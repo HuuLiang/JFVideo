@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C968D1F3053A668244681B69F1186AF7C32B6061",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "037B248F9488341ACBA0362FFA92D5366CE8AB42" : 0,
+    "C968D1F3053A668244681B69F1186AF7C32B6061" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5FAB3EC4-E198-4A4E-8DF2-A73DC7F3B0F7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "037B248F9488341ACBA0362FFA92D5366CE8AB42" : "",
+    "C968D1F3053A668244681B69F1186AF7C32B6061" : "JFVideo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JFVideo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JFVideo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/seanyue\/YuePaoBa.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "037B248F9488341ACBA0362FFA92D5366CE8AB42"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/Liang-_-\/JFVideo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C968D1F3053A668244681B69F1186AF7C32B6061"
+    }
+  ]
+}
