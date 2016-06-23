@@ -11,7 +11,7 @@
 #import "JFUserAccessModel.h"
 #import "JFSystemConfigModel.h"
 #import "JFHomeViewController.h"
-#import "JFChannelViewController.h"
+#import "JFChannelListViewController.h"
 #import "JFMineViewController.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
@@ -39,7 +39,7 @@
                                                                  selectedImage:[UIImage imageNamed:@"tabbar_home_selected"]];
 
     
-    JFChannelViewController *channelVC = [[JFChannelViewController alloc] init];
+    JFChannelListViewController *channelVC = [[JFChannelListViewController alloc] init];
     channelVC.title                     = @"女友特辑";
     UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:channelVC];
     channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:channelVC.title

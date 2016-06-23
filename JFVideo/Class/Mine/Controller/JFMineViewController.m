@@ -8,19 +8,24 @@
 
 #import "JFMineViewController.h"
 #import "JFTableViewCell.h"
-#import "JFAppSpreadTableViewCell.h"
+#import "JFAppSpreadCell.h"
+#import "JFWebViewController.h"
 
-@interface JFMineViewController ()
+static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifier";
+
+@interface JFMineViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 {
     JFTableViewCell *_bannerCell;
     JFTableViewCell *_vipCell;
     JFTableViewCell *_protocolCell;
     JFTableViewCell *_telCell;
-    JFAppSpreadTableViewCell *_appCell;
+    UICollectionView *_appCollectionView;
 }
+@property (nonatomic) NSMutableArray *dataSource;
 @end
 
 @implementation JFMineViewController
+DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,14 +44,18 @@
     @weakify(self);
     self.layoutTableViewAction = ^(NSIndexPath *indexPath, UITableViewCell *cell) {
         @strongify(self);
-        if (cell == self->_bannerCell) {
-            
-        } else if (cell == self->_vipCell) {
+        if (cell == self->_vipCell) {
             
         } else if (cell == self->_protocolCell) {
-            
+            JFWebViewController *webVC = [[JFWebViewController alloc] initWithURL:[NSURL URLWithString:@""]];
+            webVC.title = @"用户协议";
+            [self.navigationController pushViewController:webVC animated:YES];
         } else if (cell == self->_telCell) {
-            
+            [UIAlertView bk_showAlertViewWithTitle:nil message:@"4006296682" cancelButtonTitle:@"取消" otherButtonTitles:@[@"呼叫"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4006296682"]];
+                }
+            }];
         }
     };
     
@@ -56,7 +65,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 - (void)initCells {
@@ -91,9 +99,67 @@
     _telCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
     [self setLayoutCell:_telCell cellHeight:44 inRow:0 andSection:section++];
     
-    _appCell = [[JFAppSpreadTableViewCell alloc] init];
-    [self setLayoutCell:_appCell cellHeight:200 inRow:0 andSection:section];
-    
+    UITableViewCell * _appCell = [[UITableViewCell alloc] init];
+    _appCell.backgroundColor = [UIColor blueColor];
+    _appCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[self createLayout]];
+    _appCollectionView.backgroundColor = [UIColor yellowColor];
+    _appCollectionView.delegate = self;
+    _appCollectionView.dataSource = self;
+    _appCollectionView.showsVerticalScrollIndicator = NO;
+    [_appCollectionView registerClass:[JFAppSpreadCell class] forCellWithReuseIdentifier:kMoreCellReusableIdentifier];
+    [_appCell addSubview:_appCollectionView];
+    {
+        [_appCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_appCell);
+        }];
+    }
+
+    [self setLayoutCell:_appCell cellHeight:((SCREEN_WIDTH-50-50)/3+30)*2+30 inRow:0 andSection:section];
 }
+
+- (UICollectionViewLayout *)createLayout {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumLineSpacing = 10;
+    layout.minimumInteritemSpacing = 25;
+    layout.itemSize = CGSizeMake((SCREEN_WIDTH-50-50)/3, (SCREEN_WIDTH-50-50)/3+30);
+    layout.sectionInset = UIEdgeInsetsMake(14, 22.5, 5, 22.5);
+    return layout;
+}
+
+#pragma mark - UICollectionViewDataSource,UICollectionViewDelegate
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    JFAppSpreadCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMoreCellReusableIdentifier forIndexPath:indexPath];
+    if (indexPath.item < 6) {
+        cell.imgUrl = @"";
+        cell.titleStr = @"什么快播";
+        cell.isInstall = YES;
+//        LTAppSpread *app = self.dataSource[indexPath.item];
+//        cell.title = app.title;
+//        DLog("%@",app.title);
+//        cell.imageURL = app.coverImg;
+//        cell.subtitle = @"";
+//        cell.isInsatall = app.isInstall;
+    }
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//    return self.dataSource.count;
+    return 6;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.item < self.dataSource.count) {
+//        LTAppSpread *app = self.dataSource[indexPath.item];
+//        if (app.isInstall) {
+//            return;
+//        } else {
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.spreadUrl]];
+//        }
+//        
+//    }
+}
+
 
 @end

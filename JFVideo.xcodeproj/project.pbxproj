@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B0A74730804A2000DCD5B837 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE016419C16D1E2D6F05F8F /* libPods.a */; };
+		EC2E72701D1B7DF1009950CB /* JFAppSpreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */; };
+		EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72721D1B8F64009950CB /* JFWebViewController.m */; };
+		EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72751D1BB05A009950CB /* JFChannelListViewController.m */; };
+		EC2E72791D1BB1C5009950CB /* JFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72781D1BB1C5009950CB /* JFDetailViewController.m */; };
+		EC2E727C1D1BB232009950CB /* JFDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E727B1D1BB232009950CB /* JFDetailModel.m */; };
+		EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E727E1D1BB535009950CB /* JFBannerCell.m */; };
+		EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72831D1BEC70009950CB /* JFHomeModel.m */; };
+		EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */; };
 		ECAEA7E71D17BFE900926044 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA7E61D17BFE900926044 /* main.m */; };
 		ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA7E91D17BFE900926044 /* AppDelegate.m */; };
 		ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECAEA7EB1D17BFE900926044 /* Assets.xcassets */; };
@@ -52,13 +60,28 @@
 		ECAEA9941D17EFCD00926044 /* JFChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9931D17EFCD00926044 /* JFChannelViewController.m */; };
 		ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9961D17F02D00926044 /* JFMineViewController.m */; };
 		ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */; };
-		ECF815A11D1A704500FCF6C1 /* JFAppSpreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF815A01D1A704500FCF6C1 /* JFAppSpreadTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2CE016419C16D1E2D6F05F8F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2AF92029A718FDFF61E5D4B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D81418EBD05D1FB802572AB2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EC2E726E1D1B7DF1009950CB /* JFAppSpreadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadCell.h; sourceTree = "<group>"; };
+		EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppSpreadCell.m; sourceTree = "<group>"; };
+		EC2E72711D1B8F64009950CB /* JFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFWebViewController.h; sourceTree = "<group>"; };
+		EC2E72721D1B8F64009950CB /* JFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFWebViewController.m; sourceTree = "<group>"; };
+		EC2E72741D1BB05A009950CB /* JFChannelListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFChannelListViewController.h; sourceTree = "<group>"; };
+		EC2E72751D1BB05A009950CB /* JFChannelListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFChannelListViewController.m; sourceTree = "<group>"; };
+		EC2E72771D1BB1C5009950CB /* JFDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFDetailViewController.h; sourceTree = "<group>"; };
+		EC2E72781D1BB1C5009950CB /* JFDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFDetailViewController.m; sourceTree = "<group>"; };
+		EC2E727A1D1BB232009950CB /* JFDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFDetailModel.h; sourceTree = "<group>"; };
+		EC2E727B1D1BB232009950CB /* JFDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFDetailModel.m; sourceTree = "<group>"; };
+		EC2E727D1D1BB535009950CB /* JFBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFBannerCell.h; sourceTree = "<group>"; };
+		EC2E727E1D1BB535009950CB /* JFBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFBannerCell.m; sourceTree = "<group>"; };
+		EC2E72821D1BEC70009950CB /* JFHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeModel.h; sourceTree = "<group>"; };
+		EC2E72831D1BEC70009950CB /* JFHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeModel.m; sourceTree = "<group>"; };
+		EC2E72851D1BEDEF009950CB /* JFHomeSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeSectionHeaderView.h; sourceTree = "<group>"; };
+		EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeSectionHeaderView.m; sourceTree = "<group>"; };
 		ECAEA7E21D17BFE900926044 /* JFVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECAEA7E61D17BFE900926044 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ECAEA7E81D17BFE900926044 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -152,8 +175,6 @@
 		ECAEA9961D17F02D00926044 /* JFMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMineViewController.m; sourceTree = "<group>"; };
 		ECF8159C1D1A34AF00FCF6C1 /* JFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTableViewCell.h; sourceTree = "<group>"; };
 		ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTableViewCell.m; sourceTree = "<group>"; };
-		ECF8159F1D1A704500FCF6C1 /* JFAppSpreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadTableViewCell.h; sourceTree = "<group>"; };
-		ECF815A01D1A704500FCF6C1 /* JFAppSpreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppSpreadTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +295,8 @@
 				ECAEA9821D17ECB400926044 /* JFBaseViewController.m */,
 				ECAEA9841D17ED3300926044 /* JFLayoutViewController.h */,
 				ECAEA9851D17ED3300926044 /* JFLayoutViewController.m */,
+				EC2E72711D1B8F64009950CB /* JFWebViewController.h */,
+				EC2E72721D1B8F64009950CB /* JFWebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +345,8 @@
 		ECAEA83B1D17C18600926044 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EC2E72771D1BB1C5009950CB /* JFDetailViewController.h */,
+				EC2E72781D1BB1C5009950CB /* JFDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -329,6 +354,8 @@
 		ECAEA83E1D17C18600926044 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EC2E727A1D1BB232009950CB /* JFDetailModel.h */,
+				EC2E727B1D1BB232009950CB /* JFDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,6 +363,8 @@
 		ECAEA8411D17C18600926044 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC2E727D1D1BB535009950CB /* JFBannerCell.h */,
+				EC2E727E1D1BB535009950CB /* JFBannerCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,6 +391,8 @@
 		ECAEA8551D17C18600926044 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EC2E72821D1BEC70009950CB /* JFHomeModel.h */,
+				EC2E72831D1BEC70009950CB /* JFHomeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -369,6 +400,8 @@
 		ECAEA85C1D17C18600926044 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC2E72851D1BEDEF009950CB /* JFHomeSectionHeaderView.h */,
+				EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -402,8 +435,8 @@
 		ECAEA8711D17C18600926044 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ECF8159F1D1A704500FCF6C1 /* JFAppSpreadTableViewCell.h */,
-				ECF815A01D1A704500FCF6C1 /* JFAppSpreadTableViewCell.m */,
+				EC2E726E1D1B7DF1009950CB /* JFAppSpreadCell.h */,
+				EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,6 +549,8 @@
 		ECAEA98F1D17EEFF00926044 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EC2E72741D1BB05A009950CB /* JFChannelListViewController.h */,
+				EC2E72751D1BB05A009950CB /* JFChannelListViewController.m */,
 				ECAEA9921D17EFCD00926044 /* JFChannelViewController.h */,
 				ECAEA9931D17EFCD00926044 /* JFChannelViewController.m */,
 			);
@@ -665,7 +700,6 @@
 				ECAEA9291D17C18600926044 /* UIImage+Utilities.m in Sources */,
 				ECAEA9211D17C18600926044 /* NSDictionary+LTSign.m in Sources */,
 				ECAEA9261D17C18600926044 /* NSString+StringHeight.m in Sources */,
-				ECF815A11D1A704500FCF6C1 /* JFAppSpreadTableViewCell.m in Sources */,
 				ECAEA9241D17C18600926044 /* NSObject+PropertyAccessInspecting.m in Sources */,
 				ECAEA94B1D17C18600926044 /* UIView+Extension.m in Sources */,
 				ECAEA94A1D17C18600926044 /* SlideHeadView.m in Sources */,
@@ -675,9 +709,14 @@
 				ECAEA9271D17C18600926044 /* UIBarButtonItem+Badge.m in Sources */,
 				ECAEA97A1D17DA0500926044 /* JFPaymentInfo.m in Sources */,
 				ECAEA9831D17ECB400926044 /* JFBaseViewController.m in Sources */,
+				EC2E72791D1BB1C5009950CB /* JFDetailViewController.m in Sources */,
+				EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */,
+				EC2E727C1D1BB232009950CB /* JFDetailModel.m in Sources */,
 				ECAEA9201D17C18600926044 /* NSDate+Utilities.m in Sources */,
+				EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */,
 				ECAEA96D1D17CFAE00926044 /* JFSystemConfigModel.m in Sources */,
 				ECAEA97D1D17DEA800926044 /* JFPaymentConfigModel.m in Sources */,
+				EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */,
 				ECAEA91F1D17C18600926044 /* CRKHudManager.m in Sources */,
 				ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */,
 				ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */,
@@ -686,16 +725,19 @@
 				ECAEA9801D17E21200926044 /* JFPaymentModel.m in Sources */,
 				ECAEA9701D17D06100926044 /* JFActivateModel.m in Sources */,
 				ECAEA9221D17C18600926044 /* NSMutableDictionary+Safety.m in Sources */,
+				EC2E72701D1B7DF1009950CB /* JFAppSpreadCell.m in Sources */,
 				ECAEA9891D17EE7400926044 /* JFHomeViewController.m in Sources */,
 				ECAEA92C1D17C18600926044 /* UIView+Loading.m in Sources */,
 				ECAEA9131D17C18600926044 /* JQKApplication.m in Sources */,
 				ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */,
+				EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */,
 				ECAEA95A1D17CAB800926044 /* JFURLResponse.m in Sources */,
 				ECAEA9251D17C18600926044 /* NSString+crypt.m in Sources */,
 				ECAEA9141D17C18600926044 /* JQKApplicationManager.m in Sources */,
 				ECAEA92D1D17C18600926044 /* UIView+YPBMask.m in Sources */,
 				ECAEA7E71D17BFE900926044 /* main.m in Sources */,
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
+				EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */,
 				ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */,
 				ECAEA9731D17D12E00926044 /* JFUserAccessModel.m in Sources */,
 				ECAEA92B1D17C18600926044 /* UITableView+Separator.m in Sources */,

@@ -10,4 +10,6 @@
 
 @interface JFChannelViewController : JFBaseViewController
 
+- (instancetype)initWithColumnId:(NSInteger)columnId;
+
 @end
