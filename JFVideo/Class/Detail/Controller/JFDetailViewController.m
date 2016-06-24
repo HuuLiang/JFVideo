@@ -7,15 +7,21 @@
 //
 
 #import "JFDetailViewController.h"
+#import <SDCycleScrollView.h>
 #import "JFDetailModel.h"
 
 #import "JFBannerCell.h"
+#import "JFScrollCell.h"
+
+static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdentifier";
+
 
 @interface JFDetailViewController ()
 {
     NSInteger _programId;
     
     JFBannerCell *_bannerCell;
+    UITableViewCell *_scrollCell;
 }
 @property (nonatomic) JFDetailModel *detailModel;
 @end
@@ -44,11 +50,11 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     }];
     
     @weakify(self);
-    [self.layoutTableView LT_addPullToRefreshWithHandler:^{
+    [self.layoutTableView JF_addPullToRefreshWithHandler:^{
         @strongify(self);
         [self loadDetail];
     }];
-    [self.layoutTableView LT_triggerPullToRefresh];
+    [self.layoutTableView JF_triggerPullToRefresh];
     
     self.layoutTableViewAction = ^(NSIndexPath *indexPath, UITableViewCell *cell) {
         @strongify(self);
@@ -83,6 +89,7 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     NSUInteger section = 0;
     
     [self initBannerCell:section++];
+    [self initScrollCell:section++];
 }
 
 - (void)initBannerCell:(NSUInteger)section {
@@ -97,19 +104,53 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     
 }
 
+- (void)initScrollCell:(NSUInteger)section {
+    _scrollCell = [[UITableViewCell alloc] init];
+
+    UITableView *_scrollView = [[UITableView alloc] init];
+    _scrollView.hasRowSeparator = NO;
+    _scrollView.hasSectionBorder = NO;
+    _scrollView.scrollsToTop = NO;
+    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView.delegate = self;
+    _scrollView.dataSource = self;
+    _scrollView.separatorInset = UIEdgeInsetsZero;
+    _scrollView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
+    [_scrollView registerClass:[JFScrollCell class] forCellReuseIdentifier:kScrollCellReusableIdentifier];
+    _scrollView.transform = CGAffineTransformMakeRotation(-90.);
+    [_scrollCell.contentView addSubview:_scrollView];
+    {
+        [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_scrollCell);
+        }];
+    }
+    
+    [self setLayoutCell:_scrollCell cellHeight:150 inRow:0 andSection:section];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UITableViewDelegate,UITableViewDataSource
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    JFScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:kScrollCellReusableIdentifier forIndexPath:indexPath];
+    
+    return cell;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return SCREEN_WIDTH/4;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 
 @end

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B0A74730804A2000DCD5B837 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE016419C16D1E2D6F05F8F /* libPods.a */; };
+		EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C31D1CD239009C48E7 /* JFHomeCell.m */; };
+		EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C61D1CD2E7009C48E7 /* JFHomeHotCell.m */; };
+		EC2973CA1D1D3518009C48E7 /* JFScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C91D1D3518009C48E7 /* JFScrollCell.m */; };
 		EC2E72701D1B7DF1009950CB /* JFAppSpreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */; };
 		EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72721D1B8F64009950CB /* JFWebViewController.m */; };
 		EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72751D1BB05A009950CB /* JFChannelListViewController.m */; };
@@ -66,6 +69,12 @@
 		2CE016419C16D1E2D6F05F8F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2AF92029A718FDFF61E5D4B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D81418EBD05D1FB802572AB2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EC2973C21D1CD239009C48E7 /* JFHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeCell.h; sourceTree = "<group>"; };
+		EC2973C31D1CD239009C48E7 /* JFHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeCell.m; sourceTree = "<group>"; };
+		EC2973C51D1CD2E7009C48E7 /* JFHomeHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeHotCell.h; sourceTree = "<group>"; };
+		EC2973C61D1CD2E7009C48E7 /* JFHomeHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeHotCell.m; sourceTree = "<group>"; };
+		EC2973C81D1D3518009C48E7 /* JFScrollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFScrollCell.h; sourceTree = "<group>"; };
+		EC2973C91D1D3518009C48E7 /* JFScrollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFScrollCell.m; sourceTree = "<group>"; };
 		EC2E726E1D1B7DF1009950CB /* JFAppSpreadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadCell.h; sourceTree = "<group>"; };
 		EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppSpreadCell.m; sourceTree = "<group>"; };
 		EC2E72711D1B8F64009950CB /* JFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFWebViewController.h; sourceTree = "<group>"; };
@@ -365,6 +374,8 @@
 			children = (
 				EC2E727D1D1BB535009950CB /* JFBannerCell.h */,
 				EC2E727E1D1BB535009950CB /* JFBannerCell.m */,
+				EC2973C81D1D3518009C48E7 /* JFScrollCell.h */,
+				EC2973C91D1D3518009C48E7 /* JFScrollCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -372,9 +383,9 @@
 		ECAEA8501D17C18600926044 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				ECAEA85C1D17C18600926044 /* View */,
 				ECAEA8511D17C18600926044 /* Controller */,
 				ECAEA8551D17C18600926044 /* Model */,
-				ECAEA85C1D17C18600926044 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -402,6 +413,10 @@
 			children = (
 				EC2E72851D1BEDEF009950CB /* JFHomeSectionHeaderView.h */,
 				EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */,
+				EC2973C21D1CD239009C48E7 /* JFHomeCell.h */,
+				EC2973C31D1CD239009C48E7 /* JFHomeCell.m */,
+				EC2973C51D1CD2E7009C48E7 /* JFHomeHotCell.h */,
+				EC2973C61D1CD2E7009C48E7 /* JFHomeHotCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -736,7 +751,10 @@
 				ECAEA9141D17C18600926044 /* JQKApplicationManager.m in Sources */,
 				ECAEA92D1D17C18600926044 /* UIView+YPBMask.m in Sources */,
 				ECAEA7E71D17BFE900926044 /* main.m in Sources */,
+				EC2973CA1D1D3518009C48E7 /* JFScrollCell.m in Sources */,
+				EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */,
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
+				EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */,
 				EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */,
 				ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */,
 				ECAEA9731D17D12E00926044 /* JFUserAccessModel.m in Sources */,

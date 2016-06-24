@@ -10,4 +10,11 @@
 
 @implementation JFHomeModel
 
+- (void)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
+    
+    
+    
+    
+}
+
 @end

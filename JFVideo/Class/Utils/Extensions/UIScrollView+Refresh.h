@@ -1,8 +1,8 @@
 //
 //  UIScrollView+Refresh.m
-//  Lulushequ
+//  JFVideo
 //
-//  Created by Liang on 16/6/4.
+//  Created by Liang on 16/6/24.
 //  Copyright (c) 2016年 iqu8. All rights reserved.
 //
 
@@ -10,11 +10,11 @@
 
 @interface UIScrollView (Refresh)
 
-- (void)LT_addPullToRefreshWithHandler:(void (^)(void))handler;
-- (void)LT_triggerPullToRefresh;
-- (void)LT_endPullToRefresh;
+- (void)JF_addPullToRefreshWithHandler:(void (^)(void))handler;
+- (void)JF_triggerPullToRefresh;
+- (void)JF_endPullToRefresh;
 
-- (void)LT_addPagingRefreshWithHandler:(void (^)(void))handler;
-- (void)LT_pagingRefreshNoMoreData;
+- (void)JF_addPagingRefreshWithHandler:(void (^)(void))handler;
+- (void)JF_pagingRefreshNoMoreData;
 
 @end
