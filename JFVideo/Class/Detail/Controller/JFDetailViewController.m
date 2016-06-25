@@ -12,6 +12,7 @@
 
 #import "JFBannerCell.h"
 #import "JFScrollCell.h"
+#import "JFCommentCell.h"
 
 static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdentifier";
 
@@ -22,6 +23,8 @@ static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdent
     
     JFBannerCell *_bannerCell;
     UITableViewCell *_scrollCell;
+    JFCommentCell *_commentCell;
+    
 }
 @property (nonatomic) JFDetailModel *detailModel;
 @end
@@ -90,6 +93,14 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     
     [self initBannerCell:section++];
     [self initScrollCell:section++];
+    if (1) {
+        [self initCommentTitleCell:section++];
+    }
+    
+    if (1) {
+        [self initCommentCell:section++];
+    }
+    
 }
 
 - (void)initBannerCell:(NSUInteger)section {
@@ -126,6 +137,29 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     }
     
     [self setLayoutCell:_scrollCell cellHeight:150 inRow:0 andSection:section];
+}
+
+- (void)initCommentTitleCell:(NSUInteger)section {
+    UITableViewCell *_commentTitleCell = [[UITableViewCell alloc] init];
+    _commentTitleCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UILabel *_titleLabel = [[UILabel alloc] init];
+    _titleLabel.text = @"热门评论";
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.textColor = [UIColor colorWithHexString:@"#ec5382"];
+    _titleLabel.font = [UIFont systemFontOfSize:16.];
+    [_commentTitleCell.contentView addSubview:_titleLabel];
+    
+    [self setLayoutCell:_commentTitleCell cellHeight:30 inRow:0 andSection:section];
+}
+
+- (void)initCommentCell:(NSUInteger)section {
+//    CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:14.] maxSize:CGSizeMake(SCREEN_WIDTH - 30, MAXFLOAT)].height;
+    _commentCell = [[JFCommentCell alloc] initWithHeight:200];
+    _commentCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    [self setLayoutCell:_commentCell cellHeight:200 inRow:0 andSection:section];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,4 +10,6 @@
 
 @interface JFScrollCell : UITableViewCell
 
+
+
 @end

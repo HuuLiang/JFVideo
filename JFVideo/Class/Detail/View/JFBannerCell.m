@@ -103,7 +103,7 @@
 }
 
 - (void)setNum:(NSInteger)num {
-    _playNumLabel.text = num;
+    _playNumLabel.text = [NSString stringWithFormat:@"今日播放量:%ld",num];
 }
 
 

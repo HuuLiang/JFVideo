@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B0A74730804A2000DCD5B837 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE016419C16D1E2D6F05F8F /* libPods.a */; };
+		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
+		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
+		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
 		EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C31D1CD239009C48E7 /* JFHomeCell.m */; };
 		EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C61D1CD2E7009C48E7 /* JFHomeHotCell.m */; };
 		EC2973CA1D1D3518009C48E7 /* JFScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C91D1D3518009C48E7 /* JFScrollCell.m */; };
@@ -69,6 +72,12 @@
 		2CE016419C16D1E2D6F05F8F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2AF92029A718FDFF61E5D4B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D81418EBD05D1FB802572AB2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EC08496E1D1E568A00623AEF /* JFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCommentCell.h; sourceTree = "<group>"; };
+		EC08496F1D1E568A00623AEF /* JFCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCommentCell.m; sourceTree = "<group>"; };
+		EC0849711D1E715F00623AEF /* JFVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVideoPlayerController.h; sourceTree = "<group>"; };
+		EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayerController.m; sourceTree = "<group>"; };
+		EC0849741D1E718D00623AEF /* JFVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVideoPlayer.h; sourceTree = "<group>"; };
+		EC0849751D1E718D00623AEF /* JFVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayer.m; sourceTree = "<group>"; };
 		EC2973C21D1CD239009C48E7 /* JFHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeCell.h; sourceTree = "<group>"; };
 		EC2973C31D1CD239009C48E7 /* JFHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeCell.m; sourceTree = "<group>"; };
 		EC2973C51D1CD2E7009C48E7 /* JFHomeHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeHotCell.h; sourceTree = "<group>"; };
@@ -306,6 +315,8 @@
 				ECAEA9851D17ED3300926044 /* JFLayoutViewController.m */,
 				EC2E72711D1B8F64009950CB /* JFWebViewController.h */,
 				EC2E72721D1B8F64009950CB /* JFWebViewController.m */,
+				EC0849711D1E715F00623AEF /* JFVideoPlayerController.h */,
+				EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -337,6 +348,8 @@
 			children = (
 				ECF8159C1D1A34AF00FCF6C1 /* JFTableViewCell.h */,
 				ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */,
+				EC0849741D1E718D00623AEF /* JFVideoPlayer.h */,
+				EC0849751D1E718D00623AEF /* JFVideoPlayer.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -376,6 +389,8 @@
 				EC2E727E1D1BB535009950CB /* JFBannerCell.m */,
 				EC2973C81D1D3518009C48E7 /* JFScrollCell.h */,
 				EC2973C91D1D3518009C48E7 /* JFScrollCell.m */,
+				EC08496E1D1E568A00623AEF /* JFCommentCell.h */,
+				EC08496F1D1E568A00623AEF /* JFCommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -730,6 +745,8 @@
 				ECAEA9201D17C18600926044 /* NSDate+Utilities.m in Sources */,
 				EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */,
 				ECAEA96D1D17CFAE00926044 /* JFSystemConfigModel.m in Sources */,
+				EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */,
+				EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */,
 				ECAEA97D1D17DEA800926044 /* JFPaymentConfigModel.m in Sources */,
 				EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */,
 				ECAEA91F1D17C18600926044 /* CRKHudManager.m in Sources */,
@@ -746,6 +763,7 @@
 				ECAEA9131D17C18600926044 /* JQKApplication.m in Sources */,
 				ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */,
 				EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */,
+				EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */,
 				ECAEA95A1D17CAB800926044 /* JFURLResponse.m in Sources */,
 				ECAEA9251D17C18600926044 /* NSString+crypt.m in Sources */,
 				ECAEA9141D17C18600926044 /* JQKApplicationManager.m in Sources */,
@@ -865,6 +883,7 @@
 			baseConfigurationReference = D81418EBD05D1FB802572AB2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/iAppPay/DependenceSDK",
@@ -876,6 +895,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JFVideo.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -884,6 +904,7 @@
 			baseConfigurationReference = A2AF92029A718FDFF61E5D4B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/iAppPay/DependenceSDK",
