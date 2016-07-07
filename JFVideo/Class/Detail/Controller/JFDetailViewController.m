@@ -17,9 +17,10 @@
 static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdentifier";
 
 
-@interface JFDetailViewController ()
+@interface JFDetailViewController () <UITableViewSeparatorDelegate,UITableViewDataSource>
 {
     NSInteger _programId;
+    NSInteger _columnId;
     
     JFBannerCell *_bannerCell;
     UITableViewCell *_scrollCell;
@@ -27,16 +28,19 @@ static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdent
     
 }
 @property (nonatomic) JFDetailModel *detailModel;
+@property (nonatomic) JFDetailModelResponse *response;
 @end
 
 @implementation JFDetailViewController
 DefineLazyPropertyInitialization(JFDetailModel,detailModel)
+DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 
-- (instancetype)initWithProgramId:(NSInteger)programId
+- (instancetype)initWithColumnId:(NSInteger)columnId ProgramId:(NSInteger)programId
 {
     self = [super init];
     if (self) {
+        _columnId = columnId;
         _programId = programId;
     }
     return self;
@@ -46,8 +50,9 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     [super viewDidLoad];
     
     
-    self.layoutTableView.hasRowSeparator = YES;
+    self.layoutTableView.hasRowSeparator = NO;
     self.layoutTableView.hasSectionBorder = NO;
+    self.layoutTableView.backgroundColor = [UIColor colorWithHexString:@"#464646"];
     [self.layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
@@ -61,9 +66,9 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     
     self.layoutTableViewAction = ^(NSIndexPath *indexPath, UITableViewCell *cell) {
         @strongify(self);
-        if (cell == self->_bannerCell) {
-            [self playVideo];
-        } //else if (cell == self->_videoCell) {
+//        if (cell == self->_bannerCell) {
+//            [self playVideo];
+//        } else if (cell == self->_videoCell) {
 //            [self playVideo];
 //        } else if (cell == self->_appSpreadCell) {
 //            [self downloadApp];
@@ -73,16 +78,17 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
 //            
 //        }
     };
-
 }
 
 - (void)loadDetail {
-    [self->_detailModel fetchProgramDetailWithProgramId:_programId
-                                      CompletionHandler:^(BOOL success, id obj)
-     {
-         if (success) {
-             [self reloadUI];
-         }
+    [self.detailModel fetchProgramDetailWithColumnId:_columnId
+                                             ProgramId:_programId
+                                     CompletionHandler:^(BOOL success, id obj) {
+        if (success) {
+            self.response = obj;
+            [self.layoutTableView JF_endPullToRefresh];
+            [self reloadUI];
+        }
     }];
 }
 
@@ -92,23 +98,25 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     NSUInteger section = 0;
     
     [self initBannerCell:section++];
-    [self initScrollCell:section++];
-    if (1) {
-        [self initCommentTitleCell:section++];
+    if (self.response.programUrlList.count > 0) {
+        [self initScrollCell:section++];
     }
-    
-    if (1) {
+    if (self.response.commentJson.count > 0) {
+        [self initCommentTitleCell:section++];
         [self initCommentCell:section++];
     }
-    
+
+    [self.layoutTableView reloadData];
 }
 
 - (void)initBannerCell:(NSUInteger)section {
-    _bannerCell = [[JFBannerCell alloc] initWithHeight:200];
-    
-    
-    
-    [self setLayoutCell:_bannerCell cellHeight:200 inRow:0 andSection:section];
+    _bannerCell = [[JFBannerCell alloc] init];
+    JFDetailProgramModel *program = self.response.program;
+    _bannerCell.bgImgUrl = program.detailsCoverImg;
+    _bannerCell.title = program.title;
+    _bannerCell.num = [program.spare integerValue];
+
+    [self setLayoutCell:_bannerCell cellHeight:SCREEN_WIDTH*0.6+60 inRow:0 andSection:section];
 }
 
 - (void)playVideo {
@@ -117,49 +125,65 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
 
 - (void)initScrollCell:(NSUInteger)section {
     _scrollCell = [[UITableViewCell alloc] init];
+    _scrollCell.backgroundColor = [UIColor redColor];
 
-    UITableView *_scrollView = [[UITableView alloc] init];
-    _scrollView.hasRowSeparator = NO;
-    _scrollView.hasSectionBorder = NO;
-    _scrollView.scrollsToTop = NO;
-    _scrollView.backgroundColor = [UIColor whiteColor];
-    _scrollView.delegate = self;
-    _scrollView.dataSource = self;
-    _scrollView.separatorInset = UIEdgeInsetsZero;
-    _scrollView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
-    [_scrollView registerClass:[JFScrollCell class] forCellReuseIdentifier:kScrollCellReusableIdentifier];
-    _scrollView.transform = CGAffineTransformMakeRotation(-90.);
-    [_scrollCell.contentView addSubview:_scrollView];
-    {
-        [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(_scrollCell);
-        }];
-    }
-    
+
     [self setLayoutCell:_scrollCell cellHeight:150 inRow:0 andSection:section];
 }
 
 - (void)initCommentTitleCell:(NSUInteger)section {
     UITableViewCell *_commentTitleCell = [[UITableViewCell alloc] init];
+    _commentTitleCell.backgroundColor = [UIColor clearColor];
     _commentTitleCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UILabel *_titleLabel = [[UILabel alloc] init];
+    _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.text = @"热门评论";
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = [UIColor colorWithHexString:@"#ec5382"];
     _titleLabel.font = [UIFont systemFontOfSize:16.];
     [_commentTitleCell.contentView addSubview:_titleLabel];
-    
+    {
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_commentTitleCell.contentView);
+            make.left.equalTo(_commentTitleCell.mas_left).offset(10);
+            make.height.mas_equalTo(20);
+        }];
+    }
     [self setLayoutCell:_commentTitleCell cellHeight:30 inRow:0 andSection:section];
 }
 
 - (void)initCommentCell:(NSUInteger)section {
-//    CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:14.] maxSize:CGSizeMake(SCREEN_WIDTH - 30, MAXFLOAT)].height;
-    _commentCell = [[JFCommentCell alloc] initWithHeight:200];
-    _commentCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
-    [self setLayoutCell:_commentCell cellHeight:200 inRow:0 andSection:section];
+    for (NSInteger i = 0; i < self.response.commentJson.count; i++) {
+        JFDetailCommentModel *comment = self.response.commentJson[i];
+        CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:16.] maxSize:CGSizeMake(SCREEN_WIDTH - 69, MAXFLOAT)].height;
+        _commentCell = [[JFCommentCell alloc] initWithHeight:height];
+        DLog(@"%f",height);
+        _commentCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        _commentCell.userImgUrl = comment.icon;
+        _commentCell.userNameStr = comment.userName;
+        _commentCell.commentStr = comment.content;
+        _commentCell.timeStr = comment.createAt;
+        if (i == self.response.commentJson.count - 1) {
+            [self setLayoutCell:_commentCell cellHeight:height+80 inRow:0 andSection:section++];
+        } else {
+            [self setLayoutCell:_commentCell cellHeight:height+60 inRow:0 andSection:section++];
+            UITableViewCell *cell = [[UITableViewCell alloc] init];
+            cell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+            UIImageView *imgV = [[UIImageView alloc] init];
+            imgV.backgroundColor = [UIColor colorWithHexString:@"#575757"];
+            [cell addSubview:imgV];
+            {
+                [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.bottom.equalTo(cell);
+                    make.left.equalTo(cell.mas_left).offset(0);
+                    make.right.equalTo(cell.mas_right).offset(0);
+                }];
+            }
+            [self setLayoutCell:cell cellHeight:0.5 inRow:0 andSection:section++];
+
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,24 +191,5 @@ DefineLazyPropertyInitialization(JFDetailModel,detailModel)
     
 }
 
-#pragma mark - UITableViewDelegate,UITableViewDataSource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JFScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:kScrollCellReusableIdentifier forIndexPath:indexPath];
-    
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SCREEN_WIDTH/4;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
 
 @end

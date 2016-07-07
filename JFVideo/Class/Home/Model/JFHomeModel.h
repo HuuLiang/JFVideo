@@ -7,9 +7,14 @@
 //
 
 #import "JFEncryptedURLRequest.h"
+#import "JFHomeColumnModel.h"
+
+@interface JFHomeModelResponse : JFURLResponse
+@property (nonatomic) NSArray <JFHomeColumnModel *> *columnList;
+@end
 
 @interface JFHomeModel : JFEncryptedURLRequest
 
-- (void)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler;
+- (BOOL)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler;
 
 @end

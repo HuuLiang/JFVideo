@@ -21,6 +21,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.backgroundColor = [UIColor yellowColor];
+        
         _bgImgV = [[UIImageView alloc] init];
         [self addSubview:_bgImgV];
         

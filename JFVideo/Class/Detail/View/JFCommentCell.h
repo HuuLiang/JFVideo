@@ -12,4 +12,9 @@
 
 - (instancetype)initWithHeight:(CGFloat)height;
 
+@property (nonatomic) NSString *userImgUrl;
+@property (nonatomic) NSString *userNameStr;
+@property (nonatomic) NSString *commentStr;
+@property (nonatomic) NSString *timeStr;
+
 @end

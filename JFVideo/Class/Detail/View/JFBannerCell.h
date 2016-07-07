@@ -10,7 +10,6 @@
 
 @interface JFBannerCell : UITableViewCell
 
-- (instancetype)initWithHeight:(CGFloat)height;
 @property (nonatomic) NSString *bgImgUrl;
 //@property (nonatomic) NSString *userUrl;
 @property (nonatomic) NSString *title;

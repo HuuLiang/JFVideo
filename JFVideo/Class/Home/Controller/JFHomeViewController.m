@@ -8,11 +8,16 @@
 
 #import "JFHomeViewController.h"
 #import <SDCycleScrollView.h>
+
 #import "JFHomeModel.h"
+#import "JFHomeColumnModel.h"
+#import "JFHomeProgramModel.h"
 
 #import "JFHomeSectionHeaderView.h"
 #import "JFHomeCell.h"
 #import "JFHomeHotCell.h"
+
+#import "JFDetailViewController.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 static NSString *const kHomeHotCellReusableIdentifier = @"HomeHotCellReusableIdentifier";
@@ -37,22 +42,22 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#303030"];
     
     _bannerView = [[SDCycleScrollView alloc] init];
     _bannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     _bannerView.autoScrollTimeInterval = 3;
     _bannerView.titleLabelBackgroundColor = [UIColor clearColor];
-    _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _bannerView.delegate = self;
-    _bannerView.backgroundColor = [UIColor redColor];
+    _bannerView.backgroundColor = [UIColor clearColor];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
     layout.minimumInteritemSpacing = layout.minimumLineSpacing;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    _layoutCollectionView.backgroundColor = [UIColor colorWithHexString:@"#efefef"];
+    _layoutCollectionView.backgroundColor = [UIColor colorWithHexString:@"#303030"];
     _layoutCollectionView.delegate = self;
     _layoutCollectionView.dataSource = self;
     _layoutCollectionView.showsVerticalScrollIndicator = NO;
@@ -81,14 +86,14 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 
 - (void)loadMoreDataWithRefresh:(BOOL)isRefresh {
     @weakify(self);
-    [self->_homeModel fetchHomeInfoWithPage:_page CompletionHandler:^(BOOL success, id obj) {
+    [self.homeModel fetchHomeInfoWithPage:_page CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
         [_layoutCollectionView JF_endPullToRefresh];
         if (success) {
             [self.dataSource removeAllObjects];
-            
             [self.dataSource addObjectsFromArray:obj];
             [self refreshBannerView];
+            [_layoutCollectionView reloadData];
         }
     }];
 }
@@ -97,16 +102,16 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     NSMutableArray *imageUrlGroup = [NSMutableArray array];
     NSMutableArray *titlesGroup = [NSMutableArray array];
     
-//    for (LTColumnModel *column in self.dataSource) {
-//        if ([column.name isEqualToString:@"banner"]) {
-//            for (LTProgramModel *program in column.programList) {
-//                [imageUrlGroup addObject:program.coverImg];
-//                //                [titlesGroup addObject:program.title];
-//            }
-//            _bannerView.imageURLStringsGroup = imageUrlGroup;
-//            _bannerView.titlesGroup = titlesGroup;
-//        }
-//    }
+    for (JFHomeColumnModel *column in self.dataSource) {
+        if ([column.name isEqualToString:@"banner1"]) {
+            for (JFHomeProgramModel *program in column.programList) {
+                [imageUrlGroup addObject:program.coverImg];
+                [titlesGroup addObject:program.title];
+            }
+            _bannerView.imageURLStringsGroup = imageUrlGroup;
+            _bannerView.titlesGroup = titlesGroup;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,86 +125,70 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    LTColumnModel *model = self.dataSource[section];
-//    if (model.type == 4) {
-//        return 1;
-//    } else if (model.type == 8) {
-//        _cloumnNumber = model.programList.count;
-//        if ([LTUtils getIsPhotoVipInfo] || [LTUtils getIsPhotoVipInfo]) {
-//            _number = model.programList.count;
-//            return model.programList.count;
-//        } else {
-//            _number = 3;
-//            return 3;
-//        }
-//    } else {
-//        return model.programList.count;
-//    }
-    return 0;
+    JFHomeColumnModel *column = self.dataSource[section];
+    if (column.type == 4) {
+        return 1;
+    } else {
+        return column.programList.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JFHomeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
-    JFHomeHotCell *bCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeHotCellReusableIdentifier forIndexPath:indexPath];
+    JFHomeHotCell *hotCell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeHotCellReusableIdentifier forIndexPath:indexPath];
     
-//    LTColumnModel *column = _dataSource[indexPath.section];
-//    LTProgramModel *program = column.programList[indexPath.item];
-//    
-//    if (column.type == 4) {
-//        if (!_bannerCell) {
-//            _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
-//            [_bannerCell.contentView addSubview:_bannerView];
-//            {
-//                [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.edges.equalTo(_bannerCell.contentView);
-//                }];
-//            }
-//        }
-//        return _bannerCell;
-//    } else if (column.type == 5) {
-//        if (indexPath.item < column.programList.count) {
-//            [cell updateInfoWithProgram:program];
-//            return cell;
-//        } else {
-//            return nil;
-//        }
-//    } else {
-//        if ([LTUtils getIsVideoVipInfo] || [LTUtils getIsPhotoVipInfo]) {
-//            if (indexPath.item < column.programList.count) {
-//                [bCell updateInfoWithProgram:program];
-//                return bCell;
-//            } else {
-//                return nil;
-//            }
-//        } else {
-//            if (indexPath.item < 3) {
-//                [bCell updateInfoWithProgram:program];
-//                return bCell;
-//            } else {
-//                return nil;
-//            }
-//        }
-//        
-//    }
-    return nil;
+    JFHomeColumnModel *column = _dataSource[indexPath.section];
+    JFHomeProgramModel *program = column.programList[indexPath.item];
+    
+    if (column.type == 4) {
+        if (!_bannerCell) {
+            _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
+            [_bannerCell.contentView addSubview:_bannerView];
+            {
+                [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(_bannerCell.contentView);
+                }];
+            }
+        }
+        return _bannerCell;
+    } else {
+        if (indexPath.item < column.programList.count) {
+            if (column.type == 5) {
+                cell.imgUrl = program.coverImg;
+                cell.title = program.title;
+                cell.isFree = [program.spec isEqual:@(4)];
+                return cell;
+            } else if (column.type == 1) {
+                hotCell.imgUrl = program.coverImg;
+                hotCell.title = program.title;
+                hotCell.isFree = [program.spec isEqual:@(4)];
+                return hotCell;
+            } else {
+                return nil;
+            }
+        } else {
+            return nil;
+        }
+    }
 }
 
 
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     JFHomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHomeSectionHeaderReusableIdentifier forIndexPath:indexPath];
-//    LTColumnModel *column = _dataSource[indexPath.section];
-//    headerView.title = column.name;
-    
-    
+    JFHomeColumnModel *column = self.dataSource[indexPath.section];
+    if (indexPath.section == 1 || indexPath.section == 2) {
+        headerView.titleStr = column.name;
+    }    
     return headerView;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    LTColumnModel *column = _dataSource[indexPath.section];
-//    LTProgramModel *program = column.programList[indexPath.item];
-//    LTDetailController *detailVC = [[LTDetailController alloc] initWithColumnId:[NSString stringWithFormat:@"%lu",column.columnId] ProgramId:[NSString stringWithFormat:@"%lu",program.programId] type:[NSString stringWithFormat:@"%ld",column.type]];
-//    [self.navigationController pushViewController:detailVC animated:YES];
+    JFHomeColumnModel *column = _dataSource[indexPath.section];
+    JFHomeProgramModel *program = column.programList[indexPath.item];
+    
+    JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -213,8 +202,8 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
         const CGFloat height = width*0.8;
         return CGSizeMake(width, height);
     } else {
-        const CGFloat width = (fullWidth - layout.minimumLineSpacing - insets.left - insets.right)/3;
-        const CGFloat height = width * 300 / 227.;
+        const CGFloat width = (fullWidth - 2*layout.minimumLineSpacing - insets.left - insets.right)/3;
+        const CGFloat height = width * 300 / 227.+30;
         return CGSizeMake(width , height);
     }
 }
@@ -241,13 +230,13 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-//    for (LTColumnModel *column in _dataSource) {
-//        if (column.type == 4) {
-//            LTProgramModel *program = column.programList[index];
-//            LTDetailController *detailVC = [[LTDetailController alloc] initWithColumnId:[NSString stringWithFormat:@"%lu",column.columnId] ProgramId:[NSString stringWithFormat:@"%lu",program.programId] type:[NSString stringWithFormat:@"%ld",column.type]];
-//            [self.navigationController pushViewController:detailVC animated:YES];
-//        }
-//    }
+    for (JFHomeColumnModel *column in self.dataSource) {
+        if (column.type == 4) {
+            JFHomeProgramModel * program = column.programList[index];
+            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+    }
 }
 
 

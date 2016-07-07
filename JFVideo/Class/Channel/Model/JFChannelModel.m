@@ -1,36 +1,37 @@
 //
-//  JFHomeModel.m
+//  JFChannelModel.m
 //  JFVideo
 //
-//  Created by Liang on 16/6/23.
+//  Created by Liang on 16/7/6.
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFHomeModel.h"
+#import "JFChannelModel.h"
 
-@implementation JFHomeModelResponse
+@implementation JFChannelModelResponse
 
 - (Class)columnListElementClass {
-    return [JFHomeColumnModel class];
+    return [JFChannelColumnModel class];
 }
+
 @end
 
-@implementation JFHomeModel
+@implementation JFChannelModel
 
 + (Class)responseClass {
-    return [JFHomeModelResponse class];
+    return [JFChannelModelResponse class];
 }
 
-- (BOOL)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
+- (BOOL)fetchChannelInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
-    BOOL success = [self requestURLPath:JF_HOME_URL
+    BOOL success = [self requestURLPath:JF_CHANNELRANKING_URL
                              withParams:nil
                         responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         NSArray *array = nil;
                         if (respStatus == JFURLResponseSuccess) {
-                            JFHomeModelResponse *resp = self.response;
+                            JFChannelModelResponse *resp = self.response;
                             array = resp.columnList;
                         }
                         

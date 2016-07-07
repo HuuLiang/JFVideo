@@ -1,29 +1,26 @@
 //
-//  JFHomeCell.m
+//  JFChannelCell.m
 //  JFVideo
 //
-//  Created by Liang on 16/6/24.
+//  Created by Liang on 16/7/6.
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFHomeCell.h"
+#import "JFChannelCell.h"
 
-@interface JFHomeCell ()
+@interface JFChannelCell ()
 {
     UIImageView *_bgImgv;
     UILabel *_titleLabel;
-    UIImageView *_isFreeImg;
 }
 @end
 
-
-@implementation JFHomeCell
+@implementation JFChannelCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.backgroundColor = [UIColor colorWithHexString:@"#464646"];
         
         _bgImgv = [[UIImageView alloc] init];
@@ -34,14 +31,10 @@
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.font = [UIFont systemFontOfSize:14.];
         [self addSubview:_titleLabel];
-        
-        _isFreeImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_freePlay_icon"]];
-        [self addSubview:_isFreeImg];
-        
         {
             [_bgImgv mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self);
-                make.height.mas_equalTo((SCREEN_WIDTH-25)/2*0.6);
+                make.height.mas_equalTo((SCREEN_WIDTH-25)/2 * 300 / 227.);
             }];
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -49,13 +42,8 @@
                 make.left.equalTo(self).offset(5);
                 make.height.mas_equalTo(20);
             }];
-            
-            [_isFreeImg mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.left.equalTo(self);
-                make.size.mas_equalTo(CGSizeMake(30, 30));
-            }];
+
         }
-        
     }
     return self;
 }
@@ -67,9 +55,4 @@
 - (void)setTitle:(NSString *)title {
     _titleLabel.text = title;
 }
-
-- (void)setIsFree:(BOOL)isFree {
-    _isFreeImg.hidden = !isFree;
-}
-
 @end

@@ -38,6 +38,8 @@
     return self;
 }
 
-
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleLabel.text = titleStr;
+}
 
 @end

@@ -24,6 +24,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+        
         _bgImgv = [[UIImageView alloc] init];
         [self addSubview:_bgImgv];
         
@@ -39,7 +41,7 @@
         {
             [_bgImgv mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self);
-                make.height.mas_equalTo((SCREEN_WIDTH-25)/2*0.6);
+                make.height.mas_equalTo((SCREEN_WIDTH-25)/3*300 / 227.);
             }];
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,7 +70,7 @@
 }
 
 - (void)setIsFree:(BOOL)isFree {
-    
+    _isFreeImg.hidden = !isFree;
 }
 
 

@@ -129,5 +129,10 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
     }];
 }
 
++ (NSDate *)dateFromString:(NSString *)dateString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [dateFormatter dateFromString:dateString];
+}
 
 @end

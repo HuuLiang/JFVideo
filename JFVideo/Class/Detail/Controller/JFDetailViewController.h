@@ -10,6 +10,6 @@
 
 @interface JFDetailViewController : JFLayoutViewController
 
-- (instancetype)initWithProgramId:(NSInteger)programId;
+- (instancetype)initWithColumnId:(NSInteger)columnId ProgramId:(NSInteger)programId;
 
 @end

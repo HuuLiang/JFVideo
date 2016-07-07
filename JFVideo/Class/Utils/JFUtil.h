@@ -34,5 +34,6 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSArray<JFPaymentInfo *> *)paidNotProcessedPaymentInfos;
 + (JFPaymentInfo *)successfulPaymentInfo;
 
++ (NSDate *)dateFromString:(NSString *)dateString;
 
 @end

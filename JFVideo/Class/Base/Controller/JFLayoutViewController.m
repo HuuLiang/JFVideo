@@ -9,7 +9,6 @@
 #import "JFLayoutViewController.h"
 #import <TPKeyboardAvoidingTableView.h>
 
-
 @interface JFLayoutViewController ()
 @property (nonatomic,retain) NSMutableDictionary<NSIndexPath *, UITableViewCell *> *cells;
 @property (nonatomic,retain) NSMutableDictionary<NSIndexPath *, NSNumber *> *cellHeights;
@@ -173,6 +172,4 @@ DefineLazyPropertyInitialization(NSMutableDictionary, headerTitles)
     }
     SafelyCallBlock2(self.layoutTableViewAction, indexPath, cell);
 }
-
-
 @end

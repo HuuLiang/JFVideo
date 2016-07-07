@@ -19,14 +19,13 @@
 
 @implementation JFBannerCell
 
-- (instancetype)initWithHeight:(CGFloat)height
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        
+        self.backgroundColor = [UIColor clearColor];
         
         _bgImgV = [[UIImageView alloc] init];
-        _bgImgV.backgroundColor = [UIColor redColor];
         [self addSubview:_bgImgV];
         
         UIView *_view = [[UIView alloc] init];
@@ -48,7 +47,7 @@
         [self addSubview:_titleLabel];
         
         _playNumLabel = [[UILabel alloc] init];
-        _playNumLabel.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0/54];
+        _playNumLabel.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0.54];
         _playNumLabel.font = [UIFont systemFontOfSize:12.];
         _playNumLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_playNumLabel];

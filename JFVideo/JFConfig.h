@@ -9,23 +9,23 @@
 #ifndef JFConfig_h
 #define JFConfig_h
 
-#define JF_CHANNEL_NO               @"QB_FORUM_QUDAO_B_00000001" //@"QB_MFW_IOS_TEST_0000001" //
-#define JF_REST_APPID               @"QUBA_2021"
+#define JF_CHANNEL_NO               @"QUBA_IOS_TUIGUANG9_0000001" //@"QB_MFW_IOS_TEST_0000001" //
+#define JF_REST_APPID               @"QUBA_2023"
 #define JF_REST_PV                  @"100"
 #define JF_PACKAGE_CERTIFICATE      @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., JFd."
 
 #define JF_REST_APP_VERSION     ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]))
 #define JF_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO]
 
-#define JF_BASE_URL                    @"http://120.24.252.114:8096"//@"http://mfw.ihuiyx.com"////@"http://192.168.1.123:8094/"
-#define JF_ACTIVATION_URL              @"/forum/activat.htm"
-#define JF_ACCESS_URL                  @"/forum/userAccess.htm"
-#define JF_SYSTEM_CONFIG_URL           @"/forum/systemConfig.htm"
-#define JF_HOME_URL                    @"/forum/homePage.htm"
-#define JF_COMMUNITY_URL               @"/forum/column.htm"
-#define JF_PROGRAM_URL                 @"/forum/program.htm"
-#define JF_DETAIL_URL                  @"/forum/idetails.htm"
-#define JF_APPSPREAD_URL               @"/forum/iappSpreadList.htm"
+#define JF_BASE_URL                    @"http://120.24.252.114:8093"//@"http://mfw.ihuiyx.com"////@"http://192.168.1.123:8094/"
+#define JF_ACTIVATION_URL              @"/iosvideo/activat.htm"
+#define JF_ACCESS_URL                  @"/iosvideo/userAccess.htm"
+#define JF_SYSTEM_CONFIG_URL           @"/iosvideo/systemConfig.htm"
+#define JF_HOME_URL                    @"/iosvideo/homePage.htm"
+#define JF_CHANNELRANKING_URL          @"/iosvideo/channelRanking.htm"
+#define JF_PROGRAM_URL                 @"/iosvideo/program.htm"
+#define JF_DETAIL_URL                  @"/iosvideo/detailsg.htm"
+#define JF_APPSPREAD_URL               @"/iosvideo/iappSpreadList.htm"
 
 
 #define JF_PAYMENT_CONFIG_URL           @"http://120.24.252.114:8084/paycenter/payConfig.json"//@"http://pay.iqu8.net/paycenter/payConfig.json"

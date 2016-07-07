@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface JFHomeSectionHeaderView : UICollectionReusableView
-
+@property (nonatomic) NSString *titleStr;
 @end
