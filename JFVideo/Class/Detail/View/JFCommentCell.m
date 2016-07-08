@@ -26,7 +26,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         _userImgV = [[UIImageView alloc] init];
-        _userImgV.layer.cornerRadius = 19.5;
+        _userImgV.layer.cornerRadius = SCREEN_WIDTH*39/750.;
         _userImgV.layer.masksToBounds = YES;
         [self addSubview:_userImgV];
         
@@ -44,7 +44,7 @@
         
         _commentDetailLabel = [[UILabel alloc] init];
         _commentDetailLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
-        _commentDetailLabel.font = [UIFont systemFontOfSize:16.];
+        _commentDetailLabel.font = [UIFont systemFontOfSize:SCREEN_WIDTH*32/750.];
         _commentDetailLabel.numberOfLines = 0;
 //        _commentDetailLabel.lineBreakMode = UILineBreakModeWordWrap;
         [self addSubview:_commentDetailLabel];
@@ -53,17 +53,17 @@
             [_userImgV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(self).offset(10);
                 make.left.equalTo(self).offset(10);
-                make.size.mas_equalTo(CGSizeMake(39, 39));
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*78/750., SCREEN_HEIGHT*78/1334.));
             }];
             
             [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(_userImgV.mas_centerY);
+                make.centerY.equalTo(_userImgV.mas_centerY);
                 make.left.equalTo(_userImgV.mas_right).offset(10);
                 make.height.mas_equalTo(18);
             }];
 
             [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(_userImgV.mas_centerY);
+                make.centerY.equalTo(_userImgV.mas_centerY);
                 make.right.equalTo(self).offset(-10);
                 make.height.mas_equalTo(18);
             }];

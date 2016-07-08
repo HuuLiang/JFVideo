@@ -11,19 +11,20 @@
 #import "JFDetailModel.h"
 
 #import "JFBannerCell.h"
-#import "JFScrollCell.h"
+#import "JFPhotoCell.h"
 #import "JFCommentCell.h"
 
 static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdentifier";
 
 
-@interface JFDetailViewController () <UITableViewSeparatorDelegate,UITableViewDataSource>
+@interface JFDetailViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 {
     NSInteger _programId;
     NSInteger _columnId;
     
     JFBannerCell *_bannerCell;
     UITableViewCell *_scrollCell;
+    UICollectionView *_layoutCollectionView;
     JFCommentCell *_commentCell;
     
 }
@@ -100,12 +101,14 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     [self initBannerCell:section++];
     if (self.response.programUrlList.count > 0) {
         [self initScrollCell:section++];
+        [self initLineCell:section++];
     }
     if (self.response.commentJson.count > 0) {
         [self initCommentTitleCell:section++];
         [self initCommentCell:section++];
     }
-
+    
+    [_layoutCollectionView reloadData];
     [self.layoutTableView reloadData];
 }
 
@@ -125,10 +128,42 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 - (void)initScrollCell:(NSUInteger)section {
     _scrollCell = [[UITableViewCell alloc] init];
-    _scrollCell.backgroundColor = [UIColor redColor];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumLineSpacing = 2;
+    layout.minimumInteritemSpacing = 2;
+    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    _layoutCollectionView.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+    _layoutCollectionView.delegate = self;
+    _layoutCollectionView.dataSource = self;
+    _layoutCollectionView.showsHorizontalScrollIndicator = NO;
+    [_layoutCollectionView registerClass:[JFPhotoCell class] forCellWithReuseIdentifier:kScrollCellReusableIdentifier];
+    
+    [_scrollCell addSubview:_layoutCollectionView];
+    {
+        [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_scrollCell);
+        }];
+    }
+    [self setLayoutCell:_scrollCell cellHeight:SCREEN_HEIGHT*200/1334.+5 inRow:0 andSection:section];
+}
 
+- (void)initLineCell:(NSInteger)section {
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+    UIImageView *imgV = [[UIImageView alloc] init];
+    imgV.backgroundColor = [UIColor colorWithHexString:@"#575757"];
+    [cell addSubview:imgV];
+    {
+        [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(cell);
+            make.left.right.equalTo(cell);
+            make.height.mas_equalTo(0.5);
+        }];
+    }
+    [self setLayoutCell:cell cellHeight:10 inRow:0 andSection:section++];
 
-    [self setLayoutCell:_scrollCell cellHeight:150 inRow:0 andSection:section];
 }
 
 - (void)initCommentTitleCell:(NSUInteger)section {
@@ -156,7 +191,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 - (void)initCommentCell:(NSUInteger)section {
     for (NSInteger i = 0; i < self.response.commentJson.count; i++) {
         JFDetailCommentModel *comment = self.response.commentJson[i];
-        CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:16.] maxSize:CGSizeMake(SCREEN_WIDTH - 69, MAXFLOAT)].height;
+        CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:SCREEN_WIDTH*32/750.] maxSize:CGSizeMake(SCREEN_WIDTH - 69, MAXFLOAT)].height;
         _commentCell = [[JFCommentCell alloc] initWithHeight:height];
         DLog(@"%f",height);
         _commentCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -181,7 +216,6 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
                 }];
             }
             [self setLayoutCell:cell cellHeight:0.5 inRow:0 andSection:section++];
-
         }
     }
 }
@@ -190,6 +224,41 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     [super didReceiveMemoryWarning];
     
 }
+
+#pragma mark - UICollectionViewDataSource,UICollectionViewDelegate
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.response.programUrlList.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    JFPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kScrollCellReusableIdentifier forIndexPath:indexPath];
+    if (indexPath.item < self.response.programUrlList.count) {
+        JFDetailPhotoModel *photo = self.response.programUrlList[indexPath.item];
+        cell.imgUrl = photo.url;
+    }
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item < self.response.programUrlList.count) {
+
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
+    UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
+    const CGFloat width = (SCREEN_WIDTH - insets.left- insets.right - 3 * layout.minimumInteritemSpacing)/4;
+    const CGFloat height = width*8/7.;
+    
+    return CGSizeMake(width , height);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(2, 2, 2, 2);
+}
+
 
 
 @end

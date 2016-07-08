@@ -11,9 +11,9 @@
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
+		EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */; };
 		EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C31D1CD239009C48E7 /* JFHomeCell.m */; };
 		EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C61D1CD2E7009C48E7 /* JFHomeHotCell.m */; };
-		EC2973CA1D1D3518009C48E7 /* JFScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2973C91D1D3518009C48E7 /* JFScrollCell.m */; };
 		EC2E72701D1B7DF1009950CB /* JFAppSpreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */; };
 		EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72721D1B8F64009950CB /* JFWebViewController.m */; };
 		EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72751D1BB05A009950CB /* JFChannelListViewController.m */; };
@@ -85,12 +85,12 @@
 		EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayerController.m; sourceTree = "<group>"; };
 		EC0849741D1E718D00623AEF /* JFVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVideoPlayer.h; sourceTree = "<group>"; };
 		EC0849751D1E718D00623AEF /* JFVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayer.m; sourceTree = "<group>"; };
+		EC1698E81D2F3CB800E7BC68 /* JFPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoCell.h; sourceTree = "<group>"; };
+		EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoCell.m; sourceTree = "<group>"; };
 		EC2973C21D1CD239009C48E7 /* JFHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeCell.h; sourceTree = "<group>"; };
 		EC2973C31D1CD239009C48E7 /* JFHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeCell.m; sourceTree = "<group>"; };
 		EC2973C51D1CD2E7009C48E7 /* JFHomeHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeHotCell.h; sourceTree = "<group>"; };
 		EC2973C61D1CD2E7009C48E7 /* JFHomeHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeHotCell.m; sourceTree = "<group>"; };
-		EC2973C81D1D3518009C48E7 /* JFScrollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFScrollCell.h; sourceTree = "<group>"; };
-		EC2973C91D1D3518009C48E7 /* JFScrollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFScrollCell.m; sourceTree = "<group>"; };
 		EC2E726E1D1B7DF1009950CB /* JFAppSpreadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadCell.h; sourceTree = "<group>"; };
 		EC2E726F1D1B7DF1009950CB /* JFAppSpreadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppSpreadCell.m; sourceTree = "<group>"; };
 		EC2E72711D1B8F64009950CB /* JFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFWebViewController.h; sourceTree = "<group>"; };
@@ -408,8 +408,8 @@
 			children = (
 				EC2E727D1D1BB535009950CB /* JFBannerCell.h */,
 				EC2E727E1D1BB535009950CB /* JFBannerCell.m */,
-				EC2973C81D1D3518009C48E7 /* JFScrollCell.h */,
-				EC2973C91D1D3518009C48E7 /* JFScrollCell.m */,
+				EC1698E81D2F3CB800E7BC68 /* JFPhotoCell.h */,
+				EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */,
 				EC08496E1D1E568A00623AEF /* JFCommentCell.h */,
 				EC08496F1D1E568A00623AEF /* JFCommentCell.m */,
 			);
@@ -811,11 +811,11 @@
 				ECAEA9141D17C18600926044 /* JQKApplicationManager.m in Sources */,
 				ECAEA92D1D17C18600926044 /* UIView+YPBMask.m in Sources */,
 				ECAEA7E71D17BFE900926044 /* main.m in Sources */,
-				EC2973CA1D1D3518009C48E7 /* JFScrollCell.m in Sources */,
 				EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */,
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
 				EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */,
 				EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */,
+				EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */,
 				ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */,
 				ECAEA9731D17D12E00926044 /* JFUserAccessModel.m in Sources */,
 				ECAEA92B1D17C18600926044 /* UITableView+Separator.m in Sources */,

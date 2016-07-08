@@ -38,6 +38,8 @@
         _userImgV = [[UIImageView alloc] init];
         _userImgV.layer.cornerRadius = SCREEN_WIDTH*8/75.;
         _userImgV.layer.masksToBounds = YES;
+        _userImgV.layer.borderWidth = 1.;
+        _userImgV.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview:_userImgV];
         
         _titleLabel = [[UILabel alloc] init];
@@ -75,13 +77,13 @@
             }];
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(_bgImgV.mas_bottom).offset(15);
+                make.centerY.mas_equalTo(_userImgV);
                 make.centerX.equalTo(self);
                 make.height.mas_equalTo(20);
             }];
             
             [_playNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(_titleLabel.mas_bottom).offset(5);
+                make.top.equalTo(_titleLabel.mas_bottom).offset(2);
                 make.centerX.equalTo(self);
                 make.height.mas_equalTo(15);
             }];
