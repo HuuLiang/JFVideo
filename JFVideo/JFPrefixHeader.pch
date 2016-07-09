@@ -26,5 +26,7 @@
 #import "JFExtensions.h"
 #import "JFErrorHandler.h"
 #import "JFMessageCenter.h"
+#import "CRKHudManager.h"
+
 
 #endif /* JFPrefixHeader_pch */

@@ -18,7 +18,12 @@
 
 typedef NS_ENUM(NSUInteger, JFPaymentType) {
     JFPaymentTypeNone,
-    JFPaymentTypeIAppPay = 1009
+    TKPaymentTypeAlipay = 1001,
+    TKPaymentTypeWeChatPay = 1008,
+    TKPaymentTypeIAppPay = 1009,
+    TKPaymentTypeVIAPay = 1010,
+    TKPaymentTypeSPay = 1012,
+    TKPaymentTypeHTPay = 1015
 };
 typedef NS_ENUM(NSInteger, PAYRESULT)
 {
@@ -54,6 +59,7 @@ return _##propertyName; \
 #define KUSERPHOTOURL @"kUerPhtotUrlKeyName"
 
 
+
 #define SCREEN_WIDTH        [[UIScreen mainScreen]bounds].size.width
 #define SCREEN_HEIGHT       [[UIScreen mainScreen]bounds].size.height
 
@@ -66,8 +72,12 @@ return _##propertyName; \
 //#define PAY_VIDEO_VIP            @"pay_video_vip"
 //#define PAY_ALL_VIP              @"pay_all_vip"
 
+typedef void (^JFAction)(id obj);
+typedef void (^JFSelectionAction)(NSUInteger index, id obj);
 typedef void (^JFProgressHandler)(double progress);
 typedef void (^JFCompletionHandler)(BOOL success, id obj);
 
+@class JFPaymentInfo;
+typedef void (^JFPaymentCompletionHandler)(PAYRESULT payResult, JFPaymentInfo *paymentInfo);
 
 #endif /* JFCommonDef_h */

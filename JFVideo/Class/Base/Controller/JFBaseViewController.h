@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JFBaseModel.h"
 
 @interface JFBaseViewController : UIViewController
 
 - (instancetype)initWithTitle:(NSString *)title;
+
+- (void)payWithInfo:(JFBaseModel *)model;
+
+- (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr;
 
 @end

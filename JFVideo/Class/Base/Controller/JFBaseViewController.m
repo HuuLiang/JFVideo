@@ -7,6 +7,7 @@
 //
 
 #import "JFBaseViewController.h"
+#import "JFPaymentViewController.h"
 
 @interface JFBaseViewController ()
 
@@ -34,6 +35,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr {
+    if (![JFUtil isVip]) {
+        [self payWithInfo:nil];
+    } else {
+        
+    }
+}
 
+- (void)payWithInfo:(JFBaseModel *)model {
+    [[JFPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window
+                                                        baseModel:model
+                                            withCompletionHandler:nil];
+}
 
 @end

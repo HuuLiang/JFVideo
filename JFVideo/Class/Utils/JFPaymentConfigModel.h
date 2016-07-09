@@ -7,21 +7,10 @@
 //
 
 #import "JFEncryptedURLRequest.h"
-
-@interface LTIAppPayConfig : NSObject <NSCoding>
-@property (nonatomic) NSString *appid;
-@property (nonatomic) NSString *privateKey;
-@property (nonatomic) NSString *publicKey;
-@property (nonatomic) NSString *notifyUrl;
-@property (nonatomic) NSNumber *waresid;
-@property (nonatomic) NSNumber *supportPayTypes;
-@end
-
-@interface JFPaymentConfigResponse : JFURLResponse
-@property (nonatomic) LTIAppPayConfig *iappPayInfo;
-@end
+#import "JFPaymentConfig.h"
 
 @interface JFPaymentConfigModel : JFEncryptedURLRequest
+@property (nonatomic,readonly) BOOL loaded;
 + (instancetype)sharedModel;
 - (BOOL)fetchPaymentConfigInfoWithCompletionHandler:(JFCompletionHandler)handler;
 @end

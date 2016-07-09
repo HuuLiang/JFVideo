@@ -13,6 +13,7 @@
 #import "JFHomeViewController.h"
 #import "JFChannelListViewController.h"
 #import "JFMineViewController.h"
+#import "JFPaymentManager.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
@@ -156,8 +157,8 @@
     [self setupCommonStyles];
     
     //paymentInfo
+    [[JFPaymentManager sharedManager] setup];
     
-
     
     if (![JFUtil isRegistered]) {
         [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {

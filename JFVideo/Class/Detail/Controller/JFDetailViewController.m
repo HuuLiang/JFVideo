@@ -123,7 +123,13 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (void)playVideo {
+    JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+    baseModel.programId = @(2);
+    baseModel.realColumnId = @(1);
+    baseModel.programType = @(1);
+    baseModel.channelType = @(3);
     
+//    [self playVideoWithInfo:baseModel videoUrl:self.response.progra];
 }
 
 - (void)initScrollCell:(NSUInteger)section {

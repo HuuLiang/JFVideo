@@ -22,6 +22,16 @@
 		EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E727E1D1BB535009950CB /* JFBannerCell.m */; };
 		EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72831D1BEC70009950CB /* JFHomeModel.m */; };
 		EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */; };
+		EC6250581D3097AC00054005 /* JFAppSpreadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250571D3097AC00054005 /* JFAppSpreadModel.m */; };
+		EC62505B1D30A77300054005 /* tanchaun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC62505A1D30A77300054005 /* tanchaun.jpg */; };
+		EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */; };
+		EC6250611D30CDCA00054005 /* JFPaymentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250601D30CDCA00054005 /* JFPaymentButton.m */; };
+		EC6250641D30CF3D00054005 /* JFPaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250631D30CF3D00054005 /* JFPaymentTypeCell.m */; };
+		EC6250671D30D01E00054005 /* UIImage+color.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250661D30D01E00054005 /* UIImage+color.m */; };
+		EC62506A1D30DAB400054005 /* JFPaymentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250691D30DAB400054005 /* JFPaymentPopView.m */; };
+		EC62506D1D30DEC400054005 /* JFPaymentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62506C1D30DEC400054005 /* JFPaymentConfig.m */; };
+		EC6250701D30F28700054005 /* JFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62506F1D30F28700054005 /* JFBaseModel.m */; };
+		EC6250761D30FE5E00054005 /* JFPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250751D30FE5E00054005 /* JFPaymentManager.m */; };
 		ECAEA7E71D17BFE900926044 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA7E61D17BFE900926044 /* main.m */; };
 		ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA7E91D17BFE900926044 /* AppDelegate.m */; };
 		ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECAEA7EB1D17BFE900926044 /* Assets.xcassets */; };
@@ -44,9 +54,6 @@
 		ECAEA92C1D17C18600926044 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA8A11D17C18600926044 /* UIView+Loading.m */; };
 		ECAEA92D1D17C18600926044 /* UIView+YPBMask.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA8A31D17C18600926044 /* UIView+YPBMask.m */; };
 		ECAEA9361D17C18600926044 /* RACEXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA8B81D17C18600926044 /* RACEXTRuntimeExtensions.m */; };
-		ECAEA9491D17C18600926044 /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAEA8E21D17C18600926044 /* b1.png */; };
-		ECAEA94A1D17C18600926044 /* SlideHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA8E41D17C18600926044 /* SlideHeadView.m */; };
-		ECAEA94B1D17C18600926044 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA8E61D17C18600926044 /* UIView+Extension.m */; };
 		ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA94F1D17C56E00926044 /* JFUtil.m */; };
 		ECAEA95A1D17CAB800926044 /* JFURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9591D17CAB800926044 /* JFURLResponse.m */; };
 		ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA95C1D17CBAA00926044 /* JFErrorHandler.m */; };
@@ -107,6 +114,25 @@
 		EC2E72831D1BEC70009950CB /* JFHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeModel.m; sourceTree = "<group>"; };
 		EC2E72851D1BEDEF009950CB /* JFHomeSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeSectionHeaderView.h; sourceTree = "<group>"; };
 		EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeSectionHeaderView.m; sourceTree = "<group>"; };
+		EC6250561D3097AC00054005 /* JFAppSpreadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadModel.h; sourceTree = "<group>"; };
+		EC6250571D3097AC00054005 /* JFAppSpreadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppSpreadModel.m; sourceTree = "<group>"; };
+		EC62505A1D30A77300054005 /* tanchaun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tanchaun.jpg; sourceTree = "<group>"; };
+		EC62505C1D30AB7B00054005 /* JFPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentViewController.h; sourceTree = "<group>"; };
+		EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentViewController.m; sourceTree = "<group>"; };
+		EC62505F1D30CDCA00054005 /* JFPaymentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentButton.h; sourceTree = "<group>"; };
+		EC6250601D30CDCA00054005 /* JFPaymentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentButton.m; sourceTree = "<group>"; };
+		EC6250621D30CF3D00054005 /* JFPaymentTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentTypeCell.h; sourceTree = "<group>"; };
+		EC6250631D30CF3D00054005 /* JFPaymentTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentTypeCell.m; sourceTree = "<group>"; };
+		EC6250651D30D01E00054005 /* UIImage+color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+color.h"; sourceTree = "<group>"; };
+		EC6250661D30D01E00054005 /* UIImage+color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+color.m"; sourceTree = "<group>"; };
+		EC6250681D30DAB400054005 /* JFPaymentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentPopView.h; sourceTree = "<group>"; };
+		EC6250691D30DAB400054005 /* JFPaymentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentPopView.m; sourceTree = "<group>"; };
+		EC62506B1D30DEC400054005 /* JFPaymentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentConfig.h; sourceTree = "<group>"; };
+		EC62506C1D30DEC400054005 /* JFPaymentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentConfig.m; sourceTree = "<group>"; };
+		EC62506E1D30F28700054005 /* JFBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFBaseModel.h; sourceTree = "<group>"; };
+		EC62506F1D30F28700054005 /* JFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFBaseModel.m; sourceTree = "<group>"; };
+		EC6250741D30FE5E00054005 /* JFPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentManager.h; sourceTree = "<group>"; };
+		EC6250751D30FE5E00054005 /* JFPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentManager.m; sourceTree = "<group>"; };
 		ECAEA7E21D17BFE900926044 /* JFVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECAEA7E61D17BFE900926044 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ECAEA7E81D17BFE900926044 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -153,11 +179,6 @@
 		ECAEA8B81D17C18600926044 /* RACEXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACEXTRuntimeExtensions.m; sourceTree = "<group>"; };
 		ECAEA8B91D17C18600926044 /* RACEXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACEXTScope.h; sourceTree = "<group>"; };
 		ECAEA8BA1D17C18600926044 /* RACmetamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACmetamacros.h; sourceTree = "<group>"; };
-		ECAEA8E21D17C18600926044 /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
-		ECAEA8E31D17C18600926044 /* SlideHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideHeadView.h; sourceTree = "<group>"; };
-		ECAEA8E41D17C18600926044 /* SlideHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideHeadView.m; sourceTree = "<group>"; };
-		ECAEA8E51D17C18600926044 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		ECAEA8E61D17C18600926044 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		ECAEA94E1D17C56E00926044 /* JFUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFUtil.h; sourceTree = "<group>"; };
 		ECAEA94F1D17C56E00926044 /* JFUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFUtil.m; sourceTree = "<group>"; };
 		ECAEA9511D17C60900926044 /* JFPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPrefixHeader.pch; sourceTree = "<group>"; };
@@ -245,6 +266,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC6250591D30A4C500054005 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC62505A1D30A77300054005 /* tanchaun.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		ECAEA7D91D17BFE900926044 = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +298,7 @@
 				ECAEA7E81D17BFE900926044 /* AppDelegate.h */,
 				ECAEA7E91D17BFE900926044 /* AppDelegate.m */,
 				ECAEA7EB1D17BFE900926044 /* Assets.xcassets */,
+				EC6250591D30A4C500054005 /* Resources */,
 				ECAEA7E51D17BFE900926044 /* Supporting Files */,
 				ECAEA7F61D17C18600926044 /* Class */,
 			);
@@ -290,7 +320,6 @@
 		ECAEA7F61D17C18600926044 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				ECAEA8BB1D17C18600926044 /* Vendor */,
 				ECAEA8831D17C18600926044 /* Utils */,
 				ECAEA7FD1D17C18600926044 /* Base */,
 				ECAEA7F71D17C18600926044 /* Account */,
@@ -338,6 +367,8 @@
 				EC2E72721D1B8F64009950CB /* JFWebViewController.m */,
 				EC0849711D1E715F00623AEF /* JFVideoPlayerController.h */,
 				EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */,
+				EC62505C1D30AB7B00054005 /* JFPaymentViewController.h */,
+				EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -360,6 +391,8 @@
 				ECAEA96F1D17D06100926044 /* JFActivateModel.m */,
 				ECAEA9711D17D12E00926044 /* JFUserAccessModel.h */,
 				ECAEA9721D17D12E00926044 /* JFUserAccessModel.m */,
+				EC62506E1D30F28700054005 /* JFBaseModel.h */,
+				EC62506F1D30F28700054005 /* JFBaseModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,6 +404,12 @@
 				ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */,
 				EC0849741D1E718D00623AEF /* JFVideoPlayer.h */,
 				EC0849751D1E718D00623AEF /* JFVideoPlayer.m */,
+				EC6250681D30DAB400054005 /* JFPaymentPopView.h */,
+				EC6250691D30DAB400054005 /* JFPaymentPopView.m */,
+				EC62505F1D30CDCA00054005 /* JFPaymentButton.h */,
+				EC6250601D30CDCA00054005 /* JFPaymentButton.m */,
+				EC6250621D30CF3D00054005 /* JFPaymentTypeCell.h */,
+				EC6250631D30CF3D00054005 /* JFPaymentTypeCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -483,6 +522,8 @@
 		ECAEA86E1D17C18600926044 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EC6250561D3097AC00054005 /* JFAppSpreadModel.h */,
+				EC6250571D3097AC00054005 /* JFAppSpreadModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -509,10 +550,14 @@
 				ECAEA9631D17CDEC00926044 /* JFMessageCenter.m */,
 				ECAEA9781D17DA0500926044 /* JFPaymentInfo.h */,
 				ECAEA9791D17DA0500926044 /* JFPaymentInfo.m */,
-				ECAEA97B1D17DEA800926044 /* JFPaymentConfigModel.h */,
-				ECAEA97C1D17DEA800926044 /* JFPaymentConfigModel.m */,
 				ECAEA97E1D17E21200926044 /* JFPaymentModel.h */,
 				ECAEA97F1D17E21200926044 /* JFPaymentModel.m */,
+				EC62506B1D30DEC400054005 /* JFPaymentConfig.h */,
+				EC62506C1D30DEC400054005 /* JFPaymentConfig.m */,
+				ECAEA97B1D17DEA800926044 /* JFPaymentConfigModel.h */,
+				ECAEA97C1D17DEA800926044 /* JFPaymentConfigModel.m */,
+				EC6250741D30FE5E00054005 /* JFPaymentManager.h */,
+				EC6250751D30FE5E00054005 /* JFPaymentManager.m */,
 				ECAEA94E1D17C56E00926044 /* JFUtil.h */,
 				ECAEA94F1D17C56E00926044 /* JFUtil.m */,
 				ECAEA8A41D17C18600926044 /* JQKApplication.h */,
@@ -555,6 +600,8 @@
 				ECAEA8A11D17C18600926044 /* UIView+Loading.m */,
 				ECAEA8A21D17C18600926044 /* UIView+YPBMask.h */,
 				ECAEA8A31D17C18600926044 /* UIView+YPBMask.m */,
+				EC6250651D30D01E00054005 /* UIImage+color.h */,
+				EC6250661D30D01E00054005 /* UIImage+color.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -569,26 +616,6 @@
 				ECAEA8BA1D17C18600926044 /* RACmetamacros.h */,
 			);
 			path = rac_extobjc;
-			sourceTree = "<group>";
-		};
-		ECAEA8BB1D17C18600926044 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				ECAEA8E11D17C18600926044 /* SlideNavClass */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		ECAEA8E11D17C18600926044 /* SlideNavClass */ = {
-			isa = PBXGroup;
-			children = (
-				ECAEA8E21D17C18600926044 /* b1.png */,
-				ECAEA8E31D17C18600926044 /* SlideHeadView.h */,
-				ECAEA8E41D17C18600926044 /* SlideHeadView.m */,
-				ECAEA8E51D17C18600926044 /* UIView+Extension.h */,
-				ECAEA8E61D17C18600926044 /* UIView+Extension.m */,
-			);
-			path = SlideNavClass;
 			sourceTree = "<group>";
 		};
 		ECAEA98E1D17EEFF00926044 /* Channel */ = {
@@ -696,7 +723,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECAEA9491D17C18600926044 /* b1.png in Resources */,
+				EC62505B1D30A77300054005 /* tanchaun.jpg in Resources */,
 				ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */,
 				ECAEA7EF1D17BFE900926044 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -766,8 +793,6 @@
 				ECAEA9211D17C18600926044 /* NSDictionary+LTSign.m in Sources */,
 				ECAEA9261D17C18600926044 /* NSString+StringHeight.m in Sources */,
 				ECAEA9241D17C18600926044 /* NSObject+PropertyAccessInspecting.m in Sources */,
-				ECAEA94B1D17C18600926044 /* UIView+Extension.m in Sources */,
-				ECAEA94A1D17C18600926044 /* SlideHeadView.m in Sources */,
 				ECAEA9671D17CEFF00926044 /* JFEncryptedURLRequest.m in Sources */,
 				ECAEA92A1D17C18600926044 /* UIScrollView+Refresh.m in Sources */,
 				ECAEA9361D17C18600926044 /* RACEXTRuntimeExtensions.m in Sources */,
@@ -777,7 +802,10 @@
 				EC2E72791D1BB1C5009950CB /* JFDetailViewController.m in Sources */,
 				EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */,
 				EC2E727C1D1BB232009950CB /* JFDetailModel.m in Sources */,
+				EC6250761D30FE5E00054005 /* JFPaymentManager.m in Sources */,
+				EC6250671D30D01E00054005 /* UIImage+color.m in Sources */,
 				ECAEA9201D17C18600926044 /* NSDate+Utilities.m in Sources */,
+				EC6250701D30F28700054005 /* JFBaseModel.m in Sources */,
 				EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */,
 				ECF99B8B1D2D084E003CBCA8 /* JFHomeColumnModel.m in Sources */,
 				ECAEA96D1D17CFAE00926044 /* JFSystemConfigModel.m in Sources */,
@@ -789,19 +817,23 @@
 				ECAEA91F1D17C18600926044 /* CRKHudManager.m in Sources */,
 				ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */,
 				ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */,
+				EC62506D1D30DEC400054005 /* JFPaymentConfig.m in Sources */,
 				ECAEA9861D17ED3300926044 /* JFLayoutViewController.m in Sources */,
+				EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */,
 				ECAEA9231D17C18600926044 /* NSObject+Properties.m in Sources */,
 				ECAEA9801D17E21200926044 /* JFPaymentModel.m in Sources */,
 				ECF99B9A1D2D1F36003CBCA8 /* JFChannelProgramModel.m in Sources */,
 				ECF99B9D1D2D26A6003CBCA8 /* JFChannelProgramCell.m in Sources */,
 				ECAEA9701D17D06100926044 /* JFActivateModel.m in Sources */,
 				ECAEA9221D17C18600926044 /* NSMutableDictionary+Safety.m in Sources */,
+				EC62506A1D30DAB400054005 /* JFPaymentPopView.m in Sources */,
 				EC2E72701D1B7DF1009950CB /* JFAppSpreadCell.m in Sources */,
 				ECF99B941D2D1A1F003CBCA8 /* JFChannelCell.m in Sources */,
 				ECAEA9891D17EE7400926044 /* JFHomeViewController.m in Sources */,
 				ECAEA92C1D17C18600926044 /* UIView+Loading.m in Sources */,
 				ECAEA9131D17C18600926044 /* JQKApplication.m in Sources */,
 				ECF99B911D2D174B003CBCA8 /* JFChannelModel.m in Sources */,
+				EC6250581D3097AC00054005 /* JFAppSpreadModel.m in Sources */,
 				ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */,
 				EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */,
 				ECF99B971D2D1F23003CBCA8 /* JFChannelColumnModel.m in Sources */,
@@ -814,10 +846,12 @@
 				EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */,
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
 				EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */,
+				EC6250611D30CDCA00054005 /* JFPaymentButton.m in Sources */,
 				EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */,
 				EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */,
 				ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */,
 				ECAEA9731D17D12E00926044 /* JFUserAccessModel.m in Sources */,
+				EC6250641D30CF3D00054005 /* JFPaymentTypeCell.m in Sources */,
 				ECAEA92B1D17C18600926044 /* UITableView+Separator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
