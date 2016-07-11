@@ -15,6 +15,8 @@
 
 - (void)payWithInfo:(JFBaseModel *)model;
 
+- (void)playPhotoUrlWithInfo:(JFBaseModel *)model urlArray:(NSArray *)urlArray index:(NSInteger)index;
+
 - (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr;
 
 @end

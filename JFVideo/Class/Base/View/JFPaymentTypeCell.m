@@ -7,69 +7,72 @@
 //
 
 #import "JFPaymentTypeCell.h"
-#import "JFPaymentButton.h"
+
 
 @interface JFPaymentTypeCell ()
-@property (nonatomic,retain) NSMutableArray<JFPaymentButton *> *buttons;
+{
+    UIImageView *_imgV;
+    UILabel *_label;
+}
 @end
 
 @implementation JFPaymentTypeCell
 
-DefineLazyPropertyInitialization(NSMutableArray, buttons)
-
-- (void)setAvailablePaymentTypes:(NSArray *)availablePaymentTypes {
-    if ([availablePaymentTypes isEqualToArray:_availablePaymentTypes]) {
-        return ;
-    }
-    
-    _availablePaymentTypes = availablePaymentTypes;
-    
-    [self.buttons enumerateObjectsUsingBlock:^(JFPaymentButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
-    }];
-    [self.buttons removeAllObjects];
-    
-    [availablePaymentTypes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        JFPaymentType paymentType = [obj unsignedIntegerValue];
+- (instancetype)initWithPaymentType:(JFPaymentType)paymentType
+{
+    self = [super init];
+    if (self) {
         
-        JFPaymentButton *button = [[JFPaymentButton alloc] init];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        if (paymentType == TKPaymentTypeAlipay) {
-            [button setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"#02a0e9"]] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"alipay_icon"] forState:UIControlStateNormal];
-            [button setTitle:@"支付宝支付" forState:UIControlStateNormal];
-        } else if (paymentType == TKPaymentTypeWeChatPay) {
-            [button setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"#05c30b"]] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"wechat_icon"] forState:UIControlStateNormal];
-            [button setTitle:@"微信支付" forState:UIControlStateNormal];
-        } else {
-            return ;
-        }
-        [self.buttons addObject:button];
-        [self addSubview:button];
+        _chooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _chooseBtn.layer.cornerRadius = 20;
+        _chooseBtn.layer.masksToBounds = YES;
+        [_chooseBtn setImage:[UIImage imageNamed:@"choose_normal"] forState:UIControlStateNormal];
+        [_chooseBtn setImage:[UIImage imageNamed:@"choose_selected"] forState:UIControlStateSelected];
+        [self addSubview:_chooseBtn];
         
-        @weakify(self);
-        [button bk_addEventHandler:^(id sender) {
-            @strongify(self);
-            SafelyCallBlock2(self.selectionAction, idx, sender);
+        [_chooseBtn bk_addEventHandler:^(id sender) {
+            _selectionAction(paymentType);
         } forControlEvents:UIControlEventTouchUpInside];
-    }];
+        
+        _imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:paymentType == JFPaymentTypeAlipay ? @"alipay_icon" : @"wechat_icon"]];
+        [self addSubview:_imgV];
+        
+        _label = [[UILabel alloc] init];
+        _label.text = JFPaymentTypeAlipay == paymentType ? @"支付宝支付" : @"微信支付";
+        _label.textColor = [UIColor colorWithHexString:@"#333333"];
+        _label.font = [UIFont systemFontOfSize:14.];
+        _label.backgroundColor = [UIColor clearColor];
+        [self addSubview:_label];
+        
+        {
+            [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self);
+                make.left.equalTo(self).offset(10);
+                make.size.mas_equalTo(CGSizeMake(40, 40));
+            }];
+            
+            [_imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self);
+                make.left.equalTo(_chooseBtn.mas_right).offset(5);
+                make.size.mas_equalTo(CGSizeMake(25, 25));
+            }];
+            
+            [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self);
+                make.left.equalTo(_imgV.mas_right).offset(10);
+                make.right.equalTo(self);
+                make.height.mas_equalTo(20);
+            }];
+        }
+    }
+    return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    const CGFloat interItemSpacing = 15;
-    const CGFloat buttonWidth = self.buttons.count == 0 ? 0 : (CGRectGetWidth(self.bounds) - (self.buttons.count + 1) * interItemSpacing) / self.buttons.count;
-    const CGFloat buttonHeight = CGRectGetHeight(self.bounds) * 0.6;
-    const CGFloat buttonY = (CGRectGetHeight(self.bounds) - buttonHeight) / 2;
-    
-    __block CGRect lastFrame = CGRectZero;
-    [self.buttons enumerateObjectsUsingBlock:^(JFPaymentButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.frame = CGRectMake(CGRectGetMaxX(lastFrame) + interItemSpacing, buttonY, buttonWidth, buttonHeight);
-        lastFrame = obj.frame;
-    }];
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    _chooseBtn.selected = selected;
 }
 
 @end

@@ -20,6 +20,5 @@ typedef void (^JFPaymentPopViewAction)(JFPaymentType paymentType);
 
 - (instancetype)initWithAvailablePaymentTypes:(NSArray *)availablePaymentTypes;
 
-- (CGFloat)viewHeightRelativeToWidth:(CGFloat)width;
 
 @end

@@ -8,8 +8,13 @@
 
 #import "JFBaseViewController.h"
 #import "JFPaymentViewController.h"
+#import "JFVideoPlayerController.h"
+#import <MWPhotoBrowser.h>
+#import "JFDetailModel.h"
 
-@interface JFBaseViewController ()
+static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
+
+@interface JFBaseViewController () <MWPhotoBrowserDelegate>
 
 @end
 
@@ -37,9 +42,32 @@
 
 - (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr {
     if (![JFUtil isVip]) {
-        [self payWithInfo:nil];
+        [self payWithInfo:model];
     } else {
+        JFVideoPlayerController *videoVC = [[JFVideoPlayerController alloc] initWithVideo:videoUrlStr];
+        [self.navigationController pushViewController:videoVC animated:YES];
+    }
+}
+
+- (void)playPhotoUrlWithInfo:(JFBaseModel *)model urlArray:(NSArray *)urlArray index:(NSInteger)index {
+    if (![JFUtil isVip]) {
+        [UIAlertView bk_showAlertViewWithTitle:@"非VIP用户只能浏览小图哦" message:@"开通VIP,高清大图即刻欣赏" cancelButtonTitle:@"再考虑看看" otherButtonTitles:@[@"立即开通"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [self payWithInfo:model];
+            }
+        }];
+    } else {
+        NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:urlArray.count];
+        [urlArray enumerateObjectsUsingBlock:^(JFDetailPhotoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj.url]]];
+        }];
         
+        MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
+        photoBrowser.displayActionButton = NO;
+        photoBrowser.delegate = self;
+        objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
+        [photoBrowser setCurrentPhotoIndex:index];
+        [self.navigationController pushViewController:photoBrowser animated:YES];
     }
 }
 

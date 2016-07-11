@@ -34,8 +34,8 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     }
     
     NSMutableArray *availablePaymentTypes = [NSMutableArray array];
-    [availablePaymentTypes addObject:@(TKPaymentTypeWeChatPay)];
-    [availablePaymentTypes addObject:@(TKPaymentTypeAlipay)];
+    [availablePaymentTypes addObject:@(JFPaymentTypeWeChatPay)];
+//    [availablePaymentTypes addObject:@(JFPaymentTypeAlipay)]; 
     //    if ([TKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & TKSubPayTypeWeChat) {
     //        [availablePaymentTypes addObject:@(TKPaymentTypeWeChatPay)];
     //    }
@@ -48,9 +48,9 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     @weakify(self);
     _popView.paymentAction = ^(JFPaymentType paymentType) {
         @strongify(self);
-        if (paymentType == TKPaymentTypeWeChatPay) {
+        if (paymentType == JFPaymentTypeWeChatPay) {
 //            [self payForPaymentType:TKPaymentTypeVIAPay paymentSubType:paymentType paymentUsage:paymentUsage];
-        } else if (paymentType == TKPaymentTypeAlipay) {
+        } else if (paymentType == JFPaymentTypeAlipay) {
 //            [self payForPaymentType:TKPaymentTypeVIAPay paymentSubType:paymentType paymentUsage:paymentUsage];
         }
         
@@ -109,12 +109,18 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     }
     
     [self.view addSubview:self.popView];
+
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:PaymentTypeSection];
+    [self.popView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
     {
         [self.popView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             
-            const CGFloat width = kScreenWidth * 0.85;
-            make.size.mas_equalTo(CGSizeMake(width, [self.popView viewHeightRelativeToWidth:width]));
+            const CGFloat width = kScreenWidth * 580/750.;
+            CGFloat height = kScreenHeight * 630 /1334. + (kScreenHeight * 110 / 1334.) * (self.popView.availablePaymentTypes.count - 2.);
+            make.size.mas_equalTo(CGSizeMake(width,height));
         }];
     }
     

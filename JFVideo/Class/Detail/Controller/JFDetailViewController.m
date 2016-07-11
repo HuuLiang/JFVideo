@@ -67,17 +67,9 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     
     self.layoutTableViewAction = ^(NSIndexPath *indexPath, UITableViewCell *cell) {
         @strongify(self);
-//        if (cell == self->_bannerCell) {
-//            [self playVideo];
-//        } else if (cell == self->_videoCell) {
-//            [self playVideo];
-//        } else if (cell == self->_appSpreadCell) {
-//            [self downloadApp];
-//        } else if (cell == self->_otherProgramCell) {
-//            [self gotoOtherProgram];
-//        } else if (cell == self->_reportCell) {
-//            
-//        }
+        if (cell == self->_bannerCell) {
+            [self playVideo];
+        }
     };
 }
 
@@ -114,6 +106,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 - (void)initBannerCell:(NSUInteger)section {
     _bannerCell = [[JFBannerCell alloc] init];
+    _bannerCell.selectionStyle = UITableViewCellSelectionStyleNone;
     JFDetailProgramModel *program = self.response.program;
     _bannerCell.bgImgUrl = program.detailsCoverImg;
     _bannerCell.title = program.title;
@@ -129,14 +122,14 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     baseModel.programType = @(1);
     baseModel.channelType = @(3);
     
-//    [self playVideoWithInfo:baseModel videoUrl:self.response.progra];
+    [self playVideoWithInfo:baseModel videoUrl:self.response.program.videoUrl];
 }
 
 - (void)initScrollCell:(NSUInteger)section {
     _scrollCell = [[UITableViewCell alloc] init];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumLineSpacing = 2;
+    layout.minimumLineSpacing = 5;
     layout.minimumInteritemSpacing = 2;
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -248,7 +241,12 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.response.programUrlList.count) {
-
+        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+        baseModel.programId = @(2);
+        baseModel.realColumnId = @(1);
+        baseModel.programType = @(1);
+        baseModel.channelType = @(3);
+        [self playPhotoUrlWithInfo:baseModel urlArray:self.response.programUrlList index:indexPath.item];
     }
 }
 
@@ -262,9 +260,6 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(2, 2, 2, 2);
+    return UIEdgeInsetsMake(2, 5, 2, 5);
 }
-
-
-
 @end

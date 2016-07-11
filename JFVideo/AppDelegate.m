@@ -68,12 +68,14 @@
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#464646"]];
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"#ec5382"]];
     [[UITabBar appearance] setBarStyle:UIBarStyleDefault];
+    [[UITabBar appearance] setTranslucent:NO];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:11.],
                                                         NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#b9b9b9"]} forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:11.],
                                                         NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ec5382"]} forState:UIControlStateSelected];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#212121"]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18.],
                                                            NSForegroundColorAttributeName:[UIColor whiteColor]}];
     

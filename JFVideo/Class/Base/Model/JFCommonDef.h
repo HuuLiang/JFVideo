@@ -18,12 +18,12 @@
 
 typedef NS_ENUM(NSUInteger, JFPaymentType) {
     JFPaymentTypeNone,
-    TKPaymentTypeAlipay = 1001,
-    TKPaymentTypeWeChatPay = 1008,
-    TKPaymentTypeIAppPay = 1009,
-    TKPaymentTypeVIAPay = 1010,
-    TKPaymentTypeSPay = 1012,
-    TKPaymentTypeHTPay = 1015
+    JFPaymentTypeAlipay = 1001,
+    JFPaymentTypeWeChatPay = 1008,
+    JFPaymentTypeIAppPay = 1009,
+    JFPaymentTypeVIAPay = 1010,
+    JFPaymentTypeSPay = 1012,
+    JFPaymentTypeHTPay = 1015
 };
 typedef NS_ENUM(NSInteger, PAYRESULT)
 {
@@ -31,6 +31,14 @@ typedef NS_ENUM(NSInteger, PAYRESULT)
     PAYRESULT_FAIL      = 1,
     PAYRESULT_ABANDON   = 2,
     PAYRESULT_UNKNOWN   = 3
+};
+
+typedef NS_ENUM(NSUInteger, JFPaymentPopViewSection) {
+    HeaderSection,
+    PayPointSection,
+    PaymentTypeSection,
+    PaySection,
+    SectionCount
 };
 
 #define DefineLazyPropertyInitialization(propertyType, propertyName) \
@@ -73,11 +81,16 @@ return _##propertyName; \
 //#define PAY_ALL_VIP              @"pay_all_vip"
 
 typedef void (^JFAction)(id obj);
-typedef void (^JFSelectionAction)(NSUInteger index, id obj);
+typedef void (^JFSelectionAction)(JFPaymentType paymentType);
 typedef void (^JFProgressHandler)(double progress);
 typedef void (^JFCompletionHandler)(BOOL success, id obj);
 
 @class JFPaymentInfo;
 typedef void (^JFPaymentCompletionHandler)(PAYRESULT payResult, JFPaymentInfo *paymentInfo);
+
+//#define kBigFont  [UIFont systemFontOfSize:MIN(18,kScreenWidth*0.05)]
+//#define kMediumFont [UIFont systemFontOfSize:MIN(16, kScreenWidth*0.045)]
+//#define kSmallFont [UIFont systemFontOfSize:MIN(14, kScreenWidth*0.04)]
+//#define kExtraSmallFont [UIFont systemFontOfSize:MIN(12, kScreenWidth*0.035)]
 
 #endif /* JFCommonDef_h */

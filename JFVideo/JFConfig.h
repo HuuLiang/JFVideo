@@ -18,7 +18,7 @@
 #define JF_REST_APP_VERSION     ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]))
 #define JF_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO]
 
-#define JF_BASE_URL                    @"http://120.24.252.114:8093"//@"http://mfw.ihuiyx.com"////@"http://192.168.1.123:8094/"
+#define JF_BASE_URL                    @"http://120.24.252.114:8093"//@"http://iv.ihuiyx.com"//////@"http://192.168.1.123:8094/"
 #define JF_ACTIVATION_URL              @"/iosvideo/activat.htm"
 #define JF_ACCESS_URL                  @"/iosvideo/userAccess.htm"
 #define JF_SYSTEM_CONFIG_URL           @"/iosvideo/systemConfig.htm"
