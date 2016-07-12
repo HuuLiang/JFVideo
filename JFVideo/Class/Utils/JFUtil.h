@@ -36,4 +36,9 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (NSDate *)dateFromString:(NSString *)dateString;
 
++ (NSString *)currentTimeString;
+
++ (NSString *)paymentReservedData;
+
++ (UIViewController *)currentVisibleViewController;
 @end

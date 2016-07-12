@@ -103,7 +103,7 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     NSMutableArray *titlesGroup = [NSMutableArray array];
     
     for (JFHomeColumnModel *column in self.dataSource) {
-        if ([column.name isEqualToString:@"banner1"]) {
+        if (column.type == 4) {
             for (JFHomeProgramModel *program in column.programList) {
                 [imageUrlGroup addObject:program.coverImg];
                 [titlesGroup addObject:program.title];

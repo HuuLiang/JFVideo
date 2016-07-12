@@ -21,6 +21,8 @@ static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifie
     JFTableViewCell *_telCell;
     UITableViewCell *_appCell;
     UICollectionView *_appCollectionView;
+    
+    NSInteger currentSection;
 }
 @property (nonatomic) NSMutableArray *dataSource;
 @property (nonatomic) JFAppSpreadModel *appSpreadModel;
@@ -68,7 +70,15 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     };
     
     [self initCells];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification:) name:kPaidNotificationName object:nil];
+}
+
+- (void)onPaidNotification:(NSNotification *)notification {
+    if ([JFUtil isVip]) {
+        [self removeAllLayoutCells];
+        [self loadAppData];
+        [self initCells];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,7 +91,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     _bannerCell = [[JFTableViewCell alloc] init];
     _bannerCell.accessoryType = UITableViewCellAccessoryNone;
     _bannerCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
-    _bannerCell.backgroundImageView.image = [UIImage imageNamed:@""];
+    _bannerCell.backgroundImageView.image = [UIImage imageNamed:@"setting_banner.jpg"];
     [self setLayoutCell:_bannerCell cellHeight:SCREEN_WIDTH*0.4 inRow:0 andSection:section++];
     
     if (![JFUtil isVip]) {
@@ -107,6 +117,10 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     _telCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
     [self setLayoutCell:_telCell cellHeight:44 inRow:0 andSection:section++];
     
+    currentSection = section;
+}
+
+- (void)initAppCell:(NSInteger)section {
     _appCell = [[UITableViewCell alloc] init];
     _appCell.backgroundColor = [UIColor colorWithHexString:@"#303030"];
     _appCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[self createLayout]];
@@ -122,9 +136,10 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
             make.edges.equalTo(_appCell);
         }];
     }
+    
+    [self setLayoutCell:_appCell cellHeight:((SCREEN_WIDTH-50-50)/3+30)*(self.dataSource.count % 3 == 0 ? self.dataSource.count / 3 : self.dataSource.count / 3 + 1 ) +30 inRow:0 andSection:section];
 
-    [self setLayoutCell:_appCell cellHeight:((SCREEN_WIDTH-50-50)/3+30)*3+30 inRow:0 andSection:section];
-    _appCell.hidden = YES;
+    [self.layoutTableView reloadData];
 }
 
 - (void)loadAppData {
@@ -134,8 +149,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
             [self.dataSource addObjectsFromArray:obj];
             [self.layoutTableView JF_endPullToRefresh];
             if (_dataSource.count > 0) {
-                _appCell.hidden = NO;
-                [_appCollectionView reloadData];
+                [self initAppCell:currentSection];
             }
         }
     }];

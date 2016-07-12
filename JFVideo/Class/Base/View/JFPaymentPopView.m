@@ -216,6 +216,12 @@
         _payBtn.layer.cornerRadius = SCREEN_HEIGHT * 10 / 1334.;
         _payBtn.layer.masksToBounds = YES;
         [_payCell addSubview:_payBtn];
+        @weakify(self);
+        [_payBtn bk_addEventHandler:^(id sender) {
+            @strongify(self);
+            JFPaymentTypeCell * cell = [self cellForRowAtIndexPath:[self indexPathForSelectedRow]];
+            _paymentAction(cell.payType);
+        } forControlEvents:UIControlEventTouchUpInside];
         
         {
             [_payBtn mas_makeConstraints:^(MASConstraintMaker *make) {

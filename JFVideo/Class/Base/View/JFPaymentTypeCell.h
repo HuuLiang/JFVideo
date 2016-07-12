@@ -17,4 +17,6 @@
 
 @property (nonatomic,copy) JFSelectionAction selectionAction;
 
+@property (nonatomic)JFPaymentType payType;
+
 @end

@@ -9,6 +9,9 @@
 #import "JFPaymentViewController.h"
 #import "JFPaymentPopView.h"
 #import "JFPaymentManager.h"
+#import "JFPaymentConfig.h"
+#import "JFPaymentModel.h"
+#import "JFSystemConfigModel.h"
 
 @interface JFPaymentViewController ()
 @property (nonatomic) JFPaymentPopView *popView;
@@ -34,24 +37,27 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     }
     
     NSMutableArray *availablePaymentTypes = [NSMutableArray array];
-    [availablePaymentTypes addObject:@(JFPaymentTypeWeChatPay)];
-//    [availablePaymentTypes addObject:@(JFPaymentTypeAlipay)]; 
-    //    if ([TKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & TKSubPayTypeWeChat) {
-    //        [availablePaymentTypes addObject:@(TKPaymentTypeWeChatPay)];
-    //    }
-    //    if ([TKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & TKSubPayTypeAlipay) {
-    //        [availablePaymentTypes addObject:@(TKPaymentTypeAlipay)];
-    //    }
+
+    DLog("%@",[JFPaymentConfig sharedConfig]);
     
+    JFPaymentType wechatPaymentType = [[JFPaymentManager sharedManager] wechatPaymentType];
+    if (wechatPaymentType != JFPaymentTypeNone) {
+        [availablePaymentTypes addObject:@(JFPaymentTypeWeChatPay)];
+    }
+    
+    JFPaymentType alipayPaymentType = [[JFPaymentManager sharedManager] alipayPaymentType];
+    if (alipayPaymentType != JFPaymentTypeNone) {
+        [availablePaymentTypes addObject:@(JFPaymentTypeAlipay)];
+    }
     
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];
     @weakify(self);
-    _popView.paymentAction = ^(JFPaymentType paymentType) {
+    _popView.paymentAction = ^(JFPaymentType subPayType) {
         @strongify(self);
-        if (paymentType == JFPaymentTypeWeChatPay) {
-//            [self payForPaymentType:TKPaymentTypeVIAPay paymentSubType:paymentType paymentUsage:paymentUsage];
-        } else if (paymentType == JFPaymentTypeAlipay) {
-//            [self payForPaymentType:TKPaymentTypeVIAPay paymentSubType:paymentType paymentUsage:paymentUsage];
+        if (subPayType == JFPaymentTypeWeChatPay) {
+            [self payForPaymentType:wechatPaymentType subPaymentType:subPayType];
+        } else if (subPayType == JFPaymentTypeAlipay) {
+            [self payForPaymentType:alipayPaymentType subPaymentType:subPayType];
         }
         
         [self hidePayment];
@@ -59,23 +65,21 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     _popView.closeAction = ^(id sender){
         @strongify(self);
         [self hidePayment];
-        
-        
     };
     return _popView;
 }
 
 - (void)payForPaymentType:(JFPaymentType)paymentType subPaymentType:(JFPaymentType)subPaymentType {
-    //    [JFPaymentManager ]
     JFPaymentInfo *paymentInfo = [[JFPaymentManager sharedManager] startPaymentWithType:paymentType
                                                                                 subType:subPaymentType
-                                                                                  price:3800
+                                                                                  price:[JFSystemConfigModel sharedModel].payAmount
                                                                               baseModel:self.baseModel
                                                                       completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
                                   {
                                       [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
                                       
                                   }];
+    DLog("%@",paymentInfo);
 }
 
 - (void)viewDidLoad {
@@ -93,7 +97,6 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     
     self.completionHandler = completionHandler;
     self.baseModel = model;
-    
     
     if (self.view.superview) {
         [self.view removeFromSuperview];
@@ -146,41 +149,33 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
 }
 
 - (void)notifyPaymentResult:(PAYRESULT)result withPaymentInfo:(JFPaymentInfo *)paymentInfo {
-//    if (result == PAYRESULT_SUCCESS) {
-//        if (paymentInfo.paymentUsage.unsignedIntegerValue == JFPaymentUsageVIP && [JFUtil isVIP]) {
-//            return ;
-//        }
-//        
-//        if (paymentInfo.paymentUsage.unsignedIntegerValue == TKPaymentUsageFeatured && [TKUtil isPaidWithFeaturedGallery:paymentInfo.contentId]) {
-//            return ;
-//        }
-//    }
-//    
-//    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
-//    [dateFormmater setDateFormat:@"yyyyMMddHHmmss"];
-//    
-//    paymentInfo.paymentResult = @(result);
-//    paymentInfo.paymentStatus = @(TKPaymentStatusNotProcessed);
-//    paymentInfo.paymentTime = [dateFormmater stringFromDate:[NSDate date]];
-//    [paymentInfo save];
-//    
-//    if (result == PAYRESULT_SUCCESS) {
-//        [self hidePayment];
-//        [[TKHudManager manager] showHudWithText:@"支付成功"];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kPaidNotificationName object:paymentInfo];
-//        
-//        // [self.popView reloadData];
-//    } else if (result == PAYRESULT_ABANDON) {
-//        [[TKHudManager manager] showHudWithText:@"支付取消"];
-//    } else {
-//        [[TKHudManager manager] showHudWithText:@"支付失败"];
-//    }
-//    
-//    [[TKPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
-//    [[TKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
-//                                               forPayAction:TKStatsPayActionPayBack
-//                                                andTabIndex:[TKUtil currentTabPageIndex]
-//                                                subTabIndex:[TKUtil currentSubTabPageIndex]];
+    
+    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
+    [dateFormmater setDateFormat:@"yyyyMMddHHmmss"];
+    
+    paymentInfo.paymentResult = @(result);
+    paymentInfo.paymentStatus = @(JFPaymentStatusNotProcessed);
+    paymentInfo.paymentTime = [dateFormmater stringFromDate:[NSDate date]];
+    [paymentInfo save];
+    
+    if (result == PAYRESULT_SUCCESS) {
+        [JFUtil registerVip];
+        [self hidePayment];
+        [[CRKHudManager manager] showHudWithText:@"支付成功"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPaidNotificationName object:paymentInfo];
+        
+        // [self.popView reloadData];
+    } else if (result == PAYRESULT_ABANDON) {
+        [[CRKHudManager manager] showHudWithText:@"支付取消"];
+    } else {
+        [[CRKHudManager manager] showHudWithText:@"支付失败"];
+    }
+    
+    [[JFPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
+//    [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
+//                                               forPayAction:JFStatsPayActionPayBack
+//                                                andTabIndex:[JFUtil currentTabPageIndex]
+//                                                subTabIndex:[JFUtil currentSubTabPageIndex]];
 //    
     
 }

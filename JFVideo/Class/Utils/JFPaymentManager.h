@@ -25,4 +25,7 @@
 
 - (void)handleOpenUrl:(NSURL *)url;
 
+- (JFPaymentType)wechatPaymentType;
+- (JFPaymentType)alipayPaymentType;
+
 @end

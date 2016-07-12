@@ -17,8 +17,8 @@ typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 
 @interface JFSystemConfigModel : JFEncryptedURLRequest
 
-@property (nonatomic) NSInteger videoAmount;
-@property (nonatomic) NSInteger photoAmount;
+@property (nonatomic) NSInteger payAmount;
+
 
 + (instancetype)sharedModel;
 

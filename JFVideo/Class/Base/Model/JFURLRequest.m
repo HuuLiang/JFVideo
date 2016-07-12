@@ -179,8 +179,8 @@
             JFURLResponse *urlResp = self.response;
             [urlResp parseResponseWithDictionary:responseObject];
             
-            status = urlResp.Result.boolValue ? JFURLResponseSuccess : JFURLResponseFailedByInterface;
-            errorMessage = (status == JFURLResponseSuccess) ? nil : [NSString stringWithFormat:@"ResultCode: %@", urlResp.Result];
+            status = urlResp.success.boolValue ? JFURLResponseSuccess : JFURLResponseFailedByInterface;
+            errorMessage = (status == JFURLResponseSuccess) ? nil : [NSString stringWithFormat:@"ResultCode: %@", urlResp.resultCode];
         } else {
             status = JFURLResponseFailedByParsing;
             errorMessage = @"Parsing error: incorrect response class for JSON dictionary.\n";

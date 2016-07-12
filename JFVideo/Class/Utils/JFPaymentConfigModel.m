@@ -72,6 +72,8 @@ static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
                         
                         config = self.response;
                         [config setAsCurrentConfig];
+                        DLog("%@",[JFPaymentConfig sharedConfig]);
+                        
                         
                         DLog(@"Payment config loaded!");
                     }

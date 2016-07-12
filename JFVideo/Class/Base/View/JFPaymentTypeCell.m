@@ -22,6 +22,7 @@
 {
     self = [super init];
     if (self) {
+        self.payType = paymentType;
         
         self.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
         self.selectionStyle = UITableViewCellSelectionStyleNone;

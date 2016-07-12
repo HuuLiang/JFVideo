@@ -8,25 +8,19 @@
 
 #import "JFURLResponse.h"
 
-@interface JFURLResponse ()
-{
-    
-}
-@property (nonatomic) NSNumber *success;
-@property (nonatomic) NSString *resultCode;
-@end
+
 
 @implementation JFURLResponse
 
-- (void)setSuccess:(NSNumber *)success {
-    _success = success;
-    _Result = success;
-}
-
-- (void)setResultCode:(NSString *)resultCode {
-    _resultCode = resultCode;
-    _Msg = resultCode;
-}
+//- (void)setSuccess:(NSNumber *)success {
+//    _success = success;
+//    _Result = success;
+//}
+//
+//- (void)setResultCode:(NSString *)resultCode {
+//    _resultCode = resultCode;
+//    _Msg = resultCode;
+//}
 
 - (void)parseResponseWithDictionary:(NSDictionary *)dic {
     [self parseDataWithDictionary:dic inInstance:self];

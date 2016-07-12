@@ -10,8 +10,8 @@
 
 @interface JFURLResponse : NSObject
 
-@property (nonatomic) NSNumber *Result;
-@property (nonatomic) NSString *Msg;
+@property (nonatomic) NSNumber *success;
+@property (nonatomic) NSString *resultCode;
 
 - (void)parseResponseWithDictionary:(NSDictionary *)dic;
 

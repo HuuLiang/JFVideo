@@ -16,5 +16,6 @@
 @property (nonatomic) NSNumber * programType;
 @property (nonatomic) NSNumber * realColumnId;
 @property (nonatomic) NSNumber * channelType;
+@property (nonatomic) NSInteger programLocation;
 
 @end

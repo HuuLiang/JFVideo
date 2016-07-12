@@ -135,4 +135,24 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
     return [dateFormatter dateFromString:dateString];
 }
 
++ (NSString *)currentTimeString {
+    NSDateFormatter *fomatter =[[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:kDefaultDateFormat];
+    return [fomatter stringFromDate:[NSDate date]];
+}
+
++ (NSString *)paymentReservedData {
+    return [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO];
+}
+
++ (UIViewController *)currentVisibleViewController {
+    UITabBarController *tabBarController = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *selectedVC = tabBarController.selectedViewController;
+    if ([selectedVC isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navVC = (UINavigationController *)selectedVC;
+        return navVC.visibleViewController;
+    }
+    return selectedVC;
+}
+
 @end

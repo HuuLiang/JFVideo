@@ -66,7 +66,7 @@ return _##propertyName; \
 
 #define KUSERPHOTOURL @"kUerPhtotUrlKeyName"
 
-
+#define kPaidNotificationName @"jf_paid_notification"
 
 #define SCREEN_WIDTH        [[UIScreen mainScreen]bounds].size.width
 #define SCREEN_HEIGHT       [[UIScreen mainScreen]bounds].size.height

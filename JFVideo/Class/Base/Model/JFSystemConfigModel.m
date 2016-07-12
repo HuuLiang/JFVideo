@@ -47,11 +47,9 @@
                             [resp.confis enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                 JFSystemConfig *config = obj;
                                 
-//                                if ([config.name isEqualToString:VIDEO_PAY_AMOUNT]) {
-//                                    [LTSystemConfigModel sharedModel].videoAmount = [config.value integerValue];
-//                                } else if ([config.name isEqualToString:PHOTO_PAY_AMOUNT]) {
-//                                    [LTSystemConfigModel sharedModel].photoAmount = [config.value integerValue];
-//                                }
+                                if ([config.name isEqualToString:@"PAY_AMOUNT"]) {
+                                    [JFSystemConfigModel sharedModel].payAmount = [config.value integerValue];
+                                }
                             }];
                         }
                         

@@ -7,18 +7,19 @@
 //
 
 #import "JFURLResponse.h"
-
 typedef NS_ENUM(NSUInteger, JFSubPayType) {
     JFSubPayTypeUnknown = 0,
     JFSubPayTypeWeChat = 1 << 0,
     JFSubPayTypeAlipay = 1 << 1
 };
 
-@interface JFWeChatPayConfig : NSObject
+@interface JFWeChatPaymentConfig : NSObject
 @property (nonatomic) NSString *appId;
 @property (nonatomic) NSString *mchId;
 @property (nonatomic) NSString *signKey;
 @property (nonatomic) NSString *notifyUrl;
+
+//+ (instancetype)defaultConfig;
 @end
 
 @interface JFAlipayConfig : NSObject
@@ -36,11 +37,15 @@ typedef NS_ENUM(NSUInteger, JFSubPayType) {
 @property (nonatomic) NSString *notifyUrl;
 @property (nonatomic) NSNumber *waresid;
 @property (nonatomic) NSNumber *supportPayTypes;
+
+//+ (instancetype)defaultConfig;
 @end
 
 @interface JFVIAPayConfig : NSObject
-@property (nonatomic) NSString *packageId;
+
+//@property (nonatomic) NSString *packageId;
 @property (nonatomic) NSNumber *supportPayTypes;
+
 @end
 
 @interface JFSPayConfig : NSObject
@@ -57,7 +62,7 @@ typedef NS_ENUM(NSUInteger, JFSubPayType) {
 
 @interface JFPaymentConfig : JFURLResponse
 
-@property (nonatomic,retain) JFWeChatPayConfig *weixinInfo;
+@property (nonatomic,retain) JFWeChatPaymentConfig *weixinInfo;
 @property (nonatomic,retain) JFAlipayConfig *alipayInfo;
 @property (nonatomic,retain) JFIAppPayConfig *iappPayInfo;
 @property (nonatomic,retain) JFVIAPayConfig *syskPayInfo;
@@ -66,6 +71,4 @@ typedef NS_ENUM(NSUInteger, JFSubPayType) {
 
 + (instancetype)sharedConfig;
 - (void)setAsCurrentConfig;
-
-
 @end
