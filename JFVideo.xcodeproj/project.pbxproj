@@ -12,6 +12,8 @@
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
 		EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */; };
+		EC19F8021D38EA4C0048AA5C /* JFHotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */; };
+		EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */; };
 		EC2808A91D349B3200E7E76E /* setting_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC2808A81D349B3200E7E76E /* setting_banner.jpg */; };
 		EC2808BB1D34C68100E7E76E /* HYMergerPaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2808AC1D34C68100E7E76E /* HYMergerPaySDK.framework */; };
 		EC2808BC1D34C68100E7E76E /* pay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2808AD1D34C68100E7E76E /* pay.a */; };
@@ -112,6 +114,10 @@
 		EC0849751D1E718D00623AEF /* JFVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayer.m; sourceTree = "<group>"; };
 		EC1698E81D2F3CB800E7BC68 /* JFPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoCell.h; sourceTree = "<group>"; };
 		EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoCell.m; sourceTree = "<group>"; };
+		EC19F8001D38EA4C0048AA5C /* JFHotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHotViewController.h; sourceTree = "<group>"; };
+		EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHotViewController.m; sourceTree = "<group>"; };
+		EC19F8031D38FC250048AA5C /* JFTitleLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTitleLabelCell.h; sourceTree = "<group>"; };
+		EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTitleLabelCell.m; sourceTree = "<group>"; };
 		EC2808A81D349B3200E7E76E /* setting_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setting_banner.jpg; sourceTree = "<group>"; };
 		EC2808AC1D34C68100E7E76E /* HYMergerPaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HYMergerPaySDK.framework; sourceTree = "<group>"; };
 		EC2808AD1D34C68100E7E76E /* pay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = pay.a; sourceTree = "<group>"; };
@@ -324,6 +330,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC19F7FC1D38E97C0048AA5C /* Hot */ = {
+			isa = PBXGroup;
+			children = (
+				EC19F7FD1D38E97C0048AA5C /* Controller */,
+				EC19F7FE1D38E97C0048AA5C /* Model */,
+				EC19F7FF1D38E97C0048AA5C /* View */,
+			);
+			path = Hot;
+			sourceTree = "<group>";
+		};
+		EC19F7FD1D38E97C0048AA5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EC19F8001D38EA4C0048AA5C /* JFHotViewController.h */,
+				EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EC19F7FE1D38E97C0048AA5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC19F7FF1D38E97C0048AA5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC19F8031D38FC250048AA5C /* JFTitleLabelCell.h */,
+				EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EC2808AA1D34C64900E7E76E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +495,7 @@
 				ECAEA7F71D17C18600926044 /* Account */,
 				ECAEA8501D17C18600926044 /* Home */,
 				ECAEA98E1D17EEFF00926044 /* Channel */,
+				EC19F7FC1D38E97C0048AA5C /* Hot */,
 				ECAEA83A1D17C18600926044 /* Detail */,
 				ECAEA8661D17C18600926044 /* Mine */,
 			);
@@ -944,6 +986,7 @@
 				ECF99B8B1D2D084E003CBCA8 /* JFHomeColumnModel.m in Sources */,
 				EC2808C21D34C68100E7E76E /* Reachability.m in Sources */,
 				ECAEA96D1D17CFAE00926044 /* JFSystemConfigModel.m in Sources */,
+				EC19F8021D38EA4C0048AA5C /* JFHotViewController.m in Sources */,
 				EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */,
 				EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */,
 				ECAEA97D1D17DEA800926044 /* JFPaymentConfigModel.m in Sources */,
@@ -951,6 +994,7 @@
 				EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */,
 				ECAEA91F1D17C18600926044 /* CRKHudManager.m in Sources */,
 				ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */,
+				EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */,
 				ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */,
 				EC62506D1D30DEC400054005 /* JFPaymentConfig.m in Sources */,
 				ECAEA9861D17ED3300926044 /* JFLayoutViewController.m in Sources */,

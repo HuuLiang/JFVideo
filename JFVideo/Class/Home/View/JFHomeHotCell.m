@@ -24,7 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+        self.backgroundColor = [UIColor clearColor];
         
         _bgImgv = [[UIImageView alloc] init];
         [self addSubview:_bgImgv];

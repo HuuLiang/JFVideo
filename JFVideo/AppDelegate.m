@@ -12,6 +12,7 @@
 #import "JFSystemConfigModel.h"
 #import "JFHomeViewController.h"
 #import "JFChannelListViewController.h"
+#import "JFHotViewController.h"
 #import "JFMineViewController.h"
 #import "JFPaymentManager.h"
 
@@ -41,11 +42,18 @@
 
     
     JFChannelListViewController *channelVC = [[JFChannelListViewController alloc] init];
-    channelVC.title                     = @"女友特辑";
+    channelVC.title                     = @"女优特辑";
     UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:channelVC];
     channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:channelVC.title
                                                                         image:[UIImage imageNamed:@"tabbar_channel_normal"]
                                                                 selectedImage:[UIImage imageNamed:@"tabbar_channel_selected"]];
+    
+    JFHotViewController *hotVC = [[JFHotViewController alloc] init];
+    hotVC.title                          = @"热播";
+    UINavigationController * hotNav      = [[UINavigationController alloc] initWithRootViewController:hotVC];
+    hotNav.tabBarItem                    = [[UITabBarItem alloc] initWithTitle:hotVC.title
+                                                                         image:[UIImage imageNamed:@"tabbar_hot_normal"]
+                                                                 selectedImage:[UIImage imageNamed:@"tabbar_hot_selected"]];
     
     JFMineViewController *mineVC        = [[JFMineViewController alloc] init];
     mineVC.title                         = @"私密区";
@@ -55,24 +63,20 @@
                                                                  selectedImage:[UIImage imageNamed:@"tabbar_mine_selected"]];
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,channelNav,mineNav];
+    tabBarController.viewControllers        = @[homeNav,channelNav,hotNav,mineNav];
     _window.rootViewController              = tabBarController;
-    return _window;
-
-    
-    
     return _window;
 }
 
 - (void)setupCommonStyles {
-    [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#464646"]];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#efefef"]];
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"#ec5382"]];
     [[UITabBar appearance] setBarStyle:UIBarStyleDefault];
     [[UITabBar appearance] setTranslucent:NO];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:11.],
-                                                        NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#b9b9b9"]} forState:UIControlStateNormal];
+                                                        NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#b0b0b0"]} forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:11.],
-                                                        NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ec5382"]} forState:UIControlStateSelected];
+                                                        NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#e51c23"]} forState:UIControlStateSelected];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#212121"]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
