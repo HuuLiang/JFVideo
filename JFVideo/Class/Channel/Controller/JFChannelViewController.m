@@ -18,6 +18,8 @@ static NSString *const kChannelProgramCellReusableIdentifier = @"ChannelProgramC
     NSInteger _columnId;
     UICollectionView *_layoutCollectionView;
     NSInteger _page;
+    
+    BOOL _getContentSize;
 }
 @property (nonatomic) NSMutableArray *dataSource;
 @property (nonatomic) JFChannelProgramModel *channelProgramModel;
@@ -38,6 +40,8 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _getContentSize = NO;
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
     layout.minimumInteritemSpacing = layout.minimumLineSpacing;
@@ -77,6 +81,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
         if (success) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:obj];
+            _getContentSize = NO;
             [_layoutCollectionView reloadData];
         }
     }];

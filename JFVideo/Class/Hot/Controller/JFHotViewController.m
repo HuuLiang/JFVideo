@@ -12,73 +12,110 @@
 #import "JFChannelColumnModel.h"
 #import "JFTitleLabelCell.h"
 
+#import "JFChannelProgramModel.h"
+#import "JFChannelProgramCell.h"
+
+#import "JFDetailViewController.h"
+
 #define LINESPACING kScreenHeight * 20 / 1334.
 #define INTERITEMSPACING kScreenWidth * 23 / 750.
 #define EDGINSETS UIEdgeInsetsMake(kScreenHeight * 25 / 1334., kScreenWidth * 30 / 750. , kScreenHeight * 25 / 1334., kScreenWidth * 30 / 750.)
+#define titleCellHeight 2* kScreenHeight * 48/1334. + 1.5 * LINESPACING + EDGINSETS.bottom + EDGINSETS.top
+
 
 static NSString *const kHotTitleCellReusableIdentifier = @"hottitleCellReusableIdentifier";
+static NSString *const kChannelProgramCellReusableIdentifier = @"ChannelProgramCellReusableIdentifier";
+
 
 @interface JFHotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 {
+    NSUInteger _columnId;
+    NSIndexPath *_selectecIndexPath;
+    NSIndexPath *_lastSelectedIndexPath;
+    BOOL _isRefresh;
+    
+    UITableViewCell *_titleCell;
     UICollectionView *_layoutTitleCollectionView;
+    
+    UITableViewCell *_headerCell;
+    UILabel *_label;
+    
+    UITableViewCell *_detailCell;
+    UICollectionView *_layoutDetailCollectionView;
 }
 @property (nonatomic) JFChannelModel *channelModel;
 @property (nonatomic) NSMutableArray *titleArray;
 @property (nonatomic) NSMutableArray *titleWidthArray;
+@property (nonatomic) NSMutableArray *detailArray;
+@property (nonatomic) JFChannelProgramModel *programModel;
 @end
 
 @implementation JFHotViewController
 DefineLazyPropertyInitialization(JFChannelModel, channelModel)
 DefineLazyPropertyInitialization(NSMutableArray, titleArray)
 DefineLazyPropertyInitialization(NSMutableArray, titleWidthArray)
+DefineLazyPropertyInitialization(NSMutableArray, detailArray)
+DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumLineSpacing = LINESPACING;
-    layout.minimumInteritemSpacing = INTERITEMSPACING;
+    _selectecIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    _isRefresh = NO;
     
-    _layoutTitleCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    _layoutTitleCollectionView.backgroundColor = [UIColor colorWithHexString:@"#303030"];
-    _layoutTitleCollectionView.delegate = self;
-    _layoutTitleCollectionView.dataSource = self;
-    _layoutTitleCollectionView.showsVerticalScrollIndicator = NO;
-    [_layoutTitleCollectionView registerClass:[JFTitleLabelCell class] forCellWithReuseIdentifier:kHotTitleCellReusableIdentifier];
-    
-    [self.view addSubview:_layoutTitleCollectionView];
-    {
-        [_layoutTitleCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.equalTo(self.view);
-            make.height.mas_equalTo(200);
-        }];
-    }
-    
-    [_layoutTitleCollectionView JF_addPullToRefreshWithHandler:^{
-        [self loadMoreDataWithRefresh:YES];
+    self.layoutTableView.hasRowSeparator = NO;
+    self.layoutTableView.hasSectionBorder = NO;
+    self.layoutTableView.backgroundColor = [UIColor colorWithHexString:@"#303030"];
+    [self.layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
     }];
-//    
-//    [_layoutTitleCollectionView JF_addPagingRefreshWithHandler:^{
-//        [self loadMoreDataWithRefresh:NO];
-//    }];
     
-    [_layoutTitleCollectionView JF_triggerPullToRefresh];
-
+    @weakify(self);
+    [self.layoutTableView JF_addPullToRefreshWithHandler:^{
+        @strongify(self);
+        [self loadTitleData];
+    }];
+    [self.layoutTableView JF_triggerPullToRefresh];
 }
 
-- (void)loadMoreDataWithRefresh:(BOOL)isRefresh {
+- (void)loadTitleData{
     @weakify(self);
     [self.channelModel fetchChannelInfoWithPage:1 CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
-        [_layoutTitleCollectionView JF_endPullToRefresh];
+        [self.layoutTableView JF_endPullToRefresh];
         if (success) {
+            _isRefresh = YES;
             [self.titleArray removeAllObjects];
             [self.titleWidthArray removeAllObjects];
             [self titleItemWidth:obj];
             [self.titleArray addObjectsFromArray:obj];
-            [_layoutTitleCollectionView reloadData];
+            [self reloadUI];
         }
     }];
+}
+
+- (void)loadProgramsWithColumnInfo:(JFChannelColumnModel *)column {
+    if (_lastSelectedIndexPath == _selectecIndexPath && !_isRefresh) {
+        return;
+    }
+    [_layoutDetailCollectionView beginLoading];
+    @weakify(self);
+    [self.programModel fecthChannelProgramWithColumnId:column.columnId Page:0 CompletionHandler:^(BOOL success, NSArray * obj) {
+        @strongify(self);
+//        [_layoutDetailCollectionView JF_addIsRefreshing];
+        
+        if (success) {
+            if (obj.count > 0) {
+                [self.detailArray removeAllObjects];
+                [self.detailArray addObjectsFromArray:obj];
+                [self initHeaderCell:1 column:column];
+                [self initDetailCell:2 column:column];
+            }
+//            [_layoutDetailCollectionView JF_endPullToRefresh];
+
+        }
+    }];
+    _lastSelectedIndexPath = _selectecIndexPath;
 }
 
 - (void)titleItemWidth:(NSArray *)array {
@@ -119,39 +156,203 @@ DefineLazyPropertyInitialization(NSMutableArray, titleWidthArray)
     }
 }
 
+- (void)reloadUI {
+    [self removeAllLayoutCells];
+    [self initTitleCell:0];
+    [self.layoutTableView reloadData];
+    [self collectionView:_layoutTitleCollectionView didSelectItemAtIndexPath:_selectecIndexPath];
+}
+
+- (void)initTitleCell:(NSUInteger)section {
+    _titleCell = [[UITableViewCell alloc] init];
+    _titleCell.backgroundColor = [UIColor colorWithHexString:@"#303030"];
+    _titleCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumLineSpacing = LINESPACING;
+    layout.minimumInteritemSpacing = INTERITEMSPACING;
+    
+    _layoutTitleCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    _layoutTitleCollectionView.backgroundColor = [UIColor clearColor];
+    _layoutTitleCollectionView.delegate = self;
+    _layoutTitleCollectionView.dataSource = self;
+    _layoutTitleCollectionView.showsVerticalScrollIndicator = NO;
+    _layoutTitleCollectionView.scrollEnabled = NO;
+    [_layoutTitleCollectionView registerClass:[JFTitleLabelCell class] forCellWithReuseIdentifier:kHotTitleCellReusableIdentifier];
+    [_titleCell addSubview:_layoutTitleCollectionView];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = [UIColor clearColor];
+    btn.titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 26 / 750.];
+    [btn setTitle:@"更多" forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, 0)];
+    [_titleCell addSubview:btn];
+    
+    [btn bk_addEventHandler:^(id sender) {
+        if ([btn.titleLabel.text isEqualToString:@"更多"]) {
+            [btn setTitle:@"收起" forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"hot_less_icon"] forState:UIControlStateNormal];
+            _layoutTitleCollectionView.scrollEnabled = YES;
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING + 2* kScreenHeight * 48/1334. + 2 * LINESPACING);
+                _headerCell.transform = CGAffineTransformMakeTranslation(0, 2 * (kScreenHeight * 48 / 1334. + LINESPACING));
+                _detailCell.transform = CGAffineTransformMakeTranslation(0, 2 * (kScreenHeight * 48 / 1334. + LINESPACING));
+            } completion:^(BOOL finished) {
+                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING + 2* kScreenHeight * 48/1334. + 2 * LINESPACING inRow:0 andSection:0];
+//                [self.layoutTableView reloadData];
+            }];
+        } else {
+            [btn setTitle:@"更多" forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
+            _layoutTitleCollectionView.scrollEnabled = NO;
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING);
+                _headerCell.transform = CGAffineTransformMakeTranslation(0, -2 * (kScreenHeight * 48 / 1334. + LINESPACING));
+                _detailCell.transform = CGAffineTransformMakeTranslation(0, -2 * (kScreenHeight * 48 / 1334. + LINESPACING));
+            } completion:^(BOOL finished) {
+                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING inRow:0 andSection:0];
+                [self.layoutTableView reloadData];
+            }];
+        }
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    {
+        [_layoutTitleCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.equalTo(_titleCell);
+            make.bottom.equalTo(_titleCell.mas_bottom).offset(-(kScreenHeight * 30 /1334.+ 10 + LINESPACING));
+        }];
+        
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(_titleCell).offset(-LINESPACING/2.);
+            make.right.equalTo(_titleCell).offset(-5);
+            make.size.mas_equalTo(CGSizeMake(60,kScreenHeight * 30 /1334.));
+        }];
+    }
+    
+    [self setLayoutCell:_titleCell cellHeight:titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING inRow:0 andSection:0];
+}
+
+- (void)initHeaderCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
+    _headerCell = [[UITableViewCell alloc] init];
+    _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _headerCell.backgroundColor = [UIColor clearColor];
+    
+    _label = [[UILabel alloc] init];
+    _label.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0.54];
+    _label.font = [UIFont systemFontOfSize:kScreenHeight * 30 /1334.];
+    _label.text = [NSString stringWithFormat:@"共搜索到%ld部\"%@\"的作品",_detailArray.count,column.name];
+    [_headerCell addSubview:_label];
+    {
+        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_headerCell);
+            make.left.equalTo(_headerCell).offset(15);
+            make.right.equalTo(_headerCell);
+            make.height.mas_equalTo(40);
+        }];
+    }
+    [self setLayoutCell:_headerCell cellHeight:40 inRow:0 andSection:section++];
+}
+- (void)initDetailCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
+    _detailCell = [[UITableViewCell alloc] init];
+    _detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _detailCell.backgroundColor = [UIColor clearColor];
+    _label.text = [NSString stringWithFormat:@"共搜索到%ld部\"%@\"的作品",_detailArray.count,column.name];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = layout.minimumLineSpacing;
+    _layoutDetailCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    _layoutDetailCollectionView.backgroundColor = [UIColor clearColor];
+    _layoutDetailCollectionView.delegate = self;
+    _layoutDetailCollectionView.dataSource = self;
+    _layoutDetailCollectionView.showsVerticalScrollIndicator = NO;
+    [_layoutDetailCollectionView registerClass:[JFChannelProgramCell class] forCellWithReuseIdentifier:kChannelProgramCellReusableIdentifier];
+    [_detailCell addSubview:_layoutDetailCollectionView];
+    {
+        [_layoutDetailCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_detailCell);
+        }];
+    }
+    
+    const CGFloat fullWidth = kScreenWidth;
+    const CGFloat width = (fullWidth - 2*layout.minimumLineSpacing - EDGINSETS.left - EDGINSETS.right)/3;
+    const CGFloat height = width * 300 / 227.+30;
+    NSInteger itemLines = self.detailArray.count % 3 == 0 ? (self.detailArray.count / 3) : (self.detailArray.count / 3 + 1);
+    CGFloat collectionViewHeight =  (itemLines - 1) * 5 + EDGINSETS.bottom + EDGINSETS.top + itemLines * height;
+    [self setLayoutCell:_detailCell cellHeight:collectionViewHeight inRow:0 andSection:section];
+    
+    [self.layoutTableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.titleArray.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    JFTitleLabelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHotTitleCellReusableIdentifier forIndexPath:indexPath];
-    
-    JFChannelColumnModel *column = self.titleArray[indexPath.item];
-    if (indexPath.item < self.titleArray.count) {
-        cell.title = column.name;
-        
-        [cell.titleLabel bk_whenTapped:^{
-            
-        }];
-        return cell;
+    if (collectionView == _layoutTitleCollectionView) {
+        return self.titleArray.count;
+    } else if (collectionView == _layoutDetailCollectionView) {
+        return self.detailArray.count;
     } else {
-        return nil;
+        return 0;
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView == _layoutTitleCollectionView) {
+        JFTitleLabelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHotTitleCellReusableIdentifier forIndexPath:indexPath];
+        if (indexPath.item < self.titleArray.count) {
+            JFChannelColumnModel *column = self.titleArray[indexPath.item];
+            cell.title = column.name;
+            return cell;
+        }
+    } else if (collectionView == _layoutDetailCollectionView) {
+        JFChannelProgramCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kChannelProgramCellReusableIdentifier forIndexPath:indexPath];
+        if (indexPath.item < self.detailArray.count) {
+            JFChannelProgram *program = self.detailArray[indexPath.item];
+            cell.title = program.title;
+            cell.imgUrl = program.coverImg;
+            return cell;
+        }
+    }
+    return nil;
+}
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView == _layoutTitleCollectionView) {
+        JFChannelColumnModel *column = self.titleArray[indexPath.item];
+        if (indexPath.item < self.titleArray.count) {
+            _columnId = column.columnId;
+            _selectecIndexPath = indexPath;
+            [self loadProgramsWithColumnInfo:column];
+        }
+    } else if (collectionView == _layoutDetailCollectionView) {
+        JFChannelProgram *program = self.detailArray[indexPath.item];
+        JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    const CGFloat width = [self.titleWidthArray[indexPath.item] floatValue];
-    const CGFloat height = kScreenHeight * 48 / 1334.;
-    return CGSizeMake(width , height);
+
+    if (collectionView == _layoutTitleCollectionView) {
+        const CGFloat width = [self.titleWidthArray[indexPath.item] floatValue];
+        const CGFloat height = kScreenHeight * 48 / 1334.;
+        return CGSizeMake(width , height);
+    } else if (collectionView == _layoutDetailCollectionView) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_layoutDetailCollectionView.collectionViewLayout;
+        const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds);
+        UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
+        const CGFloat width = (fullWidth - 2*layout.minimumLineSpacing - insets.left - insets.right)/3;
+        const CGFloat height = width * 300 / 227.+30;
+        return CGSizeMake(width , height);
+    } else {
+        return CGSizeZero;
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

@@ -17,4 +17,6 @@
 - (void)JF_addPagingRefreshWithHandler:(void (^)(void))handler;
 - (void)JF_pagingRefreshNoMoreData;
 
+- (void)JF_addIsRefreshing;
+
 @end

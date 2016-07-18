@@ -38,4 +38,13 @@
 - (void)JF_pagingRefreshNoMoreData {
     [self.footer endRefreshingWithNoMoreData];
 }
+
+- (void)JF_addIsRefreshing {
+    if (!self.header) {
+        MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:nil];
+        [refreshHeader setTitle:@"正在刷新中" forState:MJRefreshStateRefreshing];
+        self.header = refreshHeader;
+    }
+}
+
 @end

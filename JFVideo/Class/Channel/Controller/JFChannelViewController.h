@@ -8,8 +8,14 @@
 
 #import "JFBaseViewController.h"
 
+//typedef void(^channeColumnlCount)(NSUInteger count,CGFloat height);
+
 @interface JFChannelViewController : JFBaseViewController
 
 - (instancetype)initWithColumnId:(NSInteger)columnId;
+
+//@property (nonatomic)channeColumnlCount programCount;
+
+//@property (nonatomic)UICollectionView *layoutCollectionView;
 
 @end

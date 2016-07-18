@@ -21,7 +21,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+        self.backgroundColor = [UIColor clearColor];
         
         _bgImgv = [[UIImageView alloc] init];
         [self addSubview:_bgImgv];
@@ -40,6 +40,7 @@
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(_bgImgv.mas_bottom).offset(5);
                 make.left.equalTo(self).offset(5);
+                make.right.equalTo(self).offset(-5);
                 make.height.mas_equalTo(20);
             }];
 
