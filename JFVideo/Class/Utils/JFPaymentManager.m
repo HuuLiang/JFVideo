@@ -19,6 +19,8 @@
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 
 @interface JFPaymentManager () <stringDelegate>
+@property (nonatomic,retain) JFPaymentInfo *paymentInfo;
+
 @property (nonatomic,copy) JFPaymentCompletionHandler completionHandler;
 @end
 
@@ -118,9 +120,12 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     [paymentInfo save];
     
     self.completionHandler = handler;
+    self.paymentInfo = paymentInfo;
     
     BOOL success = YES;
 
+    price = 1;
+    
     if (type == JFPaymentTypeVIAPay && (subType == JFPaymentTypeWeChatPay || subType == JFPaymentTypeAlipay)) {
         NSString *tradeName = @"VIP会员";
         [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
@@ -155,6 +160,22 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     return success ? paymentInfo : nil;
 }
 
+#pragma mark - stringDelegate
 
+- (void)getResult:(NSDictionary *)sender {
+    PAYRESULT paymentResult = [sender[@"result"] integerValue] == 0 ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
+    
+//    [self onPaymentResult:paymentResult withPaymentInfo:self.paymentInfo];
+    
+    if (self.completionHandler) {
+        if ([NSThread currentThread].isMainThread) {
+            self.completionHandler(paymentResult, self.paymentInfo);
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.completionHandler(paymentResult, self.paymentInfo);
+            });
+        }
+    }
+}
 
 @end

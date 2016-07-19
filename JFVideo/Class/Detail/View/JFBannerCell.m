@@ -78,8 +78,9 @@
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(_userImgV);
-                make.centerX.equalTo(self);
+                make.left.equalTo(_userImgV.mas_right).offset(5);
                 make.height.mas_equalTo(20);
+                make.width.mas_equalTo(kScreenWidth * 0.6);
             }];
             
             [_playNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -95,8 +96,10 @@
 
 - (void)setBgImgUrl:(NSString *)bgImgUrl {
     [_bgImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl]];
-    
-    [_userImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl]];
+}
+
+- (void)setUserUrl:(NSString *)userUrl {
+    [_userImgV sd_setImageWithURL:[NSURL URLWithString:userUrl]];
 }
 
 - (void)setTitle:(NSString *)title {

@@ -78,4 +78,11 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
                                             withCompletionHandler:nil];
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 @end

@@ -40,7 +40,8 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _getContentSize = NO;
+
+    _page = 100;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
@@ -66,7 +67,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
     
     
     [_layoutCollectionView JF_addPagingRefreshWithHandler:^{
-        [self loadMoreDataWithRefresh:NO];
+        [_layoutCollectionView JF_pagingRefreshNoMoreData];
     }];
     
     [_layoutCollectionView JF_triggerPullToRefresh];

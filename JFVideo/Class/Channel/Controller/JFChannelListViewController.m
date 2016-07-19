@@ -56,7 +56,11 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     
     
     [_layoutCollectionView JF_addPagingRefreshWithHandler:^{
-        [self loadMoreDataWithRefresh:NO];
+        if ([JFUtil isVip]) {
+            [_layoutCollectionView JF_pagingRefreshNoMoreData];
+        } else {
+            [self payWithInfo:nil];
+        }
     }];
     
     [_layoutCollectionView JF_triggerPullToRefresh];

@@ -172,8 +172,6 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     }
 }
 
-
-
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     JFHomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHomeSectionHeaderReusableIdentifier forIndexPath:indexPath];
     JFHomeColumnModel *column = self.dataSource[indexPath.section];
@@ -224,7 +222,6 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     if (section == 0) {
         return CGSizeZero;
     }
-    
     UIEdgeInsets insets = [self collectionView:collectionView layout:collectionViewLayout insetForSectionAtIndex:section];
     return CGSizeMake(CGRectGetWidth(collectionView.bounds)-insets.left-insets.right, 30);
 }

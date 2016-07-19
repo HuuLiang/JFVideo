@@ -27,7 +27,7 @@
 
 - (BOOL)fecthChannelProgramWithColumnId:(NSInteger)columnId Page:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
-    NSDictionary *params = @{@"page":[NSString stringWithFormat:@"%ld",page],
+    NSDictionary *params = @{@"pageSize":[NSString stringWithFormat:@"%ld",page],
                              @"columnId":[NSString stringWithFormat:@"%ld",columnId]};
     BOOL success = [self requestURLPath:JF_PROGRAM_URL
                              withParams:params

@@ -42,10 +42,23 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
 
 @end

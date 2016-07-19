@@ -108,10 +108,11 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     _bannerCell = [[JFBannerCell alloc] init];
     _bannerCell.selectionStyle = UITableViewCellSelectionStyleNone;
     JFDetailProgramModel *program = self.response.program;
-    _bannerCell.bgImgUrl = program.coverImg;
+    _bannerCell.bgImgUrl = program.detailsCoverImg;
+    _bannerCell.userUrl = program.coverImg;
     _bannerCell.title = program.title;
     _bannerCell.num = [program.spare integerValue];
-
+    
     [self setLayoutCell:_bannerCell cellHeight:SCREEN_WIDTH*0.6+60 inRow:0 andSection:section];
 }
 

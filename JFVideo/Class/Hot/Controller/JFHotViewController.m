@@ -20,7 +20,7 @@
 #define LINESPACING kScreenHeight * 20 / 1334.
 #define INTERITEMSPACING kScreenWidth * 23 / 750.
 #define EDGINSETS UIEdgeInsetsMake(kScreenHeight * 25 / 1334., kScreenWidth * 30 / 750. , kScreenHeight * 25 / 1334., kScreenWidth * 30 / 750.)
-#define titleCellHeight 2* kScreenHeight * 48/1334. + 1.5 * LINESPACING + EDGINSETS.bottom + EDGINSETS.top
+#define titleCellHeight 2* kScreenHeight * 48/1334. + LINESPACING + EDGINSETS.top + EDGINSETS.bottom + kScreenHeight * 48 / 1334.
 
 
 static NSString *const kHotTitleCellReusableIdentifier = @"hottitleCellReusableIdentifier";
@@ -80,7 +80,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
 
 - (void)loadTitleData{
     @weakify(self);
-    [self.channelModel fetchChannelInfoWithPage:1 CompletionHandler:^(BOOL success, NSArray * obj) {
+    [self.channelModel fetchChannelInfoWithPage:100 CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
         [self.layoutTableView JF_endPullToRefresh];
         if (success) {
@@ -98,22 +98,22 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     if (_lastSelectedIndexPath == _selectecIndexPath && !_isRefresh) {
         return;
     }
-    [_layoutDetailCollectionView beginLoading];
+    _isRefresh = YES;
+    
     @weakify(self);
-    [self.programModel fecthChannelProgramWithColumnId:column.columnId Page:0 CompletionHandler:^(BOOL success, NSArray * obj) {
+    [self.programModel fecthChannelProgramWithColumnId:column.columnId Page:100 CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
-//        [_layoutDetailCollectionView JF_addIsRefreshing];
-        
         if (success) {
-            if (obj.count > 0) {
                 [self.detailArray removeAllObjects];
                 [self.detailArray addObjectsFromArray:obj];
                 [self initHeaderCell:1 column:column];
                 [self initDetailCell:2 column:column];
-            }
-//            [_layoutDetailCollectionView JF_endPullToRefresh];
-
+            
+        } else {
+            [[CRKHudManager manager] showHudWithText:@"数据加载失败,请稍后再试"];
         }
+        _isRefresh = NO;
+        
     }];
     _lastSelectedIndexPath = _selectecIndexPath;
 }
@@ -177,13 +177,14 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     _layoutTitleCollectionView.delegate = self;
     _layoutTitleCollectionView.dataSource = self;
     _layoutTitleCollectionView.showsVerticalScrollIndicator = NO;
+    _layoutTitleCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     _layoutTitleCollectionView.scrollEnabled = NO;
     [_layoutTitleCollectionView registerClass:[JFTitleLabelCell class] forCellWithReuseIdentifier:kHotTitleCellReusableIdentifier];
     [_titleCell addSubview:_layoutTitleCollectionView];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = [UIColor clearColor];
-    btn.titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 26 / 750.];
+    btn.titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 30 / 750.];
     [btn setTitle:@"更多" forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
@@ -196,43 +197,46 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
             [btn setTitle:@"收起" forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:@"hot_less_icon"] forState:UIControlStateNormal];
             _layoutTitleCollectionView.scrollEnabled = YES;
+            _layoutTitleCollectionView.showsVerticalScrollIndicator = YES;
             [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING + 2* kScreenHeight * 48/1334. + 2 * LINESPACING);
-                _headerCell.transform = CGAffineTransformMakeTranslation(0, 2 * (kScreenHeight * 48 / 1334. + LINESPACING));
-                _detailCell.transform = CGAffineTransformMakeTranslation(0, 2 * (kScreenHeight * 48 / 1334. + LINESPACING));
+                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight + 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2);
+                _headerCell.transform = CGAffineTransformMakeTranslation(0, 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2);
+                _detailCell.transform = CGAffineTransformMakeTranslation(0, 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2);
             } completion:^(BOOL finished) {
-                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING + 2* kScreenHeight * 48/1334. + 2 * LINESPACING inRow:0 andSection:0];
-//                [self.layoutTableView reloadData];
+                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2 inRow:0 andSection:0];
+                [self.layoutTableView reloadData];
             }];
         } else {
             [btn setTitle:@"更多" forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
             _layoutTitleCollectionView.scrollEnabled = NO;
             [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING);
-                _headerCell.transform = CGAffineTransformMakeTranslation(0, -2 * (kScreenHeight * 48 / 1334. + LINESPACING));
-                _detailCell.transform = CGAffineTransformMakeTranslation(0, -2 * (kScreenHeight * 48 / 1334. + LINESPACING));
+                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight);
+                _headerCell.transform = CGAffineTransformMakeTranslation(0, 0);
+                _detailCell.transform = CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
-                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING inRow:0 andSection:0];
+                [self setLayoutCell:_titleCell cellHeight:titleCellHeight inRow:0 andSection:0];
                 [self.layoutTableView reloadData];
             }];
+            
+            [_layoutTitleCollectionView scrollToItemAtIndexPath:_selectecIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
         }
     } forControlEvents:UIControlEventTouchUpInside];
     
     {
         [_layoutTitleCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.equalTo(_titleCell);
-            make.bottom.equalTo(_titleCell.mas_bottom).offset(-(kScreenHeight * 30 /1334.+ 10 + LINESPACING));
+            make.bottom.equalTo(_titleCell.mas_bottom).offset(-(kScreenHeight * 48 /1334. + LINESPACING));
         }];
         
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(_titleCell).offset(-LINESPACING/2.);
+            make.bottom.equalTo(_titleCell).offset(0);
             make.right.equalTo(_titleCell).offset(-5);
-            make.size.mas_equalTo(CGSizeMake(60,kScreenHeight * 30 /1334.));
+            make.size.mas_equalTo(CGSizeMake(60,kScreenHeight * 48 /1334. + LINESPACING));
         }];
     }
     
-    [self setLayoutCell:_titleCell cellHeight:titleCellHeight + kScreenHeight * 30 / 1334. + LINESPACING inRow:0 andSection:0];
+    [self setLayoutCell:_titleCell cellHeight:titleCellHeight inRow:0 andSection:0];
 }
 
 - (void)initHeaderCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
@@ -247,13 +251,13 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     [_headerCell addSubview:_label];
     {
         [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(_headerCell);
+            make.top.equalTo(_headerCell).offset(kScreenHeight * 2 / 1334.);
             make.left.equalTo(_headerCell).offset(15);
             make.right.equalTo(_headerCell);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(kScreenHeight * 30 / 1334.);
         }];
     }
-    [self setLayoutCell:_headerCell cellHeight:40 inRow:0 andSection:section++];
+    [self setLayoutCell:_headerCell cellHeight:kScreenHeight * 50 / 1334. inRow:0 andSection:section++];
 }
 - (void)initDetailCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
     _detailCell = [[UITableViewCell alloc] init];
@@ -285,6 +289,8 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     [self setLayoutCell:_detailCell cellHeight:collectionViewHeight inRow:0 andSection:section];
     
     [self.layoutTableView reloadData];
+    
+    [_layoutTitleCollectionView selectItemAtIndexPath:_selectecIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
 }
 
 
@@ -308,6 +314,9 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         if (indexPath.item < self.titleArray.count) {
             JFChannelColumnModel *column = self.titleArray[indexPath.item];
             cell.title = column.name;
+            if (indexPath.item == _selectecIndexPath.item) {
+                
+            }
             return cell;
         }
     } else if (collectionView == _layoutDetailCollectionView) {
@@ -328,6 +337,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         if (indexPath.item < self.titleArray.count) {
             _columnId = column.columnId;
             _selectecIndexPath = indexPath;
+            [_layoutTitleCollectionView scrollToItemAtIndexPath:_selectecIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
             [self loadProgramsWithColumnInfo:column];
         }
     } else if (collectionView == _layoutDetailCollectionView) {
@@ -347,8 +357,8 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_layoutDetailCollectionView.collectionViewLayout;
         const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds);
         UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
-        const CGFloat width = (fullWidth - 2*layout.minimumLineSpacing - insets.left - insets.right)/3;
-        const CGFloat height = width * 300 / 227.+30;
+        const CGFloat width = (fullWidth - 2*layout.minimumInteritemSpacing - insets.left - insets.right)/3.;
+        const CGFloat height = width * 300 / 227.+30.;
         return CGSizeMake(width , height);
     } else {
         return CGSizeZero;
