@@ -23,8 +23,9 @@
 
 - (BOOL)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
+    NSDictionary *params = @{@"page":@(page)};
     BOOL success = [self requestURLPath:JF_HOME_URL
-                             withParams:nil
+                             withParams:params
                         responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);

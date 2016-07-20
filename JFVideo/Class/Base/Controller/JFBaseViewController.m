@@ -11,6 +11,8 @@
 #import "JFVideoPlayerController.h"
 #import <MWPhotoBrowser.h>
 #import "JFDetailModel.h"
+#import <AVKit/AVKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 
@@ -41,22 +43,26 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 }
 
 - (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr {
-    if (![JFUtil isVip]) {
+    if (![JFUtil isVip] && model.spec != 4) {
         [self payWithInfo:model];
-    } else {
+    } else if (![JFUtil isVip]&& model.spec == 4) {
         JFVideoPlayerController *videoVC = [[JFVideoPlayerController alloc] initWithVideo:videoUrlStr];
         [self.navigationController pushViewController:videoVC animated:YES];
+    } else {
+        UIViewController *videoPlayVC = [self playerVCWithVideo:videoUrlStr];
+        videoPlayVC.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:videoPlayVC animated:YES completion:nil];
     }
 }
 
 - (void)playPhotoUrlWithInfo:(JFBaseModel *)model urlArray:(NSArray *)urlArray index:(NSInteger)index {
-//    if (![JFUtil isVip]) {
-//        [UIAlertView bk_showAlertViewWithTitle:@"非VIP用户只能浏览小图哦" message:@"开通VIP,高清大图即刻欣赏" cancelButtonTitle:@"再考虑看看" otherButtonTitles:@[@"立即开通"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//            if (buttonIndex == 1) {
-//                [self payWithInfo:model];
-//            }
-//        }];
-//    } else {
+    if (![JFUtil isVip]) {
+        [UIAlertView bk_showAlertViewWithTitle:@"非VIP用户只能浏览小图哦" message:@"开通VIP,高清大图即刻欣赏" cancelButtonTitle:@"再考虑看看" otherButtonTitles:@[@"立即开通"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [self payWithInfo:model];
+            }
+        }];
+    } else {
         NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:urlArray.count];
         [urlArray enumerateObjectsUsingBlock:^(JFDetailPhotoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj.url]]];
@@ -69,7 +75,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
         [photoBrowser setCurrentPhotoIndex:index];
         photoBrowser.zoomPhotosToFill = NO;
         [self.navigationController pushViewController:photoBrowser animated:YES];
-//    }
+    }
 }
 
 - (void)payWithInfo:(JFBaseModel *)model {
@@ -77,6 +83,36 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
                                                         baseModel:model
                                             withCompletionHandler:nil];
 }
+
+- (UIViewController *)playerVCWithVideo:(NSString *)videoUrl {
+    UIViewController *retVC;
+    if (NSClassFromString(@"AVPlayerViewController")) {
+        AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
+        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:videoUrl]];
+        [playerVC aspect_hookSelector:@selector(viewDidAppear:)
+                          withOptions:AspectPositionAfter
+                           usingBlock:^(id<AspectInfo> aspectInfo){
+                               AVPlayerViewController *thisPlayerVC = [aspectInfo instance];
+                               [thisPlayerVC.player play];
+                           } error:nil];
+        
+        retVC = playerVC;
+    } else {
+        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:videoUrl]];
+    }
+    
+    [retVC aspect_hookSelector:@selector(supportedInterfaceOrientations) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+        UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+        [[aspectInfo originalInvocation] setReturnValue:&mask];
+    } error:nil];
+    
+    [retVC aspect_hookSelector:@selector(shouldAutorotate) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+        BOOL rotate = YES;
+        [[aspectInfo originalInvocation] setReturnValue:&rotate];
+    } error:nil];
+    return retVC;
+}
+
 
 - (BOOL)shouldAutorotate {
     return NO;

@@ -13,6 +13,8 @@
 #import "JFChannelColumnModel.h"
 #import "JFChannelCell.h"
 
+#define edgeInsets UIEdgeInsetsMake(kScreenHeight * 30 /1334., kScreenWidth * 18 /750., kScreenHeight * 30 /1334., kScreenWidth * 18 /750.)
+
 static NSString *const kChannelCellReusableIdentifier = @"ChannelCellReusableIdentifier";
 
 @interface JFChannelListViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
@@ -33,8 +35,8 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     [super viewDidLoad];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumLineSpacing = 5;
-    layout.minimumInteritemSpacing = layout.minimumLineSpacing;
+    layout.minimumLineSpacing = kScreenHeight * 45 / 1334.;
+    layout.minimumInteritemSpacing = kScreenWidth * 45 / 750.;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _layoutCollectionView.backgroundColor = [UIColor colorWithHexString:@"#303030"];
@@ -114,13 +116,12 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
     const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds);
-        UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
-    const CGFloat width = (fullWidth - layout.minimumLineSpacing - insets.left - insets.right)/2;
-    const CGFloat height = width * 300 / 227.+30;
-    return CGSizeMake(width , height);
+    const CGFloat width = (fullWidth - layout.minimumInteritemSpacing - edgeInsets.left - edgeInsets.right)/2;
+    const CGFloat height = width * 432 / 336.;
+    return CGSizeMake((long)width , (long)height);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(5, 10, 5, 10);
+    return edgeInsets;
 }
 @end

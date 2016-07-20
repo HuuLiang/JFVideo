@@ -78,7 +78,12 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     
     
     [_layoutCollectionView JF_addPagingRefreshWithHandler:^{
-        [self loadMoreDataWithRefresh:NO];
+        if ([JFUtil isVip]) {
+            [self payWithInfo:nil];
+            [_layoutCollectionView JF_endPullToRefresh];
+        } else {
+            [_layoutCollectionView JF_pagingRefreshNoMoreData];
+        }
     }];
 
     [_layoutCollectionView JF_triggerPullToRefresh];
@@ -86,15 +91,20 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 
 - (void)loadMoreDataWithRefresh:(BOOL)isRefresh {
     @weakify(self);
-    [self.homeModel fetchHomeInfoWithPage:_page CompletionHandler:^(BOOL success, NSArray * obj) {
+    [self.homeModel fetchHomeInfoWithPage:1 /*isRefresh ? _page = 1 : ++_page*/  CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
-        [_layoutCollectionView JF_endPullToRefresh];
         if (success) {
-            [self.dataSource removeAllObjects];
+//            if (isRefresh) {
+                [self.dataSource removeAllObjects];
+//            }
             [self.dataSource addObjectsFromArray:obj];
             [self refreshBannerView];
             [_layoutCollectionView reloadData];
         }
+        [_layoutCollectionView JF_endPullToRefresh];
+//        if (obj.count == 0) {
+//            [_layoutCollectionView JF_pagingRefreshNoMoreData];
+//        }
     }];
 }
 

@@ -100,7 +100,6 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
         [self initCommentCell:section++];
     }
     
-    [_layoutCollectionView reloadData];
     [self.layoutTableView reloadData];
 }
 
@@ -123,11 +122,15 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     baseModel.programType = @(1);
     baseModel.channelType = @(3);
     
+    baseModel.spec = [self.response.program.spec integerValue];
+    
     [self playVideoWithInfo:baseModel videoUrl:self.response.program.videoUrl];
 }
 
 - (void)initScrollCell:(NSUInteger)section {
     _scrollCell = [[UITableViewCell alloc] init];
+    _scrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _scrollCell.backgroundColor = [UIColor clearColor];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
@@ -147,6 +150,8 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
         }];
     }
     [self setLayoutCell:_scrollCell cellHeight:SCREEN_HEIGHT*200/1334.+5 inRow:0 andSection:section];
+    [_layoutCollectionView reloadData];
+
 }
 
 - (void)initLineCell:(NSInteger)section {

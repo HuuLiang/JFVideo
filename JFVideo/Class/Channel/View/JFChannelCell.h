@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JFChannelColumnModel.h"
 
 @interface JFChannelCell : UICollectionViewCell
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *imgUrl;
+
+- (void)updateCellWithInfo:(JFChannelColumnModel *)columnModel;
+
 @end

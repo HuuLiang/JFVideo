@@ -18,4 +18,6 @@
 @property (nonatomic) NSNumber * channelType;
 @property (nonatomic) NSInteger programLocation;
 
+@property (nonatomic) NSInteger spec;
+
 @end

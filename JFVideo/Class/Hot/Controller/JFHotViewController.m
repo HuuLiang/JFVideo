@@ -359,7 +359,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
         const CGFloat width = (fullWidth - 2*layout.minimumInteritemSpacing - insets.left - insets.right)/3.;
         const CGFloat height = width * 300 / 227.+30.;
-        return CGSizeMake(width , height);
+        return CGSizeMake((long)width , (long)height);
     } else {
         return CGSizeZero;
     }
