@@ -15,6 +15,7 @@
 #import "JFHotViewController.h"
 #import "JFMineViewController.h"
 #import "JFPaymentManager.h"
+#import "MobClick.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
@@ -158,13 +159,26 @@
 }
 
 
+- (void)setupMobStatistics {
+#ifdef DEBUG
+    [MobClick setLogEnabled:YES];
+#endif
+    NSString *bundleVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    if (bundleVersion) {
+        [MobClick setAppVersion:bundleVersion];
+    }
+    [MobClick startWithAppkey:JF_UMENG_APP_ID reportPolicy:BATCH channelId:JF_CHANNEL_NO];
+    
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [JFUtil accumateLaunchSeq];
     [self setupCommonStyles];
     
     //paymentInfo
     [[JFPaymentManager sharedManager] setup];
-    
+     [self setupMobStatistics];
     
     if (![JFUtil isRegistered]) {
         [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {

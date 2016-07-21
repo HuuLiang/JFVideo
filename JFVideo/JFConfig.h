@@ -46,4 +46,6 @@
 
 #define JF_DB_VERSION                  (1)
 
+#define JF_UMENG_APP_ID                @"5790992ce0f55a0da9003033"
+
 #endif /* JFConfig_h */

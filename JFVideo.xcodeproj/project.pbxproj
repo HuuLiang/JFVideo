@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */; };
+		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
@@ -105,6 +106,9 @@
 /* Begin PBXFileReference section */
 		3CC027D51A6BCEED5231ED1D /* Pods-JFVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JFVideo/Pods-JFVideo.release.xcconfig"; sourceTree = "<group>"; };
 		4E847A79EDDA1146FCE7A3BF /* Pods-JFVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JFVideo/Pods-JFVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JFVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC08496E1D1E568A00623AEF /* JFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCommentCell.h; sourceTree = "<group>"; };
 		EC08496F1D1E568A00623AEF /* JFCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCommentCell.m; sourceTree = "<group>"; };
@@ -301,6 +305,7 @@
 				EC2808BC1D34C68100E7E76E /* pay.a in Frameworks */,
 				A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */,
 				EC2808CD1D34CFAC00E7E76E /* libWeChatSDK.a in Frameworks */,
+				B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */,
 				EC2808BB1D34C68100E7E76E /* HYMergerPaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +320,16 @@
 				3CC027D51A6BCEED5231ED1D /* Pods-JFVideo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B39E36271D40D11500763C24 /* Umeng */ = {
+			isa = PBXGroup;
+			children = (
+				B39E36281D40D11500763C24 /* libMobClickLibrary.a */,
+				B39E36291D40D11500763C24 /* MobClick.h */,
+				B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */,
+			);
+			path = Umeng;
 			sourceTree = "<group>";
 		};
 		CD200FA47615E27A2F6C7793 /* Frameworks */ = {
@@ -368,6 +383,7 @@
 		EC2808AA1D34C64900E7E76E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				B39E36271D40D11500763C24 /* Umeng */,
 				EC2808D81D34D06B00E7E76E /* AlipaySDK */,
 				EC2808C81D34CFAC00E7E76E /* WeChatSDK */,
 				EC2808C41D34C6A100E7E76E /* HTPay */,
@@ -1159,6 +1175,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/VIAPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/WeChatSDK",
+					"$(PROJECT_DIR)/JFVideo/Class/Vendor/Umeng",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1191,6 +1208,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/VIAPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/WeChatSDK",
+					"$(PROJECT_DIR)/JFVideo/Class/Vendor/Umeng",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
