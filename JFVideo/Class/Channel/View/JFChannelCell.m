@@ -40,7 +40,7 @@
         [self addSubview:_bgImgv];
         
         UIView *bgView = [[UIView alloc] init];
-        bgView.backgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.45];
+        bgView.backgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.35];
         bgView.layer.masksToBounds = YES;
         [_bgImgv addSubview:bgView];
         
@@ -58,7 +58,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:14.];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:kScreenHeight * 28 /1334.];
         [_titleImgV addSubview:_titleLabel];
         
         _hotImgv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"channel_hot_icon"]];
@@ -86,7 +86,7 @@
             [_rankImgV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(kScreenWidth * 10 / 750.);
                 make.top.equalTo(self).offset(kScreenHeight * 10 / 1334.);
-                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 26./750, kScreenHeight * 34./1334.));
+                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 29./750, kScreenHeight * 32./1334.));
             }];
             
             [_rankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,8 +125,18 @@
     return self;
 }
 
-- (void)updateCellWithInfo:(JFChannelColumnModel *)columnModel {
-    
+- (void)setRankCount:(NSInteger)rankCount {
+    if (rankCount == 0 || rankCount == 1 || rankCount == 2) {
+        _rankLabel.hidden = NO;
+        _rankImgV.hidden = NO;
+        NSMutableAttributedString * attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"NO.%ld",rankCount+1]];
+        NSRange rankRange = [attr.string rangeOfString:[NSString stringWithFormat:@"%ld",rankCount+1]];
+        [attr addAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:kScreenWidth * 30 /750.]} range:rankRange];
+        _rankLabel.attributedText = attr;
+    } else {
+        _rankImgV.hidden = YES;
+        _rankLabel.hidden = YES;
+    }
 }
 
 - (void)setImgUrl:(NSString *)imgUrl {
@@ -134,6 +144,19 @@
 }
 
 - (void)setTitle:(NSString *)title {
-    _titleLabel.text = title;
+    _titleLabel.text = [NSString stringWithFormat:@"%@视频集",title];
+    CGFloat widht = [_titleLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:kScreenHeight * 28 /1334.] maxSize:CGSizeMake(MAXFLOAT, kScreenHeight * 60 / 1334.)].width;
+    [_titleImgV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.bottom.equalTo(self).offset(-kScreenHeight * 60 / 1334.);
+        make.size.mas_equalTo(CGSizeMake(widht + 15, kScreenHeight * 71./1334.));
+    }];
 }
+
+-(void)setHotCount:(NSString *)hotCount {
+    _hotLabel.text = hotCount;
+}
+
+
+
 @end

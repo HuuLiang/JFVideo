@@ -94,7 +94,7 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
                  baseModel:(JFBaseModel *)model
      withCompletionHandler:(void (^)(void))completionHandler
 {
-    
+    [self.view beginLoading];
     self.completionHandler = completionHandler;
     self.baseModel = model;
     
@@ -133,6 +133,7 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
 }
 
 - (void)hidePayment {
+    [self.view endLoading];
     [UIView animateWithDuration:0.25 animations:^{
         self.view.alpha = 0;
     } completion:^(BOOL finished) {

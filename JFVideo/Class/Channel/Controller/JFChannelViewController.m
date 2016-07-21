@@ -18,7 +18,7 @@ static NSString *const kChannelProgramCellReusableIdentifier = @"ChannelProgramC
     NSInteger _columnId;
     UICollectionView *_layoutCollectionView;
     NSInteger _page;
-    
+    NSString *_name;
     BOOL _getContentSize;
 }
 @property (nonatomic) NSMutableArray *dataSource;
@@ -29,11 +29,12 @@ static NSString *const kChannelProgramCellReusableIdentifier = @"ChannelProgramC
 DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
 
-- (instancetype)initWithColumnId:(NSInteger)columnId
+- (instancetype)initWithColumnId:(NSInteger)columnId ColumnName:(NSString *)name
 {
     self = [super init];
     if (self) {
         _columnId = columnId;
+        _name = name;
     }
     return self;
 }
@@ -42,6 +43,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
     [super viewDidLoad];
 
     _page = 100;
+    self.title = _name;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
@@ -82,8 +84,10 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
         if (success) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:obj];
-            _getContentSize = NO;
             [_layoutCollectionView reloadData];
+            if (obj.count == 0) {
+                [[CRKHudManager manager] showHudWithText:@"暂未获取到内容,请稍后再试"];
+            }
         }
     }];
 }
@@ -129,7 +133,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(5, 10, 5, 10);
+    return UIEdgeInsetsMake(5, 5, 5, 5);
 }
 
 @end

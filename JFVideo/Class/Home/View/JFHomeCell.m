@@ -32,7 +32,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:14.];
+        _titleLabel.font = [UIFont systemFontOfSize:kScreenHeight * 28 / 1334.];
         [self addSubview:_titleLabel];
         
         _isFreeImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_freePlay_icon"]];
@@ -72,5 +72,7 @@
 - (void)setIsFree:(BOOL)isFree {
     _isFreeImg.hidden = !isFree;
 }
+
+
 
 @end

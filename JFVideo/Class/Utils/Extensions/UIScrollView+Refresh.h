@@ -19,4 +19,6 @@
 
 - (void)JF_addIsRefreshing;
 
+- (void)JF_addVIPNotiRefreshWithHandler:(void (^)(void))handler;
+
 @end

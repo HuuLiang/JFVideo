@@ -12,7 +12,7 @@
 
 @interface JFChannelViewController : JFBaseViewController
 
-- (instancetype)initWithColumnId:(NSInteger)columnId;
+- (instancetype)initWithColumnId:(NSInteger)columnId ColumnName:(NSString *)name;
 
 //@property (nonatomic)channeColumnlCount programCount;
 

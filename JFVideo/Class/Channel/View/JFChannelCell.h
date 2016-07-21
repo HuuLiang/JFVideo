@@ -12,7 +12,8 @@
 @interface JFChannelCell : UICollectionViewCell
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *imgUrl;
+@property (nonatomic) NSInteger rankCount;
+@property (nonatomic) NSString * hotCount;
 
-- (void)updateCellWithInfo:(JFChannelColumnModel *)columnModel;
 
 @end

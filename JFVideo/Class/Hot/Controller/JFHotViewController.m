@@ -109,8 +109,10 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
                 [self initHeaderCell:1 column:column];
                 [self initDetailCell:2 column:column];
             
-        } else {
+        }
+        if (!success || obj.count == 0) {
             [[CRKHudManager manager] showHudWithText:@"数据加载失败,请稍后再试"];
+
         }
         _isRefresh = NO;
         

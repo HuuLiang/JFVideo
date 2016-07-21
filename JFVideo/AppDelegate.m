@@ -49,7 +49,7 @@
                                                                 selectedImage:[UIImage imageNamed:@"tabbar_channel_selected"]];
     
     JFHotViewController *hotVC = [[JFHotViewController alloc] init];
-    hotVC.title                          = @"热播";
+    hotVC.title                          = @"热搜";
     UINavigationController * hotNav      = [[UINavigationController alloc] initWithRootViewController:hotVC];
     hotNav.tabBarItem                    = [[UITabBarItem alloc] initWithTitle:hotVC.title
                                                                          image:[UIImage imageNamed:@"tabbar_hot_normal"]

@@ -13,6 +13,7 @@
 @property (nonatomic) NSInteger columnId;
 @property (nonatomic) NSString *columnImg;
 //@property (nonatomic) NSInteger payPointType;
+@property (nonatomic) NSString *columnDesc;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSInteger realColumnId;
 @property (nonatomic) NSInteger showNumber;

@@ -57,11 +57,12 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     }];
     
     
-    [_layoutCollectionView JF_addPagingRefreshWithHandler:^{
-        if ([JFUtil isVip]) {
-            [_layoutCollectionView JF_pagingRefreshNoMoreData];
-        } else {
+    [_layoutCollectionView JF_addVIPNotiRefreshWithHandler:^{
+        if (![JFUtil isVip]) {
             [self payWithInfo:nil];
+            [_layoutCollectionView JF_endPullToRefresh];
+        } else {
+            [_layoutCollectionView JF_pagingRefreshNoMoreData];
         }
     }];
     
@@ -99,6 +100,8 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     if (indexPath.item < self.dataSource.count) {
         cell.title = column.name;
         cell.imgUrl = column.columnImg;
+        cell.rankCount = indexPath.item;
+        cell.hotCount = column.columnDesc;
         return cell;
     } else {
         return nil;
@@ -108,7 +111,7 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataSource.count) {
         JFChannelColumnModel *column = self.dataSource[indexPath.item];
-        JFChannelViewController *channelVC = [[JFChannelViewController alloc] initWithColumnId:column.columnId];
+        JFChannelViewController *channelVC = [[JFChannelViewController alloc] initWithColumnId:column.columnId ColumnName:column.name];
         [self.navigationController pushViewController:channelVC animated:YES];
     }
 }

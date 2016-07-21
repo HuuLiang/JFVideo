@@ -75,17 +75,16 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     [_layoutCollectionView JF_addPullToRefreshWithHandler:^{
         [self loadMoreDataWithRefresh:YES];
     }];
-    
-    
-    [_layoutCollectionView JF_addPagingRefreshWithHandler:^{
-        if ([JFUtil isVip]) {
+
+    [_layoutCollectionView JF_addVIPNotiRefreshWithHandler:^{
+        if (![JFUtil isVip]) {
             [self payWithInfo:nil];
             [_layoutCollectionView JF_endPullToRefresh];
         } else {
             [_layoutCollectionView JF_pagingRefreshNoMoreData];
         }
     }];
-
+    
     [_layoutCollectionView JF_triggerPullToRefresh];
 }
 
@@ -220,9 +219,9 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 5, 0);
     } else if (section == 1) {
-        return UIEdgeInsetsMake(5, 10, 5, 10);
+        return UIEdgeInsetsMake(5, 5, 5, 5);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(5, 10, 5, 10);
+        return UIEdgeInsetsMake(5, 5, 5, 5);
     } else {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }
@@ -233,7 +232,7 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
         return CGSizeZero;
     }
     UIEdgeInsets insets = [self collectionView:collectionView layout:collectionViewLayout insetForSectionAtIndex:section];
-    return CGSizeMake(CGRectGetWidth(collectionView.bounds)-insets.left-insets.right, 30);
+    return CGSizeMake(CGRectGetWidth(collectionView.bounds)-insets.left-insets.right, kScreenHeight * 86 / 1334.);
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {

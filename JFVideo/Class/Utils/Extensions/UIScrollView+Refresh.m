@@ -47,4 +47,12 @@
     }
 }
 
+- (void)JF_addVIPNotiRefreshWithHandler:(void (^)(void))handler {
+    if (!self.footer) {
+        MJRefreshAutoNormalFooter *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:handler];
+        [refreshFooter setTitle:@"点击成为VIP可观看更多" forState:MJRefreshStateIdle];
+        self.footer = refreshFooter;
+    }
+}
+
 @end
