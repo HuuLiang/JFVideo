@@ -21,6 +21,7 @@ static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdent
 {
     NSInteger _programId;
     NSInteger _columnId;
+    UILabel *_naviLabel;
     
     JFBannerCell *_bannerCell;
     UITableViewCell *_scrollCell;
@@ -86,6 +87,8 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (void)reloadUI {
+//    self.title = self.response.
+    
     [self removeAllLayoutCells];
     
     NSUInteger section = 0;
@@ -113,6 +116,19 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     _bannerCell.num = [program.spare integerValue];
     
     [self setLayoutCell:_bannerCell cellHeight:SCREEN_WIDTH*0.6+60 inRow:0 andSection:section];
+    
+    [self setNaviTitle];
+}
+
+- (void)setNaviTitle {
+    _naviLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kScreenHeight * 20 / 1334., SCREEN_WIDTH , 24)];
+    _naviLabel.text = self.response.program.title;
+    _naviLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
+    _naviLabel.textAlignment = NSTextAlignmentCenter;
+    _naviLabel.hidden = YES;
+//    self.navigationItem.titleView = _naviLabel;
+    [self.navigationController.navigationBar addSubview:_naviLabel];
+//    self.navigationItem.titleView.frame = CGRectMake(-kScreenWidth * 67 / 750., 0, SCREEN_WIDTH, 30);
 }
 
 - (void)playVideo {
@@ -222,6 +238,20 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height = kScreenWidth * 0.6+60;
+    if (scrollView.contentOffset.y < height/2.) {
+        _naviLabel.hidden = YES;
+    } else if (scrollView.contentOffset.y > height/2. && scrollView.contentOffset.y < height) {
+        _naviLabel.hidden = NO;
+        _naviLabel.alpha = (scrollView.contentOffset.y - height/2.) / (height/2.);
+    } else {
+        _naviLabel.hidden = NO;
+        _naviLabel.alpha = 1.0;
+    }
     
 }
 

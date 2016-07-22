@@ -102,7 +102,7 @@ static NSString *const kPrivateKeyPool = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk
 - (NSString *)md5 {
     CC_MD5_CTX md5;
     CC_MD5_Init (&md5);
-    CC_MD5_Update (&md5, [self UTF8String], (unsigned int)[self length]);
+    CC_MD5_Update (&md5, [self UTF8String], (unsigned int)[self lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
     
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
     CC_MD5_Final (digest, &md5);
