@@ -33,25 +33,28 @@
                     responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
                 {
                     @strongify(self);
+                    NSArray *array = nil;
                     if (respStatus == JFURLResponseSuccess) {
                         JFAppSpreadResponse *resp = self.response;
-//                        _fetchSpreadChannel = resp;
-                        _fetchedSpreads = [NSMutableArray arrayWithArray:resp.programList];
+                        array = [NSArray arrayWithArray:resp.programList];
+                        _fetchedSpreads = [[NSMutableArray alloc] init];
                     }
-                    for (NSInteger i = 0; i < _fetchedSpreads.count; i++) {
-                        JFAppSpread *app = _fetchedSpreads[i];
+                    for (NSInteger i = 0; i < array.count; i++) {
+                        JFAppSpread *app = array[i];
                         [JFUtil checkAppInstalledWithBundleId:app.specialDesc completionHandler:^(BOOL isInstall) {
                             if (isInstall) {
                                 app.isInstall = isInstall;
-                                [_fetchedSpreads removeObject:app];
                                 [_fetchedSpreads addObject:app];
+                            } else {
+                                [_fetchedSpreads insertObject:app atIndex:0];
                             }
-                            if (i == _fetchedSpreads.count - 1) {
+                            if (_fetchedSpreads.count == array.count) {
                                 if (handler) {
                                     handler(respStatus == JFURLResponseSuccess, _fetchedSpreads);
                                 }
                             }
                         }];
+
                     }
                 }];
     return ret;

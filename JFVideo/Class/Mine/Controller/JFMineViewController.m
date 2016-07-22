@@ -35,6 +35,8 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+    
     self.layoutTableView.backgroundColor = [UIColor colorWithHexString:@"#303030"];
     
     self.layoutTableView.hasRowSeparator = NO;
@@ -54,7 +56,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     @weakify(self);
     self.layoutTableViewAction = ^(NSIndexPath *indexPath, UITableViewCell *cell) {
         @strongify(self);
-        if (cell == self->_vipCell) {
+        if (cell == self->_vipCell || cell == self->_bannerCell) {
             [self payWithInfo:nil];
         } else if (cell == self->_protocolCell) {
             JFWebViewController *webVC = [[JFWebViewController alloc] initWithURL:[NSURL URLWithString:JF_PROTOCOL_URL]];
@@ -96,6 +98,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     
     if (![JFUtil isVip]) {
         _vipCell = [[JFTableViewCell alloc] initWithImage:nil title:@"开通VIP"];
+        _vipCell.titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         _vipCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         _vipCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
         [self setLayoutCell:_vipCell cellHeight:44 inRow:0 andSection:section++];
@@ -143,7 +146,9 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
 }
 
 - (void)loadAppData {
+    @weakify(self);
     [self.appSpreadModel fetchAppSpreadWithCompletionHandler:^(BOOL success, id obj) {
+        @strongify(self);
         if (success) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:obj];
@@ -174,6 +179,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         cell.titleStr = app.title;
         cell.imgUrl = app.coverImg;
         cell.isInstall = app.isInstall;
+        DLog(@"%@ %@ %i",app.title,app.specialDesc,app.isInstall);
     }
     return cell;
 }
@@ -190,7 +196,6 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         } else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.videoUrl]];
         }
-        
     }
 }
 

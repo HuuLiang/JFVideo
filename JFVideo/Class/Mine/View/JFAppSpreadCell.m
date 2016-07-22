@@ -29,7 +29,7 @@
         self.layer.masksToBounds = YES;
         
         _bgImgv = [[UIImageView alloc] init];
-        _bgImgv.backgroundColor = [UIColor cyanColor];
+        _bgImgv.backgroundColor = [UIColor clearColor];
         _bgImgv.layer.cornerRadius = SCREEN_WIDTH * 30/750.;
         _bgImgv.layer.masksToBounds = YES;
         [self addSubview:_bgImgv];
