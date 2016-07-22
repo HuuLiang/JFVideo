@@ -22,6 +22,10 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 
 @implementation JFBaseViewController
 
+- (NSUInteger)currentIndex {
+    return NSNotFound;
+}
+
 - (instancetype)initWithTitle:(NSString *)title {
     self = [self init];
     if (self) {
@@ -47,6 +51,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
         [self payWithInfo:model];
     } else if (![JFUtil isVip]&& model.spec == 4) {
         JFVideoPlayerController *videoVC = [[JFVideoPlayerController alloc] initWithVideo:videoUrlStr];
+        videoVC.baseModel = model;
         [self presentViewController:videoVC animated:YES completion:nil];
     } else {
         UIViewController *videoPlayVC = [self playerVCWithVideo:videoUrlStr];

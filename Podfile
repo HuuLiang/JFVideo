@@ -16,4 +16,5 @@ target 'JFVideo' do
     pod 'SFHFKeychainUtils', '~> 0.0.1'
     pod 'TPKeyboardAvoiding', '~> 1.2.10'
     pod 'MWPhotoBrowser', '~> 2.1.1'
+    pod 'FMDB', '~> 2.6.2'
 end

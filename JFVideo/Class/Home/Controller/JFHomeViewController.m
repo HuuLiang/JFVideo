@@ -33,11 +33,13 @@ static NSString *const kHomeSectionHeaderReusableIdentifier = @"HomeSectionHeade
 }
 @property (nonatomic) NSMutableArray *dataSource;
 @property (nonatomic ,retain) JFHomeModel *homeModel;
+@property (nonatomic,retain)JFHomeColumnModel *bannerColumn;
 @end
 
 @implementation JFHomeViewController
 DefineLazyPropertyInitialization(JFHomeModel, homeModel)
 DefineLazyPropertyInitialization(NSMutableArray, dataSource)
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +53,11 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _bannerView.delegate = self;
     _bannerView.backgroundColor = [UIColor clearColor];
+    
+    [_bannerView aspect_hookSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo, UIScrollView *scrollView, BOOL decelerate){
+        [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forBanner:self.bannerColumn.columnId == 0 ? nil : @(self.bannerColumn.columnId) withSlideCount:1];
+    
+    } error:nil];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
@@ -113,6 +120,7 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     
     for (JFHomeColumnModel *column in self.dataSource) {
         if (column.type == 4) {
+            self.bannerColumn = column;
             for (JFHomeProgramModel *program in column.programList) {
                 [imageUrlGroup addObject:program.coverImg];
                 [titlesGroup addObject:program.title];
@@ -194,8 +202,20 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     JFHomeColumnModel *column = _dataSource[indexPath.section];
     JFHomeProgramModel *program = column.programList[indexPath.item];
     
+    JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+    baseModel.realColumnId = @(column.realColumnId);
+    baseModel.channelType = @(column.type);
+    baseModel.programId = @(program.programId);
+    baseModel.programType = @(program.type);
+    baseModel.programLocation = indexPath.item;
+    
     JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+    detailVC.baseModel = baseModel;
     [self.navigationController pushViewController:detailVC animated:YES];
+
+    
+    [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
+    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -239,12 +259,27 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
     for (JFHomeColumnModel *column in self.dataSource) {
         if (column.type == 4) {
             JFHomeProgramModel * program = column.programList[index];
+            
+            JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+            baseModel.realColumnId = @(column.realColumnId);
+            baseModel.channelType = @(column.type);
+            baseModel.programId = @(program.programId);
+            baseModel.programType = @(program.type);
+            baseModel.programLocation = index;
+            
             JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+            detailVC.baseModel = baseModel;
             [self.navigationController pushViewController:detailVC animated:YES];
+       
+            
+            [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:index andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
         }
     }
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
 
+}
 
 @end

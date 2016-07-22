@@ -103,6 +103,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
+//    price = 1;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);

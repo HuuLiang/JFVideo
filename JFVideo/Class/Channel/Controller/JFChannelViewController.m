@@ -10,6 +10,7 @@
 #import "JFChannelProgramModel.h"
 #import "JFChannelProgramCell.h"
 #import "JFDetailViewController.h"
+#import "JFChannelColumnModel.h"
 
 static NSString *const kChannelProgramCellReusableIdentifier = @"ChannelProgramCellReusableIdentifier";
 
@@ -117,9 +118,21 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataSource.count) {
+
         JFChannelProgram *program = self.dataSource[indexPath.item];
+        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+        baseModel.realColumnId = @(self.column.realColumnId);
+        baseModel.channelType = @(self.column.type);
+        baseModel.programType = @(program.type);
+        baseModel.programId = @(program.programId);
+        baseModel.programLocation = indexPath.item;
+  
         JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
+        detailVC.baseModel = baseModel;
         [self.navigationController pushViewController:detailVC animated:YES];
+      
+        [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
+        
     }
 }
 
@@ -136,4 +149,8 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
     return UIEdgeInsetsMake(5, 5, 5, 5);
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
+    
+}
 @end

@@ -19,4 +19,5 @@
 
 - (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr;
 
+- (NSUInteger)currentIndex;
 @end

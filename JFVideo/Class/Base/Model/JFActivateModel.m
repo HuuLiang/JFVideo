@@ -46,7 +46,8 @@ static NSString *const kSuccessResponse = @"SUCCESS";
                              @"cpuV":@"",
                              @"appV":[JFUtil appVersion],
                              @"appVN":@"",
-                             @"ccn":JF_PACKAGE_CERTIFICATE};
+                             @"ccn":JF_PACKAGE_CERTIFICATE,
+                             @"operator":[JFNetworkInfo sharedInfo].carriarName ?: @""};
     
     BOOL success = [self requestURLPath:JF_ACTIVATION_URL withParams:params responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage) {
         NSString *userId;

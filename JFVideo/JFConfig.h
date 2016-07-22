@@ -28,6 +28,11 @@
 #define JF_DETAIL_URL                  @"/iosvideo/detailsg.htm"
 #define JF_APPSPREAD_URL               @"/iosvideo/appSpreadList.htm"
 
+#define JF_STATS_BASE_URL              @"http://120.24.252.114"//@"http://stats.iqu8.cn"//
+#define JF_STATS_CPC_URL               @"/stats/cpcs.service"
+#define JF_STATS_TAB_URL               @"/stats/tabStat.service"
+#define JF_STATS_PAY_URL               @"/stats/payRes.service"
+
 
 #define JF_PAYMENT_CONFIG_URL           @"http://pay.zcqcmj.com/paycenter/payConfig.json"//@"http://120.24.252.114:8084/paycenter/payConfig.json"
 #define JF_PAYMENT_COMMIT_URL           @"http://pay.zcqcmj.com/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"

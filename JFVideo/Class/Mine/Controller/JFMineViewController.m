@@ -196,8 +196,18 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         } else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.videoUrl]];
         }
+
+        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+        baseModel.programId = @(app.programId);
+        baseModel.programType = @(app.type);
+        baseModel.programLocation = indexPath.item;
+        
+        [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     }
 }
 
-
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
+    
+}
 @end

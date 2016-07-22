@@ -112,7 +112,15 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     if (indexPath.item < self.dataSource.count) {
         JFChannelColumnModel *column = self.dataSource[indexPath.item];
         JFChannelViewController *channelVC = [[JFChannelViewController alloc] initWithColumnId:column.columnId ColumnName:column.name];
+        channelVC.column = column;
         [self.navigationController pushViewController:channelVC animated:YES];
+        
+        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+        baseModel.realColumnId = @(column.realColumnId);
+        baseModel.channelType = @(column.type);
+        baseModel.programLocation = indexPath.item;
+        [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel inTabIndex:self.tabBarController.selectedIndex];
+        
     }
 }
 
@@ -126,5 +134,10 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return edgeInsets;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
+    
 }
 @end

@@ -11,6 +11,7 @@
 #import <sys/sysctl.h>
 #import "NSDate+Utilities.h"
 #import "JQKApplicationManager.h"
+#import "JFBaseViewController.h"
 
 NSString *const kPaymentInfoKeyName             = @"jf_paymentinfo_keyname";
 
@@ -153,6 +154,30 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
         return navVC.visibleViewController;
     }
     return selectedVC;
+}
+
++ (NSUInteger)currentTabPageIndex {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabVC = (UITabBarController *)rootVC;
+        return tabVC.selectedIndex;
+    }
+    return 0;
+}
+
++ (NSUInteger)currentSubTabPageIndex {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabVC = (UITabBarController *)rootVC;
+        if ([tabVC.selectedViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navVC = (UINavigationController *)tabVC.selectedViewController;
+            if ([navVC.visibleViewController isKindOfClass:[JFBaseViewController class]]) {
+                JFBaseViewController *baseVC = (JFBaseViewController *)navVC.visibleViewController;
+                return [baseVC currentIndex];
+            }
+        }
+    }
+    return NSNotFound;
 }
 
 @end
