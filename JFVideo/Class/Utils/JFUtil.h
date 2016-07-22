@@ -41,4 +41,8 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)paymentReservedData;
 
 + (UIViewController *)currentVisibleViewController;
+
++ (NSUInteger)currentTabPageIndex;
++ (NSUInteger)currentSubTabPageIndex;
+
 @end

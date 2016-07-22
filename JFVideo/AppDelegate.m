@@ -42,7 +42,7 @@
     homeNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:homeVC.title
                                                                          image:[UIImage imageNamed:@"tabbar_home_normal"]
                                                                  selectedImage:[UIImage imageNamed:@"tabbar_home_selected"]];
-
+    
     
     JFChannelListViewController *channelVC = [[JFChannelListViewController alloc] init];
     channelVC.title                     = @"女优特辑";
@@ -68,6 +68,7 @@
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
     tabBarController.viewControllers        = @[homeNav,channelNav,hotNav,mineNav];
     tabBarController.tabBar.translucent = NO;
+    tabBarController.delegate = self;
     _window.rootViewController              = tabBarController;
     return _window;
 }
@@ -178,10 +179,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [JFUtil accumateLaunchSeq];
     [self setupCommonStyles];
-    
+    [[JFNetworkInfo sharedInfo] startMonitoring];
     //paymentInfo
     [[JFPaymentManager sharedManager] setup];
-     [self setupMobStatistics];
+    [self setupMobStatistics];
     
     [self.window makeKeyAndVisible];
     
@@ -197,6 +198,10 @@
     }
     
     [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        //数据统计时间
+        NSUInteger statsTimeInterval = 20;
+        [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        
         if (success) {
             //获取系统配置成功
         }
@@ -212,6 +217,17 @@
 }
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     [[JFPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [[JFStatsManager sharedManager] statsTabIndex:tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forClickCount:1];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    [[JFStatsManager sharedManager] statsStopDurationAtTabIndex:tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     return YES;
 }
 

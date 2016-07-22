@@ -54,6 +54,8 @@ return _##propertyName; \
 #define SafelyCallBlock1(block, arg) if (block) block(arg);
 #define SafelyCallBlock2(block, arg1, arg2) if (block) block(arg1, arg2);
 #define SafelyCallBlock3(block, arg1, arg2, arg3) if (block) block(arg1, arg2, arg3);
+#define SafelyCallBlock4(block,...) \
+if (block) block(__VA_ARGS__);
 
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width

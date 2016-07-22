@@ -7,11 +7,12 @@
 //
 
 #import "JFBaseViewController.h"
-
+@class JFChannelColumnModel;
 //typedef void(^channeColumnlCount)(NSUInteger count,CGFloat height);
 
 @interface JFChannelViewController : JFBaseViewController
 
+@property (nonatomic,retain)JFChannelColumnModel *column;
 - (instancetype)initWithColumnId:(NSInteger)columnId ColumnName:(NSString *)name;
 
 //@property (nonatomic)channeColumnlCount programCount;

@@ -14,4 +14,6 @@
 
 - (instancetype)initWithVideo:(NSString *)videoUrl;
 
+@property (nonatomic,retain)JFBaseModel *baseModel;
+
 @end

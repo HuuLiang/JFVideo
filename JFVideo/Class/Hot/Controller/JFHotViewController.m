@@ -104,15 +104,15 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     [self.programModel fecthChannelProgramWithColumnId:column.columnId Page:100 CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
         if (success) {
-                [self.detailArray removeAllObjects];
-                [self.detailArray addObjectsFromArray:obj];
-                [self initHeaderCell:1 column:column];
-                [self initDetailCell:2 column:column];
+            [self.detailArray removeAllObjects];
+            [self.detailArray addObjectsFromArray:obj];
+            [self initHeaderCell:1 column:column];
+            [self initDetailCell:2 column:column];
             
         }
         if (!success || obj.count == 0) {
             [[CRKHudManager manager] showHudWithText:@"数据加载失败,请稍后再试"];
-
+            
         }
         _isRefresh = NO;
         
@@ -334,23 +334,39 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    JFChannelColumnModel *column = self.titleArray[indexPath.item];
     if (collectionView == _layoutTitleCollectionView) {
-        JFChannelColumnModel *column = self.titleArray[indexPath.item];
         if (indexPath.item < self.titleArray.count) {
             _columnId = column.columnId;
             _selectecIndexPath = indexPath;
             [_layoutTitleCollectionView scrollToItemAtIndexPath:_selectecIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
             [self loadProgramsWithColumnInfo:column];
+            
+            JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+            baseModel.realColumnId = @(column.realColumnId);
+            baseModel.channelType = @(column.type);
+            baseModel.programLocation = indexPath.item;
+            
+            [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel inTabIndex:self.tabBarController.selectedIndex];
         }
     } else if (collectionView == _layoutDetailCollectionView) {
         JFChannelProgram *program = self.detailArray[indexPath.item];
+        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+        baseModel.realColumnId = @(column.realColumnId);
+        baseModel.channelType = @(column.type);
+        baseModel.programType = @(program.type);
+        baseModel.programId = @(program.programId);
+        baseModel.programLocation = indexPath.item;
         JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
+        detailVC.baseModel = baseModel;
         [self.navigationController pushViewController:detailVC animated:YES];
+     
+        [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (collectionView == _layoutTitleCollectionView) {
         const CGFloat width = [self.titleWidthArray[indexPath.item] floatValue];
         const CGFloat height = kScreenHeight * 48 / 1334.;
@@ -371,5 +387,9 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     return EDGINSETS;
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
+    
+}
 
 @end

@@ -27,6 +27,10 @@ static NSString *const kPaymentInfoPaymentMchId = @"jfVideo_paymentinfo_paymentm
 static NSString *const kPaymentInfoPaymentSignKey = @"jfVideo_paymentinfo_paymentsignkey_keyname";
 static NSString *const kPaymentInfoPaymentNotifyUrl = @"jfVideo_paymentinfo_paymentnotifyurl_keyname";
 
+static NSString *const kPaymentInfoPaymentColumIdKey = @"jfkuaibov_paymentinfo_paymentcolunidkey_keyname";
+static NSString *const kPaymentInfoPaymentColumTypeKey = @"jfkuaibov_paymentinfo_paymentcoluntypekey_keyname";
+static NSString *const kPaymentInfoPaymentContentLocationKey = @"jfkuaibov_paymentinfo_paymentcontentlocationkey_keyname";
+
 @implementation JFPaymentInfo
 
 - (NSString *)paymentId {
@@ -55,6 +59,9 @@ static NSString *const kPaymentInfoPaymentNotifyUrl = @"jfVideo_paymentinfo_paym
     paymentInfo.mchId = payment[kPaymentInfoPaymentMchId];
     paymentInfo.notifyUrl = payment[kPaymentInfoPaymentNotifyUrl];
     paymentInfo.signKey = payment[kPaymentInfoPaymentSignKey];
+    paymentInfo.columnId = payment[kPaymentInfoPaymentColumIdKey];
+    paymentInfo.columnType = payment[kPaymentInfoPaymentColumTypeKey];
+    paymentInfo.contentLocation = payment[kPaymentInfoPaymentContentLocationKey];
     return paymentInfo;
 }
 
@@ -75,6 +82,10 @@ static NSString *const kPaymentInfoPaymentNotifyUrl = @"jfVideo_paymentinfo_paym
     [payment safelySetObject:self.mchId forKey:kPaymentInfoPaymentMchId];
     [payment safelySetObject:self.notifyUrl forKey:kPaymentInfoPaymentNotifyUrl];
     [payment safelySetObject:self.signKey forKey:kPaymentInfoPaymentSignKey];
+    
+    [payment safelySetObject:self.columnId forKey:kPaymentInfoPaymentColumIdKey];
+    [payment safelySetObject:self.columnType forKey:kPaymentInfoPaymentColumTypeKey];
+    [payment safelySetObject:self.contentLocation forKey:kPaymentInfoPaymentContentLocationKey];
     return payment;
 }
 

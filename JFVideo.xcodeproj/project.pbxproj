@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */; };
+		B35045EE1D41D025005D1C03 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045E81D41D025005D1C03 /* DBHandler.m */; };
+		B35045EF1D41D025005D1C03 /* DBPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045EB1D41D025005D1C03 /* DBPersistence.m */; };
+		B35045F01D41D025005D1C03 /* DBTableVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045ED1D41D025005D1C03 /* DBTableVersion.m */; };
+		B35045FA1D41D088005D1C03 /* JFCPCStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045F31D41D088005D1C03 /* JFCPCStatsModel.m */; };
+		B35045FB1D41D088005D1C03 /* JFPayStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045F51D41D088005D1C03 /* JFPayStatsModel.m */; };
+		B35045FC1D41D088005D1C03 /* JFStatsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045F71D41D088005D1C03 /* JFStatsBaseModel.m */; };
+		B35045FD1D41D088005D1C03 /* JFTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045F91D41D088005D1C03 /* JFTabStatsModel.m */; };
+		B35046001D41E213005D1C03 /* JFNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045FF1D41E213005D1C03 /* JFNetworkInfo.m */; };
+		B35046031D41E25A005D1C03 /* JFStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35046021D41E25A005D1C03 /* JFStatsManager.m */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
@@ -108,6 +117,25 @@
 /* Begin PBXFileReference section */
 		3CC027D51A6BCEED5231ED1D /* Pods-JFVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JFVideo/Pods-JFVideo.release.xcconfig"; sourceTree = "<group>"; };
 		4E847A79EDDA1146FCE7A3BF /* Pods-JFVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JFVideo/Pods-JFVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		B35045E71D41D025005D1C03 /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
+		B35045E81D41D025005D1C03 /* DBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
+		B35045E91D41D025005D1C03 /* DBMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
+		B35045EA1D41D025005D1C03 /* DBPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPersistence.h; sourceTree = "<group>"; };
+		B35045EB1D41D025005D1C03 /* DBPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPersistence.m; sourceTree = "<group>"; };
+		B35045EC1D41D025005D1C03 /* DBTableVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTableVersion.h; sourceTree = "<group>"; };
+		B35045ED1D41D025005D1C03 /* DBTableVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTableVersion.m; sourceTree = "<group>"; };
+		B35045F21D41D088005D1C03 /* JFCPCStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCPCStatsModel.h; sourceTree = "<group>"; };
+		B35045F31D41D088005D1C03 /* JFCPCStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCPCStatsModel.m; sourceTree = "<group>"; };
+		B35045F41D41D088005D1C03 /* JFPayStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPayStatsModel.h; sourceTree = "<group>"; };
+		B35045F51D41D088005D1C03 /* JFPayStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPayStatsModel.m; sourceTree = "<group>"; };
+		B35045F61D41D088005D1C03 /* JFStatsBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStatsBaseModel.h; sourceTree = "<group>"; };
+		B35045F71D41D088005D1C03 /* JFStatsBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStatsBaseModel.m; sourceTree = "<group>"; };
+		B35045F81D41D088005D1C03 /* JFTabStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTabStatsModel.h; sourceTree = "<group>"; };
+		B35045F91D41D088005D1C03 /* JFTabStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTabStatsModel.m; sourceTree = "<group>"; };
+		B35045FE1D41E213005D1C03 /* JFNetworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFNetworkInfo.h; sourceTree = "<group>"; };
+		B35045FF1D41E213005D1C03 /* JFNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFNetworkInfo.m; sourceTree = "<group>"; };
+		B35046011D41E25A005D1C03 /* JFStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStatsManager.h; sourceTree = "<group>"; };
+		B35046021D41E25A005D1C03 /* JFStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStatsManager.m; sourceTree = "<group>"; };
 		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -326,6 +354,35 @@
 				3CC027D51A6BCEED5231ED1D /* Pods-JFVideo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B35045E61D41D025005D1C03 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				B35045E71D41D025005D1C03 /* DBHandler.h */,
+				B35045E81D41D025005D1C03 /* DBHandler.m */,
+				B35045E91D41D025005D1C03 /* DBMigration.h */,
+				B35045EA1D41D025005D1C03 /* DBPersistence.h */,
+				B35045EB1D41D025005D1C03 /* DBPersistence.m */,
+				B35045EC1D41D025005D1C03 /* DBTableVersion.h */,
+				B35045ED1D41D025005D1C03 /* DBTableVersion.m */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		B35045F11D41D088005D1C03 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				B35045F21D41D088005D1C03 /* JFCPCStatsModel.h */,
+				B35045F31D41D088005D1C03 /* JFCPCStatsModel.m */,
+				B35045F41D41D088005D1C03 /* JFPayStatsModel.h */,
+				B35045F51D41D088005D1C03 /* JFPayStatsModel.m */,
+				B35045F61D41D088005D1C03 /* JFStatsBaseModel.h */,
+				B35045F71D41D088005D1C03 /* JFStatsBaseModel.m */,
+				B35045F81D41D088005D1C03 /* JFTabStatsModel.h */,
+				B35045F91D41D088005D1C03 /* JFTabStatsModel.m */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		B39E36271D40D11500763C24 /* Umeng */ = {
@@ -569,6 +626,7 @@
 		ECAEA8091D17C18600926044 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B35045F11D41D088005D1C03 /* Stats */,
 				ECAEA9561D17C98500926044 /* JFCommonDef.h */,
 				ECAEA9681D17CF7800926044 /* JFSystemConfig.h */,
 				ECAEA9691D17CF7800926044 /* JFSystemConfig.m */,
@@ -733,6 +791,7 @@
 		ECAEA8831D17C18600926044 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B35045E61D41D025005D1C03 /* DataBase */,
 				ECAEA8861D17C18600926044 /* Extensions */,
 				ECAEA8B51D17C18600926044 /* rac_extobjc */,
 				ECAEA8841D17C18600926044 /* CRKHudManager.h */,
@@ -757,6 +816,10 @@
 				ECAEA8631D17C18600926044 /* JQKApplication.m */,
 				ECAEA8641D17C18600926044 /* JQKApplicationManager.h */,
 				ECAEA8651D17C18600926044 /* JQKApplicationManager.m */,
+				B35045FE1D41E213005D1C03 /* JFNetworkInfo.h */,
+				B35045FF1D41E213005D1C03 /* JFNetworkInfo.m */,
+				B35046011D41E25A005D1C03 /* JFStatsManager.h */,
+				B35046021D41E25A005D1C03 /* JFStatsManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1005,11 +1068,15 @@
 				ECAEA9831D17ECB400926044 /* JFBaseViewController.m in Sources */,
 				EC2E72791D1BB1C5009950CB /* JFDetailViewController.m in Sources */,
 				EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */,
+				B35045EE1D41D025005D1C03 /* DBHandler.m in Sources */,
 				EC2E727C1D1BB232009950CB /* JFDetailModel.m in Sources */,
 				EC6250761D30FE5E00054005 /* JFPaymentManager.m in Sources */,
+				B35046031D41E25A005D1C03 /* JFStatsManager.m in Sources */,
 				EC6250671D30D01E00054005 /* UIImage+color.m in Sources */,
+				B35045EF1D41D025005D1C03 /* DBPersistence.m in Sources */,
 				ECAEA9201D17C18600926044 /* NSDate+Utilities.m in Sources */,
 				EC6250701D30F28700054005 /* JFBaseModel.m in Sources */,
+				B35045F01D41D025005D1C03 /* DBTableVersion.m in Sources */,
 				EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */,
 				ECF99B8B1D2D084E003CBCA8 /* JFHomeColumnModel.m in Sources */,
 				EC2808C21D34C68100E7E76E /* Reachability.m in Sources */,
@@ -1025,6 +1092,7 @@
 				EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */,
 				ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */,
 				EC62506D1D30DEC400054005 /* JFPaymentConfig.m in Sources */,
+				B35045FA1D41D088005D1C03 /* JFCPCStatsModel.m in Sources */,
 				ECAEA9861D17ED3300926044 /* JFLayoutViewController.m in Sources */,
 				EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */,
 				ECAEA9231D17C18600926044 /* NSObject+Properties.m in Sources */,
@@ -1054,14 +1122,18 @@
 				ECAEA7E71D17BFE900926044 /* main.m in Sources */,
 				EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */,
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
+				B35045FC1D41D088005D1C03 /* JFStatsBaseModel.m in Sources */,
+				B35045FB1D41D088005D1C03 /* JFPayStatsModel.m in Sources */,
 				EC2808C71D34C6A100E7E76E /* HTPayManager.m in Sources */,
 				EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */,
+				B35046001D41E213005D1C03 /* JFNetworkInfo.m in Sources */,
 				EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */,
 				EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */,
 				ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */,
 				ECAEA9731D17D12E00926044 /* JFUserAccessModel.m in Sources */,
 				EC6250641D30CF3D00054005 /* JFPaymentTypeCell.m in Sources */,
 				ECAEA92B1D17C18600926044 /* UITableView+Separator.m in Sources */,
+				B35045FD1D41D088005D1C03 /* JFTabStatsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 
 @interface JFDetailViewController : JFLayoutViewController
 
+@property (nonatomic,retain)JFBaseModel *baseModel;
 - (instancetype)initWithColumnId:(NSInteger)columnId ProgramId:(NSInteger)programId;
 
 @end

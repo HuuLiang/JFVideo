@@ -69,7 +69,7 @@
     if ([JFUtil isVip]) {
         return;
     }
-    [self payWithInfo:nil];
+    [self payWithInfo:self.baseModel];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

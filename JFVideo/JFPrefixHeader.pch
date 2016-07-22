@@ -28,5 +28,10 @@
 #import "JFMessageCenter.h"
 #import "CRKHudManager.h"
 
+#import "DBHandler.h"
+#import "JFNetworkInfo.h"
+#import "JFBaseModel.h"
+#import "JFStatsManager.h"
+
 
 #endif /* JFPrefixHeader_pch */

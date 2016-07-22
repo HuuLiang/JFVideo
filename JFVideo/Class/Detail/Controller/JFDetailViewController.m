@@ -75,14 +75,14 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 - (void)loadDetail {
     [self.detailModel fetchProgramDetailWithColumnId:_columnId
-                                             ProgramId:_programId
-                                     CompletionHandler:^(BOOL success, id obj) {
-        if (success) {
-            self.response = obj;
-            [self.layoutTableView JF_endPullToRefresh];
-            [self reloadUI];
-        }
-    }];
+                                           ProgramId:_programId
+                                   CompletionHandler:^(BOOL success, id obj) {
+                                       if (success) {
+                                           self.response = obj;
+                                           [self.layoutTableView JF_endPullToRefresh];
+                                           [self reloadUI];
+                                       }
+                                   }];
 }
 
 - (void)reloadUI {
@@ -116,12 +116,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (void)playVideo {
-    JFBaseModel *baseModel = [[JFBaseModel alloc] init];
-    baseModel.programId = @(2);
-    baseModel.realColumnId = @(1);
-    baseModel.programType = @(1);
-    baseModel.channelType = @(3);
-    
+    JFBaseModel *baseModel = self.baseModel;
     baseModel.spec = [self.response.program.spec integerValue];
     
     [self playVideoWithInfo:baseModel videoUrl:self.response.program.videoUrl];
@@ -151,7 +146,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     }
     [self setLayoutCell:_scrollCell cellHeight:SCREEN_HEIGHT*200/1334.+5 inRow:0 andSection:section];
     [_layoutCollectionView reloadData];
-
+    
 }
 
 - (void)initLineCell:(NSInteger)section {
@@ -168,7 +163,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
         }];
     }
     [self setLayoutCell:cell cellHeight:10 inRow:0 andSection:section++];
-
+    
 }
 
 - (void)initCommentTitleCell:(NSUInteger)section {
@@ -246,13 +241,13 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.item < self.response.programUrlList.count) {
-        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
-        baseModel.programId = @(2);
-        baseModel.realColumnId = @(1);
-        baseModel.programType = @(1);
-        baseModel.channelType = @(3);
+        JFBaseModel *baseModel = self.baseModel;
+        baseModel.programType = @(2);
+        baseModel.programLocation = indexPath.item;
         [self playPhotoUrlWithInfo:baseModel urlArray:self.response.programUrlList index:indexPath.item];
+        [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     }
 }
 
@@ -267,5 +262,10 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(2, 5, 2, 5);
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
+    
 }
 @end

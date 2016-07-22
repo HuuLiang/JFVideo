@@ -65,6 +65,8 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     _popView.closeAction = ^(id sender){
         @strongify(self);
         [self hidePayment];
+        [[JFStatsManager sharedManager] statsPayWithOrderNo:nil payAction:JFStatsPayActionClose payResult:PAYRESULT_UNKNOWN forBaseModel:self.baseModel programLocation:NSNotFound andTabIndex:[JFUtil currentTabPageIndex] subTabIndex:[JFUtil currentSubTabPageIndex]];
+        
     };
     return _popView;
 }
@@ -79,7 +81,12 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
                                       [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
                                       
                                   }];
+
     DLog("%@",paymentInfo);
+    if (paymentInfo) {
+        [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:JFStatsPayActionGoToPay andTabIndex:[JFUtil currentTabPageIndex] subTabIndex:[JFUtil currentSubTabPageIndex]];
+    }
+    
 }
 
 - (void)viewDidLoad {
@@ -173,11 +180,11 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     }
     
     [[JFPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
-//    [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
-//                                               forPayAction:JFStatsPayActionPayBack
-//                                                andTabIndex:[JFUtil currentTabPageIndex]
-//                                                subTabIndex:[JFUtil currentSubTabPageIndex]];
-//    
+    [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
+                                               forPayAction:JFStatsPayActionPayBack
+                                                andTabIndex:[JFUtil currentTabPageIndex]
+                                                subTabIndex:[JFUtil currentSubTabPageIndex]];
+//
     
 }
 
