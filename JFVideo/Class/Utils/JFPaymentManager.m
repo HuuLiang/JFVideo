@@ -123,8 +123,6 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     self.paymentInfo = paymentInfo;
     
     BOOL success = YES;
-
-    price = 1;
     
     if (type == JFPaymentTypeVIAPay && (subType == JFPaymentTypeWeChatPay || subType == JFPaymentTypeAlipay)) {
         NSString *tradeName = @"VIP会员";

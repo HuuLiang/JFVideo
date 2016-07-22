@@ -65,6 +65,7 @@
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
     tabBarController.viewControllers        = @[homeNav,channelNav,hotNav,mineNav];
+    tabBarController.tabBar.translucent = NO;
     _window.rootViewController              = tabBarController;
     return _window;
 }
@@ -73,14 +74,13 @@
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#efefef"]];
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"#ec5382"]];
     [[UITabBar appearance] setBarStyle:UIBarStyleDefault];
-    [[UITabBar appearance] setTranslucent:NO];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:11.],
                                                         NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#b0b0b0"]} forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:11.],
                                                         NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#e51c23"]} forState:UIControlStateSelected];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#212121"]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTranslucent:NO];
+    
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18.],
                                                            NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
@@ -89,6 +89,7 @@
                                usingBlock:^(id<AspectInfo> aspectInfo){
                                    UIViewController *thisVC = [aspectInfo instance];
                                    thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:nil];
+                                   thisVC.navigationController.navigationBar.translucent = NO;
                                } error:nil];
     
     [UITabBarController aspect_hookSelector:@selector(shouldAutorotate)
@@ -201,24 +202,13 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [[JFPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
 }
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    [[JFPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
 }
 
 @end

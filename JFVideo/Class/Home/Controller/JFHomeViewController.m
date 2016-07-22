@@ -184,7 +184,7 @@ DefineLazyPropertyInitialization(NSMutableArray, dataSource)
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     JFHomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHomeSectionHeaderReusableIdentifier forIndexPath:indexPath];
     JFHomeColumnModel *column = self.dataSource[indexPath.section];
-    if (indexPath.section == 1 || indexPath.section == 2) {
+    if (indexPath.section != 0) {
         headerView.titleStr = column.name;
     }    
     return headerView;

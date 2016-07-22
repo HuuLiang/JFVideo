@@ -31,6 +31,11 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     _videoPlayer = [[JFVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:_videoUrl]];
+    @weakify(self);
+    _videoPlayer.endPlayAction = ^(id sender) {
+        @strongify(self);
+        [self dismissAndPopPayment];
+    };
     [self.view addSubview:_videoPlayer];
     {
         [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -40,6 +45,31 @@
 
     [_videoPlayer startToPlay];
     
+    _closeButton = [[UIButton alloc] init];
+    [_closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [self.view addSubview:_closeButton];
+    {
+        [_closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(15);
+            make.top.equalTo(self.view).offset(30);
+        }];
+    }
+    
+    [_closeButton bk_addEventHandler:^(id sender) {
+        @strongify(self);
+        [self->_videoPlayer pause];
+        
+        [self dismissAndPopPayment];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+- (void)dismissAndPopPayment {
+    if ([JFUtil isVip]) {
+        return;
+    }
+    [self payWithInfo:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

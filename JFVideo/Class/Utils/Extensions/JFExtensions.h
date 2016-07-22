@@ -25,5 +25,6 @@
 #import "UIBarButtonItem+Badge.h"
 #import "NSObject+PropertyAccessInspecting.h"
 #import "UIImage+color.h"
+#import "UIImageView+YPBAnimation.h"
 
 #endif /* JFExtensions_h */

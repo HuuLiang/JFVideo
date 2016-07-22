@@ -23,6 +23,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         _bgImgv = [[UIImageView alloc] init];
+        [_bgImgv YPB_addAnimationForImageAppearing];
         [self addSubview:_bgImgv];
         
         _titleLabel = [[UILabel alloc] init];

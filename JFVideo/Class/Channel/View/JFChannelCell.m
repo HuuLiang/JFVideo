@@ -11,6 +11,7 @@
 @interface JFChannelCell ()
 {
     UIImageView *_bgImgv;
+    UIImageView *_imageV;
     
     UIImageView *_rankImgV;
     UILabel *_rankLabel;
@@ -31,12 +32,14 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        UIImageView *imageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"channel_bgimg_icon"]];
-        [self addSubview:imageV];
+        _imageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"channel_bgimg_icon"]];
+//        _imageV.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:_imageV];
         
         _bgImgv = [[UIImageView alloc] init];
         _bgImgv.layer.cornerRadius = kScreenHeight * 8 / 1334.;
         _bgImgv.layer.masksToBounds = YES;
+        [_bgImgv YPB_addAnimationForImageAppearing];
         [self addSubview:_bgImgv];
         
         UIView *bgView = [[UIView alloc] init];
@@ -70,9 +73,9 @@
         [self addSubview:_hotLabel];
         
         {
-            [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.center.mas_equalTo(self);
-                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 360 / 750., kScreenHeight * 452 / 1334.));
+                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 360 / 750., MAX(kScreenHeight * 452 / 1334., 190)));
             }];
             
             [_bgImgv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,6 +160,12 @@
     _hotLabel.text = hotCount;
 }
 
-
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    DLog(@"%@ %f",NSStringFromCGSize(_imageV.frame.size),kScreenHeight * 452 / 1334.);
+    DLog(@"%@",NSStringFromCGSize(_bgImgv.frame.size));
+    DLog(@"%@",NSStringFromCGSize(self.frame.size));
+}
 
 @end

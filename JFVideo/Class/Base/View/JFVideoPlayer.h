@@ -13,4 +13,5 @@
 - (instancetype)initWithVideoURL:(NSURL *)videoURL;
 - (void)startToPlay;
 - (void)pause;
+@property (nonatomic,copy) JFAction endPlayAction;
 @end

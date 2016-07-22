@@ -50,6 +50,7 @@
         
         self.player = [AVPlayer playerWithURL:videoURL];
         [self.player addObserver:self forKeyPath:@"status" options:0 context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEndPlay) name:AVPlayerItemDidPlayToEndTimeNotification  object:nil];
     }
     return self;
 }
@@ -80,5 +81,10 @@
     }
 }
 
+- (void)didEndPlay {
+    if (self.endPlayAction) {
+        self.endPlayAction(self);
+    }
+}
 
 @end

@@ -15,7 +15,6 @@
 		EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */; };
 		EC19F8021D38EA4C0048AA5C /* JFHotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */; };
 		EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */; };
-		EC2808A91D349B3200E7E76E /* setting_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC2808A81D349B3200E7E76E /* setting_banner.jpg */; };
 		EC2808BB1D34C68100E7E76E /* HYMergerPaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2808AC1D34C68100E7E76E /* HYMergerPaySDK.framework */; };
 		EC2808BC1D34C68100E7E76E /* pay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2808AD1D34C68100E7E76E /* pay.a */; };
 		EC2808BD1D34C68100E7E76E /* Config.txt in Resources */ = {isa = PBXBuildFile; fileRef = EC2808B21D34C68100E7E76E /* Config.txt */; };
@@ -45,7 +44,6 @@
 		EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72831D1BEC70009950CB /* JFHomeModel.m */; };
 		EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */; };
 		EC6250581D3097AC00054005 /* JFAppSpreadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250571D3097AC00054005 /* JFAppSpreadModel.m */; };
-		EC62505B1D30A77300054005 /* tanchaun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC62505A1D30A77300054005 /* tanchaun.jpg */; };
 		EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */; };
 		EC6250641D30CF3D00054005 /* JFPaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250631D30CF3D00054005 /* JFPaymentTypeCell.m */; };
 		EC6250671D30D01E00054005 /* UIImage+color.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250661D30D01E00054005 /* UIImage+color.m */; };
@@ -93,6 +91,8 @@
 		ECAEA9891D17EE7400926044 /* JFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9881D17EE7400926044 /* JFHomeViewController.m */; };
 		ECAEA9941D17EFCD00926044 /* JFChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9931D17EFCD00926044 /* JFChannelViewController.m */; };
 		ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9961D17F02D00926044 /* JFMineViewController.m */; };
+		ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */; };
+		ECBF02541D40D762000F93E8 /* UIImageView+YPBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */; };
 		ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */; };
 		ECF99B8B1D2D084E003CBCA8 /* JFHomeColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF99B8A1D2D084E003CBCA8 /* JFHomeColumnModel.m */; };
 		ECF99B8E1D2D086F003CBCA8 /* JFHomeProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF99B8D1D2D086F003CBCA8 /* JFHomeProgramModel.m */; };
@@ -122,7 +122,6 @@
 		EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHotViewController.m; sourceTree = "<group>"; };
 		EC19F8031D38FC250048AA5C /* JFTitleLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTitleLabelCell.h; sourceTree = "<group>"; };
 		EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTitleLabelCell.m; sourceTree = "<group>"; };
-		EC2808A81D349B3200E7E76E /* setting_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setting_banner.jpg; sourceTree = "<group>"; };
 		EC2808AC1D34C68100E7E76E /* HYMergerPaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HYMergerPaySDK.framework; sourceTree = "<group>"; };
 		EC2808AD1D34C68100E7E76E /* pay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = pay.a; sourceTree = "<group>"; };
 		EC2808AE1D34C68100E7E76E /* paySender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paySender.h; sourceTree = "<group>"; };
@@ -172,7 +171,6 @@
 		EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeSectionHeaderView.m; sourceTree = "<group>"; };
 		EC6250561D3097AC00054005 /* JFAppSpreadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadModel.h; sourceTree = "<group>"; };
 		EC6250571D3097AC00054005 /* JFAppSpreadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppSpreadModel.m; sourceTree = "<group>"; };
-		EC62505A1D30A77300054005 /* tanchaun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tanchaun.jpg; sourceTree = "<group>"; };
 		EC62505C1D30AB7B00054005 /* JFPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentViewController.h; sourceTree = "<group>"; };
 		EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentViewController.m; sourceTree = "<group>"; };
 		EC6250621D30CF3D00054005 /* JFPaymentTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentTypeCell.h; sourceTree = "<group>"; };
@@ -273,6 +271,9 @@
 		ECAEA9931D17EFCD00926044 /* JFChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFChannelViewController.m; sourceTree = "<group>"; };
 		ECAEA9951D17F02D00926044 /* JFMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMineViewController.h; sourceTree = "<group>"; };
 		ECAEA9961D17F02D00926044 /* JFMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMineViewController.m; sourceTree = "<group>"; };
+		ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setting_banner.jpg; sourceTree = "<group>"; };
+		ECBF02521D40D762000F93E8 /* UIImageView+YPBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YPBAnimation.h"; sourceTree = "<group>"; };
+		ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YPBAnimation.m"; sourceTree = "<group>"; };
 		ECF8159C1D1A34AF00FCF6C1 /* JFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTableViewCell.h; sourceTree = "<group>"; };
 		ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTableViewCell.m; sourceTree = "<group>"; };
 		ECF99B891D2D084E003CBCA8 /* JFHomeColumnModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeColumnModel.h; sourceTree = "<group>"; };
@@ -453,8 +454,7 @@
 		EC6250591D30A4C500054005 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EC62505A1D30A77300054005 /* tanchaun.jpg */,
-				EC2808A81D349B3200E7E76E /* setting_banner.jpg */,
+				ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -756,6 +756,8 @@
 		ECAEA8861D17C18600926044 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				ECBF02521D40D762000F93E8 /* UIImageView+YPBAnimation.h */,
+				ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */,
 				ECAEA9571D17CA5900926044 /* JFExtensions.h */,
 				ECAEA8881D17C18600926044 /* NSDate+Utilities.h */,
 				ECAEA8891D17C18600926044 /* NSDate+Utilities.m */,
@@ -910,8 +912,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC2808DB1D34D06B00E7E76E /* AlipaySDK.bundle in Resources */,
-				EC62505B1D30A77300054005 /* tanchaun.jpg in Resources */,
-				EC2808A91D349B3200E7E76E /* setting_banner.jpg in Resources */,
+				ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */,
 				ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */,
 				EC2808BD1D34C68100E7E76E /* Config.txt in Resources */,
 				EC2808C01D34C68100E7E76E /* private_key.p12 in Resources */,
@@ -1032,6 +1033,7 @@
 				ECF99B911D2D174B003CBCA8 /* JFChannelModel.m in Sources */,
 				EC6250581D3097AC00054005 /* JFAppSpreadModel.m in Sources */,
 				ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */,
+				ECBF02541D40D762000F93E8 /* UIImageView+YPBAnimation.m in Sources */,
 				EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */,
 				ECF99B971D2D1F23003CBCA8 /* JFChannelColumnModel.m in Sources */,
 				EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */,
@@ -1179,7 +1181,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
+				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1212,7 +1214,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
+				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
 			};
 			name = Release;
 		};

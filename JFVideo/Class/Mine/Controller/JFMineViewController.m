@@ -188,7 +188,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         if (app.isInstall) {
             return;
         } else {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.spreadUrl]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.videoUrl]];
         }
         
     }

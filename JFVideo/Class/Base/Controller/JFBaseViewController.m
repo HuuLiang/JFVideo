@@ -47,7 +47,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
         [self payWithInfo:model];
     } else if (![JFUtil isVip]&& model.spec == 4) {
         JFVideoPlayerController *videoVC = [[JFVideoPlayerController alloc] initWithVideo:videoUrlStr];
-        [self.navigationController pushViewController:videoVC animated:YES];
+        [self presentViewController:videoVC animated:YES completion:nil];
     } else {
         UIViewController *videoPlayVC = [self playerVCWithVideo:videoUrlStr];
         videoPlayVC.hidesBottomBarWhenPushed = YES;
