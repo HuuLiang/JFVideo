@@ -40,11 +40,11 @@
     self.frame = keyWindow.bounds;
     [keyWindow addSubview:self];
 
-    [UIView animateWithDuration:2 delay:1 options:UIViewAnimationOptionCurveEaseIn  animations:^{
+    [UIView animateWithDuration:1.5 delay:1. options:UIViewAnimationOptionCurveEaseIn  animations:^{
         _imageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
     } completion:nil];
     
-    [UIView animateWithDuration:0.5 delay:2.5 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:0.5 delay:2. options:UIViewAnimationOptionCurveLinear animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];

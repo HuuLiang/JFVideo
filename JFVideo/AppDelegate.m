@@ -199,7 +199,7 @@
     
     [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
         //数据统计时间
-        NSUInteger statsTimeInterval = 20;
+        NSUInteger statsTimeInterval = 180;
         [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         
         if (success) {

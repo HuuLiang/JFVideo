@@ -28,7 +28,7 @@
 #define JF_DETAIL_URL                  @"/iosvideo/detailsg.htm"
 #define JF_APPSPREAD_URL               @"/iosvideo/appSpreadList.htm"
 
-#define JF_STATS_BASE_URL              @"http://120.24.252.114"//@"http://stats.iqu8.cn"//
+#define JF_STATS_BASE_URL              @"http://stats.iqu8.cn"//@"http://120.24.252.114"//
 #define JF_STATS_CPC_URL               @"/stats/cpcs.service"
 #define JF_STATS_TAB_URL               @"/stats/tabStat.service"
 #define JF_STATS_PAY_URL               @"/stats/payRes.service"
