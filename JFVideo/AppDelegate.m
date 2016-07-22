@@ -16,6 +16,8 @@
 #import "JFMineViewController.h"
 #import "JFPaymentManager.h"
 #import "MobClick.h"
+#import "JFLaunchView.h"
+
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
@@ -181,6 +183,11 @@
     [[JFPaymentManager sharedManager] setup];
      [self setupMobStatistics];
     
+    [self.window makeKeyAndVisible];
+    
+    JFLaunchView *launchView = [[JFLaunchView alloc] init];
+    [launchView show];
+    
     if (![JFUtil isRegistered]) {
         [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
             [JFUtil setRegisteredWithUserId:userId];
@@ -195,10 +202,7 @@
         }
     }];
     
-    
-    
-    self.window.hidden = NO;
-    [self.window makeKeyAndVisible];
+
     return YES;
 }
 

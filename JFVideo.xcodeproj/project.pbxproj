@@ -51,6 +51,8 @@
 		EC62506D1D30DEC400054005 /* JFPaymentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62506C1D30DEC400054005 /* JFPaymentConfig.m */; };
 		EC6250701D30F28700054005 /* JFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62506F1D30F28700054005 /* JFBaseModel.m */; };
 		EC6250761D30FE5E00054005 /* JFPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250751D30FE5E00054005 /* JFPaymentManager.m */; };
+		EC8FAEB31D42040400B7C9F1 /* JFLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8FAEB21D42040400B7C9F1 /* JFLaunchView.m */; };
+		EC8FAEB51D42047D00B7C9F1 /* launch_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC8FAEB41D42047D00B7C9F1 /* launch_image.jpg */; };
 		ECAEA7E71D17BFE900926044 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA7E61D17BFE900926044 /* main.m */; };
 		ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA7E91D17BFE900926044 /* AppDelegate.m */; };
 		ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECAEA7EB1D17BFE900926044 /* Assets.xcassets */; };
@@ -185,6 +187,9 @@
 		EC62506F1D30F28700054005 /* JFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFBaseModel.m; sourceTree = "<group>"; };
 		EC6250741D30FE5E00054005 /* JFPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentManager.h; sourceTree = "<group>"; };
 		EC6250751D30FE5E00054005 /* JFPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentManager.m; sourceTree = "<group>"; };
+		EC8FAEB11D42040400B7C9F1 /* JFLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLaunchView.h; sourceTree = "<group>"; };
+		EC8FAEB21D42040400B7C9F1 /* JFLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLaunchView.m; sourceTree = "<group>"; };
+		EC8FAEB41D42047D00B7C9F1 /* launch_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch_image.jpg; sourceTree = "<group>"; };
 		ECAEA7E21D17BFE900926044 /* JFVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECAEA7E61D17BFE900926044 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ECAEA7E81D17BFE900926044 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -455,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */,
+				EC8FAEB41D42047D00B7C9F1 /* launch_image.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -595,6 +601,8 @@
 				EC6250691D30DAB400054005 /* JFPaymentPopView.m */,
 				EC6250621D30CF3D00054005 /* JFPaymentTypeCell.h */,
 				EC6250631D30CF3D00054005 /* JFPaymentTypeCell.m */,
+				EC8FAEB11D42040400B7C9F1 /* JFLaunchView.h */,
+				EC8FAEB21D42040400B7C9F1 /* JFLaunchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -912,6 +920,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC2808DB1D34D06B00E7E76E /* AlipaySDK.bundle in Resources */,
+				EC8FAEB51D42047D00B7C9F1 /* launch_image.jpg in Resources */,
 				ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */,
 				ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */,
 				EC2808BD1D34C68100E7E76E /* Config.txt in Resources */,
@@ -983,6 +992,7 @@
 				ECAEA9281D17C18600926044 /* UIColor+hexColor.m in Sources */,
 				ECAEA9611D17CCAB00926044 /* JFURLRequest.m in Sources */,
 				ECAEA9941D17EFCD00926044 /* JFChannelViewController.m in Sources */,
+				EC8FAEB31D42040400B7C9F1 /* JFLaunchView.m in Sources */,
 				ECAEA9291D17C18600926044 /* UIImage+Utilities.m in Sources */,
 				ECAEA9211D17C18600926044 /* NSDictionary+LTSign.m in Sources */,
 				ECAEA9261D17C18600926044 /* NSString+StringHeight.m in Sources */,
@@ -1181,7 +1191,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
+				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1214,7 +1224,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
+				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
 			};
 			name = Release;
 		};
