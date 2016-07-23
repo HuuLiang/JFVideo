@@ -10,4 +10,5 @@
 
 @interface JFHomeSectionHeaderView : UICollectionReusableView
 @property (nonatomic) NSString *titleStr;
+@property (nonatomic) NSInteger section;
 @end

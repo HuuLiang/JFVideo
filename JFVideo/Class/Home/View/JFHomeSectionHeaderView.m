@@ -14,6 +14,8 @@
     
     UIImageView *_leftImg;
     UIImageView *_rightImg;
+    
+    CAShapeLayer *lineA;
 }
 @end
 
@@ -66,8 +68,17 @@
     _titleLabel.text = titleStr;
 }
 
+- (void)setSection:(NSInteger)section {
+    _section = section;
+    if (section == 1) {
+        lineA.hidden = YES;
+    } else {
+        lineA.hidden = NO;
+    }
+}
+
 -(void)drawRect:(CGRect)rect {
-    CAShapeLayer *lineA = [CAShapeLayer layer];
+    lineA = [CAShapeLayer layer];
     CGMutablePathRef linePathA = CGPathCreateMutable();
     [lineA setFillColor:[[UIColor clearColor] CGColor]];
     [lineA setStrokeColor:[[UIColor colorWithHexString:@"#3f3f3f"] CGColor]];
@@ -77,5 +88,11 @@
     [lineA setPath:linePathA];
     CGPathRelease(linePathA);
     [self.layer addSublayer:lineA];
+    
+    if (_section == 1) {
+        lineA.hidden = YES;
+    } else {
+        lineA.hidden = NO;
+    }
 }
 @end
