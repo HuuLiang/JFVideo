@@ -115,11 +115,12 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     lineCell.backgroundColor = [UIColor colorWithHexString:@"#575757"];
     [self setLayoutCell:lineCell cellHeight:0.5 inRow:0 andSection:section++];
     
-    _telCell = [[JFTableViewCell alloc] initWithImage:nil title:@"客服热线"];
-    _telCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    _telCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
-    [self setLayoutCell:_telCell cellHeight:44 inRow:0 andSection:section++];
-    
+    if ([JFUtil isVip]) {
+        _telCell = [[JFTableViewCell alloc] initWithImage:nil title:@"客服热线"];
+        _telCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _telCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+        [self setLayoutCell:_telCell cellHeight:44 inRow:0 andSection:section++];
+    }
     currentSection = section;
 }
 
