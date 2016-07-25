@@ -18,6 +18,9 @@
 		B35046001D41E213005D1C03 /* JFNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045FF1D41E213005D1C03 /* JFNetworkInfo.m */; };
 		B35046031D41E25A005D1C03 /* JFStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35046021D41E25A005D1C03 /* JFStatsManager.m */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
+		B3B223A81D45B466004B00C8 /* IapppayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B223A71D45B466004B00C8 /* IapppayKit.framework */; };
+		B3B223AA1D45B487004B00C8 /* IapppayResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3B223A91D45B487004B00C8 /* IapppayResource.bundle */; };
+		B3B223AD1D45B5AA004B00C8 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
@@ -140,6 +143,10 @@
 		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		B3B223A71D45B466004B00C8 /* IapppayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayKit.framework; sourceTree = "<group>"; };
+		B3B223A91D45B487004B00C8 /* IapppayResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayResource.bundle; sourceTree = "<group>"; };
+		B3B223AB1D45B5AA004B00C8 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
+		B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JFVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC08496E1D1E568A00623AEF /* JFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCommentCell.h; sourceTree = "<group>"; };
 		EC08496F1D1E568A00623AEF /* JFCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCommentCell.m; sourceTree = "<group>"; };
@@ -337,6 +344,7 @@
 				EC2808DC1D34D06B00E7E76E /* AlipaySDK.framework in Frameworks */,
 				EC2808D51D34D03600E7E76E /* libsqlite3.tbd in Frameworks */,
 				EC2808D31D34D02900E7E76E /* libc++.tbd in Frameworks */,
+				B3B223A81D45B466004B00C8 /* IapppayKit.framework in Frameworks */,
 				EC2808D11D34D01B00E7E76E /* Security.framework in Frameworks */,
 				EC2808CF1D34D00500E7E76E /* CoreMotion.framework in Frameworks */,
 				EC2808BC1D34C68100E7E76E /* pay.a in Frameworks */,
@@ -398,6 +406,17 @@
 			path = Umeng;
 			sourceTree = "<group>";
 		};
+		B3B223A41D45B43F004B00C8 /* IAppPay */ = {
+			isa = PBXGroup;
+			children = (
+				B3B223AB1D45B5AA004B00C8 /* IappPayMananger.h */,
+				B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */,
+				B3B223A91D45B487004B00C8 /* IapppayResource.bundle */,
+				B3B223A71D45B466004B00C8 /* IapppayKit.framework */,
+			);
+			path = IAppPay;
+			sourceTree = "<group>";
+		};
 		CD200FA47615E27A2F6C7793 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,6 +468,7 @@
 		EC2808AA1D34C64900E7E76E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				B3B223A41D45B43F004B00C8 /* IAppPay */,
 				EC866DD41D45A9DC00843C5F /* iCarousel */,
 				B39E36271D40D11500763C24 /* Umeng */,
 				EC2808D81D34D06B00E7E76E /* AlipaySDK */,
@@ -996,6 +1016,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC2808DB1D34D06B00E7E76E /* AlipaySDK.bundle in Resources */,
+				B3B223AA1D45B487004B00C8 /* IapppayResource.bundle in Resources */,
 				EC8FAEB51D42047D00B7C9F1 /* launch_image.jpg in Resources */,
 				ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */,
 				ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */,
@@ -1136,6 +1157,7 @@
 				ECAEA7E71D17BFE900926044 /* main.m in Sources */,
 				EC2973C41D1CD239009C48E7 /* JFHomeCell.m in Sources */,
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
+				B3B223AD1D45B5AA004B00C8 /* IappPayMananger.m in Sources */,
 				B35045FC1D41D088005D1C03 /* JFStatsBaseModel.m in Sources */,
 				B35045FB1D41D088005D1C03 /* JFPayStatsModel.m in Sources */,
 				EC2808C71D34C6A100E7E76E /* HTPayManager.m in Sources */,
@@ -1264,6 +1286,7 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/iAppPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/VIAPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/AlipaySDK",
+					"$(PROJECT_DIR)/JFVideo/Class/Vendor/IAppPay",
 				);
 				GCC_PREFIX_HEADER = JFVideo/JFPrefixHeader.pch;
 				INFOPLIST_FILE = JFVideo/Info.plist;
@@ -1297,6 +1320,7 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/iAppPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/VIAPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/AlipaySDK",
+					"$(PROJECT_DIR)/JFVideo/Class/Vendor/IAppPay",
 				);
 				GCC_PREFIX_HEADER = JFVideo/JFPrefixHeader.pch;
 				INFOPLIST_FILE = JFVideo/Info.plist;

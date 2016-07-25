@@ -396,14 +396,14 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
     DLog(@"currentIndex:%ld",[_bannerView currentItemIndex]);
+    _index = [_bannerView currentItemIndex];
+    _index++;
 }
 
 - (void)sendIsUserGesture:(BOOL)isGesture {
     if (isGesture) {
         [_timer setFireDate:[NSDate distantFuture]];
     } else {
-        _index = [_bannerView currentItemIndex];
-        _index++;
         [self performSelector:@selector(startScrollBannerView) withObject:self afterDelay:2];
     }
 }

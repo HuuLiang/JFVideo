@@ -22,7 +22,7 @@
     UITableViewCell *_paypointTypeCell;
     JFPaymentTypeCell *_alipayCell;
     JFPaymentTypeCell *_wxpayCell;
-    
+    JFPaymentTypeCell *_iAppPayCell;
     NSIndexPath *_selectedIndexPath;
 }
 @end
@@ -200,6 +200,13 @@
                         [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
                     };
                     return _wxpayCell;
+                }else if ([obj unsignedIntegerValue] == JFPaymentTypeIAppPay){
+                    _iAppPayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeIAppPay];
+                    _iAppPayCell.selectionAction = ^(JFPaymentType paymentType){
+                        @strongify(self);
+                        [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                    };
+                    return _iAppPayCell;
                 }
             }
         }

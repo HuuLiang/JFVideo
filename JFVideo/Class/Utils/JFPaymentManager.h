@@ -27,5 +27,6 @@
 
 - (JFPaymentType)wechatPaymentType;
 - (JFPaymentType)alipayPaymentType;
+- (JFPaymentType)cardPayPaymentType;
 
 @end

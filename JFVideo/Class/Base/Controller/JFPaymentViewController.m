@@ -50,6 +50,11 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
         [availablePaymentTypes addObject:@(JFPaymentTypeAlipay)];
     }
     
+    JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
+    if (cardPaymentType != JFPaymentTypeNone) {
+        [availablePaymentTypes addObject:@(JFPaymentTypeIAppPay)];
+    }
+    
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];
     @weakify(self);
     _popView.paymentAction = ^(JFPaymentType subPayType) {
@@ -58,6 +63,8 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
             [self payForPaymentType:wechatPaymentType subPaymentType:subPayType];
         } else if (subPayType == JFPaymentTypeAlipay) {
             [self payForPaymentType:alipayPaymentType subPaymentType:subPayType];
+        }else {
+         [self payForPaymentType:cardPaymentType subPaymentType:JFPaymentTypeNone];
         }
         
         [self hidePayment];

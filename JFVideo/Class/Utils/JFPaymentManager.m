@@ -9,12 +9,10 @@
 #import "JFPaymentManager.h"
 #import "JFPaymentConfigModel.h"
 #import "JFBaseModel.h"
-
-
 #import "PayUtils.h"
 #import "paySender.h"
-
 #import "HTPayManager.h"
+#import "IappPayMananger.h"
 
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 
@@ -89,6 +87,14 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     return JFPaymentTypeNone;
 }
 
+- (JFPaymentType)cardPayPaymentType {
+    if ([JFPaymentConfig sharedConfig].iappPayInfo) {
+        return JFPaymentTypeIAppPay;
+    }
+    return JFPaymentTypeNone;
+}
+
+
 - (void)handleOpenUrl:(NSURL *)url {
     [[PayUitls getIntents] paytoAli:url];
 }
@@ -147,6 +153,26 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
                  self.completionHandler(payResult, paymentInfo);
              }
          }];
+
+    }else if (type == JFPaymentTypeIAppPay){
+    
+        @weakify(self);
+        IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
+        iAppMgr.appId = [JFPaymentConfig sharedConfig].iappPayInfo.appid;
+        iAppMgr.privateKey = [JFPaymentConfig sharedConfig].iappPayInfo.privateKey;
+        iAppMgr.waresid = [JFPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
+        iAppMgr.appUserId = [JFUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.privateInfo = JF_PAYMENT_RESERVE_DATA;
+        iAppMgr.notifyUrl = [JFPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
+        iAppMgr.publicKey = [JFPaymentConfig sharedConfig].iappPayInfo.publicKey;
+        
+        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
+            @strongify(self);
+            
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
 
     } else {
         success = NO;

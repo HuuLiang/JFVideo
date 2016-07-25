@@ -38,11 +38,24 @@
             _selectionAction(paymentType);
         } forControlEvents:UIControlEventTouchUpInside];
         
-        _imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:paymentType == JFPaymentTypeAlipay ? @"alipay_icon" : @"wechat_icon"]];
+        NSString *imageName = @"";
+        NSString *text = @"";
+        if (paymentType == JFPaymentTypeAlipay) {
+            imageName = @"alipay_icon";
+            text = @"支付宝支付";
+        }else if(paymentType == JFPaymentTypeWeChatPay){
+            imageName = @"wechat_icon";
+            text = @"微信支付";
+        }else if (paymentType == JFPaymentTypeIAppPay){
+            imageName = @"card_pay_icon";
+            text = @"购卡支付";
+        }
+        
+        _imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
         [self addSubview:_imgV];
         
         _label = [[UILabel alloc] init];
-        _label.text = JFPaymentTypeAlipay == paymentType ? @"支付宝支付" : @"微信支付";
+        _label.text = text;//JFPaymentTypeAlipay == paymentType ? @"支付宝支付" : @"微信支付";
         _label.textColor = [UIColor colorWithHexString:@"#333333"];
         _label.font = [UIFont systemFontOfSize:14.];
         _label.backgroundColor = [UIColor clearColor];
