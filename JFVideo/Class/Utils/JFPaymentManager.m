@@ -108,8 +108,9 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
-    
-//    price = 1;
+#if DEBUG
+    price = 1;
+#endif
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -153,9 +154,9 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
                  self.completionHandler(payResult, paymentInfo);
              }
          }];
-
+        
     }else if (type == JFPaymentTypeIAppPay){
-    
+        
         @weakify(self);
         IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
         iAppMgr.appId = [JFPaymentConfig sharedConfig].iappPayInfo.appid;
@@ -173,7 +174,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-
+        
     } else {
         success = NO;
         
@@ -190,7 +191,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 - (void)getResult:(NSDictionary *)sender {
     PAYRESULT paymentResult = [sender[@"result"] integerValue] == 0 ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
     
-//    [self onPaymentResult:paymentResult withPaymentInfo:self.paymentInfo];
+    //    [self onPaymentResult:paymentResult withPaymentInfo:self.paymentInfo];
     
     if (self.completionHandler) {
         if ([NSThread currentThread].isMainThread) {

@@ -87,7 +87,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (void)reloadUI {
-//    self.title = self.response.
+    //    self.title = self.response.
     
     [self removeAllLayoutCells];
     
@@ -126,13 +126,14 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     _naviLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
     _naviLabel.textAlignment = NSTextAlignmentCenter;
     _naviLabel.hidden = YES;
-//    self.navigationItem.titleView = _naviLabel;
+    //    self.navigationItem.titleView = _naviLabel;
     [self.navigationController.navigationBar addSubview:_naviLabel];
-//    self.navigationItem.titleView.frame = CGRectMake(-kScreenWidth * 67 / 750., 0, SCREEN_WIDTH, 30);
+    //    self.navigationItem.titleView.frame = CGRectMake(-kScreenWidth * 67 / 750., 0, SCREEN_WIDTH, 30);
 }
 
 - (void)playVideo {
     JFBaseModel *baseModel = self.baseModel;
+    baseModel.programType = @(1);
     baseModel.spec = [self.response.program.spec integerValue];
     
     [self playVideoWithInfo:baseModel videoUrl:self.response.program.videoUrl];
