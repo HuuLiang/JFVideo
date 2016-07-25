@@ -195,6 +195,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (CATransform3D)carousel:(iCarousel *)carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform;
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value;
 
+//By iqu8 Liang
+- (void)sendIsUserGesture:(BOOL)isGesture;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -69,17 +69,10 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     _bannerView = [[iCarousel alloc] init];
     _bannerView.delegate = self;
     _bannerView.dataSource = self;
-    _bannerView.scrollSpeed = 0.7;
+    _bannerView.scrollSpeed = 0.8;
     _bannerView.type = iCarouselTypeRotary;
     
-//    [_bannerView addGestureRecognizer:[[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-//        if (state == UIGestureRecognizerStateEnded) {
-//            // Timer
-//        }
-//    }]];
-    
-    
-    _timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(changeIcarouselIndex) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeIcarouselIndex) userInfo:nil repeats:YES];
     [_timer setFireDate:[NSDate distantFuture]];
     
     [_bannerView aspect_hookSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo, UIScrollView *scrollView, BOOL decelerate){
@@ -129,7 +122,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 
 - (void)viewDidAppear:(BOOL)animated {
     if (_bannerView) {
-        [_timer fire];
+        [_timer setFireDate:[NSDate distantPast]];
     } else {
         [_timer setFireDate:[NSDate distantFuture]];
     }
@@ -146,7 +139,6 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
             [_layoutCollectionView reloadData];
             [_bannerView reloadData];
             [self startScrollBannerView];
-            
         }
         [_layoutCollectionView JF_endPullToRefresh];
 
@@ -168,23 +160,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     _index = 0;
 }
 
-- (void)startScrollBannerView {
-    [_timer setFireDate:[NSDate distantPast]];
-}
 
-- (void)changeIcarouselIndex {
-    if (_index == self.imageUrlGroup.count) {
-        _index = 0;
-        [_bannerView scrollToItemAtIndex:_index++ animated:YES];
-    } else {
-         [_bannerView scrollToItemAtIndex:_index++ animated:YES];
-    }
-    DLog(@"%ld",_index);
-}
-
-- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
-    [self performSelector:@selector(startScrollBannerView) withObject:self afterDelay:2.];
-}
 
 
 - (void)didReceiveMemoryWarning {
@@ -413,8 +389,33 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     }
 }
 
-- (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel {
+- (void)startScrollBannerView {
+    [_timer setFireDate:[NSDate distantPast]];
+}
+
+
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
+    DLog(@"currentIndex:%ld",[_bannerView currentItemIndex]);
+}
+
+- (void)sendIsUserGesture:(BOOL)isGesture {
+    if (isGesture) {
         [_timer setFireDate:[NSDate distantFuture]];
+    } else {
+        _index = [_bannerView currentItemIndex];
+        _index++;
+        [self performSelector:@selector(startScrollBannerView) withObject:self afterDelay:2];
+    }
+}
+
+- (void)changeIcarouselIndex {
+    if (_index == self.imageUrlGroup.count) {
+        _index = 0;
+        [_bannerView scrollToItemAtIndex:_index++ duration:1.];
+    } else {
+        [_bannerView scrollToItemAtIndex:_index++ duration:1.];
+    }
+    DLog(@"%ld",_index);
 }
 
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

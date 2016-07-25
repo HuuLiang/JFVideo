@@ -2103,6 +2103,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 #endif
 
                 [_delegate carouselWillBeginDragging:self];
+                [_delegate sendIsUserGesture:YES];
                 break;
             }
             case UIGestureRecognizerStateEnded:
@@ -2152,6 +2153,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                     [_delegate carouselWillBeginDecelerating:self];
                     [self popAnimationState];
                 }
+                [_delegate sendIsUserGesture:NO];
                 break;
             }
             case UIGestureRecognizerStateChanged:

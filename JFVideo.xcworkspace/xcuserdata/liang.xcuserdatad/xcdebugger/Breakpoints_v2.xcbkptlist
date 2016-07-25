@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JFVideo/Class/Home/Controller/JFHomeViewController.m"
-            timestampString = "490965072.717163"
+            filePath = "Pods/iCarousel/iCarousel/iCarousel.m"
+            timestampString = "491104633.990184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "-carouselDidEndScrollingAnimation:"
+            startingLineNumber = "2089"
+            endingLineNumber = "2089"
+            landmarkName = "-didPan:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JFVideo/Class/Home/Controller/JFHomeViewController.m"
-            timestampString = "490965078.549934"
+            filePath = "JFVideo/Class/Vendor/iCarousel/iCarousel.m"
+            timestampString = "491105341.276048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-startScrollBannerView"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JFVideo/Class/Home/Controller/JFHomeViewController.m"
-            timestampString = "490965079.680107"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "-changeIcarouselIndex"
+            startingLineNumber = "2185"
+            endingLineNumber = "2185"
+            landmarkName = "-didPan:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
