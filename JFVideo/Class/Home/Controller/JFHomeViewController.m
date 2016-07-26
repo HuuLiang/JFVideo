@@ -146,15 +146,15 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 }
 
 - (void)refreshBannerView {
+    [self.imageUrlGroup removeAllObjects];
+    [self.titlesGroup removeAllObjects];
     for (JFHomeColumnModel *column in self.dataSource) {
         if (column.type == 4) {
             self.bannerColumn = column;
             for (JFHomeProgramModel *program in column.programList) {
                 [self.imageUrlGroup addObject:program.coverImg];
-                [self.titlesGroup addObject:program.title];
+                [self.titlesGroup addObject:[NSString stringWithFormat:@"  %@",program.title]];
             }
-//            _bannerView.imageURLStringsGroup = imageUrlGroup;
-//            _bannerView.titlesGroup = titlesGroup;
         }
     }
     _index = 0;
@@ -327,6 +327,8 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     UIView *itemView = [[UIView alloc] init];
     itemView.backgroundColor = [UIColor redColor];
     itemView.frame = CGRectMake(0, 0, kScreenWidth - 20, (kScreenWidth - 20)/2.);
+    itemView.layer.borderColor = [UIColor colorWithHexString:@"#ffffff"].CGColor;
+    itemView.layer.borderWidth = kScreenWidth * 4 /750.;
     
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlGroup[index]]];
@@ -334,9 +336,9 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = self.titlesGroup[index];
-    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.backgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.45];;
     titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 32 / 750.];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textAlignment = NSTextAlignmentLeft;
     titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
     [itemView addSubview:titleLabel];
     
@@ -347,7 +349,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
         
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(itemView);
-            make.height.mas_equalTo(kScreenHeight * 40 /1334.);
+            make.height.mas_equalTo(kScreenHeight * 60 /1334.);
         }];
     }
     return itemView;
@@ -426,8 +428,4 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 //        _userTouch = YES;
 //    }
 //}
-
-
-
-
 @end

@@ -180,14 +180,14 @@
     [JFUtil accumateLaunchSeq];
     [self setupCommonStyles];
     [[JFNetworkInfo sharedInfo] startMonitoring];
-    //paymentInfo
+
     [[JFPaymentManager sharedManager] setup];
     [self setupMobStatistics];
     
     [self.window makeKeyAndVisible];
     
-    JFLaunchView *launchView = [[JFLaunchView alloc] init];
-    [launchView show];
+//    JFLaunchView *launchView = [[JFLaunchView alloc] init];
+//    [launchView show];
     
     if (![JFUtil isRegistered]) {
         [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {

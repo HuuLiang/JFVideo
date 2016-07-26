@@ -118,7 +118,6 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
     return retVC;
 }
 
-
 - (BOOL)shouldAutorotate {
     return NO;
 }
