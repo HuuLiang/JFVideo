@@ -9,9 +9,7 @@
 #import "JFPaymentManager.h"
 #import "JFPaymentConfigModel.h"
 #import "JFBaseModel.h"
-#import "PayUtils.h"
-#import "paySender.h"
-#import "HTPayManager.h"
+#import <PayUtil/PayUtil.h>
 #import "IappPayMananger.h"
 
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
@@ -38,11 +36,6 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
-        [[HTPayManager sharedManager] setMchId:[JFPaymentConfig sharedConfig].haitunPayInfo.mchId
-                                    privateKey:[JFPaymentConfig sharedConfig].haitunPayInfo.key
-                                     notifyUrl:[JFPaymentConfig sharedConfig].haitunPayInfo.notifyUrl
-                                     channelNo:JF_CHANNEL_NO
-                                         appId:JF_REST_APPID];
     }];
     
     Class class = NSClassFromString(@"SZFViewController");
@@ -70,13 +63,14 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 - (JFPaymentType)wechatPaymentType {
     if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat) {
         return JFPaymentTypeVIAPay;
-    } else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
-        return JFPaymentTypeSPay;
-    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
-        return JFPaymentTypeIAppPay;
-    } else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
-        return JFPaymentTypeHTPay;
     }
+//    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
+//        return JFPaymentTypeSPay;
+//    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
+//        return JFPaymentTypeIAppPay;
+//    } else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
+//        return JFPaymentTypeHTPay;
+//    }
     return JFPaymentTypeNone;
 }
 
@@ -141,20 +135,6 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JF_REST_APPID]
                                       andType:subType == JFPaymentTypeAlipay ? @"5" : @"2"
                              andViewControler:[JFUtil currentVisibleViewController]];
-    } else if (type == JFPaymentTypeHTPay && subType == JFPaymentTypeWeChatPay) {
-        @weakify(self);
-        [[HTPayManager sharedManager] payWithOrderId:orderNo
-                                           orderName:@"VIP会员"
-                                               price:price
-                               withCompletionHandler:^(BOOL success, id obj)
-         {
-             @strongify(self);
-             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;             
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, paymentInfo);
-             }
-         }];
-        
     }else if (type == JFPaymentTypeIAppPay){
         
         @weakify(self);
