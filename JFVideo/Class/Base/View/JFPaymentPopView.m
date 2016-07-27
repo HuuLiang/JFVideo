@@ -23,6 +23,7 @@
     JFPaymentTypeCell *_alipayCell;
     JFPaymentTypeCell *_wxpayCell;
     JFPaymentTypeCell *_iAppPayCell;
+    JFPaymentTypeCell *_qqpayCell;
     NSIndexPath *_selectedIndexPath;
 }
 @end
@@ -184,30 +185,51 @@
     } else if (indexPath.section == PaymentTypeSection) {
         @weakify(self);
         for (NSInteger i  = 0; i < _availablePaymentTypes.count; i++) {
-            NSNumber *obj = _availablePaymentTypes[i];
+            NSDictionary *dict = _availablePaymentTypes[i];
+            JFPaymentType type = [dict[@"type"] integerValue];
+            JFSubPayType subType = [dict[@"subType"] integerValue];
             if (indexPath.row == i) {
-                if ([obj unsignedIntegerValue] == JFPaymentTypeAlipay) {
-                    _alipayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeAlipay];
-                    _alipayCell.selectionAction = ^(JFPaymentType paymentType) {
-                        @strongify(self);
+                
+                JFPaymentTypeCell *cell = [[JFPaymentTypeCell alloc]initWithPaymentType:type subType:subType];
+                cell.selectionAction = ^(JFPaymentType paymentType){
+                    @strongify(self);
                     [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-                    };
-                    return _alipayCell;
-                } else if ([obj unsignedIntegerValue] == JFPaymentTypeWeChatPay) {
-                    _wxpayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeWeChatPay];
-                    _wxpayCell.selectionAction = ^(JFPaymentType paymentType) {
-                        @strongify(self);
-                        [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-                    };
-                    return _wxpayCell;
-                }else if ([obj unsignedIntegerValue] == JFPaymentTypeIAppPay){
-                    _iAppPayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeIAppPay];
-                    _iAppPayCell.selectionAction = ^(JFPaymentType paymentType){
-                        @strongify(self);
-                        [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-                    };
-                    return _iAppPayCell;
-                }
+                };
+                
+                return cell;
+                
+                //                if (type == JFPaymentTypeVIAPay) {
+                //                    if (subType == JFSubPayTypeWeChat) {
+                //                        _alipayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeVIAPay subType:JFSubPayTypeWeChat];
+                //                        _alipayCell.selectionAction = ^(JFPaymentType paymentType) {
+                //                            @strongify(self);
+                //                            [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                //                        };
+                //                        return _alipayCell;
+                //                    } else if (subType == JFSubPayTypeWeChat) {
+                //                        _wxpayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeVIAPay subType:JFSubPayTypeAlipay];
+                //                        _wxpayCell.selectionAction = ^(JFPaymentType paymentType) {
+                //                            @strongify(self);
+                //                            [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                //                        };
+                //                        return _wxpayCell;
+                //                    } else if(subType == JFSubPayTypeQQ){
+                //                        _qqpayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeVIAPay subType:JFSubPayTypeQQ];
+                //                        _qqpayCell.selectionAction = ^(JFPaymentType paymentType) {
+                //                            @strongify(self);
+                //                            [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                //                        };
+                //                    }
+                //                }else if (type == JFPaymentTypeIAppPay) {
+                //                    
+                //                    _iAppPayCell = [[JFPaymentTypeCell alloc] initWithPaymentType:JFPaymentTypeIAppPay subType:JFSubPayTypeNone];
+                //                    _iAppPayCell.selectionAction = ^(JFPaymentType paymentType){
+                //                        @strongify(self);
+                //                        [self selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                //                    };
+                //                    return _iAppPayCell;
+                //                }
+                
             }
         }
     } else if (indexPath.section == PaySection) {
@@ -227,7 +249,10 @@
         [_payBtn bk_addEventHandler:^(id sender) {
             @strongify(self);
             JFPaymentTypeCell * cell = [self cellForRowAtIndexPath:[self indexPathForSelectedRow]];
-            _paymentAction(cell.payType);
+            if (_paymentAction) {
+                 _paymentAction(cell.payType,cell.subType);
+            }
+           
         } forControlEvents:UIControlEventTouchUpInside];
         
         {

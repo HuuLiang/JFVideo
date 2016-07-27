@@ -17,7 +17,7 @@
 - (void)setup;
 
 - (JFPaymentInfo *)startPaymentWithType:(JFPaymentType)type
-                                subType:(JFPaymentType)subType
+                                subType:(JFSubPayType)subType
                                   price:(NSUInteger)price
                               baseModel:(JFBaseModel *)model
                       completionHandler:(JFPaymentCompletionHandler)handler;
@@ -28,5 +28,6 @@
 - (JFPaymentType)wechatPaymentType;
 - (JFPaymentType)alipayPaymentType;
 - (JFPaymentType)cardPayPaymentType;
+- (JFPaymentType)qqPaymentType;
 
 @end

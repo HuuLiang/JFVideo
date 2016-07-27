@@ -18,11 +18,12 @@
 
 @implementation JFPaymentTypeCell
 
-- (instancetype)initWithPaymentType:(JFPaymentType)paymentType
+- (instancetype)initWithPaymentType:(JFPaymentType)paymentType subType:(JFSubPayType)subType
 {
     self = [super init];
     if (self) {
         self.payType = paymentType;
+        self.subType = subType;
         
         self.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -40,15 +41,23 @@
         
         NSString *imageName = @"";
         NSString *text = @"";
-        if (paymentType == JFPaymentTypeAlipay) {
+        NSString *subTitle = nil;
+        if (paymentType == JFPaymentTypeVIAPay && subType == JFSubPayTypeAlipay) {
             imageName = @"alipay_icon";
             text = @"支付宝支付";
-        }else if(paymentType == JFPaymentTypeWeChatPay){
+        }
+        if(paymentType == JFPaymentTypeVIAPay && subType == JFSubPayTypeWeChat){
             imageName = @"wechat_icon";
             text = @"微信支付";
-        }else if (paymentType == JFPaymentTypeIAppPay){
+        }
+        if (paymentType == JFPaymentTypeIAppPay){
             imageName = @"card_pay_icon";
             text = @"购卡支付";
+            subTitle = @"支持支付宝和微信";
+        }
+        if (paymentType == JFPaymentTypeVIAPay && subType == JFSubPayTypeQQ){
+            imageName = @"qq_icon";
+            text = @"QQ钱包";
         }
         
         _imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
@@ -60,6 +69,13 @@
         _label.font = [UIFont systemFontOfSize:14.];
         _label.backgroundColor = [UIColor clearColor];
         [self addSubview:_label];
+        
+        UILabel *subLabel = [[UILabel alloc] init];
+        subLabel.textColor = [UIColor lightGrayColor];
+        subLabel.font = [UIFont systemFontOfSize:10.];
+        subLabel.backgroundColor = [UIColor clearColor];
+        subLabel.text = subTitle;
+        [self addSubview: subLabel];
         
         {
             [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -74,11 +90,23 @@
                 make.size.mas_equalTo(CGSizeMake(25, 25));
             }];
             
+            CGFloat offsetH = 0;
+//            CGFloat labelHeight = 0.;
+            if (subTitle != nil) {
+                offsetH = -5.;
+//                labelHeight = 10.;
+            }
             [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(self);
+                make.centerY.equalTo(self).mas_offset(offsetH);
                 make.left.equalTo(_imgV.mas_right).offset(10);
                 make.right.equalTo(self);
                 make.height.mas_equalTo(20);
+            }];
+            
+            [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(_label).mas_offset(-0.5);
+                make.top.mas_equalTo(_label.mas_bottom);
+//                make.height.mas_equalTo(labelHeight);
             }];
         }
     }

@@ -37,35 +37,43 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     }
     
     NSMutableArray *availablePaymentTypes = [NSMutableArray array];
-
+    
     DLog("%@",[JFPaymentConfig sharedConfig]);
     
     JFPaymentType wechatPaymentType = [[JFPaymentManager sharedManager] wechatPaymentType];
     if (wechatPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@(JFPaymentTypeWeChatPay)];
+        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeVIAPay),@"subType" : @(JFSubPayTypeWeChat)}];
     }
     
     JFPaymentType alipayPaymentType = [[JFPaymentManager sharedManager] alipayPaymentType];
     if (alipayPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@(JFPaymentTypeAlipay)];
+        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeVIAPay),@"subType" : @(JFSubPayTypeAlipay)}];
     }
     
+    JFPaymentType qqPaymentType = [[JFPaymentManager sharedManager] qqPaymentType];
+    if (qqPaymentType != JFPaymentTypeNone) {
+        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeVIAPay),@"subType" : @(JFSubPayTypeQQ)}];
+        
+    }
     JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
     if (cardPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@(JFPaymentTypeIAppPay)];
+        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeIAppPay),@"subType" : @(JFSubPayTypeNone)}];
     }
+    
     
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];
     @weakify(self);
-    _popView.paymentAction = ^(JFPaymentType subPayType) {
+    _popView.paymentAction = ^(JFPaymentType payType,JFSubPayType subType) {
         @strongify(self);
-        if (subPayType == JFPaymentTypeWeChatPay) {
-            [self payForPaymentType:wechatPaymentType subPaymentType:subPayType];
-        } else if (subPayType == JFPaymentTypeAlipay) {
-            [self payForPaymentType:alipayPaymentType subPaymentType:subPayType];
-        }else {
-         [self payForPaymentType:cardPaymentType subPaymentType:JFPaymentTypeNone];
-        }
+        
+        [self payForPaymentType:payType subPaymentType:subType];
+//        if (subPayType == JFPaymentTypeWeChatPay) {
+//            [self payForPaymentType:wechatPaymentType subPaymentType:subPayType];
+//        } else if (subPayType == JFPaymentTypeAlipay) {
+//            [self payForPaymentType:alipayPaymentType subPaymentType:subPayType];
+//        }else {
+//            [self payForPaymentType:cardPaymentType subPaymentType:JFPaymentTypeNone];
+//        }
         
         [self hidePayment];
     };
@@ -78,7 +86,7 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     return _popView;
 }
 
-- (void)payForPaymentType:(JFPaymentType)paymentType subPaymentType:(JFPaymentType)subPaymentType {
+- (void)payForPaymentType:(JFPaymentType)paymentType subPaymentType:(JFSubPayType)subPaymentType {
     JFPaymentInfo *paymentInfo = [[JFPaymentManager sharedManager] startPaymentWithType:paymentType
                                                                                 subType:subPaymentType
                                                                                   price:[JFSystemConfigModel sharedModel].payAmount
@@ -88,7 +96,7 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
                                       [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
                                       
                                   }];
-
+    
     DLog("%@",paymentInfo);
     if (paymentInfo) {
         [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:JFStatsPayActionGoToPay andTabIndex:[JFUtil currentTabPageIndex] subTabIndex:[JFUtil currentSubTabPageIndex]];
@@ -126,7 +134,7 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     }
     
     [self.view addSubview:self.popView];
-
+    
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:PaymentTypeSection];
     [self.popView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -191,7 +199,7 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
                                                forPayAction:JFStatsPayActionPayBack
                                                 andTabIndex:[JFUtil currentTabPageIndex]
                                                 subTabIndex:[JFUtil currentSubTabPageIndex]];
-//
+    //
     
 }
 

@@ -10,7 +10,7 @@
 
 @interface JFPaymentTypeCell : UITableViewCell
 
-- (instancetype)initWithPaymentType:(JFPaymentType)paymentType;
+- (instancetype)initWithPaymentType:(JFPaymentType)paymentType subType:(JFSubPayType)subType;
 
 @property (nonatomic,retain) NSArray *availablePaymentTypes;
 @property (nonatomic) UIButton *chooseBtn;
@@ -18,5 +18,6 @@
 @property (nonatomic,copy) JFSelectionAction selectionAction;
 
 @property (nonatomic)JFPaymentType payType;
+@property (nonatomic)JFSubPayType subType;
 
 @end

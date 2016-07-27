@@ -25,6 +25,14 @@ typedef NS_ENUM(NSUInteger, JFPaymentType) {
     JFPaymentTypeSPay = 1012,
     JFPaymentTypeHTPay = 1015
 };
+typedef NS_ENUM(NSUInteger, JFSubPayType) {
+    JFSubPayTypeNone = 0,
+    JFSubPayTypeWeChat = 1 << 0,
+    JFSubPayTypeAlipay = 1 << 1,
+    JFSubPayUPPay = 1 << 2,
+    JFSubPayTypeQQ = 1 << 3
+};
+
 typedef NS_ENUM(NSInteger, PAYRESULT)
 {
     PAYRESULT_SUCCESS   = 0,
@@ -86,6 +94,7 @@ typedef void (^JFAction)(id obj);
 typedef void (^JFSelectionAction)(JFPaymentType paymentType);
 typedef void (^JFProgressHandler)(double progress);
 typedef void (^JFCompletionHandler)(BOOL success, id obj);
+
 
 @class JFPaymentInfo;
 typedef void (^JFPaymentCompletionHandler)(PAYRESULT payResult, JFPaymentInfo *paymentInfo);

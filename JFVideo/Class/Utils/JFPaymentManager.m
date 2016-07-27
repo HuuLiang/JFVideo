@@ -12,6 +12,14 @@
 #import <PayUtil/PayUtil.h>
 #import "IappPayMananger.h"
 
+typedef NS_ENUM(NSUInteger, JFVIAPayType) {
+    JFVIAPayTypeNone,
+    JFVIAPayTypeWeChat = 2,
+    JFVIAPayTypeQQ = 3,
+    JFVIAPayTypeUPPay = 4,
+    JFVIAPayTypeShenZhou = 5
+};
+
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 
 @interface JFPaymentManager () <stringDelegate>
@@ -38,7 +46,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
     }];
     
-    Class class = NSClassFromString(@"SZFViewController");
+    Class class = NSClassFromString(@"VIASZFViewController");
     if (class) {
         [class aspect_hookSelector:NSSelectorFromString(@"viewWillAppear:")
                        withOptions:AspectPositionAfter
@@ -64,13 +72,13 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat) {
         return JFPaymentTypeVIAPay;
     }
-//    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
-//        return JFPaymentTypeSPay;
-//    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
-//        return JFPaymentTypeIAppPay;
-//    } else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
-//        return JFPaymentTypeHTPay;
-//    }
+    //    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
+    //        return JFPaymentTypeSPay;
+    //    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
+    //        return JFPaymentTypeIAppPay;
+    //    } else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
+    //        return JFPaymentTypeHTPay;
+    //    }
     return JFPaymentTypeNone;
 }
 
@@ -88,13 +96,19 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     return JFPaymentTypeNone;
 }
 
+- (JFPaymentType)qqPaymentType {
+    if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.unsignedIntegerValue & JFSubPayTypeQQ) {
+        return JFPaymentTypeVIAPay;
+    }
+    return JFPaymentTypeNone;
+}
 
 - (void)handleOpenUrl:(NSURL *)url {
     [[PayUitls getIntents] paytoAli:url];
 }
 
 - (JFPaymentInfo *)startPaymentWithType:(JFPaymentType)type
-                                subType:(JFPaymentType)subType
+                                subType:(JFSubPayType)subType
                                   price:(NSUInteger)price
                               baseModel:(JFBaseModel *)model
                       completionHandler:(JFPaymentCompletionHandler)handler {
@@ -105,6 +119,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 #if DEBUG
     price = 1;
 #endif
+//    price = 1;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -126,14 +141,18 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     
     BOOL success = YES;
     
-    if (type == JFPaymentTypeVIAPay && (subType == JFPaymentTypeWeChatPay || subType == JFPaymentTypeAlipay)) {
+    if (type == JFPaymentTypeVIAPay && (subType == JFSubPayTypeWeChat || subType == JFSubPayTypeAlipay || subType == JFSubPayTypeQQ)) {
+        
+        NSDictionary *viaPayTypeMapping = @{@(JFSubPayTypeAlipay):@(JFVIAPayTypeShenZhou),
+                                            @(JFSubPayTypeWeChat):@(JFVIAPayTypeWeChat),
+                                            @(JFSubPayTypeQQ):@(JFVIAPayTypeQQ)};
         NSString *tradeName = @"VIP会员";
         [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
                                  andTradeName:tradeName
                               andGoodsDetails:tradeName
                                     andScheme:KAliPaySchemeUrl
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JF_REST_APPID]
-                                      andType:subType == JFPaymentTypeAlipay ? @"5" : @"2"
+                                      andType:[viaPayTypeMapping[@(subType)] stringValue]
                              andViewControler:[JFUtil currentVisibleViewController]];
     }else if (type == JFPaymentTypeIAppPay){
         

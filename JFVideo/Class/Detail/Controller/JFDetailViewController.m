@@ -74,6 +74,11 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     };
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [_naviLabel removeFromSuperview];
+}
+
 - (void)loadDetail {
     [self.detailModel fetchProgramDetailWithColumnId:_columnId
                                            ProgramId:_programId

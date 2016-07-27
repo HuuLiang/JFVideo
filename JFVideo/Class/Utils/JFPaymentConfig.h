@@ -7,11 +7,11 @@
 //
 
 #import "JFURLResponse.h"
-typedef NS_ENUM(NSUInteger, JFSubPayType) {
-    JFSubPayTypeUnknown = 0,
-    JFSubPayTypeWeChat = 1 << 0,
-    JFSubPayTypeAlipay = 1 << 1
-};
+//typedef NS_ENUM(NSUInteger, JFSubPayType) {
+//    JFSubPayTypeUnknown = 0,
+//    JFSubPayTypeWeChat = 1 << 0,
+//    JFSubPayTypeAlipay = 1 << 1
+//};
 
 @interface JFWeChatPaymentConfig : NSObject
 @property (nonatomic) NSString *appId;
