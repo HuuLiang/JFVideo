@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, JFVIAPayType) {
 };
 
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
+static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 
 @interface JFPaymentManager () <stringDelegate>
 @property (nonatomic,retain) JFPaymentInfo *paymentInfo;
@@ -45,6 +46,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
     }];
+    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     
     Class class = NSClassFromString(@"VIASZFViewController");
     if (class) {
@@ -105,6 +107,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 
 - (void)handleOpenUrl:(NSURL *)url {
     [[PayUitls getIntents] paytoAli:url];
+    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JFPaymentInfo *)startPaymentWithType:(JFPaymentType)type
@@ -119,7 +122,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 #if DEBUG
     price = 1;
 #endif
-//    price = 1;
+    price = 200;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -202,5 +205,7 @@ static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
         }
     }
 }
+
+
 
 @end

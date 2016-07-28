@@ -29,6 +29,11 @@ static NSString *const kIappPreOrderURL = @"http://ipay.iapppay.com:9999/payapi/
     return _sharedManager;
 }
 
+- (void)setAlipayURLScheme:(NSString *)alipayURLScheme {
+    _alipayURLScheme = alipayURLScheme;
+    [IapppayKit sharedInstance].appAlipayScheme = alipayURLScheme;
+}
+
 - (void)payWithPaymentInfo:(JFPaymentInfo *)paymentInfo completionHandler:(JFPaymentCompletionHandler)completionHandler {
     self.completionHandler = completionHandler;
     self.paymentInfo = paymentInfo;
@@ -48,6 +53,10 @@ static NSString *const kIappPreOrderURL = @"http://ipay.iapppay.com:9999/payapi/
 }
 
 #pragma mark - IapppayKitPayRetDelegate
+
+- (void)handleOpenURL:(NSURL *)url {
+    [[IapppayKit sharedInstance] handleOpenUrl:url];
+}
 
 - (void)iapppayKitRetPayStatusCode:(IapppayKitPayRetCodeType)statusCode resultInfo:(NSDictionary *)resultInfo {
     NSDictionary *paymentStatusMapping = @{@(IAPPPAY_PAYRETCODE_SUCCESS):@(PAYRESULT_SUCCESS),
@@ -69,4 +78,5 @@ static NSString *const kIappPreOrderURL = @"http://ipay.iapppay.com:9999/payapi/
     self.completionHandler = nil;
     self.paymentInfo = nil;
 }
+
 @end
