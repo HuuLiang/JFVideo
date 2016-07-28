@@ -199,8 +199,6 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
                                                forPayAction:JFStatsPayActionPayBack
                                                 andTabIndex:[JFUtil currentTabPageIndex]
                                                 subTabIndex:[JFUtil currentSubTabPageIndex]];
-    //
-    
 }
 
 

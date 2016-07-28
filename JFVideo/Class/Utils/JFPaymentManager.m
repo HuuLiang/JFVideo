@@ -106,8 +106,15 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 }
 
 - (void)handleOpenUrl:(NSURL *)url {
-    [[PayUitls getIntents] paytoAli:url];
-    [[IappPayMananger sharedMananger] handleOpenURL:url];
+    
+    if ([url.absoluteString rangeOfString:kIappPaySchemeUrl].location == 0) {
+        [[IappPayMananger sharedMananger] handleOpenURL:url];
+    } else if ([url.absoluteString rangeOfString:KAliPaySchemeUrl].location == 0) {
+        [[PayUitls getIntents] paytoAli:url];
+    }
+//    
+//    [[PayUitls getIntents] paytoAli:url];
+//    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JFPaymentInfo *)startPaymentWithType:(JFPaymentType)type
