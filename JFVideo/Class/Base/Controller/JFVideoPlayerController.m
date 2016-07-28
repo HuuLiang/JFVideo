@@ -35,6 +35,7 @@
     _videoPlayer.endPlayAction = ^(id sender) {
         @strongify(self);
         [self dismissAndPopPayment];
+        [self dismissViewControllerAnimated:YES completion:nil];
     };
     [self.view addSubview:_videoPlayer];
     {
