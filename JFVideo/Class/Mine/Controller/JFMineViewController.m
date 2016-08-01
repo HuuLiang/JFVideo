@@ -94,7 +94,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     _bannerCell.accessoryType = UITableViewCellAccessoryNone;
     _bannerCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
     _bannerCell.backgroundImageView.image = [UIImage imageNamed:@"setting_banner.jpg"];
-    [self setLayoutCell:_bannerCell cellHeight:SCREEN_WIDTH*0.4 inRow:0 andSection:section++];
+    [self setLayoutCell:_bannerCell cellHeight:kScreenWidth*0.4 inRow:0 andSection:section++];
     
     if (![JFUtil isVip]) {
         _vipCell = [[JFTableViewCell alloc] initWithImage:nil title:@"开通VIP"];
@@ -141,7 +141,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         }];
     }
     
-    [self setLayoutCell:_appCell cellHeight:((SCREEN_WIDTH-50-50)/3+30)*(self.dataSource.count % 3 == 0 ? self.dataSource.count / 3 : self.dataSource.count / 3 + 1 ) +30 inRow:0 andSection:section];
+    [self setLayoutCell:_appCell cellHeight:((kScreenWidth-50-50)/3+30)*(self.dataSource.count % 3 == 0 ? self.dataSource.count / 3 : self.dataSource.count / 3 + 1 ) +30 inRow:0 andSection:section];
 
     [self.layoutTableView reloadData];
 }
@@ -166,7 +166,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 25;
-    layout.itemSize = CGSizeMake((SCREEN_WIDTH-50-50)/3, (SCREEN_WIDTH-50-50)/3+30);
+    layout.itemSize = CGSizeMake((kScreenWidth-50-50)/3, (kScreenWidth-50-50)/3+30);
     layout.sectionInset = UIEdgeInsetsMake(14, 22.5, 5, 22.5);
     return layout;
 }

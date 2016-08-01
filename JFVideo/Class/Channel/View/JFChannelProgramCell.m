@@ -29,19 +29,19 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:14.];
+        _titleLabel.font = [UIFont systemFontOfSize:14./375. *kScreenWidth];
         [self addSubview:_titleLabel];
         {
             [_bgImgv mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self);
-                make.height.mas_equalTo((SCREEN_WIDTH-25)/3 * 300 / 227.);
+                make.height.mas_equalTo(_bgImgv.mas_width).multipliedBy(300/227.);//((kScreenWidth-25/375.*kScreenWidth)/3 * 300 / 227.);
             }];
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(_bgImgv.mas_bottom).offset(5);
-                make.left.equalTo(self).offset(5);
-                make.right.equalTo(self).offset(-5);
-                make.height.mas_equalTo(20);
+                make.top.equalTo(_bgImgv.mas_bottom).offset(4/375. *kScreenWidth);
+                make.left.equalTo(self).offset(5/375.*kScreenWidth);
+                make.right.equalTo(self).offset(-5/375.*kScreenWidth);
+                make.height.mas_equalTo(20/375. *kScreenWidth);
             }];
             
         }

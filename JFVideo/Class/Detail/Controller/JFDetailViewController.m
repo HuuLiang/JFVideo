@@ -28,6 +28,7 @@ static NSString *const kScrollCellReusableIdentifier = @"ScrollCellReusableIdent
     UICollectionView *_layoutCollectionView;
     JFCommentCell *_commentCell;
     
+    
 }
 @property (nonatomic) JFDetailModel *detailModel;
 @property (nonatomic) JFDetailModelResponse *response;
@@ -120,20 +121,20 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     _bannerCell.title = program.title;
     _bannerCell.num = [program.spare integerValue];
     
-    [self setLayoutCell:_bannerCell cellHeight:SCREEN_WIDTH*0.6+60 inRow:0 andSection:section];
+    [self setLayoutCell:_bannerCell cellHeight:kScreenWidth*0.6+60/375. *kScreenWidth inRow:0 andSection:section];
     
     [self setNaviTitle];
 }
 
 - (void)setNaviTitle {
-    _naviLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kScreenHeight * 20 / 1334., SCREEN_WIDTH , 24)];
+    _naviLabel = [[UILabel alloc] initWithFrame:CGRectMake(50/375.*kScreenWidth, kScreenHeight * 20 / 1334.,  (kScreenWidth - 100)/375.*kScreenWidth , 24)];
     _naviLabel.text = self.response.program.title;
     _naviLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
     _naviLabel.textAlignment = NSTextAlignmentCenter;
     _naviLabel.hidden = YES;
     //    self.navigationItem.titleView = _naviLabel;
     [self.navigationController.navigationBar addSubview:_naviLabel];
-    //    self.navigationItem.titleView.frame = CGRectMake(-kScreenWidth * 67 / 750., 0, SCREEN_WIDTH, 30);
+    //    self.navigationItem.titleView.frame = CGRectMake(-kScreenWidth * 67 / 750., 0, kScreenWidth, 30);
 }
 
 - (void)playVideo {
@@ -166,7 +167,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
             make.edges.equalTo(_scrollCell);
         }];
     }
-    [self setLayoutCell:_scrollCell cellHeight:SCREEN_HEIGHT*200/1334.+5 inRow:0 andSection:section];
+    [self setLayoutCell:_scrollCell cellHeight:kScreenHeight*200/1334.+5 inRow:0 andSection:section];
     [_layoutCollectionView reloadData];
     
 }
@@ -198,23 +199,23 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
     _titleLabel.text = @"热门评论";
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = [UIColor colorWithHexString:@"#ec5382"];
-    _titleLabel.font = [UIFont systemFontOfSize:16.];
+    _titleLabel.font = [UIFont systemFontOfSize:16./375. *kScreenWidth];
     [_commentTitleCell.contentView addSubview:_titleLabel];
     {
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_commentTitleCell.contentView);
             make.left.equalTo(_commentTitleCell.mas_left).offset(10);
-            make.height.mas_equalTo(20);
+            make.height.mas_equalTo(20/375. *kScreenWidth);
         }];
     }
-    [self setLayoutCell:_commentTitleCell cellHeight:30 inRow:0 andSection:section];
+    [self setLayoutCell:_commentTitleCell cellHeight:30/375. *kScreenWidth inRow:0 andSection:section];
 }
 
 - (void)initCommentCell:(NSUInteger)section {
     for (NSInteger i = 0; i < self.response.commentJson.count; i++) {
         JFDetailCommentModel *comment = self.response.commentJson[i];
-        CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:SCREEN_WIDTH*32/750.] maxSize:CGSizeMake(SCREEN_WIDTH - 69, MAXFLOAT)].height;
-        _commentCell = [[JFCommentCell alloc] initWithHeight:height];
+        CGFloat height = [comment.content sizeWithFont:[UIFont systemFontOfSize:kScreenWidth*16/375.] maxSize:CGSizeMake(kScreenWidth - 69/375.*kScreenWidth, MAXFLOAT)].height;
+        _commentCell = [[JFCommentCell alloc] initWithHeight:height/375. *kScreenWidth];
         DLog(@"%f",height);
         _commentCell.selectionStyle = UITableViewCellSelectionStyleNone;
         _commentCell.userImgUrl = comment.icon;
@@ -222,9 +223,9 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
         _commentCell.commentStr = comment.content;
         _commentCell.timeStr = comment.createAt;
         if (i == self.response.commentJson.count - 1) {
-            [self setLayoutCell:_commentCell cellHeight:height+80 inRow:0 andSection:section++];
+            [self setLayoutCell:_commentCell cellHeight:(height+80)/375. *kScreenWidth inRow:0 andSection:section++];
         } else {
-            [self setLayoutCell:_commentCell cellHeight:height+60 inRow:0 andSection:section++];
+            [self setLayoutCell:_commentCell cellHeight:(height+60)/375. *kScreenWidth inRow:0 andSection:section++];
             UITableViewCell *cell = [[UITableViewCell alloc] init];
             cell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
             UIImageView *imgV = [[UIImageView alloc] init];
@@ -290,7 +291,7 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
     UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
-    const CGFloat width = (SCREEN_WIDTH - insets.left- insets.right - 3 * layout.minimumInteritemSpacing)/4;
+    const CGFloat width = (kScreenWidth - insets.left- insets.right - 3 * layout.minimumInteritemSpacing)/4;
     const CGFloat height = width*8/7.;
     
     return CGSizeMake(width , height);

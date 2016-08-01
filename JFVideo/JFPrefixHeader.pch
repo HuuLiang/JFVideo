@@ -19,19 +19,16 @@
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 
-
-#import "JFUtil.h"
 #import "JFCommonDef.h"
 #import "JFConfig.h"
 #import "JFExtensions.h"
 #import "JFErrorHandler.h"
 #import "JFMessageCenter.h"
 #import "CRKHudManager.h"
-
+#import "JFUtil.h"
 #import "DBHandler.h"
 #import "JFNetworkInfo.h"
 #import "JFBaseModel.h"
 #import "JFStatsManager.h"
-
 
 #endif /* JFPrefixHeader_pch */

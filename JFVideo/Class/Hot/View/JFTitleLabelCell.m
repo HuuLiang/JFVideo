@@ -43,7 +43,7 @@
 
 - (void)setTitle:(NSString *)title {
     _titleLabel.text = title;
-    CGFloat width = [title sizeWithFont:[UIFont systemFontOfSize:SCREEN_WIDTH*26/750.] maxSize:CGSizeMake(MAXFLOAT, kScreenHeight * 48 / 1334.)].width + 10.;
+    CGFloat width = [title sizeWithFont:[UIFont systemFontOfSize:kScreenWidth*26/750.] maxSize:CGSizeMake(MAXFLOAT, kScreenHeight * 48 / 1334.)].width + 10.;
     _titleLabel.frame = CGRectMake(0, 0, width + 15 , kScreenHeight * 48 /1334.);
 }
 

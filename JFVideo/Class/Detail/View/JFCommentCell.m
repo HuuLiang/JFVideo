@@ -26,25 +26,25 @@
         self.backgroundColor = [UIColor clearColor];
         
         _userImgV = [[UIImageView alloc] init];
-        _userImgV.layer.cornerRadius = SCREEN_WIDTH*39/750.;
+        _userImgV.layer.cornerRadius = kScreenWidth*39/750.;
         _userImgV.layer.masksToBounds = YES;
         [self addSubview:_userImgV];
         
         _userNameLabel = [[UILabel alloc] init];
         _userNameLabel.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0.54];;
         _userNameLabel.textAlignment = NSTextAlignmentCenter;
-        _userNameLabel.font = [UIFont systemFontOfSize:13.];
+        _userNameLabel.font = [UIFont systemFontOfSize:13./375. *kScreenWidth];
         [self addSubview:_userNameLabel];
         
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0.54];;
         _timeLabel.textAlignment = NSTextAlignmentCenter;
-        _timeLabel.font = [UIFont systemFontOfSize:13.];
+        _timeLabel.font = [UIFont systemFontOfSize:13./375. *kScreenWidth];
         [self addSubview:_timeLabel];
         
         _commentDetailLabel = [[UILabel alloc] init];
         _commentDetailLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
-        _commentDetailLabel.font = [UIFont systemFontOfSize:SCREEN_WIDTH*32/750.];
+        _commentDetailLabel.font = [UIFont systemFontOfSize:kScreenWidth*16/375.];
         _commentDetailLabel.numberOfLines = 0;
 //        _commentDetailLabel.lineBreakMode = UILineBreakModeWordWrap;
         [self addSubview:_commentDetailLabel];
@@ -52,20 +52,20 @@
         {
             [_userImgV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(self).offset(10);
-                make.left.equalTo(self).offset(10);
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*78/750., SCREEN_HEIGHT*78/1334.));
+                make.left.equalTo(self).offset(10/375.*kScreenWidth);
+                make.size.mas_equalTo(CGSizeMake(kScreenWidth*78/750., kScreenWidth*78/750.));
             }];
             
             [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(_userImgV.mas_centerY);
-                make.left.equalTo(_userImgV.mas_right).offset(10);
-                make.height.mas_equalTo(18);
+                make.left.equalTo(_userImgV.mas_right).offset(10/375.*kScreenWidth);
+                make.height.mas_equalTo(18/375. *kScreenWidth);
             }];
 
             [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(_userImgV.mas_centerY);
                 make.right.equalTo(self).offset(-10);
-                make.height.mas_equalTo(18);
+                make.height.mas_equalTo(18/375. *kScreenWidth);
             }];
             
             [_commentDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {

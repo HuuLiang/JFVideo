@@ -20,6 +20,7 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (NSString *)deviceName;
 + (NSString *)appVersion;
++ (JFDeviceType)deviceType;
 
 + (void)registerVip;
 + (BOOL)isVip;

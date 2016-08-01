@@ -34,7 +34,7 @@
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JFFetchSystemConfigCompletionHandler)handler {
     @weakify(self);
     BOOL success = [self requestURLPath:JF_SYSTEM_CONFIG_URL
-                             withParams:nil
+                             withParams:@{@"type":@([JFUtil deviceType])}
                         responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);

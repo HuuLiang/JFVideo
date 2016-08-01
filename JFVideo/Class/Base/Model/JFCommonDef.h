@@ -16,6 +16,7 @@
 #define DLog(...)
 #endif
 
+
 typedef NS_ENUM(NSUInteger, JFPaymentType) {
     JFPaymentTypeNone,
     JFPaymentTypeAlipay = 1001,
@@ -49,6 +50,22 @@ typedef NS_ENUM(NSUInteger, JFPaymentPopViewSection) {
     SectionCount
 };
 
+typedef NS_ENUM(NSUInteger, JFDeviceType) {
+    JFDeviceTypeUnknown,
+    JFDeviceType_iPhone4,
+    JFDeviceType_iPhone4S,
+    JFDeviceType_iPhone5,
+    JFDeviceType_iPhone5C,
+    JFDeviceType_iPhone5S,
+    JFDeviceType_iPhone6,
+    JFDeviceType_iPhone6P,
+    JFDeviceType_iPhone6S,
+    JFDeviceType_iPhone6SP,
+    JFDeviceType_iPhoneSE,
+    JFDeviceType_iPad = 100
+};
+
+
 #define DefineLazyPropertyInitialization(propertyType, propertyName) \
 -(propertyType *)propertyName { \
 if (_##propertyName) { \
@@ -67,7 +84,8 @@ if (block) block(__VA_ARGS__);
 
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenHeight [[UIScreen mainScreen]bounds].size.height
+//[UIScreen mainScreen].bounds.size.height
 #define kDefaultTextColor [UIColor colorWithWhite:0.5 alpha:1]
 #define kDefaultBackgroundColor [UIColor colorWithWhite:0.97 alpha:1]
 #define kDefaultPhotoBlurRadius (5)
@@ -78,8 +96,6 @@ if (block) block(__VA_ARGS__);
 
 #define kPaidNotificationName @"jf_paid_notification"
 
-#define SCREEN_WIDTH        [[UIScreen mainScreen]bounds].size.width
-#define SCREEN_HEIGHT       [[UIScreen mainScreen]bounds].size.height
 
 //#define VIDEO_PAY_AMOUNT    @"VIDEO_PAY_AMOUNT"
 //#define PHOTO_PAY_AMOUNT    @"GALLERY_PAY_AMOUNT"

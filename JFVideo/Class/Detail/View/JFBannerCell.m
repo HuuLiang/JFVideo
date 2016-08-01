@@ -36,7 +36,7 @@
         [_view addSubview:_icon];
         
         _userImgV = [[UIImageView alloc] init];
-        _userImgV.layer.cornerRadius = SCREEN_WIDTH*8/75.;
+        _userImgV.layer.cornerRadius = kScreenWidth*8/75.;
         _userImgV.layer.masksToBounds = YES;
         _userImgV.layer.borderWidth = 1.;
         _userImgV.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -44,13 +44,13 @@
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
-        _titleLabel.font = [UIFont systemFontOfSize:15.];
+        _titleLabel.font = [UIFont systemFontOfSize:15./375. *kScreenWidth];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleLabel];
         
         _playNumLabel = [[UILabel alloc] init];
         _playNumLabel.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0.54];
-        _playNumLabel.font = [UIFont systemFontOfSize:12.];
+        _playNumLabel.font = [UIFont systemFontOfSize:12./375. *kScreenWidth];
         _playNumLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_playNumLabel];
         
@@ -58,7 +58,7 @@
         {
             [_bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self);
-                make.height.mas_equalTo(SCREEN_WIDTH *0.6);
+                make.height.mas_equalTo(kScreenWidth *0.6);
             }];
             
             [_view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,21 +72,22 @@
             
             [_userImgV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(15);
-                make.centerY.equalTo(_bgImgV.mas_bottom).offset(15);
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*16/75., SCREEN_WIDTH*16/75.));
+                make.centerY.equalTo(_bgImgV.mas_bottom).offset(15/375. *kScreenWidth);
+                make.size.mas_equalTo(CGSizeMake(kScreenWidth*16/75., kScreenWidth*16/75.));
+                make.bottom.mas_equalTo(self).mas_offset(-5/375. *kScreenWidth);
             }];
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(_userImgV);
                 make.left.equalTo(_userImgV.mas_right).offset(5);
-                make.height.mas_equalTo(20);
+                make.height.mas_equalTo(20/375. *kScreenWidth);
                 make.width.mas_equalTo(kScreenWidth * 0.6);
             }];
             
             [_playNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(_titleLabel.mas_bottom).offset(2);
-                make.centerX.equalTo(self);
-                make.height.mas_equalTo(15);
+                make.top.equalTo(_titleLabel.mas_bottom).offset(2/375. *kScreenWidth);
+                make.centerX.equalTo(_titleLabel);
+                make.height.mas_equalTo(15/375. *kScreenWidth);
             }];
         }
         

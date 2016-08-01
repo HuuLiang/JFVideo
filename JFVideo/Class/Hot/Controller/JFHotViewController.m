@@ -17,10 +17,10 @@
 
 #import "JFDetailViewController.h"
 
-#define LINESPACING kScreenHeight * 20 / 1334.
+#define LINESPACING kScreenWidth * 10 / 375.
 #define INTERITEMSPACING kScreenWidth * 23 / 750.
-#define EDGINSETS UIEdgeInsetsMake(kScreenHeight * 25 / 1334., kScreenWidth * 30 / 750. , kScreenHeight * 25 / 1334., kScreenWidth * 30 / 750.)
-#define titleCellHeight 2* kScreenHeight * 48/1334. + LINESPACING + EDGINSETS.top + EDGINSETS.bottom + kScreenHeight * 48 / 1334.
+#define EDGINSETS UIEdgeInsetsMake(kScreenWidth * 25 / 750., kScreenWidth * 30 / 750. , kScreenWidth * 25 / 750., kScreenWidth * 30 / 750.)
+#define titleCellHeight 2* kScreenWidth * 48/750. + LINESPACING + EDGINSETS.top + EDGINSETS.bottom + kScreenWidth * 48 / 750.
 
 
 static NSString *const kHotTitleCellReusableIdentifier = @"hottitleCellReusableIdentifier";
@@ -129,14 +129,14 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     for (NSInteger i = 0; i < array.count ; i++) {
         JFChannelColumnModel *columnModel = array[i];
         if (i == 0) {
-            currentWidth = [columnModel.name sizeWithFont:[UIFont systemFontOfSize:SCREEN_WIDTH*26/750.] maxSize:CGSizeMake(MAXFLOAT, kScreenHeight * 48 / 1334.)].width + 30.;
+            currentWidth = [columnModel.name sizeWithFont:[UIFont systemFontOfSize:kScreenWidth*26/750.] maxSize:CGSizeMake(MAXFLOAT, kScreenWidth * 48 / 750.)].width + 30.;
         } else {
             currentWidth = nextWidth;
         }
         
         if (i + 1 < array.count) {
             columnModel = array[i + 1];
-            nextWidth = [columnModel.name sizeWithFont:[UIFont systemFontOfSize:SCREEN_WIDTH*26/750.] maxSize:CGSizeMake(MAXFLOAT, kScreenHeight * 48 / 1334.)].width + 30.;
+            nextWidth = [columnModel.name sizeWithFont:[UIFont systemFontOfSize:kScreenWidth*26/750.] maxSize:CGSizeMake(MAXFLOAT, kScreenWidth * 48 / 750.)].width + 30.;
             if (rowWidth - currentWidth - INTERITEMSPACING >= nextWidth && count < 3) {
                 count++;
                 rowWidth = rowWidth - currentWidth - INTERITEMSPACING;
@@ -189,9 +189,10 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     btn.titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 30 / 750.];
     [btn setTitle:@"更多" forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
+    btn.imageView.transform = CGAffineTransformMakeScale(30/375.*kScreenWidth, 30/375. *kScreenWidth);
     [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, 0)];
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 25/375.*kScreenWidth)];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 40/375.*kScreenWidth, 0, 0)];
     [_titleCell addSubview:btn];
     
     [btn bk_addEventHandler:^(id sender) {
@@ -201,11 +202,11 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
             _layoutTitleCollectionView.scrollEnabled = YES;
             _layoutTitleCollectionView.showsVerticalScrollIndicator = YES;
             [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight + 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2);
-                _headerCell.transform = CGAffineTransformMakeTranslation(0, 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2);
-                _detailCell.transform = CGAffineTransformMakeTranslation(0, 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2);
+                _titleCell.frame = CGRectMake(0, 0, kScreenWidth, titleCellHeight + 2.5 * kScreenWidth * 48/750. +  LINESPACING * 2);
+                _headerCell.transform = CGAffineTransformMakeTranslation(0, 2.5 * kScreenWidth * 48/750. +  LINESPACING * 2);
+                _detailCell.transform = CGAffineTransformMakeTranslation(0, 2.5 * kScreenWidth * 48/750. +  LINESPACING * 2);
             } completion:^(BOOL finished) {
-                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + 2.5 * kScreenHeight * 48/1334. +  LINESPACING * 2 inRow:0 andSection:0];
+                [self setLayoutCell:_titleCell cellHeight:titleCellHeight + 2.5 * kScreenWidth * 48/750. +  LINESPACING * 2 inRow:0 andSection:0];
                 [self.layoutTableView reloadData];
             }];
         } else {
@@ -213,7 +214,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
             [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
             _layoutTitleCollectionView.scrollEnabled = NO;
             [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _titleCell.frame = CGRectMake(0, 0, SCREEN_WIDTH, titleCellHeight);
+                _titleCell.frame = CGRectMake(0, 0, kScreenWidth, titleCellHeight);
                 _headerCell.transform = CGAffineTransformMakeTranslation(0, 0);
                 _detailCell.transform = CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
@@ -228,13 +229,13 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     {
         [_layoutTitleCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.equalTo(_titleCell);
-            make.bottom.equalTo(_titleCell.mas_bottom).offset(-(kScreenHeight * 48 /1334. + LINESPACING));
+            make.bottom.equalTo(_titleCell.mas_bottom).offset(-(kScreenWidth * 48 /750. + LINESPACING));
         }];
         
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(_titleCell).offset(0);
-            make.right.equalTo(_titleCell).offset(-5);
-            make.size.mas_equalTo(CGSizeMake(60,kScreenHeight * 48 /1334. + LINESPACING));
+            make.right.equalTo(_titleCell).offset(-5/375.*kScreenWidth);
+            make.size.mas_equalTo(CGSizeMake(68/375.*kScreenWidth,kScreenWidth * 24 /375. + LINESPACING));
         }];
     }
     
@@ -248,18 +249,18 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     
     _label = [[UILabel alloc] init];
     _label.textColor = [[UIColor colorWithHexString:@"#ffffff"] colorWithAlphaComponent:0.54];
-    _label.font = [UIFont systemFontOfSize:kScreenHeight * 30 /1334.];
+    _label.font = [UIFont systemFontOfSize:kScreenWidth * 30 /750.];
     _label.text = [NSString stringWithFormat:@"共搜索到%ld部\"%@\"的作品",_detailArray.count,column.name];
     [_headerCell addSubview:_label];
     {
         [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_headerCell).offset(kScreenHeight * 2 / 1334.);
+            make.top.equalTo(_headerCell).offset(kScreenWidth * 2 / 750.);
             make.left.equalTo(_headerCell).offset(15);
             make.right.equalTo(_headerCell);
-            make.height.mas_equalTo(kScreenHeight * 30 / 1334.);
+            make.height.mas_equalTo(kScreenWidth * 30 / 750.);
         }];
     }
-    [self setLayoutCell:_headerCell cellHeight:kScreenHeight * 50 / 1334. inRow:0 andSection:section++];
+    [self setLayoutCell:_headerCell cellHeight:kScreenWidth * 50 / 750. inRow:0 andSection:section++];
 }
 - (void)initDetailCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
     _detailCell = [[UITableViewCell alloc] init];
@@ -268,7 +269,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     _label.text = [NSString stringWithFormat:@"共搜索到%ld部\"%@\"的作品",_detailArray.count,column.name];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumLineSpacing = 5;
+    layout.minimumLineSpacing = 5/375. *kScreenWidth;
     layout.minimumInteritemSpacing = layout.minimumLineSpacing;
     _layoutDetailCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _layoutDetailCollectionView.backgroundColor = [UIColor clearColor];
@@ -276,6 +277,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     _layoutDetailCollectionView.dataSource = self;
     _layoutDetailCollectionView.showsVerticalScrollIndicator = NO;
     [_layoutDetailCollectionView registerClass:[JFChannelProgramCell class] forCellWithReuseIdentifier:kChannelProgramCellReusableIdentifier];
+    _layoutDetailCollectionView.scrollEnabled = NO;
     [_detailCell addSubview:_layoutDetailCollectionView];
     {
         [_layoutDetailCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -360,7 +362,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
         detailVC.baseModel = baseModel;
         [self.navigationController pushViewController:detailVC animated:YES];
-     
+        
         [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     }
 }
@@ -369,14 +371,14 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     
     if (collectionView == _layoutTitleCollectionView) {
         const CGFloat width = [self.titleWidthArray[indexPath.item] floatValue];
-        const CGFloat height = kScreenHeight * 48 / 1334.;
+        const CGFloat height = kScreenWidth * 48 / 750.;
         return CGSizeMake(width , height);
     } else if (collectionView == _layoutDetailCollectionView) {
         UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_layoutDetailCollectionView.collectionViewLayout;
         const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds);
         UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
-        const CGFloat width = (fullWidth - 2*layout.minimumInteritemSpacing - insets.left - insets.right)/3.;
-        const CGFloat height = width * 300 / 227.+30.;
+        const CGFloat width = (fullWidth - 2*layout.minimumInteritemSpacing  - insets.left - insets.right)/3.;
+        const CGFloat height = width * 300 / 227.+30;
         return CGSizeMake((long)width , (long)height);
     } else {
         return CGSizeZero;

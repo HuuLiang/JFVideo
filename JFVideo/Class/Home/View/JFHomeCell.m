@@ -42,7 +42,7 @@
         {
             [_bgImgv mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.equalTo(self);
-                make.height.mas_equalTo((SCREEN_WIDTH-25)/2*0.6);
+                make.height.mas_equalTo((kScreenWidth-25)/2*0.6);
             }];
             
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

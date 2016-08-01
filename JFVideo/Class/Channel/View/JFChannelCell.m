@@ -73,13 +73,18 @@
         [self addSubview:_hotLabel];
         
         {
-            [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.mas_equalTo(self);
-                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 360 / 750., MAX(kScreenHeight * 452 / 1334., 190)));
-            }];
             
             [_bgImgv mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self);
+            }];
+            
+            [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.mas_equalTo(self);
+
+                //                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 360 / 750., MAX(kScreenHeight * 452 / 1334., 190)));
+                make.width.mas_equalTo(_bgImgv.mas_width).multipliedBy(360/336.);
+                make.height.mas_equalTo(_bgImgv.mas_height).multipliedBy(452/432.);
+                
             }];
             
             [bgView mas_makeConstraints:^(MASConstraintMaker *make) {

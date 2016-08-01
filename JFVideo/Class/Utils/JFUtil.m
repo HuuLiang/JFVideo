@@ -59,6 +59,36 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
     return name;
 }
 
++ (JFDeviceType)deviceType {
+    NSString *deviceName = [self deviceName];
+    if ([deviceName rangeOfString:@"iPhone3,"].location == 0) {
+        return JFDeviceType_iPhone4;
+    } else if ([deviceName rangeOfString:@"iPhone4,"].location == 0) {
+        return JFDeviceType_iPhone4S;
+    } else if ([deviceName rangeOfString:@"iPhone5,1"].location == 0 || [deviceName rangeOfString:@"iPhone5,2"].location == 0) {
+        return JFDeviceType_iPhone5;
+    } else if ([deviceName rangeOfString:@"iPhone5,3"].location == 0 || [deviceName rangeOfString:@"iPhone5,4"].location == 0) {
+        return JFDeviceType_iPhone5C;
+    } else if ([deviceName rangeOfString:@"iPhone6,"].location == 0) {
+        return JFDeviceType_iPhone5S;
+    } else if ([deviceName rangeOfString:@"iPhone7,1"].location == 0) {
+        return JFDeviceType_iPhone6P;
+    } else if ([deviceName rangeOfString:@"iPhone7,2"].location == 0) {
+        return JFDeviceType_iPhone6;
+    } else if ([deviceName rangeOfString:@"iPhone8,1"].location == 0) {
+        return JFDeviceType_iPhone6S;
+    } else if ([deviceName rangeOfString:@"iPhone8,2"].location == 0) {
+        return JFDeviceType_iPhone6SP;
+    } else if ([deviceName rangeOfString:@"iPhone8,4"].location == 0) {
+        return JFDeviceType_iPhoneSE;
+    } else if ([deviceName rangeOfString:@"iPad"].location == 0) {
+        return JFDeviceType_iPad;
+    } else {
+        return JFDeviceTypeUnknown;
+    }
+}
+
+
 + (NSString *)appVersion {
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }

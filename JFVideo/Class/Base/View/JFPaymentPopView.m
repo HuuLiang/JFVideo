@@ -48,7 +48,7 @@
 }
 
 //- (CGFloat)viewHeightRelativeToWidth:(CGFloat)width {
-//    const CGFloat headerHeight = SCREEN_HEIGHT*160/1334.;
+//    const CGFloat headerHeight = kScreenHeight*160/1334.;
 //    
 //    __block CGFloat cellHeights = headerHeight;
 //    NSUInteger numberOfSections = [self numberOfSections];
@@ -178,7 +178,7 @@
                 make.centerY.mas_equalTo(_paypointTypeCell);
                 make.left.equalTo(_paypointTypeCell).offset(15);
                 make.right.equalTo(_paypointTypeCell).offset(-15);
-                make.height.mas_equalTo(SCREEN_HEIGHT * 60/1334.);
+                make.height.mas_equalTo(kScreenHeight * 60/1334.);
             }];
         }
         return _paypointTypeCell;
@@ -242,7 +242,7 @@
         _payBtn.titleLabel.font = [UIFont systemFontOfSize:16.];
         [_payBtn setTintColor:[UIColor colorWithHexString:@"#ffffff"]];
         _payBtn.backgroundColor = [UIColor colorWithHexString:@"#ff680d"];
-        _payBtn.layer.cornerRadius = SCREEN_HEIGHT * 10 / 1334.;
+        _payBtn.layer.cornerRadius = kScreenHeight * 10 / 1334.;
         _payBtn.layer.masksToBounds = YES;
         [_payCell addSubview:_payBtn];
         @weakify(self);
@@ -258,7 +258,7 @@
         {
             [_payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.center.mas_equalTo(_payCell);
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 440 / 750., SCREEN_HEIGHT * 78 / 1334.));
+                make.size.mas_equalTo(CGSizeMake(kScreenWidth * 440 / 750., kScreenHeight * 78 / 1334.));
             }];
         }
         return _payCell;
@@ -268,13 +268,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == HeaderSection) {
-        return SCREEN_WIDTH * 160/750.;
+        return kScreenWidth * 160/750.;
     } else if (indexPath.section == PayPointSection) {
-        return SCREEN_HEIGHT * 60/1334.;
+        return kScreenHeight * 60/1334.;
     } else if (indexPath.section == PaymentTypeSection) {
-        return SCREEN_HEIGHT * 110 / 1334.;
+        return kScreenHeight * 110 / 1334.;
     } else if (indexPath.section == PaySection) {
-        return kScreenHeight * 630 /1334. + (kScreenHeight * 110 / 1334.) * (_availablePaymentTypes.count - 2.) - SCREEN_WIDTH * 160/750. - SCREEN_HEIGHT * 110 / 1334. * _availablePaymentTypes.count - 30 ;
+        return kScreenHeight * 630 /1334. + (kScreenHeight * 110 / 1334.) * (_availablePaymentTypes.count - 2.) - kScreenWidth * 160/750. - kScreenHeight * 110 / 1334. * _availablePaymentTypes.count - 30 ;
     } else {
         return 0;
     }

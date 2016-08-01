@@ -25,24 +25,24 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.layer.cornerRadius = SCREEN_WIDTH * 30/750.;
+        self.layer.cornerRadius = kScreenWidth * 30/750.;
         self.layer.masksToBounds = YES;
         
         _bgImgv = [[UIImageView alloc] init];
         _bgImgv.backgroundColor = [UIColor clearColor];
-        _bgImgv.layer.cornerRadius = SCREEN_WIDTH * 30/750.;
+        _bgImgv.layer.cornerRadius = kScreenWidth * 30/750.;
         _bgImgv.layer.masksToBounds = YES;
         [self addSubview:_bgImgv];
         
         _title = [[UILabel alloc] init];
         _title.textAlignment = NSTextAlignmentCenter;
-        _title.font = [UIFont systemFontOfSize:SCREEN_WIDTH * 28/750.];
+        _title.font = [UIFont systemFontOfSize:kScreenWidth * 28/750.];
         _title.textColor = [UIColor colorWithHexString:@"#ffffff"];
         [self addSubview:_title];
         
         _isInstallView = [[UIView alloc] init];
         _isInstallView.backgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.7];
-        _isInstallView.layer.cornerRadius = SCREEN_WIDTH * 30/750.;
+        _isInstallView.layer.cornerRadius = kScreenWidth * 30/750.;
         _isInstallView.layer.masksToBounds = YES;
         [self addSubview:_isInstallView];
         
