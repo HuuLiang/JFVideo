@@ -69,7 +69,6 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     [self.layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
     @weakify(self);
     [self.layoutTableView JF_addPullToRefreshWithHandler:^{
         @strongify(self);
@@ -192,8 +191,9 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     btn.imageView.transform = CGAffineTransformMakeScale(30/375.*kScreenWidth, 30/375. *kScreenWidth);
     [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 25/375.*kScreenWidth)];
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 40/375.*kScreenWidth, 0, 0)];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(5, 40/375.*kScreenWidth, 5,5)];
     [_titleCell addSubview:btn];
+    
     
     [btn bk_addEventHandler:^(id sender) {
         if ([btn.titleLabel.text isEqualToString:@"更多"]) {

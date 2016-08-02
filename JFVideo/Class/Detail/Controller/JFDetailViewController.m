@@ -127,13 +127,14 @@ DefineLazyPropertyInitialization(JFDetailModelResponse, response)
 }
 
 - (void)setNaviTitle {
-    _naviLabel = [[UILabel alloc] initWithFrame:CGRectMake(50/375.*kScreenWidth, kScreenHeight * 20 / 1334.,  (kScreenWidth - 100)/375.*kScreenWidth , 24)];
+    _naviLabel = [[UILabel alloc] initWithFrame:CGRectMake(50/375.*kScreenWidth, kScreenHeight * 20 / 1334.,  (kScreenWidth - 100/375.*kScreenWidth) , 24)];
     _naviLabel.text = self.response.program.title;
     _naviLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
-    _naviLabel.textAlignment = NSTextAlignmentCenter;
+    _naviLabel.textAlignment =  NSTextAlignmentCenter;
     _naviLabel.hidden = YES;
     //    self.navigationItem.titleView = _naviLabel;
     [self.navigationController.navigationBar addSubview:_naviLabel];
+ 
     //    self.navigationItem.titleView.frame = CGRectMake(-kScreenWidth * 67 / 750., 0, kScreenWidth, 30);
 }
 
