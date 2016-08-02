@@ -96,6 +96,10 @@ if (block) block(__VA_ARGS__);
 
 #define kPaidNotificationName @"jf_paid_notification"
 
+#define kWidth(width)   kScreenWidth  * width  / 750
+
+#define kHeight(height) kScreenHeight * height / 1334.
+
 
 //#define VIDEO_PAY_AMOUNT    @"VIDEO_PAY_AMOUNT"
 //#define PHOTO_PAY_AMOUNT    @"GALLERY_PAY_AMOUNT"

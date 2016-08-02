@@ -71,8 +71,12 @@
 //}
 //
 
-//double radians(float degree) {
-//    return  degree * M_PI / 180.;
+//double kWidth(float width) {
+//    return  kScreenWidth * width / 750;
+//}
+//
+//double kHeight(float height) {
+//    return kScreenHeight * height / 1334.;
 //}
 
 @end

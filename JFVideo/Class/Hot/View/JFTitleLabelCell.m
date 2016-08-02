@@ -36,7 +36,6 @@
         _titleLabel.layer.borderWidth = 1.0f;
         _titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         [self addSubview:_titleLabel];
-        
     }
     return self;
 }

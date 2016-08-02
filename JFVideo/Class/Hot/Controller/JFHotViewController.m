@@ -188,7 +188,6 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     btn.titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 30 / 750.];
     [btn setTitle:@"更多" forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"hot_more_icon"] forState:UIControlStateNormal];
-    btn.imageView.transform = CGAffineTransformMakeScale(30/375.*kScreenWidth, 30/375. *kScreenWidth);
     [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 25/375.*kScreenWidth)];
     [btn setImageEdgeInsets:UIEdgeInsetsMake(5, 40/375.*kScreenWidth, 5,5)];
@@ -242,6 +241,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     [self setLayoutCell:_titleCell cellHeight:titleCellHeight inRow:0 andSection:0];
 }
 
+
 - (void)initHeaderCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
     _headerCell = [[UITableViewCell alloc] init];
     _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -269,7 +269,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     _label.text = [NSString stringWithFormat:@"共搜索到%ld部\"%@\"的作品",_detailArray.count,column.name];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumLineSpacing = 5/375. *kScreenWidth;
+    layout.minimumLineSpacing = 5;
     layout.minimumInteritemSpacing = layout.minimumLineSpacing;
     _layoutDetailCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _layoutDetailCollectionView.backgroundColor = [UIColor clearColor];
@@ -378,7 +378,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds);
         UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
         const CGFloat width = (fullWidth - 2*layout.minimumInteritemSpacing  - insets.left - insets.right)/3.;
-        const CGFloat height = width * 300 / 227.+30;
+        const CGFloat height = width * 300 / 227.+ kWidth(30);
         return CGSizeMake((long)width , (long)height);
     } else {
         return CGSizeZero;
