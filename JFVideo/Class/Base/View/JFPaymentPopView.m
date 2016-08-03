@@ -8,6 +8,7 @@
 
 #import "JFPaymentPopView.h"
 #import "JFPaymentTypeCell.h"
+#import "JFSystemConfigModel.h"
 
 //static const CGFloat kHeaderImageScale = 620./280.;
 
@@ -107,7 +108,7 @@
             [_headerCell addSubview:closeButton];
             
             UILabel * _priceLabel = [[UILabel alloc] init];
-            _priceLabel.text = @"38";
+            _priceLabel.text = [NSString stringWithFormat:@"%ld",(long)[JFSystemConfigModel sharedModel].payAmount/100];
             _priceLabel.textAlignment = NSTextAlignmentCenter;
             _priceLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
             _priceLabel.font = [UIFont boldSystemFontOfSize:32.];

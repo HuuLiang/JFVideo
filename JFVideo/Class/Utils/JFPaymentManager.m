@@ -112,9 +112,6 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     } else if ([url.absoluteString rangeOfString:KAliPaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
     }
-//    
-//    [[PayUitls getIntents] paytoAli:url];
-//    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JFPaymentInfo *)startPaymentWithType:(JFPaymentType)type
