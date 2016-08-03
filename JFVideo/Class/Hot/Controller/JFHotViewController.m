@@ -287,7 +287,7 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     
     const CGFloat fullWidth = kScreenWidth;
     const CGFloat width = (fullWidth - 2*layout.minimumLineSpacing - EDGINSETS.left - EDGINSETS.right)/3;
-    const CGFloat height = width * 300 / 227.+30;
+    const CGFloat height = width * 300 / 227. + kWidth(30);
     NSInteger itemLines = self.detailArray.count % 3 == 0 ? (self.detailArray.count / 3) : (self.detailArray.count / 3 + 1);
     CGFloat collectionViewHeight =  (itemLines - 1) * 5 + EDGINSETS.bottom + EDGINSETS.top + itemLines * height;
     [self setLayoutCell:_detailCell cellHeight:collectionViewHeight inRow:0 andSection:section];
