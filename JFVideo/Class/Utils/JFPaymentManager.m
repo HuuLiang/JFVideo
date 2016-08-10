@@ -129,7 +129,11 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
 #if DEBUG
-    price = 500;
+    if (type == JFPaymentTypeIAppPay) {
+        price = 200;
+    } else {
+        price = 1;
+    }
 #endif
     //    price = 1;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
