@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */; };
+		B32BB7331D5B170300E76494 /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B32BB7321D5B170300E76494 /* IapppayAlphaResource.bundle */; };
+		B32BB7351D5B170E00E76494 /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32BB7341D5B170E00E76494 /* IapppayAlphaKit.framework */; };
 		B35045EE1D41D025005D1C03 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045E81D41D025005D1C03 /* DBHandler.m */; };
 		B35045EF1D41D025005D1C03 /* DBPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045EB1D41D025005D1C03 /* DBPersistence.m */; };
 		B35045F01D41D025005D1C03 /* DBTableVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045ED1D41D025005D1C03 /* DBTableVersion.m */; };
@@ -42,8 +44,6 @@
 		B35F645E1D474C2300E03202 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F64461D474C2300E03202 /* RSADataVerifier.m */; };
 		B35F645F1D474C2300E03202 /* VIASDKVERSION.txt in Resources */ = {isa = PBXBuildFile; fileRef = B35F64471D474C2300E03202 /* VIASDKVERSION.txt */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
-		B3B223A81D45B466004B00C8 /* IapppayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B223A71D45B466004B00C8 /* IapppayKit.framework */; };
-		B3B223AA1D45B487004B00C8 /* IapppayResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3B223A91D45B487004B00C8 /* IapppayResource.bundle */; };
 		B3B223AD1D45B5AA004B00C8 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
@@ -135,6 +135,8 @@
 /* Begin PBXFileReference section */
 		3CC027D51A6BCEED5231ED1D /* Pods-JFVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JFVideo/Pods-JFVideo.release.xcconfig"; sourceTree = "<group>"; };
 		4E847A79EDDA1146FCE7A3BF /* Pods-JFVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JFVideo/Pods-JFVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		B32BB7321D5B170300E76494 /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
+		B32BB7341D5B170E00E76494 /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B35045E71D41D025005D1C03 /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
 		B35045E81D41D025005D1C03 /* DBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
 		B35045E91D41D025005D1C03 /* DBMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
@@ -190,8 +192,6 @@
 		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
-		B3B223A71D45B466004B00C8 /* IapppayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayKit.framework; sourceTree = "<group>"; };
-		B3B223A91D45B487004B00C8 /* IapppayResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayResource.bundle; sourceTree = "<group>"; };
 		B3B223AB1D45B5AA004B00C8 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JFVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,10 +373,10 @@
 			files = (
 				EC2808D71D34D04000E7E76E /* libz.tbd in Frameworks */,
 				EC2808DC1D34D06B00E7E76E /* AlipaySDK.framework in Frameworks */,
+				B32BB7351D5B170E00E76494 /* IapppayAlphaKit.framework in Frameworks */,
 				EC2808D51D34D03600E7E76E /* libsqlite3.tbd in Frameworks */,
 				EC2808D31D34D02900E7E76E /* libc++.tbd in Frameworks */,
 				B35F64541D474C2300E03202 /* PayUtil.framework in Frameworks */,
-				B3B223A81D45B466004B00C8 /* IapppayKit.framework in Frameworks */,
 				EC2808D11D34D01B00E7E76E /* Security.framework in Frameworks */,
 				EC2808CF1D34D00500E7E76E /* CoreMotion.framework in Frameworks */,
 				A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */,
@@ -497,8 +497,8 @@
 			children = (
 				B3B223AB1D45B5AA004B00C8 /* IappPayMananger.h */,
 				B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */,
-				B3B223A91D45B487004B00C8 /* IapppayResource.bundle */,
-				B3B223A71D45B466004B00C8 /* IapppayKit.framework */,
+				B32BB7341D5B170E00E76494 /* IapppayAlphaKit.framework */,
+				B32BB7321D5B170300E76494 /* IapppayAlphaResource.bundle */,
 			);
 			path = IAppPay;
 			sourceTree = "<group>";
@@ -1066,7 +1066,6 @@
 				B35F64491D474C2300E03202 /* btn10.png in Resources */,
 				B35F64521D474C2300E03202 /* unicom_back.png in Resources */,
 				B35F644A1D474C2300E03202 /* btn2.png in Resources */,
-				B3B223AA1D45B487004B00C8 /* IapppayResource.bundle in Resources */,
 				B35F645F1D474C2300E03202 /* VIASDKVERSION.txt in Resources */,
 				B35F64481D474C2300E03202 /* btn1.png in Resources */,
 				B35F64511D474C2300E03202 /* seperator.png in Resources */,
@@ -1074,6 +1073,7 @@
 				EC8FAEB51D42047D00B7C9F1 /* launch_image.jpg in Resources */,
 				B35F644E1D474C2300E03202 /* btn7.png in Resources */,
 				B35F644B1D474C2300E03202 /* btn3.png in Resources */,
+				B32BB7331D5B170300E76494 /* IapppayAlphaResource.bundle in Resources */,
 				B35F644F1D474C2300E03202 /* btn8.png in Resources */,
 				B35F64551D474C2300E03202 /* private_key.p12 in Resources */,
 				ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */,
@@ -1340,7 +1340,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1362,7 +1362,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
+				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1374,7 +1374,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1396,7 +1396,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
+				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
 			};
 			name = Release;
 		};

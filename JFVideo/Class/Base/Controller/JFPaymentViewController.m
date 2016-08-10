@@ -42,23 +42,23 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     
     JFPaymentType wechatPaymentType = [[JFPaymentManager sharedManager] wechatPaymentType];
     if (wechatPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeVIAPay),@"subType" : @(JFSubPayTypeWeChat)}];
+        [availablePaymentTypes addObject:@{@"type" : @(wechatPaymentType),@"subType" : @(JFSubPayTypeWeChat)}];
     }
     
     JFPaymentType alipayPaymentType = [[JFPaymentManager sharedManager] alipayPaymentType];
     if (alipayPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeVIAPay),@"subType" : @(JFSubPayTypeAlipay)}];
+        [availablePaymentTypes addObject:@{@"type" : @(alipayPaymentType),@"subType" : @(JFSubPayTypeAlipay)}];
     }
     
     JFPaymentType qqPaymentType = [[JFPaymentManager sharedManager] qqPaymentType];
     if (qqPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeVIAPay),@"subType" : @(JFSubPayTypeQQ)}];
+        [availablePaymentTypes addObject:@{@"type" : @(qqPaymentType),@"subType" : @(JFSubPayTypeQQ)}];
         
     }
-    JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
-    if (cardPaymentType != JFPaymentTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeIAppPay),@"subType" : @(JFSubPayTypeNone)}];
-    }
+//    JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
+//    if (cardPaymentType != JFPaymentTypeNone) {
+//        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeIAppPay),@"subType" : @(JFSubPayTypeNone)}];
+//    }
     
     
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];

@@ -42,15 +42,15 @@
         NSString *imageName = @"";
         NSString *text = @"";
         NSString *subTitle = nil;
-        if (paymentType == JFPaymentTypeVIAPay && subType == JFSubPayTypeAlipay) {
+        if ((paymentType == JFPaymentTypeVIAPay || paymentType == JFPaymentTypeIAppPay) && subType == JFSubPayTypeAlipay) {
             imageName = @"alipay_icon";
             text = @"支付宝支付";
         }
-        if(paymentType == JFPaymentTypeVIAPay && subType == JFSubPayTypeWeChat){
+        if((paymentType == JFPaymentTypeVIAPay || paymentType == JFPaymentTypeIAppPay) && subType == JFSubPayTypeWeChat){
             imageName = @"wechat_icon";
             text = @"微信支付";
         }
-        if (paymentType == JFPaymentTypeIAppPay){
+        if (paymentType == JFPaymentTypeIAppPay && subType == JFSubPayTypeNone){
             imageName = @"card_pay_icon";
             text = @"购卡支付";
             subTitle = @"支持支付宝和微信";
