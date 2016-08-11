@@ -60,6 +60,13 @@
 @property (nonatomic) NSString *notifyUrl;
 @end
 
+@interface JFMTDLPayConfig : NSObject
+@property (nonatomic) NSString *appid;
+@property (nonatomic) NSString *notifyUrl;
+@property (nonatomic) NSString *appKey;
+@property (nonatomic) NSNumber *supportPayTypes;
+@end
+
 @interface JFPaymentConfig : JFURLResponse
 
 @property (nonatomic,retain) JFWeChatPaymentConfig *weixinInfo;
@@ -68,6 +75,7 @@
 @property (nonatomic,retain) JFVIAPayConfig *syskPayInfo;
 @property (nonatomic,retain) JFSPayConfig *wftPayInfo;
 @property (nonatomic,retain) JFHTPayConfig *haitunPayInfo;
+@property (nonatomic,retain) JFMTDLPayConfig *mtdlPayInfo;
 
 + (instancetype)sharedConfig;
 - (void)setAsCurrentConfig;

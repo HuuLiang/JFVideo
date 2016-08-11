@@ -182,7 +182,36 @@ static NSString *const kPaymentConfigKeyName = @"jf_payment_config_key_name";
     }];
     return config;
 }
+@end
 
+@implementation JFMTDLPayConfig
++ (instancetype)defaultConfig {
+    JFMTDLPayConfig *config = [[self alloc] init];
+    config.appid = @"0000000064";
+    config.appKey = @"f210c25179cef075e60f3c982018a988";
+    config.notifyUrl = @"xxx";
+    config.supportPayTypes = @(2);
+    return config;
+}
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dicRep = [NSMutableDictionary dictionary];
+    [dicRep safelySetObject:self.appid forKey:@"appid"];
+    [dicRep safelySetObject:self.appKey forKey:@"appKey"];
+    [dicRep safelySetObject:self.notifyUrl forKey:@"notifyUrl"];
+    [dicRep safelySetObject:self.supportPayTypes forKey:@"supportPayTypes"];
+    return dicRep;
+}
+
++ (instancetype)configFormDictionary:(NSDictionary *)dic {
+    JFMTDLPayConfig *config = [[self alloc] init];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj) {
+            [config setValue:obj forKey:key];
+        }
+    }];
+    return config;
+}
 @end
 
 @interface JFPaymentConfigRespCode : NSObject
@@ -248,6 +277,10 @@ static JFPaymentConfig *_shardConfig;
     return [JFHTPayConfig class];
 }
 
+- (Class)mtdlPayInfoClass {
+    return [JFMTDLPayConfig class];
+}
+
 - (void)loadCachedConfig {
     NSDictionary *configDic = [[NSUserDefaults standardUserDefaults] objectForKey:kPaymentConfigKeyName];
     //    NSDictionary *weixinInfo = configDic[@"weixinInfo"];
@@ -278,6 +311,11 @@ static JFPaymentConfig *_shardConfig;
         self.haitunPayInfo = [JFHTPayConfig configFromDictionary:htPayInfo];
     }
     
+    NSDictionary *mtdlPayInfo = configDic[@"mtdlPayInfo"];
+    if (mtdlPayInfo) {
+        self.mtdlPayInfo = [JFMTDLPayConfig configFormDictionary:mtdlPayInfo];
+    }
+    
     if (!self.syskPayInfo && !self.wftPayInfo && !self.iappPayInfo && !self.haitunPayInfo) {
         self.haitunPayInfo = [JFHTPayConfig defaultConfig];
     }
@@ -291,6 +329,7 @@ static JFPaymentConfig *_shardConfig;
     [dicRep safelySetObject:[self.syskPayInfo dictionaryRepresentation] forKey:@"syskPayInfo"];
     [dicRep safelySetObject:[self.wftPayInfo dictionaryRepresentation] forKey:@"wftPayInfo"];
     [dicRep safelySetObject:[self.haitunPayInfo dictionaryRepresentation] forKey:@"haitunPayInfo"];
+    [dicRep safelySetObject:[self.mtdlPayInfo dictionaryRepresentation] forKey:@"mtdlPayInfo"];
     return dicRep;
 }
 
@@ -300,7 +339,7 @@ static JFPaymentConfig *_shardConfig;
     currentConfig.wftPayInfo = self.wftPayInfo;
     currentConfig.iappPayInfo = self.iappPayInfo;
     currentConfig.haitunPayInfo = self.haitunPayInfo;
-    
+    currentConfig.mtdlPayInfo = self.mtdlPayInfo;
     [[NSUserDefaults standardUserDefaults] setObject:[self dictionaryRepresentation] forKey:kPaymentConfigKeyName];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

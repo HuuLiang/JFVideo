@@ -11,6 +11,7 @@
 #import "JFBaseModel.h"
 #import <PayUtil/PayUtil.h>
 #import "IappPayMananger.h"
+#import "QJPayManager.h"
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
     JFVIAPayTypeNone,
@@ -22,6 +23,7 @@ typedef NS_ENUM(NSUInteger, JFVIAPayType) {
 
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
+static NSString *const kQJPaySchemeUrl = @"comjfyingyuanqjpayscheme";
 
 @interface JFPaymentManager () <stringDelegate>
 @property (nonatomic,retain) JFPaymentInfo *paymentInfo;
@@ -97,8 +99,11 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 }
 
 - (JFPaymentType)cardPayPaymentType {
-    if ([JFPaymentConfig sharedConfig].iappPayInfo) {
-        return JFPaymentTypeIAppPay;
+//    if ([JFPaymentConfig sharedConfig].iappPayInfo) {
+//        return JFPaymentTypeIAppPay;
+//    }
+    if ([JFPaymentConfig sharedConfig].mtdlPayInfo) {
+        return JFPaymentTypeQJPay;
     }
     return JFPaymentTypeNone;
 }
@@ -116,6 +121,8 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         [[IappPayMananger sharedMananger] handleOpenURL:url];
     } else if ([url.absoluteString rangeOfString:KAliPaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
+    } else if ([url.absoluteString rangeOfString:kQJPaySchemeUrl].location == 0) {
+        [[QJPayManager sharedMananger] handleOpenURL:url];
     }
 }
 
@@ -170,6 +177,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JF_REST_APPID]
                                       andType:[viaPayTypeMapping[@(subType)] stringValue]
                              andViewControler:[JFUtil currentVisibleViewController]];
+
     }else if (type == JFPaymentTypeIAppPay ){
         
         @weakify(self);
@@ -188,8 +196,14 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
+
         
-        
+    } else if (type == JFPaymentTypeQJPay) {
+        [[QJPayManager sharedMananger] payWithPaymentInfo:paymentInfo CompletionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
+            if (self.completionHandler) {
+                self.completionHandler(payResult,self.paymentInfo);
+            }
+        }];
     } else {
         success = NO;
         

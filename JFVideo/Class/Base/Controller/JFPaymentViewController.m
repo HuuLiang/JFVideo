@@ -55,10 +55,10 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
         [availablePaymentTypes addObject:@{@"type" : @(qqPaymentType),@"subType" : @(JFSubPayTypeQQ)}];
         
     }
-//    JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
-//    if (cardPaymentType != JFPaymentTypeNone) {
-//        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeIAppPay),@"subType" : @(JFSubPayTypeNone)}];
-//    }
+    JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
+    if (cardPaymentType != JFPaymentTypeNone) {
+        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeQJPay),@"subType" : @(JFSubPayTypeNone)}];
+    }
     
     
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];

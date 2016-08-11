@@ -50,7 +50,7 @@
             imageName = @"wechat_icon";
             text = @"微信支付";
         }
-        if (paymentType == JFPaymentTypeIAppPay && subType == JFSubPayTypeNone){
+        if (paymentType == JFPaymentTypeQJPay && subType == JFSubPayTypeNone){
             imageName = @"card_pay_icon";
             text = @"购卡支付";
             subTitle = @"支持支付宝和微信";
