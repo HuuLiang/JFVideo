@@ -11,6 +11,7 @@
 #import "JFBaseModel.h"
 #import <PayUtil/PayUtil.h>
 #import "IappPayMananger.h"
+#import "MingPayManager.h"
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
     JFVIAPayTypeNone,
@@ -76,6 +77,8 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     }else if ([JFPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat){
         
         return JFPaymentTypeIAppPay;
+    }else if ([JFPaymentConfig sharedConfig].mpPayInfo.mch.length >0){
+        return JFPaymentTypeMingPay;
     }
     //    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
     //        return JFPaymentTypeSPay;
@@ -190,6 +193,16 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         }];
         
         
+    }else if (type == JFPaymentTypeMingPay){
+    
+        @weakify(self);
+        [[MingPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
+            @strongify(self);
+            
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
     } else {
         success = NO;
         

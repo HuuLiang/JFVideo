@@ -45,6 +45,12 @@
 		B35F645F1D474C2300E03202 /* VIASDKVERSION.txt in Resources */ = {isa = PBXBuildFile; fileRef = B35F64471D474C2300E03202 /* VIASDKVERSION.txt */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
 		B3B223AD1D45B5AA004B00C8 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */; };
+		B3E5C74B1D646BF200283DA9 /* MingPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C74A1D646BF200283DA9 /* MingPayManager.m */; };
+		B3E5C7571D646C3900283DA9 /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C74E1D646C3900283DA9 /* ApiXml.mm */; };
+		B3E5C7581D646C3900283DA9 /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C7501D646C3900283DA9 /* payRequsestHandler.mm */; };
+		B3E5C7591D646C3900283DA9 /* WeChatPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C7521D646C3900283DA9 /* WeChatPayManager.m */; };
+		B3E5C75A1D646C3900283DA9 /* WeChatPayQueryOrderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C7541D646C3900283DA9 /* WeChatPayQueryOrderRequest.m */; };
+		B3E5C75B1D646C3900283DA9 /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C7561D646C3900283DA9 /* WXUtil.mm */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
@@ -194,6 +200,18 @@
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		B3B223AB1D45B5AA004B00C8 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
+		B3E5C7491D646BF200283DA9 /* MingPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MingPayManager.h; sourceTree = "<group>"; };
+		B3E5C74A1D646BF200283DA9 /* MingPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MingPayManager.m; sourceTree = "<group>"; };
+		B3E5C74D1D646C3900283DA9 /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
+		B3E5C74E1D646C3900283DA9 /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
+		B3E5C74F1D646C3900283DA9 /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
+		B3E5C7501D646C3900283DA9 /* payRequsestHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payRequsestHandler.mm; sourceTree = "<group>"; };
+		B3E5C7511D646C3900283DA9 /* WeChatPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayManager.h; sourceTree = "<group>"; };
+		B3E5C7521D646C3900283DA9 /* WeChatPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayManager.m; sourceTree = "<group>"; };
+		B3E5C7531D646C3900283DA9 /* WeChatPayQueryOrderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayQueryOrderRequest.h; sourceTree = "<group>"; };
+		B3E5C7541D646C3900283DA9 /* WeChatPayQueryOrderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayQueryOrderRequest.m; sourceTree = "<group>"; };
+		B3E5C7551D646C3900283DA9 /* WXUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXUtil.h; sourceTree = "<group>"; };
+		B3E5C7561D646C3900283DA9 /* WXUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXUtil.mm; sourceTree = "<group>"; };
 		CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JFVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC08496E1D1E568A00623AEF /* JFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCommentCell.h; sourceTree = "<group>"; };
 		EC08496F1D1E568A00623AEF /* JFCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCommentCell.m; sourceTree = "<group>"; };
@@ -501,6 +519,32 @@
 				B32BB7321D5B170300E76494 /* IapppayAlphaResource.bundle */,
 			);
 			path = IAppPay;
+			sourceTree = "<group>";
+		};
+		B3E5C7481D646BF200283DA9 /* MingPay */ = {
+			isa = PBXGroup;
+			children = (
+				B3E5C7491D646BF200283DA9 /* MingPayManager.h */,
+				B3E5C74A1D646BF200283DA9 /* MingPayManager.m */,
+			);
+			path = MingPay;
+			sourceTree = "<group>";
+		};
+		B3E5C74C1D646C3900283DA9 /* WeChatPay */ = {
+			isa = PBXGroup;
+			children = (
+				B3E5C74D1D646C3900283DA9 /* ApiXml.h */,
+				B3E5C74E1D646C3900283DA9 /* ApiXml.mm */,
+				B3E5C74F1D646C3900283DA9 /* payRequsestHandler.h */,
+				B3E5C7501D646C3900283DA9 /* payRequsestHandler.mm */,
+				B3E5C7511D646C3900283DA9 /* WeChatPayManager.h */,
+				B3E5C7521D646C3900283DA9 /* WeChatPayManager.m */,
+				B3E5C7531D646C3900283DA9 /* WeChatPayQueryOrderRequest.h */,
+				B3E5C7541D646C3900283DA9 /* WeChatPayQueryOrderRequest.m */,
+				B3E5C7551D646C3900283DA9 /* WXUtil.h */,
+				B3E5C7561D646C3900283DA9 /* WXUtil.mm */,
+			);
+			path = WeChatPay;
 			sourceTree = "<group>";
 		};
 		CD200FA47615E27A2F6C7793 /* Frameworks */ = {
@@ -871,6 +915,8 @@
 		ECAEA8831D17C18600926044 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B3E5C74C1D646C3900283DA9 /* WeChatPay */,
+				B3E5C7481D646BF200283DA9 /* MingPay */,
 				B35045E61D41D025005D1C03 /* DataBase */,
 				ECAEA8861D17C18600926044 /* Extensions */,
 				ECAEA8B51D17C18600926044 /* rac_extobjc */,
@@ -1164,6 +1210,7 @@
 				EC2E727C1D1BB232009950CB /* JFDetailModel.m in Sources */,
 				EC6250761D30FE5E00054005 /* JFPaymentManager.m in Sources */,
 				B35046031D41E25A005D1C03 /* JFStatsManager.m in Sources */,
+				B3E5C74B1D646BF200283DA9 /* MingPayManager.m in Sources */,
 				EC6250671D30D01E00054005 /* UIImage+color.m in Sources */,
 				B35045EF1D41D025005D1C03 /* DBPersistence.m in Sources */,
 				B35F64571D474C2300E03202 /* base64.m in Sources */,
@@ -1179,6 +1226,7 @@
 				ECAEA97D1D17DEA800926044 /* JFPaymentConfigModel.m in Sources */,
 				ECF99B8E1D2D086F003CBCA8 /* JFHomeProgramModel.m in Sources */,
 				B35F645B1D474C2300E03202 /* NSDataEx.m in Sources */,
+				B3E5C75B1D646C3900283DA9 /* WXUtil.mm in Sources */,
 				EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */,
 				ECAEA91F1D17C18600926044 /* CRKHudManager.m in Sources */,
 				ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */,
@@ -1187,6 +1235,7 @@
 				ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */,
 				EC866DD71D45A9DC00843C5F /* iCarousel.m in Sources */,
 				EC62506D1D30DEC400054005 /* JFPaymentConfig.m in Sources */,
+				B3E5C7581D646C3900283DA9 /* payRequsestHandler.mm in Sources */,
 				B35045FA1D41D088005D1C03 /* JFCPCStatsModel.m in Sources */,
 				ECAEA9861D17ED3300926044 /* JFLayoutViewController.m in Sources */,
 				EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */,
@@ -1194,6 +1243,7 @@
 				ECAEA9801D17E21200926044 /* JFPaymentModel.m in Sources */,
 				ECF99B9A1D2D1F36003CBCA8 /* JFChannelProgramModel.m in Sources */,
 				B35F645E1D474C2300E03202 /* RSADataVerifier.m in Sources */,
+				B3E5C7591D646C3900283DA9 /* WeChatPayManager.m in Sources */,
 				ECF99B9D1D2D26A6003CBCA8 /* JFChannelProgramCell.m in Sources */,
 				ECAEA9701D17D06100926044 /* JFActivateModel.m in Sources */,
 				ECAEA9221D17C18600926044 /* NSMutableDictionary+Safety.m in Sources */,
@@ -1221,10 +1271,12 @@
 				ECAEA95D1D17CBAA00926044 /* JFErrorHandler.m in Sources */,
 				B3B223AD1D45B5AA004B00C8 /* IappPayMananger.m in Sources */,
 				B35045FC1D41D088005D1C03 /* JFStatsBaseModel.m in Sources */,
+				B3E5C7571D646C3900283DA9 /* ApiXml.mm in Sources */,
 				B35045FB1D41D088005D1C03 /* JFPayStatsModel.m in Sources */,
 				EC2973C71D1CD2E7009C48E7 /* JFHomeHotCell.m in Sources */,
 				B35046001D41E213005D1C03 /* JFNetworkInfo.m in Sources */,
 				EC2E72761D1BB05A009950CB /* JFChannelListViewController.m in Sources */,
+				B3E5C75A1D646C3900283DA9 /* WeChatPayQueryOrderRequest.m in Sources */,
 				EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */,
 				ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */,
 				ECAEA9731D17D12E00926044 /* JFUserAccessModel.m in Sources */,

@@ -30,6 +30,9 @@ typedef NS_ENUM(NSUInteger, JFPaymentStatus) {
 @property (nonatomic) NSNumber *paymentStatus;
 @property (nonatomic) NSString *reservedData;
 
+@property (nonatomic) NSString *orderDescription;
+
+
 @property (nonatomic) NSNumber *contentLocation;
 @property (nonatomic) NSNumber *columnId;
 @property (nonatomic) NSNumber *columnType;

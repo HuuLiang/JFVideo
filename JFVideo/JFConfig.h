@@ -12,7 +12,7 @@
 #define JF_CHANNEL_NO               @"QUBA_IOS_TUIGUANG9_0000001" //@"QB_MFW_IOS_TEST_0000001" //
 #define JF_REST_APPID               @"QUBA_2023"
 #define JF_REST_PV                  @"100"
-#define JF_PAYMENT_PV               @"101"
+#define JF_PAYMENT_PV               @"104"
 #define JF_PACKAGE_CERTIFICATE      @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., JFd."
 
 #define JF_REST_APP_VERSION     ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]))

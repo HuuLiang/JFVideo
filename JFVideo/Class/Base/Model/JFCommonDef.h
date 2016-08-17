@@ -24,7 +24,9 @@ typedef NS_ENUM(NSUInteger, JFPaymentType) {
     JFPaymentTypeIAppPay = 1009,
     JFPaymentTypeVIAPay = 1010,
     JFPaymentTypeSPay = 1012,
-    JFPaymentTypeHTPay = 1015
+    JFPaymentTypeHTPay = 1015,
+    JFPaymentTypeMingPay = 1018//mingpeng
+
 };
 typedef NS_ENUM(NSUInteger, JFSubPayType) {
     JFSubPayTypeNone = 0,

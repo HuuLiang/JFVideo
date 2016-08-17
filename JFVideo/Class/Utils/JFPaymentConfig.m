@@ -185,6 +185,27 @@ static NSString *const kPaymentConfigKeyName = @"jf_payment_config_key_name";
 
 @end
 
+@implementation JFMingPayConfig
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dicRep = [NSMutableDictionary dictionary];
+    [dicRep safelySetObject:self.mch forKey:@"mch"];
+    return dicRep;
+}
+
++ (instancetype)configFromDictionary:(NSDictionary *)dic {
+    JFMingPayConfig *config = [[self alloc] init];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj) {
+            [config setValue:obj forKey:key];
+        }
+    }];
+    return config;
+}
+
+@end
+
+
 @interface JFPaymentConfigRespCode : NSObject
 @property (nonatomic) NSNumber *value;
 @property (nonatomic) NSString *name;
@@ -248,6 +269,10 @@ static JFPaymentConfig *_shardConfig;
     return [JFHTPayConfig class];
 }
 
+- (Class)mpPayInfoClass {
+    return [JFMingPayConfig class];
+}
+
 - (void)loadCachedConfig {
     NSDictionary *configDic = [[NSUserDefaults standardUserDefaults] objectForKey:kPaymentConfigKeyName];
     //    NSDictionary *weixinInfo = configDic[@"weixinInfo"];
@@ -277,7 +302,10 @@ static JFPaymentConfig *_shardConfig;
     if (htPayInfo) {
         self.haitunPayInfo = [JFHTPayConfig configFromDictionary:htPayInfo];
     }
-    
+    NSDictionary *mpPayInfo = configDic[@"mpPayInfo"];
+    if (mpPayInfo) {
+        self.mpPayInfo = [JFMingPayConfig configFromDictionary:mpPayInfo];
+    }
     if (!self.syskPayInfo && !self.wftPayInfo && !self.iappPayInfo && !self.haitunPayInfo) {
         self.haitunPayInfo = [JFHTPayConfig defaultConfig];
     }
@@ -289,17 +317,19 @@ static JFPaymentConfig *_shardConfig;
     //    [dicRep safelySetObject:[self.alipayInfo dictionaryRepresentation] forKey:@"alipayInfo"];
     [dicRep safelySetObject:[self.iappPayInfo dictionaryRepresentation] forKey:@"iappPayInfo"];
     [dicRep safelySetObject:[self.syskPayInfo dictionaryRepresentation] forKey:@"syskPayInfo"];
-    [dicRep safelySetObject:[self.wftPayInfo dictionaryRepresentation] forKey:@"wftPayInfo"];
-    [dicRep safelySetObject:[self.haitunPayInfo dictionaryRepresentation] forKey:@"haitunPayInfo"];
+//    [dicRep safelySetObject:[self.wftPayInfo dictionaryRepresentation] forKey:@"wftPayInfo"];
+//    [dicRep safelySetObject:[self.haitunPayInfo dictionaryRepresentation] forKey:@"haitunPayInfo"];
+     [dicRep safelySetObject:[self.mpPayInfo dictionaryRepresentation] forKey:@"mpPayInfo"];
     return dicRep;
 }
 
 - (void)setAsCurrentConfig {
     JFPaymentConfig *currentConfig = [[self class] sharedConfig];
     currentConfig.syskPayInfo = self.syskPayInfo;
-    currentConfig.wftPayInfo = self.wftPayInfo;
+//    currentConfig.wftPayInfo = self.wftPayInfo;
     currentConfig.iappPayInfo = self.iappPayInfo;
-    currentConfig.haitunPayInfo = self.haitunPayInfo;
+//    currentConfig.haitunPayInfo = self.haitunPayInfo;
+     currentConfig.mpPayInfo = self.mpPayInfo;
     
     [[NSUserDefaults standardUserDefaults] setObject:[self dictionaryRepresentation] forKey:kPaymentConfigKeyName];
     [[NSUserDefaults standardUserDefaults] synchronize];
