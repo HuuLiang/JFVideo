@@ -12,6 +12,7 @@
 #import <PayUtil/PayUtil.h>
 #import "IappPayMananger.h"
 #import "MingPayManager.h"
+#import "JFSystemConfigModel.h"
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
     JFVIAPayTypeNone,
@@ -46,6 +47,8 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
+              [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].mpPayInfo.mch;
+        
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     
@@ -138,7 +141,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         price = 1;
     }
 #endif
-    //    price = 1;
+//        price = 1;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -153,6 +156,13 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
     paymentInfo.paymentStatus = @(JFPaymentStatusPaying);
     paymentInfo.reservedData = [JFUtil paymentReservedData];
+    
+    //    NSString *servicePhone = [JFSystemConfigModel sharedModel].contact;
+    if (type == JFPaymentTypeMingPay) {
+        paymentInfo.orderDescription =  @"VIP";
+        paymentInfo.orderId = [[MingPayManager sharedManager] processOrderNo:orderNo];
+    }
+        
     [paymentInfo save];
     
     self.completionHandler = handler;
@@ -194,7 +204,6 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         
         
     }else if (type == JFPaymentTypeMingPay){
-    
         @weakify(self);
         [[MingPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
             @strongify(self);
