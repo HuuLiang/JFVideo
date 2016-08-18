@@ -13,6 +13,7 @@
 #import "IappPayMananger.h"
 #import "MingPayManager.h"
 #import "JFSystemConfigModel.h"
+#import "HTPaymentManager.h"
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
     JFVIAPayTypeNone,
@@ -48,7 +49,8 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
         [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].mpPayInfo.mch;
-        
+        JFPaymentConfig *config = (JFPaymentConfig *)obj;
+        [[HTPaymentManager sharedManager] registHaiTunPayWithSignVal:config.haitunPayInfo.key mreId:config.haitunPayInfo.mchId];
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     
@@ -75,6 +77,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 }
 
 - (JFPaymentType)wechatPaymentType {
+//    return JFPaymentTypeHTPay;
     if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat) {
         return JFPaymentTypeVIAPay;
     }else if ([JFPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat){
@@ -82,14 +85,14 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         return JFPaymentTypeIAppPay;
     }else if ([JFPaymentConfig sharedConfig].mpPayInfo.mch.length >0){
         return JFPaymentTypeMingPay;
+    }else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
+        return JFPaymentTypeHTPay;
     }
     //    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
     //        return JFPaymentTypeSPay;
     //    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
     //        return JFPaymentTypeIAppPay;
-    //    } else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
-    //        return JFPaymentTypeHTPay;
-    //    }
+//        } 
     return JFPaymentTypeNone;
 }
 
@@ -138,7 +141,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     if (type == JFPaymentTypeIAppPay) {
         price = 200;
     } else {
-        price = 1;
+        price = 100;
     }
 #endif
 //            price = 200;
@@ -210,6 +213,20 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
             
             if (self.completionHandler) {
                 self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
+    }else if (type == JFPaymentTypeHTPay){
+        @weakify(self);
+      HTPaymentManager *htPayManager =  [HTPaymentManager sharedManager];
+        JFPaymentConfig *paymentConfig = [JFPaymentConfig sharedConfig];
+        htPayManager.signVal = paymentConfig.haitunPayInfo.key;
+        htPayManager.notifUrl = paymentConfig.haitunPayInfo.notifyUrl;
+        htPayManager.merId = paymentConfig.haitunPayInfo.mchId;
+        htPayManager.currentVC = [JFUtil currentVisibleViewController];
+        [htPayManager payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
+            @strongify(self);
+            if (self.completionHandler) {
+                self.completionHandler (payResult,self.paymentInfo);
             }
         }];
     } else {

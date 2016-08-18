@@ -42,6 +42,8 @@
 		B35F645E1D474C2300E03202 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F64461D474C2300E03202 /* RSADataVerifier.m */; };
 		B35F645F1D474C2300E03202 /* VIASDKVERSION.txt in Resources */ = {isa = PBXBuildFile; fileRef = B35F64471D474C2300E03202 /* VIASDKVERSION.txt */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
+		B3A4D4DB1D65A39700F61B57 /* libHaiTunPay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A4D4DA1D65A39700F61B57 /* libHaiTunPay.a */; };
+		B3A4D4EF1D65A98200F61B57 /* HTPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A4D4EE1D65A98200F61B57 /* HTPaymentManager.m */; };
 		B3B223AD1D45B5AA004B00C8 /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */; };
 		B3E114B81D6552D2001C43AD /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3E114B71D6552D2001C43AD /* IapppayAlphaResource.bundle */; };
 		B3E114BA1D6552DA001C43AD /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3E114B91D6552DA001C43AD /* IapppayAlphaKit.framework */; };
@@ -196,6 +198,10 @@
 		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		B3A4D4DA1D65A39700F61B57 /* libHaiTunPay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHaiTunPay.a; path = ../libHaiTunPay.a; sourceTree = "<group>"; };
+		B3A4D4DD1D65A3A200F61B57 /* HaiTunPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaiTunPay.h; sourceTree = "<group>"; };
+		B3A4D4ED1D65A98200F61B57 /* HTPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTPaymentManager.h; sourceTree = "<group>"; };
+		B3A4D4EE1D65A98200F61B57 /* HTPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTPaymentManager.m; sourceTree = "<group>"; };
 		B3B223AB1D45B5AA004B00C8 /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B3B223AC1D45B5AA004B00C8 /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		B3E114B71D6552D2001C43AD /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
@@ -400,6 +406,7 @@
 				A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */,
 				EC2808CD1D34CFAC00E7E76E /* libWeChatSDK.a in Frameworks */,
 				B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */,
+				B3A4D4DB1D65A39700F61B57 /* libHaiTunPay.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +517,32 @@
 			path = Umeng;
 			sourceTree = "<group>";
 		};
+		B3A4D4D91D65A38900F61B57 /* HTPay */ = {
+			isa = PBXGroup;
+			children = (
+				B3A4D4DC1D65A3A200F61B57 /* HaiTunPay */,
+			);
+			path = HTPay;
+			sourceTree = "<group>";
+		};
+		B3A4D4DC1D65A3A200F61B57 /* HaiTunPay */ = {
+			isa = PBXGroup;
+			children = (
+				B3A4D4DA1D65A39700F61B57 /* libHaiTunPay.a */,
+				B3A4D4DD1D65A3A200F61B57 /* HaiTunPay.h */,
+			);
+			path = HaiTunPay;
+			sourceTree = "<group>";
+		};
+		B3A4D4DE1D65A52600F61B57 /* HaiTunPay */ = {
+			isa = PBXGroup;
+			children = (
+				B3A4D4ED1D65A98200F61B57 /* HTPaymentManager.h */,
+				B3A4D4EE1D65A98200F61B57 /* HTPaymentManager.m */,
+			);
+			path = HaiTunPay;
+			sourceTree = "<group>";
+		};
 		B3B223A41D45B43F004B00C8 /* IAppPay */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,6 +631,7 @@
 		EC2808AA1D34C64900E7E76E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				B3A4D4D91D65A38900F61B57 /* HTPay */,
 				B35F64241D474C2300E03202 /* VIAPay */,
 				B3B223A41D45B43F004B00C8 /* IAppPay */,
 				EC866DD41D45A9DC00843C5F /* iCarousel */,
@@ -915,6 +949,7 @@
 		ECAEA8831D17C18600926044 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B3A4D4DE1D65A52600F61B57 /* HaiTunPay */,
 				B3E5C74C1D646C3900283DA9 /* WeChatPay */,
 				B3E5C7481D646BF200283DA9 /* MingPay */,
 				B35045E61D41D025005D1C03 /* DataBase */,
@@ -1283,6 +1318,7 @@
 				EC6250641D30CF3D00054005 /* JFPaymentTypeCell.m in Sources */,
 				ECAEA92B1D17C18600926044 /* UITableView+Separator.m in Sources */,
 				B35F645C1D474C2300E03202 /* openssl_wrapper.m in Sources */,
+				B3A4D4EF1D65A98200F61B57 /* HTPaymentManager.m in Sources */,
 				B35045FD1D41D088005D1C03 /* JFTabStatsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1411,10 +1447,11 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/VIAPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/WeChatSDK",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/Umeng",
+					"$(PROJECT_DIR)/JFVideo/Class/Vendor/HTPay",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6daaad26-e411-4551-8c67-e76b4ea64707";
+				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1445,10 +1482,11 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/VIAPay",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/WeChatSDK",
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/Umeng",
+					"$(PROJECT_DIR)/JFVideo/Class/Vendor/HTPay",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6daaad26-e411-4551-8c67-e76b4ea64707";
+				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
 			};
 			name = Release;
 		};

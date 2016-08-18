@@ -31,7 +31,7 @@ static NSString *const kPaymentInfoPaymentColumIdKey = @"jfkuaibov_paymentinfo_p
 static NSString *const kPaymentInfoPaymentColumTypeKey = @"jfkuaibov_paymentinfo_paymentcoluntypekey_keyname";
 static NSString *const kPaymentInfoPaymentContentLocationKey = @"jfkuaibov_paymentinfo_paymentcontentlocationkey_keyname";
 static NSString *const kPaymentInfoOrderDescriptionKeyName = @"jfkuaibov_paymentinfo_orderdescription_keyname";
-
+//static NSString *const kPaymentInfoPayResultKeyName = @"jfkuaibov_paymentinfo_payresult_keyname";
 
 @implementation JFPaymentInfo
 
@@ -65,6 +65,7 @@ static NSString *const kPaymentInfoOrderDescriptionKeyName = @"jfkuaibov_payment
     paymentInfo.columnId = payment[kPaymentInfoPaymentColumIdKey];
     paymentInfo.columnType = payment[kPaymentInfoPaymentColumTypeKey];
     paymentInfo.contentLocation = payment[kPaymentInfoPaymentContentLocationKey];
+//    paymentInfo.payResultUrl = payment[kPaymentInfoPaymentResultKeyName];
     return paymentInfo;
 }
 
@@ -90,6 +91,8 @@ static NSString *const kPaymentInfoOrderDescriptionKeyName = @"jfkuaibov_payment
     [payment safelySetObject:self.columnId forKey:kPaymentInfoPaymentColumIdKey];
     [payment safelySetObject:self.columnType forKey:kPaymentInfoPaymentColumTypeKey];
     [payment safelySetObject:self.contentLocation forKey:kPaymentInfoPaymentContentLocationKey];
+    
+//    [payment safelySetObject:self.payResultUrl forKey:kPaymentInfoPaymentResultKeyName];
     return payment;
 }
 

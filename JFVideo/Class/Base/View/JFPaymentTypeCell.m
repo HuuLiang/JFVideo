@@ -46,7 +46,7 @@
             imageName = @"alipay_icon";
             text = @"支付宝支付";
         }
-        if((paymentType == JFPaymentTypeVIAPay || paymentType == JFPaymentTypeIAppPay || paymentType == JFPaymentTypeMingPay) && subType == JFSubPayTypeWeChat){
+        if((paymentType == JFPaymentTypeVIAPay || paymentType == JFPaymentTypeIAppPay || paymentType == JFPaymentTypeMingPay ||paymentType == JFPaymentTypeHTPay) && subType == JFSubPayTypeWeChat){
             imageName = @"wechat_icon";
             text = @"微信支付";
         }

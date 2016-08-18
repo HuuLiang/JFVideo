@@ -161,7 +161,7 @@ static NSString *const kPaymentConfigKeyName = @"jf_payment_config_key_name";
     JFHTPayConfig *config = [[self alloc] init];
     config.mchId = @"10605";
     config.key = @"e7c549c833cb9108e6524d075942119d";
-    config.notifyUrl = @"http://phas.ihuiyx.com/pd-has/notifyHtPay.json";
+    config.notifyUrl = @"http://www.xxxxxx.com";//@"http://phas.ihuiyx.com/pd-has/notifyHtPay.json";
     return config;
 }
 
@@ -318,7 +318,7 @@ static JFPaymentConfig *_shardConfig;
     [dicRep safelySetObject:[self.iappPayInfo dictionaryRepresentation] forKey:@"iappPayInfo"];
     [dicRep safelySetObject:[self.syskPayInfo dictionaryRepresentation] forKey:@"syskPayInfo"];
 //    [dicRep safelySetObject:[self.wftPayInfo dictionaryRepresentation] forKey:@"wftPayInfo"];
-//    [dicRep safelySetObject:[self.haitunPayInfo dictionaryRepresentation] forKey:@"haitunPayInfo"];
+    [dicRep safelySetObject:[self.haitunPayInfo dictionaryRepresentation] forKey:@"haitunPayInfo"];
      [dicRep safelySetObject:[self.mpPayInfo dictionaryRepresentation] forKey:@"mpPayInfo"];
     return dicRep;
 }
@@ -328,7 +328,7 @@ static JFPaymentConfig *_shardConfig;
     currentConfig.syskPayInfo = self.syskPayInfo;
 //    currentConfig.wftPayInfo = self.wftPayInfo;
     currentConfig.iappPayInfo = self.iappPayInfo;
-//    currentConfig.haitunPayInfo = self.haitunPayInfo;
+    currentConfig.haitunPayInfo = self.haitunPayInfo ? self.haitunPayInfo : [JFHTPayConfig defaultConfig];
      currentConfig.mpPayInfo = self.mpPayInfo;
     
     [[NSUserDefaults standardUserDefaults] setObject:[self dictionaryRepresentation] forKey:kPaymentConfigKeyName];

@@ -58,6 +58,11 @@
 @property (nonatomic) NSString *key;
 @property (nonatomic) NSString *mchId;
 @property (nonatomic) NSString *notifyUrl;
+
+//@property (nonatomic) NSString *signVal;
+//@property (nonatomic) NSString *merId;
+//@property (nonatomic) NSString *selectUrl;
+
 @end
 
 @interface JFMingPayConfig : NSObject

@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSNumber *success;
 @property (nonatomic) NSString *resultCode;
+//@property (nonatomic) NSUI
 
 - (void)parseResponseWithDictionary:(NSDictionary *)dic;
 
