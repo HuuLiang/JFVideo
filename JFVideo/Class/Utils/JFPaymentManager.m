@@ -47,7 +47,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
-              [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].mpPayInfo.mch;
+        [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].mpPayInfo.mch;
         
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
@@ -141,7 +141,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         price = 1;
     }
 #endif
-//        price = 1;
+//            price = 200;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -162,7 +162,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         paymentInfo.orderDescription =  @"VIP";
         paymentInfo.orderId = [[MingPayManager sharedManager] processOrderNo:orderNo];
     }
-        
+    
     [paymentInfo save];
     
     self.completionHandler = handler;
@@ -183,7 +183,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JF_REST_APPID]
                                       andType:[viaPayTypeMapping[@(subType)] stringValue]
                              andViewControler:[JFUtil currentVisibleViewController]];
-    }else if (type == JFPaymentTypeIAppPay ){
+    }else if (type == JFPaymentTypeIAppPay && (subType == JFSubPayTypeWeChat || subType == JFSubPayTypeAlipay)){
         
         @weakify(self);
         IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
