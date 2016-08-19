@@ -1451,7 +1451,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
+				PROVISIONING_PROFILE = "6daaad26-e411-4551-8c67-e76b4ea64707";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1486,7 +1486,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
+				PROVISIONING_PROFILE = "6daaad26-e411-4551-8c67-e76b4ea64707";
 			};
 			name = Release;
 		};

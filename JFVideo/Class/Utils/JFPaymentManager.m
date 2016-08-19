@@ -77,7 +77,6 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 }
 
 - (JFPaymentType)wechatPaymentType {
-//    return JFPaymentTypeHTPay;
     if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat) {
         return JFPaymentTypeVIAPay;
     }else if ([JFPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat){
@@ -85,14 +84,14 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         return JFPaymentTypeIAppPay;
     }else if ([JFPaymentConfig sharedConfig].mpPayInfo.mch.length >0){
         return JFPaymentTypeMingPay;
-    }else if ([JFPaymentConfig sharedConfig].haitunPayInfo) {
+    }else if ([JFPaymentConfig sharedConfig].haitunPayInfo.mchId.length >0) {
         return JFPaymentTypeHTPay;
     }
     //    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
     //        return JFPaymentTypeSPay;
     //    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
     //        return JFPaymentTypeIAppPay;
-//        } 
+    //        } 
     return JFPaymentTypeNone;
 }
 
@@ -144,7 +143,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         price = 100;
     }
 #endif
-//            price = 200;
+//                price = 200;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -217,7 +216,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         }];
     }else if (type == JFPaymentTypeHTPay){
         @weakify(self);
-      HTPaymentManager *htPayManager =  [HTPaymentManager sharedManager];
+        HTPaymentManager *htPayManager =  [HTPaymentManager sharedManager];
         JFPaymentConfig *paymentConfig = [JFPaymentConfig sharedConfig];
         htPayManager.signVal = paymentConfig.haitunPayInfo.key;
         htPayManager.notifUrl = paymentConfig.haitunPayInfo.notifyUrl;
