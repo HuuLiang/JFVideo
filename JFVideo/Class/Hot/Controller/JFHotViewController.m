@@ -241,7 +241,6 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     [self setLayoutCell:_titleCell cellHeight:titleCellHeight inRow:0 andSection:0];
 }
 
-
 - (void)initHeaderCell:(NSUInteger)section column:(JFChannelColumnModel *)column {
     _headerCell = [[UITableViewCell alloc] init];
     _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;

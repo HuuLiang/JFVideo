@@ -25,16 +25,16 @@ static NSString *const kHomeHotCellReusableIdentifier = @"HomeHotCellReusableIde
 static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdentifier";
 static NSString *const kHomeSectionHeaderReusableIdentifier = @"HomeSectionHeaderReusableIdentifier";
 
-@interface JFHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,iCarouselDelegate,iCarouselDataSource>
+@interface JFHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,SDCycleScrollViewDelegate>
 {
     UICollectionView *_layoutCollectionView;
     UICollectionViewCell *_bannerCell;
     
-//    SDCycleScrollView *_bannerView;
-    iCarousel *_bannerView;
+    SDCycleScrollView *_bannerView;
+//    iCarousel *_bannerView;
     
-    NSTimer *_timer;
-    NSInteger _index;
+//    NSTimer *_timer;
+//    NSInteger _index;
     BOOL _userTouch;
     
     NSInteger _page;
@@ -58,22 +58,27 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#303030"];
     
-//    _bannerView = [[SDCycleScrollView alloc] init];
-//    _bannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
-//    _bannerView.autoScrollTimeInterval = 3;
-//    _bannerView.titleLabelBackgroundColor = [UIColor clearColor];
-//    _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-//    _bannerView.delegate = self;
-//    _bannerView.backgroundColor = [UIColor clearColor];
-    
-    _bannerView = [[iCarousel alloc] init];
+    _bannerView = [[SDCycleScrollView alloc] init];
+    _bannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+    _bannerView.autoScrollTimeInterval = 3;
+    _bannerView.titleLabelBackgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.3];
+    _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _bannerView.delegate = self;
-    _bannerView.dataSource = self;
-    _bannerView.scrollSpeed = 0.8;
-    _bannerView.type = iCarouselTypeRotary;
+    _bannerView.backgroundColor = [UIColor clearColor];
+    _bannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+//    _bannerView.pageDotImage = [UIImage imageNamed:@"home_current_page"];
+//    _bannerView.currentPageDotImage = [UIImage imageNamed:@"home_other_page"];
+//    _bannerView.currentPageDotColor = [UIColor colorWithHexString:@"#ffffff"];
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeIcarouselIndex) userInfo:nil repeats:YES];
-    [_timer setFireDate:[NSDate distantFuture]];
+    
+//    _bannerView = [[iCarousel alloc] init];
+//    _bannerView.delegate = self;
+//    _bannerView.dataSource = self;
+//    _bannerView.scrollSpeed = 0.8;
+//    _bannerView.type = iCarouselTypeRotary;
+//    
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeIcarouselIndex) userInfo:nil repeats:YES];
+//    [_timer setFireDate:[NSDate distantFuture]];
     
     [_bannerView aspect_hookSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo, UIScrollView *scrollView, BOOL decelerate){
         [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forBanner:self.bannerColumn.columnId == 0 ? nil : @(self.bannerColumn.columnId) withSlideCount:1];
@@ -117,15 +122,15 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [_timer setFireDate:[NSDate distantFuture]];
+//    [_timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (_bannerView) {
-        [_timer setFireDate:[NSDate distantPast]];
-    } else {
-        [_timer setFireDate:[NSDate distantFuture]];
-    }
+//    if (_bannerView) {
+//        [_timer setFireDate:[NSDate distantPast]];
+//    } else {
+//        [_timer setFireDate:[NSDate distantFuture]];
+//    }
 }
 
 - (void)loadMoreDataWithRefresh:(BOOL)isRefresh {
@@ -137,11 +142,11 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
             [self.dataSource addObjectsFromArray:obj];
             [self refreshBannerView];
             [_layoutCollectionView reloadData];
-            [_bannerView reloadData];
-            [self startScrollBannerView];
+//            [_bannerView reloadData];
+//            [self startScrollBannerView];
         }
         [_layoutCollectionView JF_endPullToRefresh];
-
+    
     }];
 }
 
@@ -153,11 +158,14 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
             self.bannerColumn = column;
             for (JFHomeProgramModel *program in column.programList) {
                 [self.imageUrlGroup addObject:program.coverImg];
-                [self.titlesGroup addObject:[NSString stringWithFormat:@"  %@",program.title]];
+                [self.titlesGroup addObject:program.title.length > 10 ? [NSString stringWithFormat:@"%@...",[program.title substringToIndex:10]] : program.title];
             }
         }
     }
-    _index = 0;
+    
+    _bannerView.imageURLStringsGroup = _imageUrlGroup;
+    _bannerView.titlesGroup = _titlesGroup;
+//    _index = 0;
 }
 
 
@@ -232,9 +240,9 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        [_timer setFireDate:[NSDate distantFuture]];
-    }
+//    if (indexPath.section == 0) {
+//        [_timer setFireDate:[NSDate distantFuture]];
+//    }
     JFHomeColumnModel *column = _dataSource[indexPath.section];
     JFHomeProgramModel *program = column.programList[indexPath.item];
     
@@ -290,87 +298,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     return CGSizeMake(CGRectGetWidth(collectionView.bounds)-insets.left-insets.right, kScreenHeight * 86 / 1334.);
 }
 
-//- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-//    for (JFHomeColumnModel *column in self.dataSource) {
-//        if (column.type == 4) {
-//            JFHomeProgramModel * program = column.programList[index];
-//            
-//            JFBaseModel *baseModel = [[JFBaseModel alloc] init];
-//            baseModel.realColumnId = @(column.realColumnId);
-//            baseModel.channelType = @(column.type);
-//            baseModel.programId = @(program.programId);
-//            baseModel.programType = @(program.type);
-//            baseModel.programLocation = index;
-//            
-//            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
-//            detailVC.baseModel = baseModel;
-//            [self.navigationController pushViewController:detailVC animated:YES];
-//       
-//            
-//            [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:index andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
-//        }
-//    }
-//}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
-
-}
-
-#pragma mark - iCarouselDelegate iCarouselDataSource
-
-- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
-    return self.imageUrlGroup.count;
-}
-
-- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-    UIView *itemView = [[UIView alloc] init];
-    itemView.backgroundColor = [UIColor redColor];
-    itemView.frame = CGRectMake(0, 0, kScreenWidth - 20, (kScreenWidth - 20)/2.);
-    itemView.layer.borderColor = [UIColor colorWithHexString:@"#ffffff"].CGColor;
-    itemView.layer.borderWidth = kScreenWidth * 4 /750.;
-    
-    UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlGroup[index]]];
-    [itemView addSubview:imageView];
-    
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = self.titlesGroup[index];
-    titleLabel.backgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.45];;
-    titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 32 / 750.];
-    titleLabel.textAlignment = NSTextAlignmentLeft;
-    titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
-    [itemView addSubview:titleLabel];
-    
-    {
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(itemView);
-        }];
-        
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(itemView);
-            make.height.mas_equalTo(kScreenHeight * 60 /1334.);
-        }];
-    }
-    return itemView;
-}
-
-//- (CATransform3D)carousel:(iCarousel *)_carousel transformForItemView:(UIView *)view withOffset:(CGFloat)offset{
-//    view.alpha = 1.0 - fminf(fmaxf(offset, 0.0), 1.0);
-//    
-//    CATransform3D transform = CATransform3DIdentity;
-//    transform.m34 = ica.perspective;
-//    transform = CATransform3DRotate(transform, M_PI / 8.0, 0, 1.0, 0);
-//    return CATransform3DTranslate(transform, 0.0, 0.0, offset * ica.itemWidth);
-//}
-
-- (CGFloat)carouselItemWidth:(iCarousel *)carousel{
-    return kScreenWidth* 1.35;
-}
-
-- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
-    DLog(@"_index = %ld",index);
-
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     for (JFHomeColumnModel *column in self.dataSource) {
         if (column.type == 4) {
             JFHomeProgramModel * program = column.programList[index];
@@ -385,40 +313,120 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
             JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
             detailVC.baseModel = baseModel;
             [self.navigationController pushViewController:detailVC animated:YES];
+       
             
             [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:index andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
         }
     }
 }
 
-- (void)startScrollBannerView {
-    [_timer setFireDate:[NSDate distantPast]];
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JFStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex] forSlideCount:1];
+
 }
 
+//#pragma mark - iCarouselDelegate iCarouselDataSource
+//
+//- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
+//    return self.imageUrlGroup.count;
+//}
+//
+//- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
+//    UIView *itemView = [[UIView alloc] init];
+//    itemView.backgroundColor = [UIColor redColor];
+//    itemView.frame = CGRectMake(0, 0, kScreenWidth - 20, (kScreenWidth - 20)/2.);
+//    itemView.layer.borderColor = [UIColor colorWithHexString:@"#ffffff"].CGColor;
+//    itemView.layer.borderWidth = kScreenWidth * 4 /750.;
+//    
+//    UIImageView *imageView = [[UIImageView alloc] init];
+//    [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlGroup[index]]];
+//    [itemView addSubview:imageView];
+//    
+//    UILabel *titleLabel = [[UILabel alloc] init];
+//    titleLabel.text = self.titlesGroup[index];
+//    titleLabel.backgroundColor = [[UIColor colorWithHexString:@"#000000"] colorWithAlphaComponent:0.45];;
+//    titleLabel.font = [UIFont systemFontOfSize:kScreenWidth * 32 / 750.];
+//    titleLabel.textAlignment = NSTextAlignmentLeft;
+//    titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
+//    [itemView addSubview:titleLabel];
+//    
+//    {
+//        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(itemView);
+//        }];
+//        
+//        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.bottom.equalTo(itemView);
+//            make.height.mas_equalTo(kScreenHeight * 60 /1334.);
+//        }];
+//    }
+//    return itemView;
+//}
 
-- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
-    DLog(@"currentIndex:%ld",[_bannerView currentItemIndex]);
-    _index = [_bannerView currentItemIndex];
-    _index++;
-}
+//- (CATransform3D)carousel:(iCarousel *)_carousel transformForItemView:(UIView *)view withOffset:(CGFloat)offset{
+//    view.alpha = 1.0 - fminf(fmaxf(offset, 0.0), 1.0);
+//    
+//    CATransform3D transform = CATransform3DIdentity;
+//    transform.m34 = ica.perspective;
+//    transform = CATransform3DRotate(transform, M_PI / 8.0, 0, 1.0, 0);
+//    return CATransform3DTranslate(transform, 0.0, 0.0, offset * ica.itemWidth);
+//}
 
-- (void)sendIsUserGesture:(BOOL)isGesture {
-    if (isGesture) {
-        [_timer setFireDate:[NSDate distantFuture]];
-    } else {
-        [self performSelector:@selector(startScrollBannerView) withObject:self afterDelay:2];
-    }
-}
-
-- (void)changeIcarouselIndex {
-    if (_index == self.imageUrlGroup.count) {
-        _index = 0;
-        [_bannerView scrollToItemAtIndex:_index++ duration:1.];
-    } else {
-        [_bannerView scrollToItemAtIndex:_index++ duration:1.];
-    }
-    DLog(@"%ld",_index);
-}
+//- (CGFloat)carouselItemWidth:(iCarousel *)carousel{
+//    return kScreenWidth* 1.35;
+//}
+//
+//- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+//    DLog(@"_index = %ld",index);
+//
+//    for (JFHomeColumnModel *column in self.dataSource) {
+//        if (column.type == 4) {
+//            JFHomeProgramModel * program = column.programList[index];
+//            
+//            JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+//            baseModel.realColumnId = @(column.realColumnId);
+//            baseModel.channelType = @(column.type);
+//            baseModel.programId = @(program.programId);
+//            baseModel.programType = @(program.type);
+//            baseModel.programLocation = index;
+//            
+//            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+//            detailVC.baseModel = baseModel;
+//            [self.navigationController pushViewController:detailVC animated:YES];
+//            
+//            [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:index andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
+//        }
+//    }
+//}
+//
+//- (void)startScrollBannerView {
+//    [_timer setFireDate:[NSDate distantPast]];
+//}
+//
+//
+//- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
+//    DLog(@"currentIndex:%ld",[_bannerView currentItemIndex]);
+//    _index = [_bannerView currentItemIndex];
+//    _index++;
+//}
+//
+//- (void)sendIsUserGesture:(BOOL)isGesture {
+//    if (isGesture) {
+//        [_timer setFireDate:[NSDate distantFuture]];
+//    } else {
+//        [self performSelector:@selector(startScrollBannerView) withObject:self afterDelay:2];
+//    }
+//}
+//
+//- (void)changeIcarouselIndex {
+//    if (_index == self.imageUrlGroup.count) {
+//        _index = 0;
+//        [_bannerView scrollToItemAtIndex:_index++ duration:1.];
+//    } else {
+//        [_bannerView scrollToItemAtIndex:_index++ duration:1.];
+//    }
+//    DLog(@"%ld",_index);
+//}
 
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    [super touchesBegan:touches withEvent:event];
