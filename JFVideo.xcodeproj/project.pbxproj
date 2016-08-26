@@ -130,6 +130,7 @@
 		ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9961D17F02D00926044 /* JFMineViewController.m */; };
 		ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */; };
 		ECBF02541D40D762000F93E8 /* UIImageView+YPBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */; };
+		ECF3AC311D6E8C5D009E7A54 /* JFPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF3AC301D6E8C5D009E7A54 /* JFPayTypeView.m */; };
 		ECF8159E1D1A34AF00FCF6C1 /* JFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */; };
 		ECF99B8B1D2D084E003CBCA8 /* JFHomeColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF99B8A1D2D084E003CBCA8 /* JFHomeColumnModel.m */; };
 		ECF99B8E1D2D086F003CBCA8 /* JFHomeProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF99B8D1D2D086F003CBCA8 /* JFHomeProgramModel.m */; };
@@ -372,6 +373,8 @@
 		ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setting_banner.jpg; sourceTree = "<group>"; };
 		ECBF02521D40D762000F93E8 /* UIImageView+YPBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YPBAnimation.h"; sourceTree = "<group>"; };
 		ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YPBAnimation.m"; sourceTree = "<group>"; };
+		ECF3AC2F1D6E8C5D009E7A54 /* JFPayTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPayTypeView.h; sourceTree = "<group>"; };
+		ECF3AC301D6E8C5D009E7A54 /* JFPayTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPayTypeView.m; sourceTree = "<group>"; };
 		ECF8159C1D1A34AF00FCF6C1 /* JFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTableViewCell.h; sourceTree = "<group>"; };
 		ECF8159D1D1A34AF00FCF6C1 /* JFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTableViewCell.m; sourceTree = "<group>"; };
 		ECF99B891D2D084E003CBCA8 /* JFHomeColumnModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHomeColumnModel.h; sourceTree = "<group>"; };
@@ -815,6 +818,8 @@
 				EC0849751D1E718D00623AEF /* JFVideoPlayer.m */,
 				EC6250681D30DAB400054005 /* JFPaymentPopView.h */,
 				EC6250691D30DAB400054005 /* JFPaymentPopView.m */,
+				ECF3AC2F1D6E8C5D009E7A54 /* JFPayTypeView.h */,
+				ECF3AC301D6E8C5D009E7A54 /* JFPayTypeView.m */,
 				EC6250621D30CF3D00054005 /* JFPaymentTypeCell.h */,
 				EC6250631D30CF3D00054005 /* JFPaymentTypeCell.m */,
 				EC8FAEB11D42040400B7C9F1 /* JFLaunchView.h */,
@@ -1291,6 +1296,7 @@
 				B35F64591D474C2300E03202 /* DataVerifier.m in Sources */,
 				ECF99B911D2D174B003CBCA8 /* JFChannelModel.m in Sources */,
 				EC6250581D3097AC00054005 /* JFAppSpreadModel.m in Sources */,
+				ECF3AC311D6E8C5D009E7A54 /* JFPayTypeView.m in Sources */,
 				ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */,
 				ECBF02541D40D762000F93E8 /* UIImageView+YPBAnimation.m in Sources */,
 				EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */,

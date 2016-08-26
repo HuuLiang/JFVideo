@@ -144,8 +144,8 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
         [self.popView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             
-            const CGFloat width = kScreenWidth * 580/750.;
-            CGFloat height = kScreenHeight * 630 /1334. + (kScreenHeight * 110 / 1334.) * (self.popView.availablePaymentTypes.count - 2.);
+            const CGFloat width = kWidth(567);
+            CGFloat height = kWidth(898);
             make.size.mas_equalTo(CGSizeMake(width,height));
         }];
     }
