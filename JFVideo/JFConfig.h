@@ -33,6 +33,9 @@
 #define JF_STATS_TAB_URL               @"/stats/tabStat.service"
 #define JF_STATS_PAY_URL               @"/stats/payRes.service"
 
+#define JF_SYSTEM_CONFIG_CONTACT_SCHEME           @"CONTACT_SCHEME"
+#define JF_SYSTEM_CONFIG_CONTACT_NAME             @"CONTACT_NAME"
+
 
 #define JF_PAYMENT_CONFIG_URL           @"http://pay.zcqcmj.com/paycenter/payConfig.json"//@"http://120.24.252.114:8084/paycenter/payConfig.json"
 #define JF_PAYMENT_COMMIT_URL           @"http://pay.zcqcmj.com/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"

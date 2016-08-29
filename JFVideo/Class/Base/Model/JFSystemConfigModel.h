@@ -18,7 +18,8 @@ typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 @interface JFSystemConfigModel : JFEncryptedURLRequest
 
 @property (nonatomic) NSInteger payAmount;
-
+@property (nonatomic) NSString *contactScheme;
+@property (nonatomic,copy)NSString *contactName;
 
 + (instancetype)sharedModel;
 

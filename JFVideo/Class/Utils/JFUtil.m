@@ -99,6 +99,7 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
 }
 
 + (BOOL)isVip {
+    return YES;
     return [[[NSUserDefaults standardUserDefaults] objectForKey:kVipUserKeyName] isEqualToString:IS_VIP];
 }
 

@@ -49,6 +49,10 @@
                                 
                                 if ([config.name isEqualToString:@"PAY_AMOUNT"]) {
                                     [JFSystemConfigModel sharedModel].payAmount = [config.value integerValue];
+                                }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_SCHEME]){
+                                    [JFSystemConfigModel sharedModel].contactScheme = config.value;
+                                }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_NAME]){
+                                    [JFSystemConfigModel sharedModel].contactName = config.value;
                                 }
                             }];
                         }

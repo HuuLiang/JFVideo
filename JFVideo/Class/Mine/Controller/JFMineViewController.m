@@ -12,6 +12,7 @@
 #import "JFWebViewController.h"
 #import "JFAppSpreadModel.h"
 #import "CRKHudManager.h"
+#import "JFSystemConfigModel.h"
 
 static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifier";
 
@@ -65,11 +66,12 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
             webVC.title = @"用户协议";
             [self.navigationController pushViewController:webVC animated:YES];
         } else if (cell == self->_telCell) {
-            [UIAlertView bk_showAlertViewWithTitle:nil message:@"4006296682" cancelButtonTitle:@"取消" otherButtonTitles:@[@"呼叫"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                if (buttonIndex == 1) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4006296682"]];
-                }
-            }];
+//            [UIAlertView bk_showAlertViewWithTitle:nil message:@"4006296682" cancelButtonTitle:@"取消" otherButtonTitles:@[@"呼叫"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//                if (buttonIndex == 1) {
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4006296682"]];
+//                }
+//            }];
+            [self contactCustomerService];
         }
     };
     
@@ -80,6 +82,26 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         NSString *baseURLString = [JF_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, JF_BASE_URL.length-6) withString:@"******"];
         [[CRKHudManager manager] showHudWithText:[NSString stringWithFormat:@"Server:%@\nChannelNo:%@\nPackageCertificate:%@\npV:%@/%@", baseURLString, JF_CHANNEL_NO, JF_PACKAGE_CERTIFICATE, JF_REST_PV, JF_PAYMENT_PV]];
     }];
+}
+
+- (void)contactCustomerService {
+    NSString *contactScheme = [JFSystemConfigModel sharedModel].contactScheme;
+    NSString *contactName = [JFSystemConfigModel sharedModel].contactName;
+    
+    if (contactScheme.length == 0) {
+        return ;
+    }
+    
+    [UIAlertView bk_showAlertViewWithTitle:nil
+                                   message:[NSString stringWithFormat:@"是否联系客服%@？", contactName ?: @""]
+                         cancelButtonTitle:@"取消"
+                         otherButtonTitles:@[@"确认"]
+                                   handler:^(UIAlertView *alertView, NSInteger buttonIndex)
+     {
+         if (buttonIndex == 1) {
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactScheme]];
+         }
+     }];
 }
 
 - (void)onPaidNotification:(NSNotification *)notification {
@@ -123,7 +145,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     [self setLayoutCell:lineCell cellHeight:0.5 inRow:0 andSection:section++];
     
     if ([JFUtil isVip]) {
-        _telCell = [[JFTableViewCell alloc] initWithImage:nil title:@"客服热线"];
+        _telCell = [[JFTableViewCell alloc] initWithImage:nil title:@"联系客服"];
         _telCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         _telCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
         [self setLayoutCell:_telCell cellHeight:44 inRow:0 andSection:section++];

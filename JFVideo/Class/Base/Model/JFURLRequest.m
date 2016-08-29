@@ -178,8 +178,10 @@
         if ([self.response isKindOfClass:[JFURLResponse class]]) {
             JFURLResponse *urlResp = self.response;
             [urlResp parseResponseWithDictionary:responseObject];
+
             
-            status = urlResp.success.boolValue ? JFURLResponseSuccess : JFURLResponseFailedByInterface;
+            status = (urlResp.success.boolValue || [urlResp.response_code integerValue] == 100) ? JFURLResponseSuccess : JFURLResponseFailedByInterface;
+            
             errorMessage = (status == JFURLResponseSuccess) ? nil : [NSString stringWithFormat:@"ResultCode: %@", urlResp.resultCode];
         } else {
             status = JFURLResponseFailedByParsing;
