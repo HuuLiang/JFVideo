@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol JFResponseParsable <NSObject>
+
+@optional
+- (Class)JF_classOfProperty:(NSString *)propName;
+- (NSString *)JF_propertyOfParsing:(NSString *)parsingName;
+
+@end
+
+
 @interface JFURLResponse : NSObject
 
 @property (nonatomic) NSNumber *success;

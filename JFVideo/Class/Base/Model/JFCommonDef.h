@@ -44,6 +44,14 @@ typedef NS_ENUM(NSInteger, PAYRESULT)
     PAYRESULT_UNKNOWN   = 3
 };
 
+typedef NS_ENUM(NSInteger,JFPayPriceLevel) {
+    JFPayPriceLevelNone,
+    JFPayPriceLevelA = 1,
+    JFPayPriceLevelB = 2,
+    JFPayPriceLevelC = 3
+};
+
+
 typedef NS_ENUM(NSUInteger, JFPaymentPopViewSection) {
     HeaderSection,
     PayPointSection,

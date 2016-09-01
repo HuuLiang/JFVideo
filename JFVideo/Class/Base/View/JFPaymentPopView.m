@@ -10,6 +10,7 @@
 #import "JFPaymentTypeCell.h"
 #import "JFSystemConfigModel.h"
 #import "JFPayTypeView.h"
+#import "JFPaymentPointView.h"
 
 //static const CGFloat kHeaderImageScale = 620./280.;
 
@@ -22,13 +23,16 @@
 {
     UITableViewCell *_headerCell;
     UITableViewCell *_paypointTypeCell;
-    JFPaymentTypeCell *_alipayCell;
-    JFPaymentTypeCell *_wxpayCell;
-    JFPaymentTypeCell *_iAppPayCell;
-    JFPaymentTypeCell *_qqpayCell;
+//    JFPaymentTypeCell *_alipayCell;
+//    JFPaymentTypeCell *_wxpayCell;
+//    JFPaymentTypeCell *_iAppPayCell;
+//    JFPaymentTypeCell *_qqpayCell;
     NSIndexPath *_selectedIndexPath;
     JFPayTypeView *_payTypeView;
+    JFPaymentPointView *_payPointView;
+    
 }
+@property (nonatomic) JFPayPriceLevel priceLevel;
 @end
 
 @implementation JFPaymentPopView
@@ -39,6 +43,7 @@
     if (self) {
         _availablePaymentTypes = availablePaymentTypes;
         
+        _priceLevel = JFPayPriceLevelA;
         self.delegate = self;
         self.dataSource = self;
         self.scrollEnabled = NO;
@@ -70,7 +75,7 @@
         if (!_headerCell) {
             _headerCell = [[UITableViewCell alloc] init];
             _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView * bgImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pay_bgimg"]];
+            UIImageView * bgImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pay_bgimg.jpg"]];
             _headerCell.backgroundView = bgImgV;
             
             UIButton *closeButton = [[UIButton alloc] init];
@@ -78,17 +83,15 @@
             [closeButton setImage:[UIImage imageNamed:@"close_icon"] forState:UIControlStateNormal];
             [_headerCell addSubview:closeButton];
             
-            UILabel * _priceLabel = [[UILabel alloc] init];
-            _priceLabel.text = [NSString stringWithFormat:@"%ld",(long)[JFSystemConfigModel sharedModel].payAmount/100];
-            _priceLabel.textAlignment = NSTextAlignmentCenter;
-            _priceLabel.textColor = [UIColor colorWithHexString:@"#eaff00"];
-            _priceLabel.font = [UIFont systemFontOfSize:kWidth(32)];
-            [_headerCell addSubview:_priceLabel];
+            UIImageView *shadeImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pay_shade"]];
+            shadeImgV.userInteractionEnabled = YES;
+            [_headerCell addSubview:shadeImgV];
+            
+            _payPointView = [[JFPaymentPointView alloc] init];
+            [_headerCell addSubview:_payPointView];
             
             _payTypeView = [[JFPayTypeView alloc] initWithPayTypesArray:_availablePaymentTypes];
-            [_headerCell addSubview:_payTypeView];
-            
-
+            [shadeImgV addSubview:_payTypeView];
             
             
             {
@@ -98,26 +101,36 @@
                     make.size.mas_equalTo(CGSizeMake(50, 50));
                 }];
                 
-                [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(_headerCell).offset(kWidth(295));
-                    make.top.equalTo(_headerCell.mas_top).offset(kWidth(555));
-                    make.height.mas_equalTo(27);
+                [shadeImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.bottom.equalTo(_headerCell);
+                    make.height.mas_equalTo(kWidth(259));
+                }];
+                
+                [_payPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.equalTo(shadeImgV);
+                    make.top.equalTo(shadeImgV).offset(kWidth(55));
+                    make.height.mas_equalTo(kWidth(30));
                 }];
                 
                 [_payTypeView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.right.equalTo(_headerCell);
+                    make.left.right.bottom.equalTo(shadeImgV);
                     make.height.mas_equalTo(kWidth(100));
-                    make.bottom.equalTo(_headerCell.mas_bottom).offset(-kWidth(90));
+                    make.bottom.equalTo(shadeImgV.mas_bottom).offset(-kWidth(30));
                 }];
 
             }
             
             @weakify(self);
-            _payTypeView.payAction = ^(JFPaymentType type,JFSubPayType subType) {
+            _payPointView.levelAction = ^(JFPayPriceLevel priceLevel) {
                 @strongify(self);
-                self.paymentAction(type,subType);
+                self.priceLevel = priceLevel;
             };
             
+            
+            _payTypeView.payAction = ^(JFPaymentType type,JFSubPayType subType) {
+                @strongify(self);
+                self.paymentAction(type,subType,self.priceLevel);
+            };
             
             [closeButton bk_addEventHandler:^(id sender) {
                 @strongify(self);
@@ -181,7 +194,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return kWidth(898);
+    return kWidth(780);
 }
 
 @end

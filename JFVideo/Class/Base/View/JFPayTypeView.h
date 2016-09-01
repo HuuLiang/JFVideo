@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^JFPaymentPopViewAction)(JFPaymentType paymentType,JFSubPayType subType);
+typedef void (^JFPaymentPopViewActions)(JFPaymentType paymentType,JFSubPayType subType);
 
 @interface JFPayTypeView : UIView
 
 - (instancetype)initWithPayTypesArray:(NSArray *)payTypes;
 
-@property (nonatomic,copy) JFPaymentPopViewAction payAction;
+@property (nonatomic,copy) JFPaymentPopViewActions payAction;
 
 
 @end

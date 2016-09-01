@@ -12,16 +12,6 @@
 
 @implementation JFURLResponse
 
-//- (void)setSuccess:(NSNumber *)success {
-//    _success = success;
-//    _Result = success;
-//}
-//
-//- (void)setResultCode:(NSString *)resultCode {
-//    _resultCode = resultCode;
-//    _Msg = resultCode;
-//}
-
 - (void)parseResponseWithDictionary:(NSDictionary *)dic {
     [self parseDataWithDictionary:dic inInstance:self];
 }
@@ -34,46 +24,69 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     NSArray *properties = [NSObject propertiesOfClass:[instance class]];
-    [properties enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *propertyName = (NSString *)obj;
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *propertyName = key;
+        NSString *setPropertyName = propertyName;
         
-        id value = [dic objectForKey:propertyName];
+        NSString *const kNameMappingProperty = @"JF_propertyOfParsing:";
+        if ([instance respondsToSelector:NSSelectorFromString(kNameMappingProperty)]) {
+            setPropertyName = [instance performSelector:NSSelectorFromString(kNameMappingProperty) withObject:propertyName];
+        }
+        
+        if (![properties containsObject:setPropertyName]) {
+            return ;
+        }
+        
+        id value = obj;
         if ([value isKindOfClass:[NSString class]]
             || [value isKindOfClass:[NSNumber class]]) {
-            [instance setValue:value forKey:propertyName];
+            [instance setValue:value forKey:setPropertyName];
         } else if ([value isKindOfClass:[NSDictionary class]]) {
-            id property = [instance valueForKey:propertyName];
+            id property = [instance valueForKey:setPropertyName];
             Class subclass = [property class];
             if (!subclass) {
                 NSString *classPropertyName = [propertyName stringByAppendingString:@"Class"];
-                subclass = [instance valueForKey:classPropertyName];
+                if ([instance respondsToSelector:NSSelectorFromString(classPropertyName)]) {
+                    subclass = [instance valueForKey:classPropertyName];
+                }
             }
+            
+            if (!subclass) {
+                NSString *const kClassSelectorName = @"JF_classOfProperty:";
+                if ([instance respondsToSelector:NSSelectorFromString(kClassSelectorName)]) {
+                    subclass = [instance performSelector:NSSelectorFromString(kClassSelectorName) withObject:setPropertyName];
+                }
+            }
+            
             id subinstance = [[subclass alloc] init];
-            [instance setValue:subinstance forKey:propertyName];
+            [instance setValue:subinstance forKey:setPropertyName];
             
             [self parseDataWithDictionary:(NSDictionary *)value inInstance:subinstance];
         } else if ([value isKindOfClass:[NSArray class]]) {
             Class subclass = [instance valueForKey:[propertyName stringByAppendingString:@"ElementClass"]];
-            
             if (!subclass) {
                 DLog(@"JSON Parsing Warning: cannot find element class of property: %@ in class: %@\n", propertyName, [[instance class] description])
                 return;
             }
             
-            NSMutableArray *arr = [[NSMutableArray alloc] init];
-            [instance setValue:arr forKey:propertyName];
+            if (subclass == [NSString class] || subclass == [NSNumber class]) {
+                [instance setValue:value forKey:setPropertyName];
+                return ;
+            }
             
-            for (id obj in (NSArray *)value) {
-                if ([obj isKindOfClass:[NSDictionary class]]) {
-                    id subinstance = [[subclass alloc] init];
-                    [arr addObject:subinstance];
-                    [self parseDataWithDictionary:obj inInstance:subinstance];
-                } else if ([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[NSNumber class]]) {
-                    [arr addObject:obj];
-                }
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [instance setValue:arr forKey:setPropertyName];
+            
+            for (NSDictionary *subDic in (NSArray *)value) {
+                id subinstance = [[subclass alloc] init];
+                [arr addObject:subinstance];
+                [self parseDataWithDictionary:subDic inInstance:subinstance];
             }
         }
     }];
+    //    [properties enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    //
+    //    }];
 #pragma clang diagnostic pop
 }
 

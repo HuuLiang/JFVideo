@@ -64,10 +64,10 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];
     @weakify(self);
-    _popView.paymentAction = ^(JFPaymentType payType,JFSubPayType subType) {
+    _popView.paymentAction = ^(JFPaymentType payType,JFSubPayType subType, JFPayPriceLevel priceLevel) {
         @strongify(self);
         
-        [self payForPaymentType:payType subPaymentType:subType];
+        [self payForPaymentType:payType subPaymentType:subType priceLevel:priceLevel];
 //        if (subPayType == JFPaymentTypeWeChatPay) {
 //            [self payForPaymentType:wechatPaymentType subPaymentType:subPayType];
 //        } else if (subPayType == JFPaymentTypeAlipay) {
@@ -87,10 +87,19 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
     return _popView;
 }
 
-- (void)payForPaymentType:(JFPaymentType)paymentType subPaymentType:(JFSubPayType)subPaymentType {
+- (void)payForPaymentType:(JFPaymentType)paymentType subPaymentType:(JFSubPayType)subPaymentType priceLevel:(JFPayPriceLevel)priceLevel {
+    NSUInteger price = 0;
+    if (priceLevel == JFPayPriceLevelA) {
+        price = [JFSystemConfigModel sharedModel].payAmount;
+    } else if (priceLevel == JFPayPriceLevelB) {
+        price = [JFSystemConfigModel sharedModel].payAmountPlus;
+    } else if (priceLevel == JFPayPriceLevelC) {
+        price = [JFSystemConfigModel sharedModel].payAmountPlusPlus;
+    }
+    
     JFPaymentInfo *paymentInfo = [[JFPaymentManager sharedManager] startPaymentWithType:paymentType
                                                                                 subType:subPaymentType
-                                                                                  price:[JFSystemConfigModel sharedModel].payAmount
+                                                                                  price:price
                                                                               baseModel:self.baseModel
                                                                       completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
                                   {
@@ -144,8 +153,8 @@ DefineLazyPropertyInitialization(JFBaseModel, baseModel)
         [self.popView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             
-            const CGFloat width = kWidth(567);
-            CGFloat height = kWidth(898);
+            const CGFloat width = kWidth(600);
+            CGFloat height = kWidth(780);
             make.size.mas_equalTo(CGSizeMake(width,height));
         }];
     }

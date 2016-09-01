@@ -57,8 +57,8 @@ static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
 - (BOOL)fetchPaymentConfigInfoWithCompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
     BOOL ret = [self requestURLPath:JF_PAYMENT_CONFIG_URL
-                     standbyURLPath:[NSString stringWithFormat:JF_STANDBY_PAYMENT_CONFIG_URL, JF_REST_APPID]
-                         withParams:@{@"appId":JF_REST_APPID, @"channelNo":JF_CHANNEL_NO, @"pV":JF_PAYMENT_PV}
+                    // standbyURLPath:[NSString stringWithFormat:JF_STANDBY_PAYMENT_CONFIG_URL, JF_REST_APPID]
+                         withParams:@{@"appId":JF_REST_APPID, @"channelNo":JF_CHANNEL_NO, @"pv":JF_PAYMENT_PV}
                     responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
                 {
                     @strongify(self);

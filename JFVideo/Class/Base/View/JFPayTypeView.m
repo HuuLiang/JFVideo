@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         
-        self.backgroundColor = [UIColor clearColor];
+//        self.backgroundColor = [UIColor redColor];
         
         for (NSDictionary *dic in payTypes) {
             _payType = [dic[@"type"] integerValue];

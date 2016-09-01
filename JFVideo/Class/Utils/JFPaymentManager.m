@@ -48,9 +48,13 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
-        [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].mpPayInfo.mch;
         JFPaymentConfig *config = (JFPaymentConfig *)obj;
-        [[HTPaymentManager sharedManager] registHaiTunPayWithSignVal:config.haitunPayInfo.key mreId:config.haitunPayInfo.mchId];
+        if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
+            [[HTPaymentManager sharedManager] registHaiTunPayWithSignVal:config.configDetails.htpayConfig.key mreId:config.configDetails.htpayConfig.mchId];
+        }
+        if ([JFPaymentConfig sharedConfig].configDetails.mingPayConfig) {
+            [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].configDetails.mingPayConfig.mch;
+        }
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     
@@ -77,45 +81,22 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 }
 
 - (JFPaymentType)wechatPaymentType {
-    if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat) {
-        return JFPaymentTypeVIAPay;
-    }else if ([JFPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JFSubPayTypeWeChat){
-        
-        return JFPaymentTypeIAppPay;
-    }else if ([JFPaymentConfig sharedConfig].mpPayInfo.mch.length >0){
-        return JFPaymentTypeMingPay;
-    }else if ([JFPaymentConfig sharedConfig].haitunPayInfo.mchId.length >0) {
-        return JFPaymentTypeHTPay;
-    }
-    //    else if ([JFPaymentConfig sharedConfig].wftPayInfo) {
-    //        return JFPaymentTypeSPay;
-    //    } else if ([JFPaymentConfig sharedConfig].iappPayInfo) {
-    //        return JFPaymentTypeIAppPay;
-    //        } 
-    return JFPaymentTypeNone;
+    return [JFPaymentConfig sharedConfig].wechatPaymentType;
 }
 
 - (JFPaymentType)alipayPaymentType {
-    if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JFSubPayTypeAlipay) {
-        return JFPaymentTypeVIAPay;
-    }else if ([JFPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JFSubPayTypeAlipay){
-        return JFPaymentTypeIAppPay;
-    }
-    return JFPaymentTypeNone;
+    return [JFPaymentConfig sharedConfig].alipayPaymentType;
 }
 
 - (JFPaymentType)cardPayPaymentType {
-    if ([JFPaymentConfig sharedConfig].iappPayInfo) {
-        return JFPaymentTypeIAppPay;
-    }
+    //    if ([JFPaymentConfig sharedConfig].iappPayInfo) {
+    //        return JFPaymentTypeIAppPay;
+    //    }
     return JFPaymentTypeNone;
 }
 
 - (JFPaymentType)qqPaymentType {
-    if ([JFPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.unsignedIntegerValue & JFSubPayTypeQQ) {
-        return JFPaymentTypeVIAPay;
-    }
-    return JFPaymentTypeNone;
+    return [JFPaymentConfig sharedConfig].qqPaymentType;
 }
 
 - (void)handleOpenUrl:(NSURL *)url {
@@ -136,13 +117,13 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
-#if DEBUG
-    if (type == JFPaymentTypeIAppPay) {
-        price = 200;
-    } else {
-        price = 100;
-    }
-#endif
+//#if DEBUG
+//    if (type == JFPaymentTypeIAppPay) {
+//        price = 200;
+//    } else {
+//        price = 100;
+//    }
+//#endif
 //    price = 200;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
@@ -189,13 +170,13 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         
         @weakify(self);
         IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
-        iAppMgr.appId = [JFPaymentConfig sharedConfig].iappPayInfo.appid;
-        iAppMgr.privateKey = [JFPaymentConfig sharedConfig].iappPayInfo.privateKey;
-        iAppMgr.waresid = [JFPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
+        iAppMgr.appId = [JFPaymentConfig sharedConfig].configDetails.iAppPayConfig.appid;
+        iAppMgr.privateKey = [JFPaymentConfig sharedConfig].configDetails.iAppPayConfig.privateKey;
+        iAppMgr.waresid = [JFPaymentConfig sharedConfig].configDetails.iAppPayConfig.waresid.stringValue;
         iAppMgr.appUserId = [JFUtil userId] ?: @"UnregisterUser";
         iAppMgr.privateInfo = JF_PAYMENT_RESERVE_DATA;
-        iAppMgr.notifyUrl = [JFPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
-        iAppMgr.publicKey = [JFPaymentConfig sharedConfig].iappPayInfo.publicKey;
+        iAppMgr.notifyUrl = [JFPaymentConfig sharedConfig].configDetails.iAppPayConfig.notifyUrl;
+        iAppMgr.publicKey = [JFPaymentConfig sharedConfig].configDetails.iAppPayConfig.publicKey;
         
         [iAppMgr payWithPaymentInfo:paymentInfo payType:subType completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
             @strongify(self);
@@ -218,9 +199,9 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         @weakify(self);
         HTPaymentManager *htPayManager =  [HTPaymentManager sharedManager];
         JFPaymentConfig *paymentConfig = [JFPaymentConfig sharedConfig];
-        htPayManager.signVal = paymentConfig.haitunPayInfo.key;
-        htPayManager.notifUrl = paymentConfig.haitunPayInfo.notifyUrl;
-        htPayManager.merId = paymentConfig.haitunPayInfo.mchId;
+        htPayManager.signVal = paymentConfig.configDetails.htpayConfig.key;
+        htPayManager.notifUrl = paymentConfig.configDetails.htpayConfig.notifyUrl;
+        htPayManager.merId = paymentConfig.configDetails.htpayConfig.mchId;
         htPayManager.currentVC = [JFUtil currentVisibleViewController];
         [htPayManager payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
             @strongify(self);

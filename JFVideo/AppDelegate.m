@@ -93,6 +93,7 @@
                                    UIViewController *thisVC = [aspectInfo instance];
                                    thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:nil];
                                    thisVC.navigationController.navigationBar.translucent = NO;
+//                                   [thisVC.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navibar.jpg"] forBarMetrics:UIBarMetricsDefault];
                                } error:nil];
     
     [UITabBarController aspect_hookSelector:@selector(shouldAutorotate)
