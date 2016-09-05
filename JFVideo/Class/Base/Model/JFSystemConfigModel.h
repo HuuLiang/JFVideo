@@ -17,6 +17,7 @@ typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 
 @interface JFSystemConfigModel : JFEncryptedURLRequest
 
+@property (nonatomic) NSString *payImg;
 @property (nonatomic) NSInteger payAmount;
 @property (nonatomic) NSInteger payAmountPlus;
 @property (nonatomic) NSInteger payAmountPlusPlus;

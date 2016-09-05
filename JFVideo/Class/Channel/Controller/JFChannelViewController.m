@@ -120,16 +120,25 @@ DefineLazyPropertyInitialization(JFChannelProgramModel, channelProgramModel)
     if (indexPath.item < self.dataSource.count) {
 
         JFChannelProgram *program = self.dataSource[indexPath.item];
+//        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+//        baseModel.realColumnId = @(self.column.realColumnId);
+//        baseModel.channelType = @(self.column.type);
+//        baseModel.programType = @(program.type);
+//        baseModel.programId = @(program.programId);
+//        baseModel.programLocation = indexPath.item;
+  
         JFBaseModel *baseModel = [[JFBaseModel alloc] init];
         baseModel.realColumnId = @(self.column.realColumnId);
         baseModel.channelType = @(self.column.type);
-        baseModel.programType = @(program.type);
         baseModel.programId = @(program.programId);
+        baseModel.programType = @(program.type);
         baseModel.programLocation = indexPath.item;
-  
-        JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
-        detailVC.baseModel = baseModel;
-        [self.navigationController pushViewController:detailVC animated:YES];
+        baseModel.spec = [program.spec integerValue];
+        [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
+        
+//        JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
+//        detailVC.baseModel = baseModel;
+//        [self.navigationController pushViewController:detailVC animated:YES];
       
         [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
         

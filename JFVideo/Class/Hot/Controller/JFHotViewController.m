@@ -352,15 +352,24 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
         }
     } else if (collectionView == _layoutDetailCollectionView) {
         JFChannelProgram *program = self.detailArray[indexPath.item];
+//        JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+//        baseModel.realColumnId = @(column.realColumnId);
+//        baseModel.channelType = @(column.type);
+//        baseModel.programType = @(program.type);
+//        baseModel.programId = @(program.programId);
+//        baseModel.programLocation = indexPath.item;
+//        JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
+//        detailVC.baseModel = baseModel;
+//        [self.navigationController pushViewController:detailVC animated:YES];
+        
         JFBaseModel *baseModel = [[JFBaseModel alloc] init];
         baseModel.realColumnId = @(column.realColumnId);
         baseModel.channelType = @(column.type);
-        baseModel.programType = @(program.type);
         baseModel.programId = @(program.programId);
+        baseModel.programType = @(program.type);
         baseModel.programLocation = indexPath.item;
-        JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:_columnId ProgramId:program.programId];
-        detailVC.baseModel = baseModel;
-        [self.navigationController pushViewController:detailVC animated:YES];
+        baseModel.spec = [program.spec integerValue];
+        [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
         
         [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     }

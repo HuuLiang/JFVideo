@@ -139,7 +139,12 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
         @strongify(self);
         if (success) {
             [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:obj];
+            for (JFHomeColumnModel *model in obj) {
+                if (model.type == 4 || model.programList.count > 0) {
+                    [self.dataSource addObject:model];
+                }
+            }
+//            [self.dataSource addObjectsFromArray:obj];
             [self refreshBannerView];
             [_layoutCollectionView reloadData];
 //            [_bannerView reloadData];
@@ -185,9 +190,12 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     JFHomeColumnModel *column = self.dataSource[section];
     if (column.type == 4) {
         return 1;
+    } else if (column.type == 5){
+        return 0;
     } else {
         return column.programList.count;
     }
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -232,7 +240,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     JFHomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHomeSectionHeaderReusableIdentifier forIndexPath:indexPath];
     JFHomeColumnModel *column = self.dataSource[indexPath.section];
-    if (indexPath.section != 0) {
+    if (indexPath.section != 0 || column.type != 5) {
         headerView.titleStr = column.name;
         headerView.section = indexPath.section;
     }    
@@ -252,22 +260,30 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     baseModel.programId = @(program.programId);
     baseModel.programType = @(program.type);
     baseModel.programLocation = indexPath.item;
+    baseModel.spec = [program.spec integerValue];
+    [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
+//    JFBaseModel *baseModel = self.baseModel;
+//    baseModel.programType = @(1);
+//    baseModel.spec = [self.response.program.spec integerValue];
     
-    JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
-    detailVC.baseModel = baseModel;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
+    
+//    JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+//    detailVC.baseModel = baseModel;
+//    [self.navigationController pushViewController:detailVC animated:YES];
 
     [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    JFHomeColumnModel *column = self.dataSource[indexPath.section];
     const CGFloat fullWidth = CGRectGetWidth(collectionView.bounds);
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
     UIEdgeInsets insets = [self collectionView:collectionView layout:layout insetForSectionAtIndex:indexPath.section];
-    if (indexPath.section == 0 && indexPath.item == 0) {
+    if (column.type == 4) {
         return CGSizeMake(fullWidth, fullWidth/2);
-    } else if (indexPath.section == 1) {
+    } else if (column.type == 5) {
         const CGFloat width = (fullWidth - layout.minimumInteritemSpacing - insets.left - insets.right)/2;
         const CGFloat height = width*0.8;
         return CGSizeMake(width, height);
@@ -279,11 +295,12 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if (section == 0) {
+    JFHomeColumnModel *column = self.dataSource[section];
+    if (column.type == 4) {
         return UIEdgeInsetsMake(0, 0, 5, 0);
-    } else if (section == 1) {
+    } else if (column.type == 5) {
         return UIEdgeInsetsMake(5, 5, 5, 5);
-    } else if (section == 2) {
+    } else if (column.type == 1) {
         return UIEdgeInsetsMake(5, 5, 5, 5);
     } else {
         return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -303,17 +320,25 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
         if (column.type == 4) {
             JFHomeProgramModel * program = column.programList[index];
             
+//            JFBaseModel *baseModel = [[JFBaseModel alloc] init];
+//            baseModel.realColumnId = @(column.realColumnId);
+//            baseModel.channelType = @(column.type);
+//            baseModel.programId = @(program.programId);
+//            baseModel.programType = @(program.type);
+//            baseModel.programLocation = index;
+//            
+//            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+//            detailVC.baseModel = baseModel;
+//            [self.navigationController pushViewController:detailVC animated:YES];
+       
             JFBaseModel *baseModel = [[JFBaseModel alloc] init];
             baseModel.realColumnId = @(column.realColumnId);
             baseModel.channelType = @(column.type);
             baseModel.programId = @(program.programId);
             baseModel.programType = @(program.type);
             baseModel.programLocation = index;
-            
-            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
-            detailVC.baseModel = baseModel;
-            [self.navigationController pushViewController:detailVC animated:YES];
-       
+            baseModel.spec = [program.spec integerValue];
+            [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
             
             [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:index andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
         }

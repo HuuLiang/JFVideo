@@ -75,7 +75,9 @@
         if (!_headerCell) {
             _headerCell = [[UITableViewCell alloc] init];
             _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView * bgImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pay_bgimg.jpg"]];
+//            UIImageView * bgImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pay_bgimg.jpg"]];
+            UIImageView *bgImgV = [[UIImageView alloc] init];
+            [bgImgV sd_setImageWithURL:[NSURL URLWithString:[JFSystemConfigModel sharedModel].payImg]];
             _headerCell.backgroundView = bgImgV;
             
             UIButton *closeButton = [[UIButton alloc] init];

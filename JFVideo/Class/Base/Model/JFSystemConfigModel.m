@@ -55,6 +55,8 @@
                                     [JFSystemConfigModel sharedModel].contactScheme = config.value;
                                 }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_NAME]){
                                     [JFSystemConfigModel sharedModel].contactName = config.value;
+                                }else if ([config.name isEqualToString:JF_SYSTEM_PAY_IMG]) {
+                                    [JFSystemConfigModel sharedModel].payImg = config.value;
                                 }
                             }];
                         }
