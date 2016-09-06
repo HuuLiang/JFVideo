@@ -190,8 +190,6 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     JFHomeColumnModel *column = self.dataSource[section];
     if (column.type == 4) {
         return 1;
-    } else if (column.type == 5){
-        return 0;
     } else {
         return column.programList.count;
     }
@@ -261,16 +259,10 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     baseModel.programType = @(program.type);
     baseModel.programLocation = indexPath.item;
     baseModel.spec = [program.spec integerValue];
-    [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
-//    JFBaseModel *baseModel = self.baseModel;
-//    baseModel.programType = @(1);
-//    baseModel.spec = [self.response.program.spec integerValue];
-    
-    [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
-    
-//    JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
-//    detailVC.baseModel = baseModel;
-//    [self.navigationController pushViewController:detailVC animated:YES];
+//    [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
+    JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+    detailVC.baseModel = baseModel;
+    [self.navigationController pushViewController:detailVC animated:YES];
 
     [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:indexPath.item andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     

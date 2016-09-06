@@ -146,17 +146,17 @@
             [_priceViewA mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(kWidth(50));
                 make.centerY.equalTo(self);
-                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(28)));
+                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
             }];
             
             [_priceViewB mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(28)));
+                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
                 make.centerY.equalTo(self);
                 make.left.equalTo(_priceViewA.mas_right).offset(kWidth(25));
             }];
             
             [_priceViewC mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(28)));
+                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
                 make.centerY.equalTo(self);
                 make.left.equalTo(_priceViewB.mas_right).offset(kWidth(25));
             }];

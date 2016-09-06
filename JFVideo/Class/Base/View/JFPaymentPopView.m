@@ -110,8 +110,8 @@
                 
                 [_payPointView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.right.equalTo(shadeImgV);
-                    make.top.equalTo(shadeImgV).offset(kWidth(55));
-                    make.height.mas_equalTo(kWidth(30));
+                    make.top.equalTo(shadeImgV).offset(kWidth(40));
+                    make.height.mas_equalTo(kWidth(100));
                 }];
                 
                 [_payTypeView mas_makeConstraints:^(MASConstraintMaker *make) {
