@@ -52,6 +52,7 @@ static NSString *const kPaymentConfigKeyName = @"JFuaibo_payment_config_key_name
     _paymentTypeMapping = @{kJFVIAPayConfigName:@(JFPaymentTypeVIAPay),
                             kJFIAppPayConfigName:@(JFPaymentTypeIAppPay),
                             kJFMingPayConfigName:@(JFPaymentTypeMingPay),
+                            kJFHTPayConfigName:@(JFPaymentTypeHTPay),
                             kJFSPayConfigName:@(JFPaymentTypeSPay)};
     return _paymentTypeMapping;
 }

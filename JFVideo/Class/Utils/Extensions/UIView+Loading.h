@@ -17,6 +17,7 @@
 - (void)beginLoading;
 - (void)endLoading;
 
+- (void)setLoadingViewActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;
 - (void)beginProgressingWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
 - (void)progressWithPercent:(double)percent;
 - (void)endProgressing;

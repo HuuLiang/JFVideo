@@ -13,7 +13,7 @@
 #import "IappPayMananger.h"
 #import "MingPayManager.h"
 #import "JFSystemConfigModel.h"
-#import "HTPaymentManager.h"
+#import "HTPayManager.h"
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
     JFVIAPayTypeNone,
@@ -48,10 +48,10 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
-        JFPaymentConfig *config = (JFPaymentConfig *)obj;
-        if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
-            [[HTPaymentManager sharedManager] registHaiTunPayWithSignVal:config.configDetails.htpayConfig.key mreId:config.configDetails.htpayConfig.mchId];
-        }
+//        JFPaymentConfig *config = (JFPaymentConfig *)obj;
+//        if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
+//            [[HTPaymentManager sharedManager] registHaiTunPayWithSignVal:config.configDetails.htpayConfig.key mreId:config.configDetails.htpayConfig.mchId];
+//        }
         if ([JFPaymentConfig sharedConfig].configDetails.mingPayConfig) {
             [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].configDetails.mingPayConfig.mch;
         }
@@ -197,18 +197,18 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         }];
     }else if (type == JFPaymentTypeHTPay){
         @weakify(self);
-        HTPaymentManager *htPayManager =  [HTPaymentManager sharedManager];
-        JFPaymentConfig *paymentConfig = [JFPaymentConfig sharedConfig];
-        htPayManager.signVal = paymentConfig.configDetails.htpayConfig.key;
-        htPayManager.notifUrl = paymentConfig.configDetails.htpayConfig.notifyUrl;
-        htPayManager.merId = paymentConfig.configDetails.htpayConfig.mchId;
-        htPayManager.currentVC = [JFUtil currentVisibleViewController];
-        [htPayManager payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
-            @strongify(self);
-            if (self.completionHandler) {
-                self.completionHandler (payResult,self.paymentInfo);
-            }
-        }];
+        [HTPayManager sharedManager].mchId = [JFPaymentConfig sharedConfig].configDetails.htpayConfig.mchId;
+        [HTPayManager sharedManager].key = [JFPaymentConfig sharedConfig].configDetails.htpayConfig.key;
+        [HTPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.htpayConfig.notifyUrl;
+        
+        [[HTPayManager sharedManager] payWithPaymentInfo:paymentInfo
+                                       completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
+         {
+             @strongify(self);
+             if (self.completionHandler) {
+                 self.completionHandler(payResult, self.paymentInfo);
+             }
+         }];
     } else {
         success = NO;
         

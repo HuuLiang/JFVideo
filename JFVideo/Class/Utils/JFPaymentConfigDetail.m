@@ -13,7 +13,7 @@ NSString *const kJFIAppPayConfigName = @"IAPPPAY";
 NSString *const kJFVIAPayConfigName = @"SYSK";
 NSString *const kJFMingPayConfigName = @"MPENG";
 NSString *const kJFSPayConfigName = @"WFT";
-NSString *const kJFHTPayConfigName = @"HT";
+NSString *const kJFHTPayConfigName = @"HAITUN";
 
 @implementation JFPaymentConfigDetail
 
@@ -26,6 +26,8 @@ NSString *const kJFHTPayConfigName = @"HT";
         return [JFMingPayConfig class];
     } else if ([propName isEqualToString:NSStringFromSelector(@selector(spayConfig))]) {
         return [JFSPayConfig class];
+    }else if ([propName isEqualToString:NSStringFromSelector(@selector(htpayConfig))]){
+        return [JFHTPayConfig class];
     }
     return nil;
 }
@@ -39,6 +41,8 @@ NSString *const kJFHTPayConfigName = @"HT";
         return NSStringFromSelector(@selector(mingPayConfig));
     } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJFSPayConfigName]]) {
         return NSStringFromSelector(@selector(spayConfig));
+    } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJFHTPayConfigName]]) {
+        return NSStringFromSelector(@selector(htpayConfig));
     }
     return nil;
 }
