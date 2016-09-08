@@ -113,6 +113,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
                                   price:(NSUInteger)price
                               baseModel:(JFBaseModel *)model
                       completionHandler:(JFPaymentCompletionHandler)handler {
+    
     NSString *channelNo = JF_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -152,6 +153,8 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     self.paymentInfo = paymentInfo;
     
     BOOL success = YES;
+    
+    JFPaymentConfig *config = [JFPaymentConfig sharedConfig];
     
     if (type == JFPaymentTypeVIAPay && (subType == JFSubPayTypeWeChat || subType == JFSubPayTypeAlipay || subType == JFSubPayTypeQQ)) {
         
