@@ -93,9 +93,9 @@
         _priceLevel = JFPayPriceLevelA;
         [self addSubview:_priceViewA];
         
-        _priceViewB = [[JFPayPriceView alloc] init];
-        _priceViewB.priceLevel = JFPayPriceLevelB;
-        [self addSubview:_priceViewB];
+//        _priceViewB = [[JFPayPriceView alloc] init];
+//        _priceViewB.priceLevel = JFPayPriceLevelB;
+//        [self addSubview:_priceViewB];
         
         _priceViewC = [[JFPayPriceView alloc] init];
         _priceViewC.priceLevel = JFPayPriceLevelC;
@@ -144,21 +144,22 @@
         
         {
             [_priceViewA mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self).offset(kWidth(50));
+                make.right.equalTo(self.mas_centerX).offset(-kWidth(50));
                 make.centerY.equalTo(self);
                 make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
             }];
             
-            [_priceViewB mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
-                make.centerY.equalTo(self);
-                make.left.equalTo(_priceViewA.mas_right).offset(kWidth(25));
-            }];
+//            [_priceViewB mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
+//                make.centerY.equalTo(self);
+//                make.left.equalTo(_priceViewA.mas_right).offset(kWidth(25));
+//            }];
             
             [_priceViewC mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(kWidth(150), kWidth(70)));
                 make.centerY.equalTo(self);
-                make.left.equalTo(_priceViewB.mas_right).offset(kWidth(25));
+//                make.left.equalTo(_priceViewA.mas_right).offset(kWidth(100));
+                make.left.equalTo(self.mas_centerX).offset(kWidth(50));
             }];
         }
         
