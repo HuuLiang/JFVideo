@@ -70,8 +70,6 @@
 		EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72831D1BEC70009950CB /* JFHomeModel.m */; };
 		EC2E72871D1BEDEF009950CB /* JFHomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */; };
 		EC398C4E1D82A5EA009D2820 /* DXTXPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC398C4D1D82A5EA009D2820 /* DXTXPayManager.m */; };
-		EC398C621D82CCAF009D2820 /* libDXTXPaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC398C601D82CCAF009D2820 /* libDXTXPaySDK.a */; };
-		EC398C631D82CCAF009D2820 /* SPaySDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC398C611D82CCAF009D2820 /* SPaySDKResource.bundle */; };
 		EC3AFB901D780ECB0055FA84 /* NSObject+DictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFB8F1D780ECB0055FA84 /* NSObject+DictionaryRepresentation.m */; };
 		EC3AFB931D780F130055FA84 /* JFPaymentConfigDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFB921D780F130055FA84 /* JFPaymentConfigDetail.m */; };
 		EC3AFB961D780F2A0055FA84 /* JFPaymentConfigSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFB951D780F2A0055FA84 /* JFPaymentConfigSummary.m */; };
@@ -127,6 +125,8 @@
 		ECAEA9891D17EE7400926044 /* JFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9881D17EE7400926044 /* JFHomeViewController.m */; };
 		ECAEA9941D17EFCD00926044 /* JFChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9931D17EFCD00926044 /* JFChannelViewController.m */; };
 		ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAEA9961D17F02D00926044 /* JFMineViewController.m */; };
+		ECB6D7DD1D82F9AD00F95730 /* libDXTXPaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB6D7DB1D82F9AD00F95730 /* libDXTXPaySDK.a */; };
+		ECB6D7DE1D82F9AD00F95730 /* SPaySDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECB6D7DC1D82F9AD00F95730 /* SPaySDKResource.bundle */; };
 		ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */; };
 		ECBF02541D40D762000F93E8 /* UIImageView+YPBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */; };
 		ECF3AC311D6E8C5D009E7A54 /* JFPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF3AC301D6E8C5D009E7A54 /* JFPayTypeView.m */; };
@@ -248,9 +248,6 @@
 		EC2E72861D1BEDEF009950CB /* JFHomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHomeSectionHeaderView.m; sourceTree = "<group>"; };
 		EC398C4C1D82A5EA009D2820 /* DXTXPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTXPayManager.h; sourceTree = "<group>"; };
 		EC398C4D1D82A5EA009D2820 /* DXTXPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTXPayManager.m; sourceTree = "<group>"; };
-		EC398C5F1D82CCAF009D2820 /* PayuPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayuPlugin.h; sourceTree = "<group>"; };
-		EC398C601D82CCAF009D2820 /* libDXTXPaySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDXTXPaySDK.a; sourceTree = "<group>"; };
-		EC398C611D82CCAF009D2820 /* SPaySDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SPaySDKResource.bundle; sourceTree = "<group>"; };
 		EC3AFB8E1D780ECB0055FA84 /* NSObject+DictionaryRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryRepresentation.h"; sourceTree = "<group>"; };
 		EC3AFB8F1D780ECB0055FA84 /* NSObject+DictionaryRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryRepresentation.m"; sourceTree = "<group>"; };
 		EC3AFB911D780F130055FA84 /* JFPaymentConfigDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentConfigDetail.h; sourceTree = "<group>"; };
@@ -366,6 +363,9 @@
 		ECAEA9931D17EFCD00926044 /* JFChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFChannelViewController.m; sourceTree = "<group>"; };
 		ECAEA9951D17F02D00926044 /* JFMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMineViewController.h; sourceTree = "<group>"; };
 		ECAEA9961D17F02D00926044 /* JFMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMineViewController.m; sourceTree = "<group>"; };
+		ECB6D7DA1D82F9AD00F95730 /* PayuPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayuPlugin.h; sourceTree = "<group>"; };
+		ECB6D7DB1D82F9AD00F95730 /* libDXTXPaySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDXTXPaySDK.a; sourceTree = "<group>"; };
+		ECB6D7DC1D82F9AD00F95730 /* SPaySDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SPaySDKResource.bundle; sourceTree = "<group>"; };
 		ECBF02501D40D6A7000F93E8 /* setting_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setting_banner.jpg; sourceTree = "<group>"; };
 		ECBF02521D40D762000F93E8 /* UIImageView+YPBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YPBAnimation.h"; sourceTree = "<group>"; };
 		ECBF02531D40D762000F93E8 /* UIImageView+YPBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YPBAnimation.m"; sourceTree = "<group>"; };
@@ -403,7 +403,7 @@
 				EC2808D11D34D01B00E7E76E /* Security.framework in Frameworks */,
 				EC2808CF1D34D00500E7E76E /* CoreMotion.framework in Frameworks */,
 				A6CFFE44A5A08BD86B35F5A3 /* libPods-JFVideo.a in Frameworks */,
-				EC398C621D82CCAF009D2820 /* libDXTXPaySDK.a in Frameworks */,
+				ECB6D7DD1D82F9AD00F95730 /* libDXTXPaySDK.a in Frameworks */,
 				EC2808CD1D34CFAC00E7E76E /* libWeChatSDK.a in Frameworks */,
 				B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */,
 			);
@@ -611,21 +611,13 @@
 		EC398C4B1D82A5EA009D2820 /* DunXingTianXia */ = {
 			isa = PBXGroup;
 			children = (
-				EC398C5E1D82CCAF009D2820 /* include */,
-				EC398C601D82CCAF009D2820 /* libDXTXPaySDK.a */,
-				EC398C611D82CCAF009D2820 /* SPaySDKResource.bundle */,
+				ECB6D7D91D82F9AD00F95730 /* include */,
+				ECB6D7DB1D82F9AD00F95730 /* libDXTXPaySDK.a */,
+				ECB6D7DC1D82F9AD00F95730 /* SPaySDKResource.bundle */,
 				EC398C4C1D82A5EA009D2820 /* DXTXPayManager.h */,
 				EC398C4D1D82A5EA009D2820 /* DXTXPayManager.m */,
 			);
 			path = DunXingTianXia;
-			sourceTree = "<group>";
-		};
-		EC398C5E1D82CCAF009D2820 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				EC398C5F1D82CCAF009D2820 /* PayuPlugin.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		EC6250591D30A4C500054005 /* Resources */ = {
@@ -1056,6 +1048,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ECB6D7D91D82F9AD00F95730 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				ECB6D7DA1D82F9AD00F95730 /* PayuPlugin.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1134,7 +1134,7 @@
 				ECBF02511D40D6A7000F93E8 /* setting_banner.jpg in Resources */,
 				B35F64561D474C2300E03202 /* public_key.der in Resources */,
 				B35F64501D474C2300E03202 /* btn9.png in Resources */,
-				EC398C631D82CCAF009D2820 /* SPaySDKResource.bundle in Resources */,
+				ECB6D7DE1D82F9AD00F95730 /* SPaySDKResource.bundle in Resources */,
 				B35F64531D474C2300E03202 /* Config.txt in Resources */,
 				B35F644C1D474C2300E03202 /* btn5.png in Resources */,
 				ECAEA7EC1D17BFE900926044 /* Assets.xcassets in Resources */,
@@ -1428,7 +1428,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
+				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1466,7 +1466,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
+				PROVISIONING_PROFILE = "900f596d-8c35-461b-bc5b-2245786086b6";
 			};
 			name = Release;
 		};

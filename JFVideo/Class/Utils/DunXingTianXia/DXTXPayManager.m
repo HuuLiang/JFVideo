@@ -56,8 +56,8 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
                                             O_bizcode:paymentInfo.orderId
                                            o_goods_id:[self.waresid intValue]
                                          o_goods_name:paymentInfo.orderDescription
-                                              o_price:[paymentInfo.orderPrice doubleValue]
-                                        o_privateinfo:nil
+                                              o_price:[paymentInfo.orderPrice doubleValue] /100.
+                                        o_privateinfo:[NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO]
                                                Scheme:kDxtxSchemeUrl
                                                AppKey:self.appKey
                                         completeBlock:^(NSDictionary *result)
