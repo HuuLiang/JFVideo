@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, JFURLRequestMethod) {
     JFURLGetRequest,
     JFURLPostRequest
 };
-typedef void (^LTURLResponseHandler)(JFURLResponseStatus respStatus, NSString *errorMessage);
+typedef void (^JFURLResponseHandler)(JFURLResponseStatus respStatus, NSString *errorMessage);
 
 
 @interface JFURLRequest : NSObject
@@ -36,12 +36,12 @@ typedef void (^LTURLResponseHandler)(JFURLResponseStatus respStatus, NSString *e
 - (BOOL)shouldPostErrorNotification;
 - (JFURLRequestMethod)requestMethod;
 
-- (BOOL)requestURLPath:(NSString *)urlPath withParams:(NSDictionary *)params responseHandler:(LTURLResponseHandler)responseHandler;
+- (BOOL)requestURLPath:(NSString *)urlPath withParams:(NSDictionary *)params responseHandler:(JFURLResponseHandler)responseHandler;
 
-- (BOOL)requestURLPath:(NSString *)urlPath standbyURLPath:(NSString *)standbyUrlPath withParams:(NSDictionary *)params responseHandler:(LTURLResponseHandler)responseHandler;
+- (BOOL)requestURLPath:(NSString *)urlPath standbyURLPath:(NSString *)standbyUrlPath withParams:(NSDictionary *)params responseHandler:(JFURLResponseHandler)responseHandler;
 
 // For subclass pre/post processing response object
-- (void)processResponseObject:(id)responseObject withResponseHandler:(LTURLResponseHandler)responseHandler;
+- (void)processResponseObject:(id)responseObject withResponseHandler:(JFURLResponseHandler)responseHandler;
 
 
 @end

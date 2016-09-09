@@ -20,7 +20,7 @@
            withParams:(NSDictionary *)params
             isStandby:(BOOL)isStandBy
     shouldNotifyError:(BOOL)shouldNotifyError
-      responseHandler:(LTURLResponseHandler)responseHandler;
+      responseHandler:(JFURLResponseHandler)responseHandler;
 @end
 
 @implementation JFURLRequest
@@ -30,6 +30,10 @@
 }
 
 + (BOOL)shouldPersistURLResponse {
+    return NO;
+}
+
+- (BOOL)isPlainResponse {
     return NO;
 }
 
@@ -78,6 +82,10 @@
     
     _requestOpManager = [[AFHTTPRequestOperationManager alloc]
                          initWithBaseURL:[self baseURL]];
+    if ([self isPlainResponse]) {
+        _requestOpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    }
+    
     return _requestOpManager;
 }
 
@@ -87,6 +95,7 @@
     }
     
     _standbyRequestOpManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[self standbyBaseURL]];
+    
     return _standbyRequestOpManager;
 }
 
@@ -94,7 +103,7 @@
            withParams:(NSDictionary *)params
             isStandby:(BOOL)isStandBy
     shouldNotifyError:(BOOL)shouldNotifyError
-      responseHandler:(LTURLResponseHandler)responseHandler
+      responseHandler:(JFURLResponseHandler)responseHandler
 {
     if (urlPath.length == 0) {
         if (responseHandler) {
@@ -147,7 +156,7 @@
     return YES;
 }
 
-- (BOOL)requestURLPath:(NSString *)urlPath standbyURLPath:(NSString *)standbyUrlPath withParams:(NSDictionary *)params responseHandler:(LTURLResponseHandler)responseHandler {
+- (BOOL)requestURLPath:(NSString *)urlPath standbyURLPath:(NSString *)standbyUrlPath withParams:(NSDictionary *)params responseHandler:(JFURLResponseHandler)responseHandler {
     BOOL useStandbyRequest = standbyUrlPath.length > 0;
     BOOL success = [self requestURLPath:urlPath
                              withParams:params
@@ -166,12 +175,12 @@
     return success;
 }
 
--(BOOL)requestURLPath:(NSString *)urlPath withParams:(NSDictionary *)params responseHandler:(LTURLResponseHandler)responseHandler
+-(BOOL)requestURLPath:(NSString *)urlPath withParams:(NSDictionary *)params responseHandler:(JFURLResponseHandler)responseHandler
 {
     return [self requestURLPath:urlPath standbyURLPath:nil withParams:params responseHandler:responseHandler];
 }
 
-- (void)processResponseObject:(id)responseObject withResponseHandler:(LTURLResponseHandler)responseHandler {
+- (void)processResponseObject:(id)responseObject withResponseHandler:(JFURLResponseHandler)responseHandler {
     JFURLResponseStatus status = JFURLResponseNone;
     NSString *errorMessage;
     if ([responseObject isKindOfClass:[NSDictionary class]]) {

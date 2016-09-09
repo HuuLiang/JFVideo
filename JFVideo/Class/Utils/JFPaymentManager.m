@@ -11,9 +11,12 @@
 #import "JFBaseModel.h"
 #import <PayUtil/PayUtil.h>
 #import "IappPayMananger.h"
-#import "MingPayManager.h"
+
 #import "JFSystemConfigModel.h"
-#import "HTPayManager.h"
+
+
+#import "DXTXPayManager.h"
+
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
     JFVIAPayTypeNone,
@@ -25,6 +28,7 @@ typedef NS_ENUM(NSUInteger, JFVIAPayType) {
 
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
+static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
 
 @interface JFPaymentManager () <stringDelegate>
 @property (nonatomic,retain) JFPaymentInfo *paymentInfo;
@@ -48,12 +52,10 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
-//        JFPaymentConfig *config = (JFPaymentConfig *)obj;
-//        if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
-//            [[HTPaymentManager sharedManager] registHaiTunPayWithSignVal:config.configDetails.htpayConfig.key mreId:config.configDetails.htpayConfig.mchId];
-//        }
-        if ([JFPaymentConfig sharedConfig].configDetails.mingPayConfig) {
-            [MingPayManager sharedManager].mch = [JFPaymentConfig sharedConfig].configDetails.mingPayConfig.mch;
+        if ([JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig) {
+            [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+            [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+            [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
         }
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
@@ -105,6 +107,8 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         [[IappPayMananger sharedMananger] handleOpenURL:url];
     } else if ([url.absoluteString rangeOfString:KAliPaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
+    } else if ([url.absoluteString rangeOfString:kDxtxSchemeUrl].location == 0) {
+        [[DXTXPayManager sharedManager] handleOpenURL:url];
     }
 }
 
@@ -125,6 +129,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 //        price = 100;
 //    }
 //#endif
+    price = 200;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -136,14 +141,16 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     paymentInfo.payPointType = @(1);
     paymentInfo.paymentTime = [JFUtil currentTimeString];
     paymentInfo.paymentType = @(type);
+    paymentInfo.paymentSubType = @(subType);
     paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
     paymentInfo.paymentStatus = @(JFPaymentStatusPaying);
     paymentInfo.reservedData = [JFUtil paymentReservedData];
     
-    //    NSString *servicePhone = [JFSystemConfigModel sharedModel].contact;
-    if (type == JFPaymentTypeMingPay) {
-        paymentInfo.orderDescription =  @"VIP";
-        paymentInfo.orderId = [[MingPayManager sharedManager] processOrderNo:orderNo];
+
+    if (type == JFPaymentTypeDXTXPay) {
+        NSString *contactName = [JFSystemConfigModel sharedModel].contactName;
+        NSString *tradeName = @"VIP会员";
+        paymentInfo.orderDescription = contactName.length > 0 ? [tradeName stringByAppendingFormat:@"(%@)", contactName] : tradeName;
     }
     
     [paymentInfo save];
@@ -188,28 +195,17 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         }];
         
         
-    }else if (type == JFPaymentTypeMingPay){
+    } else if (type == JFPaymentTypeDXTXPay && (subType == JFSubPayTypeWeChat || subType == JFSubPayTypeAlipay)) {
         @weakify(self);
-        [[MingPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
-            @strongify(self);
-            
-            if (self.completionHandler) {
-                self.completionHandler(payResult, self.paymentInfo);
-            }
-        }];
-    }else if (type == JFPaymentTypeHTPay){
-        @weakify(self);
-        [HTPayManager sharedManager].mchId = [JFPaymentConfig sharedConfig].configDetails.htpayConfig.mchId;
-        [HTPayManager sharedManager].key = [JFPaymentConfig sharedConfig].configDetails.htpayConfig.key;
-        [HTPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.htpayConfig.notifyUrl;
-        
-        [[HTPayManager sharedManager] payWithPaymentInfo:paymentInfo
-                                       completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
+        [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+        [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+        [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+        [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
+                                         completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
          {
              @strongify(self);
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, self.paymentInfo);
-             }
+             [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
+             SafelyCallBlock4(self.completionHandler, payResult, paymentInfo);
          }];
     } else {
         success = NO;
@@ -221,6 +217,12 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     
     return success ? paymentInfo : nil;
 }
+
+- (void)onPaymentResult:(PAYRESULT)payResult withPaymentInfo:(JFPaymentInfo *)paymentInfo {
+    
+}
+
+
 
 #pragma mark - stringDelegate
 

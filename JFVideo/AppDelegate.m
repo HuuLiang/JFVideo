@@ -17,7 +17,7 @@
 #import "JFPaymentManager.h"
 #import "MobClick.h"
 #import "JFLaunchView.h"
-
+#import "PayuPlugin.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
@@ -221,6 +221,10 @@
     return YES;
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [[PayuPlugin defaultPlugin] applicationWillEnterForeground:application];
+}
+
 #pragma mark - UITabBarControllerDelegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
@@ -231,6 +235,5 @@
     [[JFStatsManager sharedManager] statsStopDurationAtTabIndex:tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
     return YES;
 }
-
 
 @end

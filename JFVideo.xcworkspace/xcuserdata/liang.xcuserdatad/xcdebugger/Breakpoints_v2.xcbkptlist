@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JFVideo/Class/Utils/JFPaymentManager.m"
-            timestampString = "495017057.96697"
+            filePath = "JFVideo/Class/Utils/DunXingTianXia/DXTXPayManager.m"
+            timestampString = "495118298.881858"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-startPaymentWithType:subType:price:baseModel:completionHandler:"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "-payWithPaymentInfo:completionHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

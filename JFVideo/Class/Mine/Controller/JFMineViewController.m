@@ -62,7 +62,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         if (cell == self->_vipCell || cell == self->_bannerCell) {
             [self payWithInfo:nil];
         } else if (cell == self->_protocolCell) {
-            JFWebViewController *webVC = [[JFWebViewController alloc] initWithURL:[NSURL URLWithString:JF_PROTOCOL_URL]];
+            JFWebViewController *webVC = [[JFWebViewController alloc] initWithURL:[NSURL URLWithString:JF_PROTOCOL_URL] standbyURL:nil];
             webVC.title = @"用户协议";
             [self.navigationController pushViewController:webVC animated:YES];
         } else if (cell == self->_telCell) {

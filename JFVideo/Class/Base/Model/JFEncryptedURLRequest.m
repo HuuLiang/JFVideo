@@ -45,11 +45,11 @@ static NSString *const kEncryptionPasssword = @"f7@j3%#5aiG$4";
     return [mergedParams encryptedDictionarySignedTogetherWithDictionary:commonParams keyOrders:[[self class] keyOrdersOfCommonParams] passwordKeyName:kEncryptionKeyName];
 }
 
-- (BOOL)requestURLPath:(NSString *)urlPath withParams:(NSDictionary *)params responseHandler:(LTURLResponseHandler)responseHandler {
+- (BOOL)requestURLPath:(NSString *)urlPath withParams:(NSDictionary *)params responseHandler:(JFURLResponseHandler)responseHandler {
     return [self requestURLPath:urlPath standbyURLPath:nil withParams:params responseHandler:responseHandler];
 }
 
-- (BOOL)requestURLPath:(NSString *)urlPath standbyURLPath:(NSString *)standbyUrlPath withParams:(NSDictionary *)params responseHandler:(LTURLResponseHandler)responseHandler {
+- (BOOL)requestURLPath:(NSString *)urlPath standbyURLPath:(NSString *)standbyUrlPath withParams:(NSDictionary *)params responseHandler:(JFURLResponseHandler)responseHandler {
     return [super requestURLPath:urlPath standbyURLPath:standbyUrlPath withParams:[self encryptWithParams:params] responseHandler:responseHandler];
 }
 
@@ -73,7 +73,7 @@ static NSString *const kEncryptionPasssword = @"f7@j3%#5aiG$4";
     return jsonObject;
 }
 
-- (void)processResponseObject:(id)responseObject withResponseHandler:(LTURLResponseHandler)responseHandler {
+- (void)processResponseObject:(id)responseObject withResponseHandler:(JFURLResponseHandler)responseHandler {
     
     if (![responseObject isKindOfClass:[NSDictionary class]]) {
         [super processResponseObject:nil withResponseHandler:responseHandler];

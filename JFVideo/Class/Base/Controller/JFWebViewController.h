@@ -9,6 +9,12 @@
 #import "JFBaseViewController.h"
 
 @interface JFWebViewController : JFBaseViewController
+
 @property (nonatomic) NSURL *url;
-- (instancetype)initWithURL:(NSURL *)url;
+@property (nonatomic,readonly) NSURL *standbyUrl;
+@property (nonatomic,readonly) NSString *htmlString;
+
+- (instancetype)initWithURL:(NSURL *)url standbyURL:(NSURL *)standbyUrl;
+- (instancetype)initWithHTML:(NSString *)htmlString;
+
 @end

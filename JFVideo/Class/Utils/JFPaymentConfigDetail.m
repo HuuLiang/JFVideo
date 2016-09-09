@@ -14,6 +14,9 @@ NSString *const kJFVIAPayConfigName = @"SYSK";
 NSString *const kJFMingPayConfigName = @"MPENG";
 NSString *const kJFSPayConfigName = @"WFT";
 NSString *const kJFHTPayConfigName = @"HAITUN";
+NSString *const kJFWeiYingConfigName = @"WEIYINGSDK";
+NSString *const kJFDXTXPayConfigName = @"DXTX";
+
 
 @implementation JFPaymentConfigDetail
 
@@ -26,8 +29,12 @@ NSString *const kJFHTPayConfigName = @"HAITUN";
         return [JFMingPayConfig class];
     } else if ([propName isEqualToString:NSStringFromSelector(@selector(spayConfig))]) {
         return [JFSPayConfig class];
-    }else if ([propName isEqualToString:NSStringFromSelector(@selector(htpayConfig))]){
+    } else if ([propName isEqualToString:NSStringFromSelector(@selector(htpayConfig))]){
         return [JFHTPayConfig class];
+    } else if ([propName isEqualToString:NSStringFromSelector(@selector(weiYingPayConfig))]) {
+        return [JFWeiYingPayConfig class];
+    } else if ([propName isEqualToString:NSStringFromSelector(@selector(dxtxPayConfig))]) {
+        return [JFDXTXPayConfig class];
     }
     return nil;
 }
@@ -43,6 +50,10 @@ NSString *const kJFHTPayConfigName = @"HAITUN";
         return NSStringFromSelector(@selector(spayConfig));
     } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJFHTPayConfigName]]) {
         return NSStringFromSelector(@selector(htpayConfig));
+    } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJFWeiYingConfigName]]) {
+        return NSStringFromSelector(@selector(weiYingPayConfig));
+    } else if ([parsingName hasSuffix:[@"-" stringByAppendingString:kJFDXTXPayConfigName]]) {
+        return NSStringFromSelector(@selector(dxtxPayConfig));
     }
     return nil;
 }
@@ -187,3 +198,12 @@ NSString *const kJFHTPayConfigName = @"HAITUN";
     return config;
 }
 @end
+
+@implementation JFWeiYingPayConfig
+
+@end
+
+@implementation JFDXTXPayConfig
+
+@end
+

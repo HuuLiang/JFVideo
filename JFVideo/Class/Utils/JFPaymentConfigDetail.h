@@ -14,12 +14,18 @@
 @class JFMingPayConfig;
 @class JFSPayConfig;
 @class JFHTPayConfig;
+@class JFWeiYingPayConfig;
+@class JFDXTXPayConfig;
+
 
 extern NSString *const kJFIAppPayConfigName;
 extern NSString *const kJFVIAPayConfigName;
 extern NSString *const kJFMingPayConfigName;
 extern NSString *const kJFSPayConfigName;
 extern NSString *const kJFHTPayConfigName;
+extern NSString *const kJFWeiYingConfigName;
+extern NSString *const kJFDXTXPayConfigName;
+
 
 @interface JFPaymentConfigDetail : NSObject <JFResponseParsable>
 
@@ -28,7 +34,8 @@ extern NSString *const kJFHTPayConfigName;
 @property (nonatomic,retain) JFMingPayConfig *mingPayConfig; //明鹏支付
 @property (nonatomic,retain) JFSPayConfig *spayConfig; //威富通
 @property (nonatomic,retain) JFHTPayConfig *htpayConfig;//海豚支付
-
+@property (nonatomic,retain) JFWeiYingPayConfig *weiYingPayConfig; //微赢支付
+@property (nonatomic,retain) JFDXTXPayConfig *dxtxPayConfig; //盾行天下
 @end
 
 @interface JFIAppPayConfig : NSObject
@@ -70,3 +77,15 @@ extern NSString *const kJFHTPayConfigName;
 @property (nonatomic) NSString *key;
 @property (nonatomic) NSString *notifyUrl;
 @end
+
+@interface JFWeiYingPayConfig : NSObject
+@property (nonatomic) NSString *mchId;
+@property (nonatomic) NSString *notifyUrl;
+@end
+
+@interface JFDXTXPayConfig : NSObject
+@property (nonatomic) NSString *appKey;
+@property (nonatomic) NSString *notifyUrl;
+@property (nonatomic) NSNumber *waresid;
+@end
+
