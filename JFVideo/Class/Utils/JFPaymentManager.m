@@ -129,7 +129,7 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
 //        price = 100;
 //    }
 //#endif
-//    price = 200;
+//    price = 1000;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);

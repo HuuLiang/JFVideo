@@ -50,7 +50,7 @@
                                 if ([config.name isEqualToString:@"PAY_AMOUNT"]) {
                                     [JFSystemConfigModel sharedModel].payAmount = [config.value integerValue];
 //                                    [JFSystemConfigModel sharedModel].payAmountPlus = [config.value integerValue] + 2000;
-                                    [JFSystemConfigModel sharedModel].payAmountPlusPlus = [config.value integerValue] + 5000;
+                                    [JFSystemConfigModel sharedModel].payAmountPlusPlus = 10000;//[config.value integerValue] + 5000;
                                 }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_SCHEME]){
                                     [JFSystemConfigModel sharedModel].contactScheme = config.value;
                                 }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_NAME]){
