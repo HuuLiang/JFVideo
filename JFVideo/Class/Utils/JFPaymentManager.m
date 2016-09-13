@@ -222,8 +222,6 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
     
 }
 
-
-
 #pragma mark - stringDelegate
 
 - (void)getResult:(NSDictionary *)sender {
