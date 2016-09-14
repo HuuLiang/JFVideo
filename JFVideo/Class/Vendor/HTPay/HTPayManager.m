@@ -64,7 +64,7 @@ static NSString * const kHTPayType          = @"b";
                                @"p3_Amt": [NSString stringWithFormat:@"%ld",[paymentInfo.orderPrice integerValue]/100],//支付金额
                                @"p7_Pdesc": @"VIP",//paymentInfo.orderDescription,//商品描述
                                @"p8_Url": _config.configDetails.htpayConfig.notifyUrl,//支付成功后会跳转此地址
-                               @"Sjt_UserName": @"asdfaaa",//支付用户
+                               @"Sjt_UserName": [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO],//支付用户
                                };
     //调用支付方法
     [[HaiTunPay shareInstance] requestWithUrl:[HaiTunPay shareInstance].haiTunPayBaseUrl

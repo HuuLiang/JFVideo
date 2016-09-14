@@ -264,7 +264,7 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    //这一步判断HTPayManager 如果没有直接就是出发自主查询
+    //这一步判断HTPayManager 如果没有直接就是触发自主查询
     [[HTPayManager sharedManager] searchOrderState];
 }
 
