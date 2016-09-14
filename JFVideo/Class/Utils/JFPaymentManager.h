@@ -16,6 +16,8 @@
 
 - (void)setup;
 
+- (void)setupWithCompletionHandler:(JFCompletionHandler)handler;
+
 - (JFPaymentInfo *)startPaymentWithType:(JFPaymentType)type
                                 subType:(JFSubPayType)subType
                                   price:(NSUInteger)price

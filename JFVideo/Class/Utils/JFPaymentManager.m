@@ -13,9 +13,9 @@
 #import "IappPayMananger.h"
 
 #import "JFSystemConfigModel.h"
+//#import "DXTXPayManager.h"
+#import "HTPayManager.h"
 
-
-#import "DXTXPayManager.h"
 
 
 typedef NS_ENUM(NSUInteger, JFVIAPayType) {
@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, JFVIAPayType) {
 static NSString *const KAliPaySchemeUrl = @"comjfyingyuanappalipayurlscheme";
 static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
+
 
 @interface JFPaymentManager () <stringDelegate>
 @property (nonatomic,retain) JFPaymentInfo *paymentInfo;
@@ -47,16 +48,63 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
     return _sharedManager;
 }
 
+- (void)setupWithCompletionHandler:(JFCompletionHandler)handler {
+    [[PayUitls getIntents] initSdk];
+    [paySender getIntents].delegate = self;
+    
+    [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
+        if ([JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig) {
+//            [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+//            [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+//            [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+        }
+        if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
+            
+        }
+        if (success) {
+            handler(success,obj);
+        }
+        
+    }];
+    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
+    
+    Class class = NSClassFromString(@"VIASZFViewController");
+    if (class) {
+        [class aspect_hookSelector:NSSelectorFromString(@"viewWillAppear:")
+                       withOptions:AspectPositionAfter
+                        usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated)
+         {
+             UIViewController *thisVC = [aspectInfo instance];
+             if ([thisVC respondsToSelector:NSSelectorFromString(@"buy")]) {
+                 UIViewController *buyVC = [thisVC valueForKey:@"buy"];
+                 [buyVC.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                     if ([obj isKindOfClass:[UIButton class]]) {
+                         UIButton *buyButton = (UIButton *)obj;
+                         if ([[buyButton titleForState:UIControlStateNormal] isEqualToString:@"购卡支付"]) {
+                             [buyButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                         }
+                     }
+                 }];
+             }
+         } error:nil];
+    }
+
+}
+
 - (void)setup {
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
     
     [[JFPaymentConfigModel sharedModel] fetchPaymentConfigInfoWithCompletionHandler:^(BOOL success, id obj) {
         if ([JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig) {
-            [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
-            [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
-            [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+//            [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+//            [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+//            [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
         }
+        if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
+            
+        }
+        
     }];
     [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     
@@ -102,13 +150,12 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
 }
 
 - (void)handleOpenUrl:(NSURL *)url {
-    
     if ([url.absoluteString rangeOfString:kIappPaySchemeUrl].location == 0) {
         [[IappPayMananger sharedMananger] handleOpenURL:url];
     } else if ([url.absoluteString rangeOfString:KAliPaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
     } else if ([url.absoluteString rangeOfString:kDxtxSchemeUrl].location == 0) {
-        [[DXTXPayManager sharedManager] handleOpenURL:url];
+//        [[DXTXPayManager sharedManager] handleOpenURL:url];
     }
 }
 
@@ -129,7 +176,7 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
 //        price = 100;
 //    }
 //#endif
-//    price = 1000;
+    price = 200;
     JFPaymentInfo *paymentInfo = [[JFPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
@@ -147,7 +194,7 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
     paymentInfo.reservedData = [JFUtil paymentReservedData];
     
 
-    if (type == JFPaymentTypeDXTXPay) {
+    if (type == JFPaymentTypeDXTXPay || type == JFPaymentTypeHTPay) {
         NSString *contactName = [JFSystemConfigModel sharedModel].contactName;
         NSString *tradeName = @"VIP会员";
         paymentInfo.orderDescription = contactName.length > 0 ? [tradeName stringByAppendingFormat:@"(%@)", contactName] : tradeName;
@@ -196,17 +243,26 @@ static NSString *const kDxtxSchemeUrl = @"comjfyingyuanDXTXPayDemoscheme";
         
         
     } else if (type == JFPaymentTypeDXTXPay && (subType == JFSubPayTypeWeChat || subType == JFSubPayTypeAlipay)) {
+//        @weakify(self);
+//        [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
+//        [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
+//        [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
+//        [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
+//                                         completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
+//         {
+//             @strongify(self);
+//             [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
+//             SafelyCallBlock4(self.completionHandler, payResult, paymentInfo);
+//         }];
+    } else if (type == JFPaymentTypeHTPay) {
         @weakify(self);
-        [DXTXPayManager sharedManager].appKey = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.appKey;
-        [DXTXPayManager sharedManager].notifyUrl = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.notifyUrl;
-        [DXTXPayManager sharedManager].waresid = [JFPaymentConfig sharedConfig].configDetails.dxtxPayConfig.waresid;
-        [[DXTXPayManager sharedManager] payWithPaymentInfo:paymentInfo
-                                         completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
-         {
-             @strongify(self);
-             [self onPaymentResult:payResult withPaymentInfo:paymentInfo];
-             SafelyCallBlock4(self.completionHandler, payResult, paymentInfo);
-         }];
+        [[HTPayManager sharedManager] payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo) {
+            @strongify(self);
+            if (self.completionHandler) {
+                SafelyCallBlock4(self.completionHandler,payResult,paymentInfo);
+            }
+        }];
+        
     } else {
         success = NO;
         

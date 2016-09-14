@@ -88,9 +88,10 @@
     
     {
         [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(view);
+            make.centerY.equalTo(view.mas_centerY);
             make.right.equalTo(view.mas_centerX).offset(-kWidth(40));
-            make.size.mas_equalTo(CGSizeMake(kWidth(image.size.width * 2), kWidth(image.size.height * 2)));
+//            make.size.mas_equalTo(CGSizeMake(kWidth(image.size.width * 2), kWidth(image.size.height * 2)));
+            make.size.mas_equalTo(CGSizeMake(kWidth(44), kWidth(37)));
         }];
         
         [label mas_makeConstraints:^(MASConstraintMaker *make) {

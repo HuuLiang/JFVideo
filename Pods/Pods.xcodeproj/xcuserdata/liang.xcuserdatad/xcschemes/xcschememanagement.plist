@@ -94,10 +94,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>libqrencode.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1E9C22C6448D25EF9A5828DF0418C10F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>466902A3AF256B354D12233B229938A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,6 +132,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>59B5154DEC6908AAF54B5F46275BEC56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8F74D9EA91F4C43190670066BAC37D44</key>
 		<dict>
 			<key>primary</key>
@@ -132,27 +152,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A3F02F2007430679E4ED2E6FBE899012</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AE37877AD2AECD1A23FD79F611D51199</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B1FF8CC5BB24ED0C041E2DADB0B069F3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D4C93131B1D6797B1300901953127BF6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D765A1D0A2BCAD0D309C1A2FD15EE9D5</key>
+		<key>A0C3872CB27897C623F200709925DA12</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,7 +177,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E87E53EF3511EA8910C5FA8C3DC61902</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E9EF397B95762DDB254C71DDCB4B1381</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC99376D0EBB830E06EE85FBF2CF5E24</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -17,7 +17,13 @@
 #import "JFPaymentManager.h"
 #import "MobClick.h"
 #import "JFLaunchView.h"
-#import "PayuPlugin.h"
+//#import "PayuPlugin.h"
+#import "JFPaymentConfig.h"
+#import "SPayClient.h"
+#import "HTPayManager.h"
+
+static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
+
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
@@ -182,7 +188,17 @@
     [self setupCommonStyles];
     [[JFNetworkInfo sharedInfo] startMonitoring];
 
-    [[JFPaymentManager sharedManager] setup];
+//    [[JFPaymentManager sharedManager] setup];
+    [[JFPaymentManager sharedManager] setupWithCompletionHandler:^(BOOL success, id obj) {
+        if (success) {
+            if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
+                [[HTPayManager sharedManager] registerHaitunSDKWithApplication:application Options:launchOptions];
+            }
+        }
+    }];
+    
+    
+    
     [self setupMobStatistics];
     
     [self.window makeKeyAndVisible];
@@ -212,17 +228,44 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    [[JFPaymentManager sharedManager] handleOpenUrl:url];
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url {
+    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
+        [HTPayManager sharedManager].isAutoForeground = YES;
+        return [[SPayClient sharedInstance] application:application handleOpenURL:url];
+    } else {
+        [[JFPaymentManager sharedManager] handleOpenUrl:url];
+        return YES;
+    }
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
+        [HTPayManager sharedManager].isAutoForeground = YES;
+        [[SPayClient sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    } else {
+        [[JFPaymentManager sharedManager] handleOpenUrl:url];
+    }
     return YES;
 }
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-    [[JFPaymentManager sharedManager] handleOpenUrl:url];
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *,id> *)options {
+    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
+        [HTPayManager sharedManager].isAutoForeground = YES;
+        [[SPayClient sharedInstance] application:app openURL:url options:options];
+    } else {
+        [[JFPaymentManager sharedManager] handleOpenUrl:url];
+    }
     return YES;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[PayuPlugin defaultPlugin] applicationWillEnterForeground:application];
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    //这一步判断HTPayManager 如果没有直接就是出发自主查询
+    [[HTPayManager sharedManager] searchOrderState];
 }
 
 #pragma mark - UITabBarControllerDelegate

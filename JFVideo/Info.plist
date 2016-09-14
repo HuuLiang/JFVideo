@@ -50,9 +50,27 @@
 				<string>comjfyingyuanDXTXPayDemoscheme</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxd3c9c179bb827f2c</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>alipay</string>
+		<string>wechat</string>
+		<string>alipayqr</string>
+		<string>weixin</string>
+		<string>mqq</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -75,14 +93,6 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>alipay</string>
-		<string>wechat</string>
-		<string>alipayqr</string>
-		<string>weixin</string>
-		<string>mqq</string>
 	</array>
 </dict>
 </plist>

@@ -78,7 +78,7 @@
 //            UIImageView * bgImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pay_bgimg.jpg"]];
             UIImageView *bgImgV = [[UIImageView alloc] init];
             [bgImgV sd_setImageWithURL:[NSURL URLWithString:[JFSystemConfigModel sharedModel].payImg]];
-            _headerCell.backgroundView = bgImgV;
+            [_headerCell addSubview:bgImgV];
             
             UIButton *closeButton = [[UIButton alloc] init];
             closeButton.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
@@ -97,6 +97,10 @@
             
             
             {
+                [bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(_headerCell);
+                }];
+                
                 [closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.right.equalTo(_headerCell).offset(10);
                     make.top.equalTo(_headerCell).offset(-10);
@@ -115,7 +119,7 @@
                 }];
                 
                 [_payTypeView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.right.bottom.equalTo(shadeImgV);
+                    make.left.right.equalTo(shadeImgV);
                     make.height.mas_equalTo(kWidth(100));
                     make.bottom.equalTo(shadeImgV.mas_bottom).offset(-kWidth(30));
                 }];

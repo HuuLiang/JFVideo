@@ -17,5 +17,6 @@ target 'JFVideo' do
     pod 'TPKeyboardAvoiding', '~> 1.2.10'
     pod 'MWPhotoBrowser', '~> 2.1.1'
     pod 'FMDB', '~> 2.6.2'
+    pod 'libqrencode', '~> 3.4.2'
     #  pod 'iCarousel', '~> 1.8.2'
 end
