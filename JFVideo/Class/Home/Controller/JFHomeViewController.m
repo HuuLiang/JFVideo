@@ -311,17 +311,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     for (JFHomeColumnModel *column in self.dataSource) {
         if (column.type == 4) {
             JFHomeProgramModel * program = column.programList[index];
-            
-//            JFBaseModel *baseModel = [[JFBaseModel alloc] init];
-//            baseModel.realColumnId = @(column.realColumnId);
-//            baseModel.channelType = @(column.type);
-//            baseModel.programId = @(program.programId);
-//            baseModel.programType = @(program.type);
-//            baseModel.programLocation = index;
-//            
-//            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
-//            detailVC.baseModel = baseModel;
-//            [self.navigationController pushViewController:detailVC animated:YES];
+
        
             JFBaseModel *baseModel = [[JFBaseModel alloc] init];
             baseModel.realColumnId = @(column.realColumnId);
@@ -330,7 +320,10 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
             baseModel.programType = @(program.type);
             baseModel.programLocation = index;
             baseModel.spec = [program.spec integerValue];
-            [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
+//            [self playVideoWithInfo:baseModel videoUrl:program.videoUrl];
+            JFDetailViewController *detailVC = [[JFDetailViewController alloc] initWithColumnId:column.columnId ProgramId:program.programId];
+            detailVC.baseModel = baseModel;
+            [self.navigationController pushViewController:detailVC animated:YES];
             
             [[JFStatsManager sharedManager] statsCPCWithBeseModel:baseModel programLocation:index andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JFUtil currentSubTabPageIndex]];
         }
