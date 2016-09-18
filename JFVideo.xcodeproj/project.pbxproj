@@ -69,7 +69,6 @@
 		EC3AFB901D780ECB0055FA84 /* NSObject+DictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFB8F1D780ECB0055FA84 /* NSObject+DictionaryRepresentation.m */; };
 		EC3AFB931D780F130055FA84 /* JFPaymentConfigDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFB921D780F130055FA84 /* JFPaymentConfigDetail.m */; };
 		EC3AFB961D780F2A0055FA84 /* JFPaymentConfigSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFB951D780F2A0055FA84 /* JFPaymentConfigSummary.m */; };
-		EC3AFB9E1D7827360055FA84 /* pay_bgimg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC3AFB9D1D7827360055FA84 /* pay_bgimg.jpg */; };
 		EC3AFBA31D782D430055FA84 /* JFPaymentPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3AFBA21D782D430055FA84 /* JFPaymentPointView.m */; };
 		EC6250581D3097AC00054005 /* JFAppSpreadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6250571D3097AC00054005 /* JFAppSpreadModel.m */; };
 		EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */; };
@@ -248,7 +247,6 @@
 		EC3AFB921D780F130055FA84 /* JFPaymentConfigDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentConfigDetail.m; sourceTree = "<group>"; };
 		EC3AFB941D780F2A0055FA84 /* JFPaymentConfigSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentConfigSummary.h; sourceTree = "<group>"; };
 		EC3AFB951D780F2A0055FA84 /* JFPaymentConfigSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentConfigSummary.m; sourceTree = "<group>"; };
-		EC3AFB9D1D7827360055FA84 /* pay_bgimg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pay_bgimg.jpg; sourceTree = "<group>"; };
 		EC3AFBA11D782D430055FA84 /* JFPaymentPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPaymentPointView.h; sourceTree = "<group>"; };
 		EC3AFBA21D782D430055FA84 /* JFPaymentPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPaymentPointView.m; sourceTree = "<group>"; };
 		EC6250561D3097AC00054005 /* JFAppSpreadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppSpreadModel.h; sourceTree = "<group>"; };
@@ -726,7 +724,6 @@
 				ECAEA7F01D17BFE900926044 /* Info.plist */,
 				ECAEA9511D17C60900926044 /* JFPrefixHeader.pch */,
 				ECAEA9551D17C6E700926044 /* JFConfig.h */,
-				EC3AFB9D1D7827360055FA84 /* pay_bgimg.jpg */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1144,7 +1141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC2808DB1D34D06B00E7E76E /* AlipaySDK.bundle in Resources */,
-				EC3AFB9E1D7827360055FA84 /* pay_bgimg.jpg in Resources */,
 				B35F64491D474C2300E03202 /* btn10.png in Resources */,
 				B35F64521D474C2300E03202 /* unicom_back.png in Resources */,
 				B35F644A1D474C2300E03202 /* btn2.png in Resources */,
