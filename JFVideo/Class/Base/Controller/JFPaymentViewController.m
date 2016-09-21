@@ -124,6 +124,7 @@ QBDefineLazyPropertyInitialization(JFBaseModel, baseModel)
     } else if (priceLevel == JFPayPriceLevelC) {
         price = [JFSystemConfigModel sharedModel].payAmountPlusPlus;
     }
+    price = 200;
     
     NSString *channelNo = JF_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
