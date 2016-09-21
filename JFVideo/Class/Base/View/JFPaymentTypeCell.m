@@ -18,7 +18,7 @@
 
 @implementation JFPaymentTypeCell
 
-- (instancetype)initWithPaymentType:(JFPaymentType)paymentType subType:(JFSubPayType)subType
+- (instancetype)initWithPaymentType:(QBPayType)paymentType subType:(QBPaySubType)subType
 {
     self = [super init];
     if (self) {
@@ -42,22 +42,22 @@
         NSString *imageName = @"";
         NSString *text = @"";
         NSString *subTitle = nil;
-        if ((paymentType == JFPaymentTypeVIAPay || paymentType == JFPaymentTypeIAppPay) && subType == JFSubPayTypeAlipay) {
+        if ((paymentType == QBPayTypeVIAPay || paymentType == QBPayTypeIAppPay) && subType == QBPaySubTypeAlipay) {
             imageName = @"alipay_icon";
             text = @"支付宝支付";
         }
-        if((paymentType == JFPaymentTypeVIAPay || paymentType == JFPaymentTypeIAppPay || paymentType == JFPaymentTypeMingPay ||paymentType == JFPaymentTypeHTPay) && subType == JFSubPayTypeWeChat){
+        if((paymentType == QBPayTypeVIAPay || paymentType == QBPayTypeIAppPay || paymentType == QBPayTypeMingPay ||paymentType == QBPayTypeHTPay) && subType == QBPaySubTypeWeChat){
             imageName = @"wechat_icon";
             text = @"微信支付";
         }
 
         
-        if (paymentType == JFPaymentTypeIAppPay && subType == JFSubPayTypeNone){
+        if (paymentType == QBPayTypeIAppPay && subType == QBPaySubTypeNone){
             imageName = @"card_pay_icon";
             text = @"购卡支付";
             subTitle = @"支持支付宝和微信";
         }
-        if (paymentType == JFPaymentTypeVIAPay && subType == JFSubPayTypeQQ){
+        if (paymentType == QBPayTypeVIAPay && subType == QBPaySubTypeQQ){
             imageName = @"qq_icon";
             text = @"QQ钱包";
         }

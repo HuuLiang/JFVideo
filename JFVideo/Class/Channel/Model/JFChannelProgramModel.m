@@ -31,17 +31,17 @@
                              @"columnId":[NSString stringWithFormat:@"%ld",columnId]};
     BOOL success = [self requestURLPath:JF_PROGRAM_URL
                              withParams:params
-                        responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         NSArray *array = nil;
-                        if (respStatus == JFURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JFChannelProgramResponse *resp = self.response;
                             array = resp.programList;
                         }
                         
                         if (handler) {
-                            handler(respStatus==JFURLResponseSuccess, array);
+                            handler(respStatus==QBURLResponseSuccess, array);
                         }
                     }];
     

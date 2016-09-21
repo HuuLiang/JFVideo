@@ -30,11 +30,11 @@
     @weakify(self);
     BOOL ret = [self requestURLPath:JF_APPSPREAD_URL
                          withParams:nil
-                    responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                 {
                     @strongify(self);
                     NSArray *array = nil;
-                    if (respStatus == JFURLResponseSuccess) {
+                    if (respStatus == QBURLResponseSuccess) {
                         JFAppSpreadResponse *resp = self.response;
                         array = [NSArray arrayWithArray:resp.programList];
                         _fetchedSpreads = [[NSMutableArray alloc] init];
@@ -50,7 +50,7 @@
                             }
                             if (_fetchedSpreads.count == array.count) {
                                 if (handler) {
-                                    handler(respStatus == JFURLResponseSuccess, _fetchedSpreads);
+                                    handler(respStatus == QBURLResponseSuccess, _fetchedSpreads);
                                 }
                             }
                         }];

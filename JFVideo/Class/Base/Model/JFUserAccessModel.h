@@ -6,11 +6,11 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 
 typedef void (^JFUserAccessCompletionHandler)(BOOL success);
 
-@interface JFUserAccessModel : JFEncryptedURLRequest
+@interface JFUserAccessModel : QBEncryptedURLRequest
 
 + (instancetype)sharedModel;
 

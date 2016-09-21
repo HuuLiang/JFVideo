@@ -7,7 +7,7 @@
 //
 
 #import "JFErrorHandler.h"
-#import "JFURLRequest.h"
+#import <QBNetworking/QBURLRequest.h>
 
 NSString *const kNetworkErrorNotification = @"LTNetworkErrorNotification";
 NSString *const kNetworkErrorCodeKey = @"LTNetworkErrorCodeKey";
@@ -34,11 +34,11 @@ NSString *const kNetworkErrorMessageKey = @"LTNetworkErrorMessageKey";
 
 - (void)onNetworkError:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
-    JFURLResponseStatus resp = (JFURLResponseStatus)(((NSNumber *)userInfo[kNetworkErrorCodeKey]).unsignedIntegerValue);
+    QBURLResponseStatus resp = (QBURLResponseStatus)(((NSNumber *)userInfo[kNetworkErrorCodeKey]).unsignedIntegerValue);
     
-    if (resp == JFURLResponseFailedByInterface) {
+    if (resp == QBURLResponseFailedByInterface) {
         JFShowError(@"网络数据返回失败");
-    } else if (resp == JFURLResponseFailedByNetwork) {
+    } else if (resp == QBURLResponseFailedByNetwork) {
         JFShowError(@"网络错误，请检查网络连接");
     }
 }

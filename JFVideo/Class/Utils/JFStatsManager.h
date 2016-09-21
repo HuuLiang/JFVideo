@@ -39,13 +39,13 @@ typedef NS_ENUM(NSUInteger, JFStatsPayAction) {
 
 - (void)statsPayWithOrderNo:(NSString *)orderNo
                   payAction:(JFStatsPayAction)payAction
-                  payResult:(PAYRESULT)payResult
+                  payResult:(QBPayResult)payResult
                  forBaseModel:(JFBaseModel *)beseModel
             programLocation:(NSUInteger)programLocation
                 andTabIndex:(NSUInteger)tabIndex
                 subTabIndex:(NSUInteger)subTabIndex;
 
-- (void)statsPayWithPaymentInfo:(JFPaymentInfo *)paymentInfo
+- (void)statsPayWithPaymentInfo:(QBPaymentInfo *)paymentInfo
                    forPayAction:(JFStatsPayAction)payAction
                     andTabIndex:(NSUInteger)tabIndex
                     subTabIndex:(NSUInteger)subTabIndex;

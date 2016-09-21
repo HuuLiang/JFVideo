@@ -52,16 +52,16 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JF_DETAIL_URL
                              withParams:params
-                        responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         JFDetailModelResponse *resp = nil;
-                        if (respStatus == JFURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             resp = self.response;
                         }
                         
                         if (handler) {
-                            handler(respStatus==JFURLResponseSuccess, resp);
+                            handler(respStatus==QBURLResponseSuccess, resp);
                         }
                     }];
     

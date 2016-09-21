@@ -133,7 +133,7 @@
             };
             
             
-            _payTypeView.payAction = ^(JFPaymentType type,JFSubPayType subType) {
+            _payTypeView.payAction = ^(QBPayType type,QBPaySubType subType) {
                 @strongify(self);
                 self.paymentAction(type,subType,self.priceLevel);
             };

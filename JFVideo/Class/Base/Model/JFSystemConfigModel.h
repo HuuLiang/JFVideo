@@ -6,16 +6,16 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 #import "JFSystemConfig.h"
 
-@interface JFSystemConfigResponse : JFURLResponse
+@interface JFSystemConfigResponse : QBURLResponse
 @property (nonatomic,retain) NSArray<JFSystemConfig> *confis;
 @end
 
 typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 
-@interface JFSystemConfigModel : JFEncryptedURLRequest
+@interface JFSystemConfigModel : QBEncryptedURLRequest
 
 @property (nonatomic) NSString *payImg;
 @property (nonatomic) NSInteger payAmount;

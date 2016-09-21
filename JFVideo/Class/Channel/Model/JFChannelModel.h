@@ -6,14 +6,14 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 #import "JFChannelColumnModel.h"
 
-@interface JFChannelModelResponse : JFURLResponse
+@interface JFChannelModelResponse : QBURLResponse
 @property (nonatomic) NSArray <JFChannelColumnModel *> *columnList;
 @end
 
-@interface JFChannelModel : JFEncryptedURLRequest
+@interface JFChannelModel : QBEncryptedURLRequest
 
 - (BOOL)fetchChannelInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler;
 

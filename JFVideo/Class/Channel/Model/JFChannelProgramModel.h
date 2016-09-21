@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 
 @interface JFChannelProgram : NSObject
 @property (nonatomic) NSString *coverImg;
@@ -21,11 +21,11 @@
 @property (nonatomic) NSString *videoUrl;
 @end
 
-@interface JFChannelProgramResponse : JFURLResponse
+@interface JFChannelProgramResponse : QBURLResponse
 @property (nonatomic) NSArray <JFChannelProgram *> *programList;
 @end
 
-@interface JFChannelProgramModel : JFEncryptedURLRequest
+@interface JFChannelProgramModel : QBEncryptedURLRequest
 
 - (BOOL)fecthChannelProgramWithColumnId:(NSInteger)columnId Page:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler;
 

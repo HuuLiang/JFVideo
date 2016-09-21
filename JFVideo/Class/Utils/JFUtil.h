@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JFPaymentInfo.h"
+#import <QBPayment/QBPaymentInfo.h>
 
 extern NSString *const kPaymentInfoKeyName;
 
@@ -30,10 +30,10 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler;
 
-+ (NSArray<JFPaymentInfo *> *)allPaymentInfos;
-+ (NSArray<JFPaymentInfo *> *)payingPaymentInfos;
-+ (NSArray<JFPaymentInfo *> *)paidNotProcessedPaymentInfos;
-+ (JFPaymentInfo *)successfulPaymentInfo;
++ (NSArray<QBPaymentInfo *> *)allPaymentInfos;
++ (NSArray<QBPaymentInfo *> *)payingPaymentInfos;
++ (NSArray<QBPaymentInfo *> *)paidNotProcessedPaymentInfos;
++ (QBPaymentInfo *)successfulPaymentInfo;
 
 + (NSDate *)dateFromString:(NSString *)dateString;
 

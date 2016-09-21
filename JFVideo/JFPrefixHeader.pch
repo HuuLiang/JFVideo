@@ -27,8 +27,11 @@
 #import "CRKHudManager.h"
 #import "JFUtil.h"
 #import "DBHandler.h"
-#import "JFNetworkInfo.h"
 #import "JFBaseModel.h"
 #import "JFStatsManager.h"
+
+#import <QBNetworking/QBNetworkInfo.h>
+//#import <QBPayment/QBPaymentDefines.h>
+#import <QBExtensions/QBDefines.h>
 
 #endif /* JFPrefixHeader_pch */

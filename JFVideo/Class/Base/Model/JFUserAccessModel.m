@@ -36,12 +36,12 @@
     @weakify(self);
     BOOL ret = [super requestURLPath:JF_ACCESS_URL
                           withParams:@{@"userId":userId,@"accessId":[JFUtil accessId]}
-                     responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                     responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                 {
                     @strongify(self);
                     
                     BOOL success = NO;
-                    if (respStatus == JFURLResponseSuccess) {
+                    if (respStatus == QBURLResponseSuccess) {
                         NSString *resp = self.response;
                         success = [resp isEqualToString:@"SUCCESS"];
                         if (success) {

@@ -47,12 +47,12 @@ static NSString *const kSuccessResponse = @"SUCCESS";
                              @"appV":[JFUtil appVersion],
                              @"appVN":@"",
                              @"ccn":JF_PACKAGE_CERTIFICATE,
-                             @"operator":[JFNetworkInfo sharedInfo].carriarName ?: @"",
+                             @"operator":[QBNetworkInfo sharedInfo].carriarName ?: @"",
                              @"systemVersion":[UIDevice currentDevice].systemVersion};
     
-    BOOL success = [self requestURLPath:JF_ACTIVATION_URL withParams:params responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage) {
+    BOOL success = [self requestURLPath:JF_ACTIVATION_URL withParams:params responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
         NSString *userId;
-        if (respStatus == JFURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             NSString *resp = self.response;
             NSArray *resps = [resp componentsSeparatedByString:@";"];
             NSString *success = resps.firstObject;
@@ -62,7 +62,7 @@ static NSString *const kSuccessResponse = @"SUCCESS";
         }
         
         if (handler) {
-            handler(respStatus == JFURLResponseSuccess && userId, userId);
+            handler(respStatus == QBURLResponseSuccess && userId, userId);
         }
     }];
     return success;

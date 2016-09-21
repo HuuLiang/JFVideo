@@ -9,6 +9,7 @@
 #ifndef JFCommonDef_h
 #define JFCommonDef_h
 
+#import <QBPayment/QBPaymentDefines.h>
 
 #ifdef  DEBUG
 #define DLog(fmt,...) {NSLog((@"%s [Line:%d]" fmt),__PRETTY_FUNCTION__,__LINE__,##__VA_ARGS__);}
@@ -17,33 +18,40 @@
 #endif
 
 
-typedef NS_ENUM(NSUInteger, JFPaymentType) {
-    JFPaymentTypeNone,
-    JFPaymentTypeAlipay = 1001,
-    JFPaymentTypeWeChatPay = 1008,
-    JFPaymentTypeIAppPay = 1009,
-    JFPaymentTypeVIAPay = 1010,
-    JFPaymentTypeSPay = 1012,
-    JFPaymentTypeHTPay = 1015,
-    JFPaymentTypeMingPay = 1018,//明鹏
-    JFPaymentTypeDXTXPay = 1019, //盾行天下
-    JFPaymentTypeWeiYingPay = 1022 //微赢支付
-};
-typedef NS_ENUM(NSUInteger, JFSubPayType) {
-    JFSubPayTypeNone = 0,
-    JFSubPayTypeWeChat = 1 << 0,
-    JFSubPayTypeAlipay = 1 << 1,
-    JFSubPayUPPay = 1 << 2,
-    JFSubPayTypeQQ = 1 << 3
-};
+//typedef NS_ENUM(NSUInteger, JFPaymentType) {
+//    JFPaymentTypeNone,
+//    JFPaymentTypeAlipay = 1001,
+//    JFPaymentTypeWeChatPay = 1008,
+//    JFPaymentTypeIAppPay = 1009,
+//    JFPaymentTypeVIAPay = 1010,
+//    JFPaymentTypeSPay = 1012,
+//    JFPaymentTypeHTPay = 1015,
+//    JFPaymentTypeMingPay = 1018,//明鹏
+//    JFPaymentTypeDXTXPay = 1019, //盾行天下
+//    JFPaymentTypeWeiYingPay = 1022 //微赢支付
+//};
 
-typedef NS_ENUM(NSInteger, PAYRESULT)
-{
-    PAYRESULT_SUCCESS   = 0,
-    PAYRESULT_FAIL      = 1,
-    PAYRESULT_ABANDON   = 2,
-    PAYRESULT_UNKNOWN   = 3
-};
+//typedef NS_ENUM(NSUInteger, JFSubPayType) {
+//    JFSubPayTypeNone = 0,
+//    JFSubPayTypeWeChat = 1 << 0,
+//    JFSubPayTypeAlipay = 1 << 1,
+//    JFSubPayUPPay = 1 << 2,
+//    JFSubPayTypeQQ = 1 << 3
+//};
+
+//typedef NS_ENUM(NSInteger, PAYRESULT)
+//{
+//    PAYRESULT_SUCCESS   = 0,
+//    PAYRESULT_FAIL      = 1,
+//    PAYRESULT_ABANDON   = 2,
+//    PAYRESULT_UNKNOWN   = 3
+//};
+
+//typedef NS_ENUM(NSUInteger, JFPayPointType) {
+//    JFPayPointTypeNone,
+//    JFPayPointTypeVIP,
+//    JFPayPointTypeSVIP
+//};
 
 typedef NS_ENUM(NSInteger,JFPayPriceLevel) {
     JFPayPriceLevelNone,
@@ -112,6 +120,7 @@ if (block) block(__VA_ARGS__);
 #define kHeight(height) kScreenHeight * height / 1334.
 
 
+
 //#define VIDEO_PAY_AMOUNT    @"VIDEO_PAY_AMOUNT"
 //#define PHOTO_PAY_AMOUNT    @"GALLERY_PAY_AMOUNT"
 
@@ -122,13 +131,13 @@ if (block) block(__VA_ARGS__);
 //#define PAY_ALL_VIP              @"pay_all_vip"
 
 typedef void (^JFAction)(id obj);
-typedef void (^JFSelectionAction)(JFPaymentType paymentType);
+typedef void (^JFSelectionAction)(QBPayType paymentType);
 typedef void (^JFProgressHandler)(double progress);
 typedef void (^JFCompletionHandler)(BOOL success, id obj);
 
 
-@class JFPaymentInfo;
-typedef void (^JFPaymentCompletionHandler)(PAYRESULT payResult, JFPaymentInfo *paymentInfo);
+//@class JFPaymentInfo;
+//typedef void (^JFPaymentCompletionHandler)(PAYRESULT payResult, JFPaymentInfo *paymentInfo);
 
 //#define kBigFont  [UIFont systemFontOfSize:MIN(18,kScreenWidth*0.05)]
 //#define kMediumFont [UIFont systemFontOfSize:MIN(16, kScreenWidth*0.045)]

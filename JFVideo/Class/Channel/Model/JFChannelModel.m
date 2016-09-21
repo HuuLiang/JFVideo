@@ -26,17 +26,17 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JF_CHANNELRANKING_URL
                              withParams:nil
-                        responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         NSArray *array = nil;
-                        if (respStatus == JFURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JFChannelModelResponse *resp = self.response;
                             array = resp.columnList;
                         }
                         
                         if (handler) {
-                            handler(respStatus==JFURLResponseSuccess, array);
+                            handler(respStatus==QBURLResponseSuccess, array);
                         }
                     }];
     

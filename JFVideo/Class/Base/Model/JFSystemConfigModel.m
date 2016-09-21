@@ -35,13 +35,13 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JF_SYSTEM_CONFIG_URL
                              withParams:@{@"type":@([JFUtil deviceType])}
-                        responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         
                         DLog("%ld %@",respStatus,errorMessage);
                         
-                        if (respStatus == JFURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JFSystemConfigResponse *resp = self.response;
                             
                             [resp.confis enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -62,7 +62,7 @@
                         }
                         
                         if (handler) {
-                            handler(respStatus == JFURLResponseSuccess);
+                            handler(respStatus == QBURLResponseSuccess);
                         }
                         
                     }];

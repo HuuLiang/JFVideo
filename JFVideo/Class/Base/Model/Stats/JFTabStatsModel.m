@@ -21,9 +21,9 @@
     
     BOOL ret = [self requestURLPath:JF_STATS_TAB_URL
                          withParams:params
-                    responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
-        SafelyCallBlock4(completionHandler, respStatus == JFURLResponseSuccess, errorMessage);
+        SafelyCallBlock4(completionHandler, respStatus == QBURLResponseSuccess, errorMessage);
     }];
     return ret;
 }

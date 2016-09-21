@@ -10,8 +10,9 @@
 #import "JFCPCStatsModel.h"
 #import "JFTabStatsModel.h"
 #import "JFPayStatsModel.h"
-#import "JFPaymentInfo.h"
 #import "MobClick.h"
+#import <QBPayment/QBPaymentInfo.h>
+
 
 static NSString *const kUmengCPCChannelEvent = @"CPC_CHANNEL";
 static NSString *const kUmengCPCProgramEvent = @"CPC_PROGRAM";
@@ -266,7 +267,7 @@ DefineLazyPropertyInitialization(JFPayStatsModel, payStats)
 
 - (void)statsPayWithOrderNo:(NSString *)orderNo
                   payAction:(JFStatsPayAction)payAction
-                  payResult:(PAYRESULT)payResult
+                  payResult:(QBPayResult)payResult
                forBaseModel:(JFBaseModel *)beseModel
             programLocation:(NSUInteger)programLocation
                 andTabIndex:(NSUInteger)tabIndex
@@ -290,7 +291,7 @@ DefineLazyPropertyInitialization(JFPayStatsModel, payStats)
         } else if (payAction == JFStatsPayActionGoToPay) {
             statsInfo.isPayConfirm = @(1);
         } else if (payAction == JFStatsPayActionPayBack) {
-            NSDictionary *payStautsMapping = @{@(PAYRESULT_SUCCESS):@(1), @(PAYRESULT_FAIL):@(2), @(PAYRESULT_ABANDON):@(3)};
+            NSDictionary *payStautsMapping = @{@(QBPayResultSuccess):@(1), @(QBPayResultFailure):@(2), @(QBPayResultCancelled):@(3)};
             NSNumber *payStatus = payStautsMapping[@(payResult)];
             statsInfo.payStatus = payStatus;
         } else {
@@ -299,14 +300,14 @@ DefineLazyPropertyInitialization(JFPayStatsModel, payStats)
         
         statsInfo.paySeq = @([JFUtil launchSeq]);
         statsInfo.statsType = @(JFStatsTypePay);
-        statsInfo.network = @([JFNetworkInfo sharedInfo].networkStatus);
+        statsInfo.network = @([QBNetworkInfo sharedInfo].networkStatus);
         [statsInfo save];
         
         [MobClick event:kUmengPayEvent attributes:statsInfo.umengAttributes];
     });
 }
 
-- (void)statsPayWithPaymentInfo:(JFPaymentInfo *)paymentInfo
+- (void)statsPayWithPaymentInfo:(QBPaymentInfo *)paymentInfo
                    forPayAction:(JFStatsPayAction)payAction
                     andTabIndex:(NSUInteger)tabIndex
                     subTabIndex:(NSUInteger)subTabIndex
@@ -329,8 +330,9 @@ DefineLazyPropertyInitialization(JFPayStatsModel, payStats)
         } else if (payAction == JFStatsPayActionGoToPay) {
             statsInfo.isPayConfirm = @(1);
         } else if (payAction == JFStatsPayActionPayBack) {
-            NSDictionary *payStautsMapping = @{@(PAYRESULT_SUCCESS):@(1), @(PAYRESULT_FAIL):@(2), @(PAYRESULT_ABANDON):@(3)};
-            NSNumber *payStatus = payStautsMapping[paymentInfo.paymentResult];
+            NSDictionary *payStautsMapping = @{@(QBPayResultSuccess):@(1), @(QBPayResultFailure):@(2), @(QBPayResultCancelled):@(3)};
+//            NSNumber *payStatus = payStautsMapping[paymentInfo.paymentResult];
+            NSNumber *payStatus = payStautsMapping[@(paymentInfo.paymentResult)];
             statsInfo.payStatus = payStatus;
         } else {
             return ;
@@ -338,7 +340,7 @@ DefineLazyPropertyInitialization(JFPayStatsModel, payStats)
     
         statsInfo.paySeq = @([JFUtil launchSeq]);
         statsInfo.statsType = @(JFStatsTypePay);
-        statsInfo.network = @([JFNetworkInfo sharedInfo].networkStatus);
+        statsInfo.network = @([QBNetworkInfo sharedInfo].networkStatus);
         [statsInfo save];
         
         [MobClick event:kUmengPayEvent attributes:statsInfo.umengAttributes];

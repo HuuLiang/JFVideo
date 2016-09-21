@@ -26,17 +26,17 @@
     NSDictionary *params = @{@"page":@(page)};
     BOOL success = [self requestURLPath:JF_HOME_URL
                              withParams:params
-                        responseHandler:^(JFURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         NSArray *array = nil;
-                        if (respStatus == JFURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JFHomeModelResponse *resp = self.response;
                             array = resp.columnList;
                         }
                         
                         if (handler) {
-                            handler(respStatus==JFURLResponseSuccess, array);
+                            handler(respStatus==QBURLResponseSuccess, array);
                         }
                     }];
     

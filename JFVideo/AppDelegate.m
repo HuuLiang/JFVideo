@@ -7,23 +7,25 @@
 //
 
 #import "AppDelegate.h"
+
 #import "JFActivateModel.h"
 #import "JFUserAccessModel.h"
+
 #import "JFSystemConfigModel.h"
+
 #import "JFHomeViewController.h"
 #import "JFChannelListViewController.h"
 #import "JFHotViewController.h"
 #import "JFMineViewController.h"
-#import "JFPaymentManager.h"
 #import "MobClick.h"
-#import "JFLaunchView.h"
-//#import "PayuPlugin.h"
-#import "JFPaymentConfig.h"
-#import "SPayClient.h"
-#import "HTPayManager.h"
+
+#import <QBPayment/QBPaymentManager.h>
+#import <QBNetworking/QBNetworkingConfiguration.h>
+#import "PayuPlugin.h"
+//#import <DXTXPay/PayuPlugin.h>
 
 static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
-
+static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
@@ -184,20 +186,16 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [QBNetworkingConfiguration defaultConfiguration].RESTAppId = JF_REST_APPID;
+    [QBNetworkingConfiguration defaultConfiguration].RESTpV = @([JF_REST_PV integerValue]);
+    [QBNetworkingConfiguration defaultConfiguration].channelNo = JF_CHANNEL_NO;
+    [QBNetworkingConfiguration defaultConfiguration].baseURL = JF_BASE_URL;
+    
     [JFUtil accumateLaunchSeq];
     [self setupCommonStyles];
-    [[JFNetworkInfo sharedInfo] startMonitoring];
+    [[QBNetworkInfo sharedInfo] startMonitoring];
 
-//    [[JFPaymentManager sharedManager] setup];
-    [[JFPaymentManager sharedManager] setupWithCompletionHandler:^(BOOL success, id obj) {
-        if (success) {
-            if ([JFPaymentConfig sharedConfig].configDetails.htpayConfig) {
-                [[HTPayManager sharedManager] registerHaitunSDKWithApplication:application Options:launchOptions];
-            }
-        }
-    }];
-    
-    
+    [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:@([JF_PAYMENT_PV integerValue]) channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl];
     
     [self setupMobStatistics];
     
@@ -224,50 +222,33 @@ static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
         }
     }];
     
-
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application
       handleOpenURL:(NSURL *)url {
-    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
-        [HTPayManager sharedManager].isAutoForeground = YES;
-        return [[SPayClient sharedInstance] application:application handleOpenURL:url];
-    } else {
-        [[JFPaymentManager sharedManager] handleOpenUrl:url];
-        return YES;
-    }
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
-        [HTPayManager sharedManager].isAutoForeground = YES;
-        [[SPayClient sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-    } else {
-        [[JFPaymentManager sharedManager] handleOpenUrl:url];
-    }
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
     return YES;
 }
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *,id> *)options {
-    if ([url.absoluteString rangeOfString:kHTPaySchemeUrl].location == 0) {
-        [HTPayManager sharedManager].isAutoForeground = YES;
-        [[SPayClient sharedInstance] application:app openURL:url options:options];
-    } else {
-        [[JFPaymentManager sharedManager] handleOpenUrl:url];
-    }
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
     return YES;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    //这一步判断HTPayManager 如果没有直接就是触发自主查询
-    [[HTPayManager sharedManager] searchOrderState];
-}
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [[QBPaymentManager sharedManager] applicationWillEnterForeground:application];
+}
 #pragma mark - UITabBarControllerDelegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

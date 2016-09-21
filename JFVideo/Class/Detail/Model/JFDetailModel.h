@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 
 @interface JFDetailPhotoModel : NSObject
 @property (nonatomic) NSInteger height;
@@ -36,14 +36,14 @@
 @property (nonatomic) NSString *userName;
 @end
 
-@interface JFDetailModelResponse : JFURLResponse
+@interface JFDetailModelResponse : QBURLResponse
 @property (nonatomic) NSInteger columnId;
 @property (nonatomic) NSArray <JFDetailCommentModel *> *commentJson;
 @property (nonatomic) JFDetailProgramModel *program;
 @property (nonatomic) NSArray <JFDetailPhotoModel *> *programUrlList;
 @end
 
-@interface JFDetailModel : JFEncryptedURLRequest
+@interface JFDetailModel : QBEncryptedURLRequest
 
 - (BOOL)fetchProgramDetailWithColumnId:(NSInteger)columnId ProgramId:(NSInteger)programId CompletionHandler:(JFCompletionHandler)handler;
 

@@ -14,8 +14,8 @@
     UIView *_aliView;
     
 }
-@property (nonatomic)JFPaymentType payType;
-@property (nonatomic)JFSubPayType subType;
+@property (nonatomic)QBPayType payType;
+@property (nonatomic)QBPaySubType subType;
 @end
 
 @implementation JFPayTypeView
@@ -31,10 +31,10 @@
             _payType = [dic[@"type"] integerValue];
             _subType = [dic[@"subType"] integerValue];
             
-            if (_subType == JFSubPayTypeAlipay) {
+            if (_subType == QBPaySubTypeAlipay) {
                 _aliView = [[UIView alloc] init];
                 [self initWithPayTypeView:_aliView PayType:_payType subPayType:_subType];
-            } else if (_subType == JFSubPayTypeWeChat) {
+            } else if (_subType == QBPaySubTypeWeChat) {
                 _wxView = [[UIView alloc] init];
                 [self initWithPayTypeView:_wxView PayType:_payType subPayType:_subType];
             }
@@ -70,18 +70,18 @@
     return self;
 }
 
-- (void)initWithPayTypeView:(UIView *)view PayType:(JFPaymentType)type subPayType:(JFSubPayType)subType {
+- (void)initWithPayTypeView:(UIView *)view PayType:(QBPayType)type subPayType:(QBPaySubType)subType {
     view.userInteractionEnabled = YES;
     view.layer.cornerRadius = kWidth(10);
     view.layer.masksToBounds = YES;
-    view.backgroundColor = [UIColor colorWithHexString:subType == JFSubPayTypeAlipay ? @"#0090ff" : @"#08c20c"];
+    view.backgroundColor = [UIColor colorWithHexString:subType == QBPaySubTypeAlipay ? @"#0090ff" : @"#08c20c"];
     
-    UIImage *image = [UIImage imageNamed:subType == JFSubPayTypeAlipay ? @"pay_ali" : @"pay_weixin"];
+    UIImage *image = [UIImage imageNamed:subType == QBPaySubTypeAlipay ? @"pay_ali" : @"pay_weixin"];
     UIImageView * imgV = [[UIImageView alloc] initWithImage:image];
     [view addSubview:imgV];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = subType == JFSubPayTypeAlipay ? @"支付宝" : @"微信支付";
+    label.text = subType == QBPaySubTypeAlipay ? @"支付宝" : @"微信支付";
     label.textColor = [UIColor colorWithHexString:@"#ffffff"];
     label.font = [UIFont systemFontOfSize:kWidth(30)];
     [view addSubview:label];

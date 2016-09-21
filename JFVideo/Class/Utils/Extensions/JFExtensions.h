@@ -9,12 +9,10 @@
 #ifndef JFExtensions_h
 #define JFExtensions_h
 
-#import "RACEXTScope.h"
 #import "UIColor+hexColor.h"
 #import "UIImage+Utilities.h"
 #import "NSMutableDictionary+Safety.h"
 #import "NSObject+Properties.h"
-#import "NSDictionary+LTSign.h"
 #import "NSString+crypt.h"
 #import "NSString+StringHeight.h"
 #import "UIView+Loading.h"
@@ -27,5 +25,9 @@
 #import "UIImage+color.h"
 #import "UIImageView+YPBAnimation.h"
 #import "NSObject+DictionaryRepresentation.h"
+
+#import <QBExtensions/NSDictionary+QBSign.h>
+#import <QBExtensions/NSString+md5.h>
+#import <QBExtensions/RACEXTScope.h>
 
 #endif /* JFExtensions_h */

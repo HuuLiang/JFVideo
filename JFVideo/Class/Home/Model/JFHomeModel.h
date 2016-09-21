@@ -6,14 +6,14 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 #import "JFHomeColumnModel.h"
 
-@interface JFHomeModelResponse : JFURLResponse
+@interface JFHomeModelResponse : QBURLResponse
 @property (nonatomic) NSArray <JFHomeColumnModel *> *columnList;
 @end
 
-@interface JFHomeModel : JFEncryptedURLRequest
+@interface JFHomeModel : QBEncryptedURLRequest
 
 - (BOOL)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler;
 

@@ -125,35 +125,36 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
     });
 }
 
-+ (NSArray<JFPaymentInfo *> *)allPaymentInfos {
-    NSArray<NSDictionary *> *paymentInfoArr = [[NSUserDefaults standardUserDefaults] objectForKey:kPaymentInfoKeyName];
-    
-    NSMutableArray *paymentInfos = [NSMutableArray array];
-    [paymentInfoArr enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        JFPaymentInfo *paymentInfo = [JFPaymentInfo paymentInfoFromDictionary:obj];
-        [paymentInfos addObject:paymentInfo];
-    }];
-    return paymentInfos;
++ (NSArray<QBPaymentInfo *> *)allPaymentInfos {
+//    NSArray<NSDictionary *> *paymentInfoArr = [[NSUserDefaults standardUserDefaults] objectForKey:kPaymentInfoKeyName];
+//    
+//    NSMutableArray *paymentInfos = [NSMutableArray array];
+//    [paymentInfoArr enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        QBPaymentInfo *paymentInfo = [QBPaymentInfo allPaymentInfos];
+//        [paymentInfos addObject:paymentInfo];
+//    }];
+//    return paymentInfos;
+    return [QBPaymentInfo allPaymentInfos];
 }
 
-+ (NSArray<JFPaymentInfo *> *)payingPaymentInfos {
++ (NSArray<QBPaymentInfo *> *)payingPaymentInfos {
     return [self.allPaymentInfos bk_select:^BOOL(id obj) {
-        JFPaymentInfo *paymentInfo = obj;
-        return paymentInfo.paymentStatus.unsignedIntegerValue == JFPaymentStatusPaying;
+        QBPaymentInfo *paymentInfo = obj;
+        return paymentInfo.paymentStatus == QBPayStatusPaying;
     }];
 }
 
-+ (NSArray<JFPaymentInfo *> *)paidNotProcessedPaymentInfos {
++ (NSArray<QBPaymentInfo *> *)paidNotProcessedPaymentInfos {
     return [self.allPaymentInfos bk_select:^BOOL(id obj) {
-        JFPaymentInfo *paymentInfo = obj;
-        return paymentInfo.paymentStatus.unsignedIntegerValue == JFPaymentStatusNotProcessed;
+        QBPaymentInfo *paymentInfo = obj;
+        return paymentInfo.paymentStatus == QBPayStatusNotProcessed;
     }];
 }
 
-+ (JFPaymentInfo *)successfulPaymentInfo {
++ (QBPaymentInfo *)successfulPaymentInfo {
     return [self.allPaymentInfos bk_match:^BOOL(id obj) {
-        JFPaymentInfo *paymentInfo = obj;
-        if (paymentInfo.paymentResult.unsignedIntegerValue == PAYRESULT_SUCCESS) {
+        QBPaymentInfo *paymentInfo = obj;
+        if (paymentInfo.paymentResult == QBPayResultSuccess) {
             return YES;
         }
         return NO;

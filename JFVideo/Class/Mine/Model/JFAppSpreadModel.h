@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JFEncryptedURLRequest.h"
+#import <QBNetworking/QBEncryptedURLRequest.h>
 
 @interface JFAppSpread : NSObject
 @property (nonatomic) NSString *coverImg;
@@ -22,11 +22,11 @@
 @property (nonatomic) BOOL isInstall;
 @end
 
-@interface JFAppSpreadResponse : JFURLResponse
+@interface JFAppSpreadResponse : QBURLResponse
 @property (nonatomic) NSArray <JFAppSpread *> *programList;
 @end
 
-@interface JFAppSpreadModel : JFEncryptedURLRequest
+@interface JFAppSpreadModel : QBEncryptedURLRequest
 @property (nonatomic,retain,readonly) NSMutableArray<JFAppSpread *> *fetchedSpreads;
 - (BOOL)fetchAppSpreadWithCompletionHandler:(JFCompletionHandler)handler;
 @end
