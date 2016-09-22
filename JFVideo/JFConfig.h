@@ -36,6 +36,8 @@
 #define JF_SYSTEM_CONFIG_CONTACT_SCHEME           @"CONTACT_SCHEME"
 #define JF_SYSTEM_CONFIG_CONTACT_NAME             @"CONTACT_NAME"
 #define JF_SYSTEM_PAY_IMG                         @"PAY_IMG"
+#define JF_SYSTEM_PAY_AMOUNT                      @"PAY_AMOUNT"
+#define JF_SYSTEM_SVIP_PAY_AMOUNT                 @"SVIP_PAY_AMOUNT"
 
 #define JF_PAYMENT_CONFIG_URL           @"http://pay.zcqcmj.com/paycenter/appPayConfig.json"//@"http://120.24.252.114:8084/paycenter/appPayConfig.json"
 #define JF_PAYMENT_COMMIT_URL           @"http://pay.zcqcmj.com/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"//

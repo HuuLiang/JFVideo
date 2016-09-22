@@ -47,11 +47,11 @@
                             [resp.confis enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                 JFSystemConfig *config = obj;
                                 
-                                if ([config.name isEqualToString:@"PAY_AMOUNT"]) {
+                                if ([config.name isEqualToString:JF_SYSTEM_PAY_AMOUNT]) {
                                     [JFSystemConfigModel sharedModel].payAmount = [config.value integerValue];
-//                                    [JFSystemConfigModel sharedModel].payAmountPlus = [config.value integerValue] + 2000;
-                                    [JFSystemConfigModel sharedModel].payAmountPlusPlus = 10000;//[config.value integerValue] + 5000;
-                                }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_SCHEME]){
+                                } else if ([config.name isEqualToString:JF_SYSTEM_SVIP_PAY_AMOUNT]) {
+                                    [JFSystemConfigModel sharedModel].payAmountPlus = [config.value integerValue];
+                                } else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_SCHEME]){
                                     [JFSystemConfigModel sharedModel].contactScheme = config.value;
                                 }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_NAME]){
                                     [JFSystemConfigModel sharedModel].contactName = config.value;

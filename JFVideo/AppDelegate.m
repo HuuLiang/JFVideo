@@ -190,6 +190,10 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [QBNetworkingConfiguration defaultConfiguration].RESTpV = @([JF_REST_PV integerValue]);
     [QBNetworkingConfiguration defaultConfiguration].channelNo = JF_CHANNEL_NO;
     [QBNetworkingConfiguration defaultConfiguration].baseURL = JF_BASE_URL;
+#ifdef DEBUG
+    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
+#endif
+    
     
     [JFUtil accumateLaunchSeq];
     [self setupCommonStyles];

@@ -60,7 +60,7 @@
     } else if (priceLevel == JFPayPriceLevelB) {
         _priceLabel.text = [NSString stringWithFormat:@"%ld元包年",[JFSystemConfigModel sharedModel].payAmountPlus /100];
     } else if (priceLevel == JFPayPriceLevelC) {
-        _priceLabel.text = [NSString stringWithFormat:@"%ld元终身",[JFSystemConfigModel sharedModel].payAmountPlusPlus /100];
+        _priceLabel.text = [NSString stringWithFormat:@"%ld元终身",[JFSystemConfigModel sharedModel].payAmountPlus /100];
     }
 }
 
