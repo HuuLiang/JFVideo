@@ -198,7 +198,7 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [JFUtil accumateLaunchSeq];
     [self setupCommonStyles];
     [[QBNetworkInfo sharedInfo] startMonitoring];
-
+//    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//支付测试
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:@([JF_PAYMENT_PV integerValue]) channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl];
     
     [self setupMobStatistics];
