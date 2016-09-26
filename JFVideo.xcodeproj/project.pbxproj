@@ -21,6 +21,7 @@
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
 		EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */; };
+		EC1976631D98FA5D00B91C4F /* JFVideoTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */; };
 		EC19F8021D38EA4C0048AA5C /* JFHotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */; };
 		EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */; };
 		EC2808CF1D34D00500E7E76E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2808CE1D34D00500E7E76E /* CoreMotion.framework */; };
@@ -120,6 +121,8 @@
 		EC0849751D1E718D00623AEF /* JFVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayer.m; sourceTree = "<group>"; };
 		EC1698E81D2F3CB800E7BC68 /* JFPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoCell.h; sourceTree = "<group>"; };
 		EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoCell.m; sourceTree = "<group>"; };
+		EC1976611D98FA5D00B91C4F /* JFVideoTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVideoTokenManager.h; sourceTree = "<group>"; };
+		EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoTokenManager.m; sourceTree = "<group>"; };
 		EC19F8001D38EA4C0048AA5C /* JFHotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHotViewController.h; sourceTree = "<group>"; };
 		EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHotViewController.m; sourceTree = "<group>"; };
 		EC19F8031D38FC250048AA5C /* JFTitleLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTitleLabelCell.h; sourceTree = "<group>"; };
@@ -658,6 +661,8 @@
 				ECAEA8651D17C18600926044 /* JQKApplicationManager.m */,
 				B35046011D41E25A005D1C03 /* JFStatsManager.h */,
 				B35046021D41E25A005D1C03 /* JFStatsManager.m */,
+				EC1976611D98FA5D00B91C4F /* JFVideoTokenManager.h */,
+				EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -905,6 +910,7 @@
 				EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */,
 				ECF99B9A1D2D1F36003CBCA8 /* JFChannelProgramModel.m in Sources */,
 				ECF99B9D1D2D26A6003CBCA8 /* JFChannelProgramCell.m in Sources */,
+				EC1976631D98FA5D00B91C4F /* JFVideoTokenManager.m in Sources */,
 				ECAEA9701D17D06100926044 /* JFActivateModel.m in Sources */,
 				ECAEA9221D17C18600926044 /* NSMutableDictionary+Safety.m in Sources */,
 				EC62506A1D30DAB400054005 /* JFPaymentPopView.m in Sources */,
@@ -1074,7 +1080,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6daaad26-e411-4551-8c67-e76b4ea64707";
+				PROVISIONING_PROFILE = "bbf00a2b-2a6a-4312-b939-5667f4ef969e";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";

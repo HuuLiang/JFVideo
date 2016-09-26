@@ -25,6 +25,9 @@ extern NSString *const kPaymentInfoKeyName;
 + (void)registerVip;
 + (BOOL)isVip;
 
++ (NSString *)imageToken;
++ (void)setImageToken:(NSString *)imageToken;
+
 + (NSUInteger)launchSeq;
 + (void)accumateLaunchSeq;
 

@@ -23,6 +23,9 @@ typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSInteger payAmountPlusPlus;
 @property (nonatomic) NSString *contactScheme;
 @property (nonatomic,copy)NSString *contactName;
+@property (nonatomic) NSString *imageToken;
+@property (nonatomic) NSUInteger statsTimeInterval;
+@property (nonatomic,readonly) BOOL loaded;
 
 + (instancetype)sharedModel;
 

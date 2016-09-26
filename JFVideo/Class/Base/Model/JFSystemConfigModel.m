@@ -53,12 +53,17 @@
                                     [JFSystemConfigModel sharedModel].payAmountPlus = [config.value integerValue];
                                 } else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_SCHEME]){
                                     [JFSystemConfigModel sharedModel].contactScheme = config.value;
-                                }else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_NAME]){
+                                } else if ([config.name isEqualToString:JF_SYSTEM_CONFIG_CONTACT_NAME]){
                                     [JFSystemConfigModel sharedModel].contactName = config.value;
-                                }else if ([config.name isEqualToString:JF_SYSTEM_PAY_IMG]) {
+                                } else if ([config.name isEqualToString:JF_SYSTEM_PAY_IMG]) {
                                     [JFSystemConfigModel sharedModel].payImg = config.value;
+                                } else if ([config.name isEqualToString:JF_SYSTEM_IMAGE_TOKEN]) {
+                                    [JFSystemConfigModel sharedModel].imageToken = config.value;
+                                } else if ([config.name isEqualToString:JF_SYSTEM_STATS_TIME_INTERVAL]) {
+                                    [JFSystemConfigModel sharedModel].statsTimeInterval = config.value.integerValue;
                                 }
                             }];
+                            _loaded = YES;
                         }
                         
                         if (handler) {

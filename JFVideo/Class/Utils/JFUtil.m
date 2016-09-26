@@ -22,6 +22,9 @@ static NSString *const kUserAccessServicename   = @"jf_user_access_service";
 
 static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
 
+static NSString *const kImageTokenKeyName = @"safiajfoaiefr$^%^$E&&$*&$*";
+static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
+
 @implementation JFUtil
 
 + (NSString *)accessId {
@@ -99,8 +102,31 @@ static NSString *const kVipUserKeyName          = @"jf_isvip_userkey";
 }
 
 + (BOOL)isVip {
+//    return YES;
     return [[[NSUserDefaults standardUserDefaults] objectForKey:kVipUserKeyName] isEqualToString:IS_VIP];
 }
+
++ (NSString *)imageToken {
+    NSString *imageToken = [[NSUserDefaults standardUserDefaults] objectForKey:kImageTokenKeyName];
+    if (!imageToken) {
+        return nil;
+    }
+    
+    return [imageToken decryptedStringWithPassword:kImageTokenCryptPassword];
+}
+
++ (void)setImageToken:(NSString *)imageToken {
+    if (imageToken) {
+        imageToken = [imageToken encryptedStringWithPassword:kImageTokenCryptPassword];
+        [[NSUserDefaults standardUserDefaults] setObject:imageToken forKey:kImageTokenKeyName];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kImageTokenKeyName];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 
 + (NSUInteger)launchSeq {
     NSNumber *launchSeq = [[NSUserDefaults standardUserDefaults] objectForKey:kLaunchSeqKeyName];

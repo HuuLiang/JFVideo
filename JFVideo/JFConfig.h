@@ -38,6 +38,8 @@
 #define JF_SYSTEM_PAY_IMG                         @"PAY_IMG"
 #define JF_SYSTEM_PAY_AMOUNT                      @"PAY_AMOUNT"
 #define JF_SYSTEM_SVIP_PAY_AMOUNT                 @"SVIP_PAY_AMOUNT"
+#define JF_SYSTEM_IMAGE_TOKEN                     @"IMG_REFERER"
+#define JF_SYSTEM_STATS_TIME_INTERVAL             @"STATS_TIME_INTERVAL"
 
 #define JF_PAYMENT_CONFIG_URL           @"http://pay.zcqcmj.com/paycenter/appPayConfig.json"//@"http://120.24.252.114:8084/paycenter/appPayConfig.json"
 #define JF_PAYMENT_COMMIT_URL           @"http://pay.zcqcmj.com/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"//

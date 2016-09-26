@@ -12,6 +12,7 @@
 #import "JFUserAccessModel.h"
 
 #import "JFSystemConfigModel.h"
+#import "JFVideoTokenManager.h"
 
 #import "JFHomeViewController.h"
 #import "JFChannelListViewController.h"
@@ -30,7 +31,9 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
     UITabBarController *_tabBarController;
+    
 }
+@property (nonatomic,retain) UIViewController *rootViewController;
 
 @end
 
@@ -43,6 +46,14 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     
     _window                              = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor              = [UIColor whiteColor];
+
+    return _window;
+}
+
+- (UIViewController *)rootViewController {
+    if (_rootViewController) {
+        return _rootViewController;
+    }
     
     JFHomeViewController *homeVC        = [[JFHomeViewController alloc] init];
     homeVC.title                         = @"首页";
@@ -77,8 +88,9 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     tabBarController.viewControllers        = @[homeNav,channelNav,hotNav,mineNav];
     tabBarController.tabBar.translucent = NO;
     tabBarController.delegate = self;
-    _window.rootViewController              = tabBarController;
-    return _window;
+//    _window.rootViewController              = tabBarController;
+    _rootViewController = tabBarController;
+    return _rootViewController;
 }
 
 - (void)setupCommonStyles {
@@ -200,13 +212,45 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
     [[QBNetworkInfo sharedInfo] startMonitoring];
 //    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//支付测试
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:@([JF_PAYMENT_PV integerValue]) channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl];
-    
     [self setupMobStatistics];
     
+    BOOL requestedSystemConfig = NO;
+#ifdef JF_IMAGE_TOKEN_ENABLED
+    NSString *imageToken = [JFUtil imageToken];
+    if (imageToken) {
+        [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
+        self.window.rootViewController = self.rootViewController;
+        [self.window makeKeyAndVisible];
+    } else {
+        self.window.rootViewController = [[UIViewController alloc] init];
+        [self.window makeKeyAndVisible];
+        
+        [self.window beginProgressingWithTitle:@"更新系统配置..." subtitle:nil];
+        requestedSystemConfig = [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+            [self.window endProgressing];
+            
+            if (success) {
+                NSString *fetchedToken = [JFSystemConfigModel sharedModel].imageToken;
+                [JFUtil setImageToken:fetchedToken];
+                if (fetchedToken) {
+                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+                }
+                
+            }
+            
+            self.window.rootViewController = self.rootViewController;
+            
+            NSUInteger statsTimeInterval = 180;
+            if ([JFSystemConfigModel sharedModel].loaded && [JFSystemConfigModel sharedModel].statsTimeInterval > 0) {
+                statsTimeInterval = [JFSystemConfigModel sharedModel].statsTimeInterval;
+            }
+            [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        }];
+    }
+#else
+    self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
-    
-//    JFLaunchView *launchView = [[JFLaunchView alloc] init];
-//    [launchView show];
+#endif
     
     if (![JFUtil isRegistered]) {
         [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
@@ -216,15 +260,31 @@ static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
         [[JFUserAccessModel sharedModel] requestUserAccess];
     }
     
-    [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-        //数据统计时间
-        NSUInteger statsTimeInterval = 180;
-        [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
-        
-        if (success) {
-            //获取系统配置成功
-        }
-    }];
+    if (!requestedSystemConfig) {
+        [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+//#ifdef JF_IMAGE_TOKEN_ENABLED
+            if (success) {
+                [JFUtil setImageToken:[JFSystemConfigModel sharedModel].imageToken];
+            }
+//#endif
+            NSUInteger statsTimeInterval = 180;
+            if ([JFSystemConfigModel sharedModel].loaded && [JFSystemConfigModel sharedModel].statsTimeInterval > 0) {
+                statsTimeInterval = [JFSystemConfigModel sharedModel].statsTimeInterval;
+            }
+            [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        }];
+    }
+    
+    [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
+//    [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+//        //数据统计时间
+//        NSUInteger statsTimeInterval = 180;
+//        [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+//        
+//        if (success) {
+//            //获取系统配置成功
+//        }
+//    }];
     
     return YES;
 }
