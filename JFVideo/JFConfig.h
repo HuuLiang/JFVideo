@@ -13,7 +13,7 @@
 #define JF_REST_APPID               @"QUBA_2023"
 #define JF_REST_PV                  @"102"
 #define JF_PAYMENT_PV               @"110"//@"109"
-#define JF_PACKAGE_CERTIFICATE      @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., JFd."
+#define JF_PACKAGE_CERTIFICATE      @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
 
 #define JF_REST_APP_VERSION     ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]))
 #define JF_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO]

@@ -25,6 +25,7 @@ static NSString *const kUmengPayEvent = @"PAY_STATS";
 @property (nonatomic,retain,readonly) JFTabStatsModel *tabStats;
 @property (nonatomic,retain,readonly) JFPayStatsModel *payStats;
 @property (nonatomic,retain,readonly) NSDate *statsDate;
+@property (nonatomic)BOOL scheduling;
 @end
 
 @implementation JFStatsManager
@@ -75,6 +76,10 @@ DefineLazyPropertyInitialization(JFPayStatsModel, payStats)
 }
 
 - (void)scheduleStatsUploadWithTimeInterval:(NSTimeInterval)timeInterval {
+    if (self.scheduling) {
+        return;
+    }
+    self.scheduling = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         while (1) {
             dispatch_async(self.queue, ^{
