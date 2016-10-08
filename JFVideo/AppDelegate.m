@@ -26,7 +26,7 @@
 //#import <DXTXPay/PayuPlugin.h>
 
 static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
-static NSString *const kIappPaySchemeUrl = @"comjfyingyuanappiapppayurlscheme";
+static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlscheme";
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 {
