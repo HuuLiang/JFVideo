@@ -84,6 +84,10 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
         return JFDeviceType_iPhone6SP;
     } else if ([deviceName rangeOfString:@"iPhone8,4"].location == 0) {
         return JFDeviceType_iPhoneSE;
+    }else if ([deviceName rangeOfString:@"iPhone9,1"].location == 0){
+        return JFDeviceType_iPhone7;
+    }else if ([deviceName rangeOfString:@"iPhone9,2"].location == 0){
+        return JFDeviceType_iPhone7P;
     } else if ([deviceName rangeOfString:@"iPad"].location == 0) {
         return JFDeviceType_iPad;
     } else {

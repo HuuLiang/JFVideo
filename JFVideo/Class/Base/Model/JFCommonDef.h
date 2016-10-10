@@ -81,6 +81,8 @@ typedef NS_ENUM(NSUInteger, JFDeviceType) {
     JFDeviceType_iPhone6S,
     JFDeviceType_iPhone6SP,
     JFDeviceType_iPhoneSE,
+    JFDeviceType_iPhone7,
+    JFDeviceType_iPhone7P,
     JFDeviceType_iPad = 100
 };
 

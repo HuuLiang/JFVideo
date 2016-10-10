@@ -20,4 +20,6 @@
 - (void)playVideoWithInfo:(JFBaseModel *)model videoUrl:(NSString *)videoUrlStr;
 
 - (NSUInteger)currentIndex;
+- (void)addRefreshBtnWithCurrentView:(UIView *)view withAction:(JFAction) action;
+- (void)removeCurrentRefreshBtn;
 @end

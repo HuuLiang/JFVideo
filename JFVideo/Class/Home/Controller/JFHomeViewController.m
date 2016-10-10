@@ -119,6 +119,15 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     }];
     
     [_layoutCollectionView JF_triggerPullToRefresh];
+    @weakify(self);
+    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+        @strongify(self);
+        [self->_layoutCollectionView JF_endPullToRefresh];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self->_layoutCollectionView JF_triggerPullToRefresh];
+        });
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -137,6 +146,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     @weakify(self);
     [self.homeModel fetchHomeInfoWithPage:1 /*isRefresh ? _page = 1 : ++_page*/  CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
+        [self removeCurrentRefreshBtn];
         if (success) {
             [self.dataSource removeAllObjects];
             for (JFHomeColumnModel *model in obj) {
@@ -149,6 +159,12 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
             [_layoutCollectionView reloadData];
 //            [_bannerView reloadData];
 //            [self startScrollBannerView];
+        }else {
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                [self->_layoutCollectionView JF_triggerPullToRefresh];
+            }];
+        
         }
         [_layoutCollectionView JF_endPullToRefresh];
     

@@ -44,7 +44,7 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     _layoutCollectionView.dataSource = self;
     _layoutCollectionView.showsVerticalScrollIndicator = NO;
     [_layoutCollectionView registerClass:[JFChannelCell class] forCellWithReuseIdentifier:kChannelCellReusableIdentifier];
-
+    
     [self.view addSubview:_layoutCollectionView];
     {
         [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,6 +67,15 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     }];
     
     [_layoutCollectionView JF_triggerPullToRefresh];
+    @weakify(self);
+    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+        @strongify(self);
+        [self->_layoutCollectionView JF_endPullToRefresh];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self->_layoutCollectionView JF_triggerPullToRefresh];
+        });
+    }];
     
 }
 
@@ -74,11 +83,17 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     @weakify(self);
     [self.channelModel fetchChannelInfoWithPage:_page CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
+        [self removeCurrentRefreshBtn];
         [_layoutCollectionView JF_endPullToRefresh];
         if (success) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:obj];
             [_layoutCollectionView reloadData];
+        }else {
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                [self->_layoutCollectionView JF_triggerPullToRefresh];
+            }];
         }
     }];
 }
