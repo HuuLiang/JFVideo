@@ -90,10 +90,12 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
             [self.dataSource addObjectsFromArray:obj];
             [_layoutCollectionView reloadData];
         }else {
-            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                @strongify(self);
-                [self->_layoutCollectionView JF_triggerPullToRefresh];
-            }];
+            if (self.dataSource.count == 0) {
+                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                    @strongify(self);
+                    [self->_layoutCollectionView JF_triggerPullToRefresh];
+                }];
+            }
         }
     }];
 }

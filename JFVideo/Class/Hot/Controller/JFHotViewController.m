@@ -100,10 +100,12 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
             [self.titleArray addObjectsFromArray:obj];
             [self reloadUI];
         }else {
-            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                @strongify(self);
-                [self.layoutTableView JF_triggerPullToRefresh];
-            }];
+            if (self.titleArray.count == 0) {
+                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                    @strongify(self);
+                    [self.layoutTableView JF_triggerPullToRefresh];
+                }];
+            }
             
         }
     }];

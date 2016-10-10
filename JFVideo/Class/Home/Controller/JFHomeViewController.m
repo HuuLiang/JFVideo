@@ -160,11 +160,14 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 //            [_bannerView reloadData];
 //            [self startScrollBannerView];
         }else {
-            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                @strongify(self);
-                [self->_layoutCollectionView JF_triggerPullToRefresh];
-            }];
-        
+            if (self.dataSource.count == 0) {
+                
+                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                    @strongify(self);
+                    [self->_layoutCollectionView JF_triggerPullToRefresh];
+                }];
+                
+            }
         }
         [_layoutCollectionView JF_endPullToRefresh];
     
