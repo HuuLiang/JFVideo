@@ -203,7 +203,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     [QBNetworkingConfiguration defaultConfiguration].channelNo = JF_CHANNEL_NO;
     [QBNetworkingConfiguration defaultConfiguration].baseURL = JF_BASE_URL;
 #ifdef DEBUG
-    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
+//    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
 #endif
     
     
@@ -214,8 +214,14 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:@([JF_PAYMENT_PV integerValue]) channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl];
     [self setupMobStatistics];
     
+    [QBNetworkInfo sharedInfo].reachabilityChangedAction = ^(BOOL reachable) {
+        if (reachable && ![JFSystemConfigModel sharedModel].loaded) {
+            [self fetchSystemConfigWithCompletionHandler:nil];
+        }
+    };
+    
     BOOL requestedSystemConfig = NO;
-#ifdef JF_IMAGE_TOKEN_ENABLED
+//#ifdef JF_IMAGE_TOKEN_ENABLED
     NSString *imageToken = [JFUtil imageToken];
     if (imageToken) {
         [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
@@ -226,31 +232,34 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
         [self.window makeKeyAndVisible];
         
         [self.window beginProgressingWithTitle:@"更新系统配置..." subtitle:nil];
-        requestedSystemConfig = [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        requestedSystemConfig = [self fetchSystemConfigWithCompletionHandler:^(BOOL success) {
             [self.window endProgressing];
-            
-            if (success) {
-                NSString *fetchedToken = [JFSystemConfigModel sharedModel].imageToken;
-                [JFUtil setImageToken:fetchedToken];
-                if (fetchedToken) {
-                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
-                }
-                
-            }
-            
             self.window.rootViewController = self.rootViewController;
-            
-            NSUInteger statsTimeInterval = 180;
-            if ([JFSystemConfigModel sharedModel].loaded && [JFSystemConfigModel sharedModel].statsTimeInterval > 0) {
-                statsTimeInterval = [JFSystemConfigModel sharedModel].statsTimeInterval;
-            }
-            [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         }];
+
+//
+//            if (success) {
+//                NSString *fetchedToken = [JFSystemConfigModel sharedModel].imageToken;
+//                [JFUtil setImageToken:fetchedToken];
+//                if (fetchedToken) {
+//                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+//                }
+//                
+//            }
+//            
+//            self.window.rootViewController = self.rootViewController;
+//            
+//            NSUInteger statsTimeInterval = 180;
+//            if ([JFSystemConfigModel sharedModel].loaded && [JFSystemConfigModel sharedModel].statsTimeInterval > 0) {
+//                statsTimeInterval = [JFSystemConfigModel sharedModel].statsTimeInterval;
+//            }
+//            [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+//        }];
     }
-#else
-    self.window.rootViewController = self.rootViewController;
-    [self.window makeKeyAndVisible];
-#endif
+//#else
+//    self.window.rootViewController = self.rootViewController;
+//    [self.window makeKeyAndVisible];
+//#endif
     
     if (![JFUtil isRegistered]) {
         [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
@@ -288,6 +297,25 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     
     return YES;
 }
+
+- (BOOL)fetchSystemConfigWithCompletionHandler:(void (^)(BOOL success))completionHandler {
+    return [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            NSString *fetchedToken = [JFSystemConfigModel sharedModel].imageToken;
+            [JFUtil setImageToken:fetchedToken];
+            if (fetchedToken) {
+                [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+            }
+            
+        }
+        
+        NSUInteger statsTimeInterval = 180;
+        [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        
+        QBSafelyCallBlock(completionHandler, success);
+    }];
+}
+
 
 - (BOOL)application:(UIApplication *)application
       handleOpenURL:(NSURL *)url {
