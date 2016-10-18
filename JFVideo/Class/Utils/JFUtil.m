@@ -95,6 +95,10 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
     }
 }
 
++ (BOOL)isIpad {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
 
 + (NSString *)appVersion {
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];

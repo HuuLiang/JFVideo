@@ -21,6 +21,7 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)deviceName;
 + (NSString *)appVersion;
 + (JFDeviceType)deviceType;
++ (BOOL)isIpad;
 
 + (void)registerVip;
 + (BOOL)isVip;
