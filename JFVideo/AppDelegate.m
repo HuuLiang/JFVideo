@@ -218,7 +218,28 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
         if (reachable && ![JFSystemConfigModel sharedModel].loaded) {
             [self fetchSystemConfigWithCompletionHandler:nil];
         }
+        if (reachable && ![JFUtil isRegistered]) {
+            [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
+                if (success) {
+                    [JFUtil setRegisteredWithUserId:userId];
+                    [[JFUserAccessModel sharedModel] requestUserAccess];
+                }
+            }];
+        } else {
+            [[JFUserAccessModel sharedModel] requestUserAccess];
+        }
+        if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JFUtil isRegistered] || ![JFSystemConfigModel sharedModel].loaded)) {
+            [UIAlertView bk_showAlertViewWithTitle:@"很抱歉!" message:@"您的应用未连接到网络,请检查您的网络设置" cancelButtonTitle:@"稍后" otherButtonTitles:@[@"设置"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    if([[UIApplication sharedApplication] canOpenURL:url]) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }
+            }];
+        }
     };
+
     
     BOOL requestedSystemConfig = NO;
 //#ifdef JF_IMAGE_TOKEN_ENABLED
@@ -237,37 +258,8 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
             self.window.rootViewController = self.rootViewController;
         }];
 
-//
-//            if (success) {
-//                NSString *fetchedToken = [JFSystemConfigModel sharedModel].imageToken;
-//                [JFUtil setImageToken:fetchedToken];
-//                if (fetchedToken) {
-//                    [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
-//                }
-//                
-//            }
-//            
-//            self.window.rootViewController = self.rootViewController;
-//            
-//            NSUInteger statsTimeInterval = 180;
-//            if ([JFSystemConfigModel sharedModel].loaded && [JFSystemConfigModel sharedModel].statsTimeInterval > 0) {
-//                statsTimeInterval = [JFSystemConfigModel sharedModel].statsTimeInterval;
-//            }
-//            [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
-//        }];
     }
-//#else
-//    self.window.rootViewController = self.rootViewController;
-//    [self.window makeKeyAndVisible];
-//#endif
-    
-    if (![JFUtil isRegistered]) {
-        [[JFActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {
-            [JFUtil setRegisteredWithUserId:userId];
-        }];
-    } else {
-        [[JFUserAccessModel sharedModel] requestUserAccess];
-    }
+
     
     if (!requestedSystemConfig) {
         [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
@@ -285,15 +277,6 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     }
     
     [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
-//    [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-//        //数据统计时间
-//        NSUInteger statsTimeInterval = 180;
-//        [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
-//        
-//        if (success) {
-//            //获取系统配置成功
-//        }
-//    }];
     
     return YES;
 }
