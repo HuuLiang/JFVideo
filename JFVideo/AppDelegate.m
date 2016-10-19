@@ -223,6 +223,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
                 if (success) {
                     [JFUtil setRegisteredWithUserId:userId];
                     [[JFUserAccessModel sharedModel] requestUserAccess];
+                    [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
                 }
             }];
         } else {
@@ -280,8 +281,6 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
             [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         }];
     }
-    
-    [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
     
     return YES;
 }
