@@ -228,6 +228,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
             }];
         } else {
             [[JFUserAccessModel sharedModel] requestUserAccess];
+             [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
         }
         if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JFUtil isRegistered] || ![JFSystemConfigModel sharedModel].loaded)) {
             
