@@ -76,38 +76,40 @@ DefineLazyPropertyInitialization(JFChannelProgramModel,programModel)
     }];
     [self.layoutTableView JF_triggerPullToRefresh];
     
-    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-        @strongify(self);
-        [self.layoutTableView JF_endPullToRefresh];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self.layoutTableView JF_triggerPullToRefresh];
-        });
-    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.titleArray.count == 0) {
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                  [self.layoutTableView JF_triggerPullToRefresh];
+            }];
+        }
+    });;
+    
 }
 
 - (void)loadTitleData{
     @weakify(self);
     [self.channelModel fetchChannelInfoWithPage:100 CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
-        [self removeCurrentRefreshBtn];
         [self.layoutTableView JF_endPullToRefresh];
         if (success) {
+            [self removeCurrentRefreshBtn];
             _isRefresh = YES;
             [self.titleArray removeAllObjects];
             [self.titleWidthArray removeAllObjects];
             [self titleItemWidth:obj];
             [self.titleArray addObjectsFromArray:obj];
             [self reloadUI];
-        }else {
-            if (self.titleArray.count == 0) {
-                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                    @strongify(self);
-                    [self.layoutTableView JF_triggerPullToRefresh];
-                }];
-            }
-            
         }
+//        else {
+//            if (self.titleArray.count == 0) {
+//                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+//                    @strongify(self);
+//                    [self.layoutTableView JF_triggerPullToRefresh];
+//                }];
+//            }
+//            
+//        }
     }];
 }
 

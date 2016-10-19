@@ -148,6 +148,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 - (void)addRefreshBtnWithCurrentView:(UIView *)view withAction:(JFAction) action;{
     UIButton *refreshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.refreshBtn = refreshBtn;
+    
     //    [refreshBtn setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     refreshBtn.titleLabel.font = [UIFont systemFontOfSize:kWidth(18.)];
     [refreshBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -156,16 +157,17 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
     refreshBtn.backgroundColor = [UIColor clearColor];
     [view addSubview:refreshBtn];
     [UIView animateWithDuration:0.4 animations:^{
-        //       refreshBtn.frame = CGRectMake(kScreenWidth/2.-kWidth(40.), (kScreenHeight-108.)/2.-kWidth(40.), kWidth(80.), kWidth(80.));
         refreshBtn.transform = CGAffineTransformMakeScale(1.8, 1.8);
-        //        refreshBtn.frame
     }];
     [refreshBtn bk_addEventHandler:^(id sender) {
         if (action) {
             action(refreshBtn);
         }
-        //        [refreshBtn removeFromSuperview];
-        //        refreshBtn.enabled = NO;
+        refreshBtn.transform = CGAffineTransformMakeScale(0.56, 0.56);
+        [UIView animateWithDuration:0.4 animations:^{
+            refreshBtn.transform = CGAffineTransformMakeScale(1.8, 1.8);
+        }];
+
         if (![JFSystemConfigModel sharedModel].loaded) {
             [[JFSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:nil];
         }

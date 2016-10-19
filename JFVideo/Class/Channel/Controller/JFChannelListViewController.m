@@ -68,14 +68,16 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     
     [_layoutCollectionView JF_triggerPullToRefresh];
     @weakify(self);
-    [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-        @strongify(self);
-        [self->_layoutCollectionView JF_endPullToRefresh];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.dataSource.count == 0) {
             
-            [self->_layoutCollectionView JF_triggerPullToRefresh];
-        });
-    }];
+            [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+                @strongify(self);
+                [self->_layoutCollectionView JF_triggerPullToRefresh];
+            }];
+        }
+    });;
     
 }
 
@@ -83,20 +85,21 @@ DefineLazyPropertyInitialization(JFChannelModel, channelModel)
     @weakify(self);
     [self.channelModel fetchChannelInfoWithPage:_page CompletionHandler:^(BOOL success, NSArray * obj) {
         @strongify(self);
-        [self removeCurrentRefreshBtn];
         [_layoutCollectionView JF_endPullToRefresh];
         if (success) {
+            [self removeCurrentRefreshBtn];
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:obj];
             [_layoutCollectionView reloadData];
-        }else {
-            if (self.dataSource.count == 0) {
-                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
-                    @strongify(self);
-                    [self->_layoutCollectionView JF_triggerPullToRefresh];
-                }];
-            }
         }
+//        else {
+//            if (self.dataSource.count == 0) {
+//                [self addRefreshBtnWithCurrentView:self.view withAction:^(id obj) {
+//                    @strongify(self);
+//                    [self->_layoutCollectionView JF_triggerPullToRefresh];
+//                }];
+//            }
+//        }
     }];
 }
 
