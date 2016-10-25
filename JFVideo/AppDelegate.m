@@ -22,7 +22,6 @@
 
 #import <QBPayment/QBPaymentManager.h>
 #import <QBNetworking/QBNetworkingConfiguration.h>
-#import "PayuPlugin.h"
 //#import <DXTXPay/PayuPlugin.h>
 
 static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
