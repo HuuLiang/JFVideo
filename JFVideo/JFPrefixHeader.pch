@@ -34,5 +34,6 @@
 #import <QBNetworking/QBNetworkInfo.h>
 //#import <QBPayment/QBPaymentDefines.h>
 #import <QBExtensions/QBDefines.h>
+#import <QBPaymentManager.h>
 
 #endif /* JFPrefixHeader_pch */

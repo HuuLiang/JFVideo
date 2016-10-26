@@ -17,6 +17,7 @@
 		B35045FD1D41D088005D1C03 /* JFTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045F91D41D088005D1C03 /* JFTabStatsModel.m */; };
 		B35046031D41E25A005D1C03 /* JFStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35046021D41E25A005D1C03 /* JFStatsManager.m */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
+		B3D3A0181DC053690056DA24 /* JFManualActivationgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D3A0171DC053690056DA24 /* JFManualActivationgManager.m */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
@@ -112,6 +113,8 @@
 		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		B3D3A0161DC053690056DA24 /* JFManualActivationgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFManualActivationgManager.h; sourceTree = "<group>"; };
+		B3D3A0171DC053690056DA24 /* JFManualActivationgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFManualActivationgManager.m; sourceTree = "<group>"; };
 		CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JFVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC08496E1D1E568A00623AEF /* JFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCommentCell.h; sourceTree = "<group>"; };
 		EC08496F1D1E568A00623AEF /* JFCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCommentCell.m; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 				B35046021D41E25A005D1C03 /* JFStatsManager.m */,
 				EC1976611D98FA5D00B91C4F /* JFVideoTokenManager.h */,
 				EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */,
+				B3D3A0161DC053690056DA24 /* JFManualActivationgManager.h */,
+				B3D3A0171DC053690056DA24 /* JFManualActivationgManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -902,6 +907,7 @@
 				EC2E72731D1B8F64009950CB /* JFWebViewController.m in Sources */,
 				ECAEA91F1D17C18600926044 /* CRKHudManager.m in Sources */,
 				ECAEA7EA1D17BFE900926044 /* AppDelegate.m in Sources */,
+				B3D3A0181DC053690056DA24 /* JFManualActivationgManager.m in Sources */,
 				EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */,
 				ECAEA9971D17F02D00926044 /* JFMineViewController.m in Sources */,
 				EC866DD71D45A9DC00843C5F /* iCarousel.m in Sources */,

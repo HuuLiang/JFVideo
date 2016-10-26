@@ -13,6 +13,7 @@
 #import "JFAppSpreadModel.h"
 #import "CRKHudManager.h"
 #import "JFSystemConfigModel.h"
+#import "JFManualActivationgManager.h"
 
 static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifier";
 
@@ -20,6 +21,7 @@ static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifie
 {
     JFTableViewCell *_bannerCell;
     JFTableViewCell *_vipCell;
+    JFTableViewCell *_activateCell;
     JFTableViewCell *_protocolCell;
     JFTableViewCell *_telCell;
     UITableViewCell *_appCell;
@@ -61,7 +63,9 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         @strongify(self);
         if (cell == self->_vipCell || cell == self->_bannerCell) {
             [self payWithInfo:nil];
-        } else if (cell == self->_protocolCell) {
+        }else if (cell == self->_activateCell){
+            [[JFManualActivationgManager shareManager] doActivate];
+        }else if (cell == self->_protocolCell) {
             JFWebViewController *webVC = [[JFWebViewController alloc] initWithURL:[NSURL URLWithString:JF_PROTOCOL_URL] standbyURL:nil];
             webVC.title = @"用户协议";
             [self.navigationController pushViewController:webVC animated:YES];
@@ -131,12 +135,19 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
         _vipCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         _vipCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
         [self setLayoutCell:_vipCell cellHeight:44 inRow:0 andSection:section++];
+          [self setHeaderHeight:10 inSection:section];
+        _activateCell = [[JFTableViewCell alloc] initWithImage:nil title:@"自助激活"];
+        _activateCell.titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
+        _activateCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _activateCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
+        [self setLayoutCell:_activateCell cellHeight:44 inRow:0 andSection:section++];
     }
     
     [self setHeaderHeight:10 inSection:section];
     
     _protocolCell = [[JFTableViewCell alloc] initWithImage:nil title:@"用户协议"];
     _protocolCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    _protocolCell.titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
     _protocolCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
     [self setLayoutCell:_protocolCell cellHeight:44 inRow:0 andSection:section++];
     
@@ -147,6 +158,7 @@ DefineLazyPropertyInitialization(JFAppSpreadModel, appSpreadModel)
     if ([JFUtil isVip]) {
         _telCell = [[JFTableViewCell alloc] initWithImage:nil title:@"联系客服"];
         _telCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _telCell.titleLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         _telCell.backgroundColor = [UIColor colorWithHexString:@"#464646"];
         [self setLayoutCell:_telCell cellHeight:44 inRow:0 andSection:section++];
     }

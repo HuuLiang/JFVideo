@@ -38,6 +38,7 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSArray<QBPaymentInfo *> *)payingPaymentInfos;
 + (NSArray<QBPaymentInfo *> *)paidNotProcessedPaymentInfos;
 + (QBPaymentInfo *)successfulPaymentInfo;
++ (NSArray<QBPaymentInfo *> *)allUnsuccessfulPaymentInfos;
 
 + (NSDate *)dateFromString:(NSString *)dateString;
 

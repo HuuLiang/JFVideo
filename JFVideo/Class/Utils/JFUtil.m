@@ -195,6 +195,16 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
     }];
 }
 
++ (NSArray<QBPaymentInfo *> *)allUnsuccessfulPaymentInfos {
+    return [self.allPaymentInfos bk_select:^BOOL(id obj) {
+        QBPaymentInfo *paymentInfo = obj;
+        if (paymentInfo.paymentResult != QBPayResultSuccess) {
+            return YES;
+        }
+        return NO;
+    }];
+}
+
 + (NSDate *)dateFromString:(NSString *)dateString {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
