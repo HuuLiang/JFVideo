@@ -9,7 +9,7 @@
 #ifndef JFConfig_h
 #define JFConfig_h
 
-#define JF_CHANNEL_NO               @"IOS_DONGJING_01" //@"QB_MFW_IOS_TEST_0000001" //
+#define JF_CHANNEL_NO               @"IOS_DONGJING_99" //@"QB_MFW_IOS_TEST_0000001" //
 #define JF_REST_APPID               @"QUBA_2023"
 #define JF_REST_PV                  @"102"
 #define JF_PAYMENT_PV               @"200"//@"109"
