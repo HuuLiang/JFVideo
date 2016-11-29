@@ -12,6 +12,7 @@
 #import "NSDate+Utilities.h"
 #import "JQKApplicationManager.h"
 #import "JFBaseViewController.h"
+#import "JFSystemConfigModel.h"
 
 NSString *const kPaymentInfoKeyName             = @"jf_paymentinfo_keyname";
 
@@ -253,6 +254,11 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
         }
     }
     return NSNotFound;
+}
+
++ (void)setDefaultPrice {
+    [JFSystemConfigModel sharedModel].payAmount = 3800;
+    [JFSystemConfigModel sharedModel].payAmountPlus = 5800;
 }
 
 @end
