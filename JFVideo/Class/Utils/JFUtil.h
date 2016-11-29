@@ -50,5 +50,6 @@ extern NSString *const kPaymentInfoKeyName;
 
 + (NSUInteger)currentTabPageIndex;
 + (NSUInteger)currentSubTabPageIndex;
++ (void)setDefaultPrice;
 
 @end

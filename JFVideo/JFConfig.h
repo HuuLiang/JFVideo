@@ -12,7 +12,7 @@
 #define JF_CHANNEL_NO               @"IOS_DONGJING_01" //@"QB_MFW_IOS_TEST_0000001" //
 #define JF_REST_APPID               @"QUBA_2023"
 #define JF_REST_PV                  @"102"
-#define JF_PAYMENT_PV               @"200"//@"109"
+#define JF_PAYMENT_PV               @"201"//@"109"
 #define JF_PACKAGE_CERTIFICATE      @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
 
 #define JF_REST_APP_VERSION     ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]))
@@ -28,7 +28,7 @@
 #define JF_DETAIL_URL                  @"/iosvideo/detailsg.htm"
 #define JF_APPSPREAD_URL               @"/iosvideo/appSpreadList.htm"
 
-#define JF_STATS_BASE_URL              @"http://stats.iqu8.cn"//@"http://120.24.252.114"//
+#define JF_STATS_BASE_URL              @"http://stats.dswtg.com"//@"http://120.24.252.114"//
 #define JF_STATS_CPC_URL               @"/stats/cpcs.service"
 #define JF_STATS_TAB_URL               @"/stats/tabStat.service"
 #define JF_STATS_PAY_URL               @"/stats/payRes.service"
