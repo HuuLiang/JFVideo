@@ -25,6 +25,7 @@
 - (BOOL)fetchChannelInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
     BOOL success = [self requestURLPath:JF_CHANNELRANKING_URL
+                         standbyURLPath:[JFUtil getStandByUrlPathWithOriginalUrl:JF_CHANNELRANKING_URL params:nil]
                              withParams:nil
                         responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {

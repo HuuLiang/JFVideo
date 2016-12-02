@@ -30,6 +30,7 @@
     NSDictionary *params = @{@"pageSize":[NSString stringWithFormat:@"%ld",page],
                              @"columnId":[NSString stringWithFormat:@"%ld",columnId]};
     BOOL success = [self requestURLPath:JF_PROGRAM_URL
+                         standbyURLPath:[JFUtil getStandByUrlPathWithOriginalUrl:JF_PROGRAM_URL params:@[@(columnId),@(page)]]
                              withParams:params
                         responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {

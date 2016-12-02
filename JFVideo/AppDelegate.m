@@ -23,6 +23,7 @@
 #import <QBPayment/QBPaymentManager.h>
 #import <QBNetworking/QBNetworkingConfiguration.h>
 #import <QBPaymentConfig.h>
+//#import <DXTXPay/PayuPlugin.h>
 
 static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
 static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlscheme";
@@ -205,13 +206,13 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
 //    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
 #endif
     
+    
     [JFUtil accumateLaunchSeq];
+    [JFUtil setDefaultPrice];
     [self setupCommonStyles];
     [[QBNetworkInfo sharedInfo] startMonitoring];
 //    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//支付测试
-    [JFUtil setDefaultPrice];
-    [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:JF_PAYMENT_PV channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl defaultConfig:[self setDefaultPaymentConfig]];
-//    [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:@([JF_PAYMENT_PV integerValue]) channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl];
+    [[QBPaymentManager sharedManager] registerPaymentWithAppId:JF_REST_APPID paymentPv:@([JF_PAYMENT_PV integerValue]) channelNo:JF_CHANNEL_NO urlScheme:kIappPaySchemeUrl defaultConfig:[self setDefaultPaymentConfig]];
     [self setupMobStatistics];
     
     [QBNetworkInfo sharedInfo].reachabilityChangedAction = ^(BOOL reachable) {
@@ -304,7 +305,6 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     }];
 }
 
-
 - (QBPaymentConfig *)setDefaultPaymentConfig {
     QBPaymentConfig *config = [[QBPaymentConfig alloc] init];
     
@@ -319,25 +319,25 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     configDetails.iAppPayConfig = iAppPayConfig;
     
     //    //海豚默认配置
-    //    QBHTPayConfig *htpayConfig = [[QBHTPayConfig alloc] init];
-    //    htpayConfig.mchId = @"10014";
-    //    htpayConfig.key = @"55f4f728b7a01c2e57a9f767fd34cb8e";
-    //    htpayConfig.appid = @"wxdea87ffa75dfb0fa";
-    //    htpayConfig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyHtPay.json";
-    //    htpayConfig.payType = @"z";
-    //    configDetails.htpayConfig = htpayConfig;
+    QBHTPayConfig *htpayConfig = [[QBHTPayConfig alloc] init];
+    htpayConfig.mchId = @"10014";
+    htpayConfig.key = @"55f4f728b7a01c2e57a9f767fd34cb8e";
+    htpayConfig.appid = @"wxf1fa52ed49c4c7da";//@"wxdea87ffa75dfb0fa";
+    htpayConfig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyHtPay.json";
+    htpayConfig.payType = @"z";
+    configDetails.htpayConfig = htpayConfig;
     
     //WJPAY
-    QBWJPayConfig *wjPayCofig = [[QBWJPayConfig alloc] init];
-    wjPayCofig.mchId = @"50000009";
-    wjPayCofig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyWujism.json";
-    wjPayCofig.signKey = @"B0C65DF81AA7EA85";
-    configDetails.wjPayConfig = wjPayCofig;
+    //    QBWJPayConfig *wjPayCofig = [[QBWJPayConfig alloc] init];
+    //    wjPayCofig.mchId = @"50000009";
+    //    wjPayCofig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyWujism.json";
+    //    wjPayCofig.signKey = @"B0C65DF81AA7EA85";
+    //    configDetails.wjPayConfig = wjPayCofig;
     
     //支付方式
     QBPaymentConfigSummary *payConfig = [[QBPaymentConfigSummary alloc] init];
     payConfig.alipay = @"IAPPPAY";
-    payConfig.wechat = @"WUJI";
+    payConfig.wechat = @"HAITUN";
     
     config.configDetails = configDetails;
     config.payConfig = payConfig;
@@ -345,6 +345,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     [config setAsCurrentConfig];
     return config;
 }
+
 
 
 - (BOOL)application:(UIApplication *)application
