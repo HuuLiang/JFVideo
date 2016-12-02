@@ -51,5 +51,5 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSUInteger)currentTabPageIndex;
 + (NSUInteger)currentSubTabPageIndex;
 + (void)setDefaultPrice;
-
++ (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params;
 @end

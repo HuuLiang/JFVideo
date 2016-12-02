@@ -51,6 +51,7 @@
                              @"programId":[NSString stringWithFormat:@"%ld",programId]};
     @weakify(self);
     BOOL success = [self requestURLPath:JF_DETAIL_URL
+                         standbyURLPath:[JFUtil getStandByUrlPathWithOriginalUrl:JF_DETAIL_URL params:params]
                              withParams:params
                         responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {

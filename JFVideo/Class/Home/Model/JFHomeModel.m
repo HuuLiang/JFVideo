@@ -25,6 +25,7 @@
     @weakify(self);
     NSDictionary *params = @{@"page":@(page)};
     BOOL success = [self requestURLPath:JF_HOME_URL
+                         standbyURLPath:[JFUtil getStandByUrlPathWithOriginalUrl:JF_HOME_URL params:nil]
                              withParams:params
                         responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {

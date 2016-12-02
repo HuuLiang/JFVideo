@@ -33,7 +33,9 @@
 
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JFFetchSystemConfigCompletionHandler)handler {
     @weakify(self);
+
     BOOL success = [self requestURLPath:JF_SYSTEM_CONFIG_URL
+                    standbyURLPath:[JFUtil getStandByUrlPathWithOriginalUrl:JF_SYSTEM_CONFIG_URL params:@{@"type":@([JFUtil deviceType])}]
                              withParams:@{@"type":@([JFUtil deviceType])}
                         responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {

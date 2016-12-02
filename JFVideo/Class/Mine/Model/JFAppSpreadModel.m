@@ -29,6 +29,7 @@
 - (BOOL)fetchAppSpreadWithCompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
     BOOL ret = [self requestURLPath:JF_APPSPREAD_URL
+                     standbyURLPath:[JFUtil getStandByUrlPathWithOriginalUrl:JF_APPSPREAD_URL params:nil]
                          withParams:nil
                     responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                 {
