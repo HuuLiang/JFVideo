@@ -256,10 +256,10 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
     return NSNotFound;
 }
 
-+ (void)setDefaultPrice {
-    [JFSystemConfigModel sharedModel].payAmount = 3800;
-    [JFSystemConfigModel sharedModel].payAmountPlus = 5800;
-}
+//+ (void)setDefaultPrice {
+//    [JFSystemConfigModel sharedModel].payAmount = 3800;
+//    [JFSystemConfigModel sharedModel].payAmountPlus = 5800;
+//}
 
 + (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params {
     NSMutableString *standbyUrl = [NSMutableString stringWithString:JF_STANDBY_BASE_URL];

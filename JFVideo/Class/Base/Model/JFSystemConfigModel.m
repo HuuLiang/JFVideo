@@ -66,6 +66,9 @@
                                 }
                             }];
                             _loaded = YES;
+                        }else {
+                                [JFSystemConfigModel sharedModel].payAmount = 3800;
+                                [JFSystemConfigModel sharedModel].payAmountPlus = 5800;
                         }
                         
                         if (handler) {

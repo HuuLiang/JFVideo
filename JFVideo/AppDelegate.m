@@ -208,7 +208,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     
     
     [JFUtil accumateLaunchSeq];
-    [JFUtil setDefaultPrice];
+//    [JFUtil setDefaultPrice];
     [self setupCommonStyles];
     [[QBNetworkInfo sharedInfo] startMonitoring];
 //    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];//支付测试
