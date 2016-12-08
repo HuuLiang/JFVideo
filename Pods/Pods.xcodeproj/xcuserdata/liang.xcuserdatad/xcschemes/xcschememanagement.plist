@@ -109,6 +109,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XMLReader-Arc.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>libqrencode.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,7 +122,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D9FB8A107F3C6B057E7DE13D6B82DDB</key>
+		<key>1136D72149D889B31937E20D9A4F815D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>31F087AA4927C4C44DF1CB3F0A4D18A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,17 +137,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4E0BEB21575A8D4286179F55CBE05A3C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>560DEA05B85DD6DF0013F004E7E4F13E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,7 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>639D31D0D1F8F5CA5E55548FE4DB3B6C</key>
+		<key>69F0312AE11CB97909F73BE8D47BDCC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BA0152C7487B753660999579D0C45CA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76D45AA6AD0647C88AFA04D0B40479D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,12 +182,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9E61CD950C7E5B35196D7DB8477BCE19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB44AF71B64FA612C26FD8E7C1A505B9</key>
+		<key>A424DE69FEC0CBC47E8FE2AB0DF23951</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B164A85072D7EBC97CBD0A1CA05CCB09</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,17 +217,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DFFA862CB418C8D2AE4B95348654E450</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E2FE87384A67337831E53490EEA8BF11</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E703C00BB820F66DC3A8C5FD847241B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -217,7 +227,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC9A0F9E123C6EF2D09BFD685EE3352A</key>
+		<key>F78EC548CBF537BBC814E712AE78DC7F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

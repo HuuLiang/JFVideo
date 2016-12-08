@@ -23,6 +23,12 @@ case "${TARGETED_DEVICE_FAMILY}" in
     ;;
 esac
 
+realpath() {
+  DIRECTORY="$(cd "${1%/*}" && pwd)"
+  FILENAME="${1##*/}"
+  echo "$DIRECTORY/$FILENAME"
+}
+
 install_resource()
 {
   if [[ "$1" = /* ]] ; then
@@ -64,7 +70,7 @@ EOM
       xcrun mapc "$RESOURCE_PATH" "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename "$RESOURCE_PATH" .xcmappingmodel`.cdm"
       ;;
     *.xcassets)
-      ABSOLUTE_XCASSET_FILE="$RESOURCE_PATH"
+      ABSOLUTE_XCASSET_FILE=$(realpath "$RESOURCE_PATH")
       XCASSET_FILES+=("$ABSOLUTE_XCASSET_FILE")
       ;;
     *)
@@ -93,6 +99,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "QBPayment/QBPayment/Vendor/VIAPay/private_key.p12"
   install_resource "QBPayment/QBPayment/Vendor/VIAPay/public_key.der"
   install_resource "QBPayment/QBPayment/Vendor/VIAPay/VIASDKVERSION.txt"
+  install_resource "QBPayment/QBPayment/Vendor/SPaySDK/SPaySDKResource.bundle"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError@2x.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png"
@@ -131,6 +138,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "QBPayment/QBPayment/Vendor/VIAPay/private_key.p12"
   install_resource "QBPayment/QBPayment/Vendor/VIAPay/public_key.der"
   install_resource "QBPayment/QBPayment/Vendor/VIAPay/VIASDKVERSION.txt"
+  install_resource "QBPayment/QBPayment/Vendor/SPaySDK/SPaySDKResource.bundle"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError@2x.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png"
@@ -163,7 +171,7 @@ then
   # Find all other xcassets (this unfortunately includes those of path pods and other targets).
   OTHER_XCASSETS=$(find "$PWD" -iname "*.xcassets" -type d)
   while read line; do
-    if [[ $line != "${PODS_ROOT}*" ]]; then
+    if [[ $line != "`realpath $PODS_ROOT`*" ]]; then
       XCASSET_FILES+=("$line")
     fi
   done <<<"$OTHER_XCASSETS"
