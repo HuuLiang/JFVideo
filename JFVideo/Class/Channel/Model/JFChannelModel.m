@@ -18,6 +18,8 @@
 
 @implementation JFChannelModel
 
+RequestTimeOutInterval
+
 + (Class)responseClass {
     return [JFChannelModelResponse class];
 }

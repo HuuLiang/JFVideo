@@ -30,6 +30,7 @@
 #import "JFBaseModel.h"
 #import "JFStatsManager.h"
 #import "JFVideoTokenManager.h"
+#import "JFSystemConfigModel.h"
 
 #import <QBNetworking/QBNetworkInfo.h>
 //#import <QBPayment/QBPaymentDefines.h>

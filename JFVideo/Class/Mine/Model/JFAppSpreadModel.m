@@ -22,6 +22,8 @@
 
 @implementation JFAppSpreadModel
 
+RequestTimeOutInterval
+
 + (Class)responseClass {
     return [JFAppSpreadResponse class];
 }

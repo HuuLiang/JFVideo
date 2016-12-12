@@ -63,6 +63,8 @@
                                     [JFSystemConfigModel sharedModel].imageToken = config.value;
                                 } else if ([config.name isEqualToString:JF_SYSTEM_STATS_TIME_INTERVAL]) {
                                     [JFSystemConfigModel sharedModel].statsTimeInterval = config.value.integerValue;
+                                }else if ([config.name isEqualToString:JF_SYSTEM_TIME_OUT]){
+                                    self.timeOutInterval = config.value.integerValue;
                                 }
                             }];
                             _loaded = YES;

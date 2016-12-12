@@ -26,6 +26,7 @@ typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *imageToken;
 @property (nonatomic) NSUInteger statsTimeInterval;
 @property (nonatomic,readonly) BOOL loaded;
+@property (nonatomic) NSInteger timeOutInterval;
 
 + (instancetype)sharedModel;
 

@@ -42,6 +42,8 @@
 
 @implementation JFDetailModel
 
+RequestTimeOutInterval
+
 + (Class)responseClass {
     return [JFDetailModelResponse class];
 }

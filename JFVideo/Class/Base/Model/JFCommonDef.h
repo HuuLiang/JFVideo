@@ -121,7 +121,10 @@ if (block) block(__VA_ARGS__);
 
 #define kHeight(height) kScreenHeight * height / 1334.
 
-
+#define RequestTimeOutInterval  \
+- (NSTimeInterval)requestTimeInterval {\
+   return [JFSystemConfigModel sharedModel].timeOutInterval;\
+}
 
 //#define VIDEO_PAY_AMOUNT    @"VIDEO_PAY_AMOUNT"
 //#define PHOTO_PAY_AMOUNT    @"GALLERY_PAY_AMOUNT"
