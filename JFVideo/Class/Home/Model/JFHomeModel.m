@@ -16,10 +16,12 @@
 @end
 
 @implementation JFHomeModel
+RequestTimeOutInterval
 
 + (Class)responseClass {
     return [JFHomeModelResponse class];
 }
+
 
 - (BOOL)fetchHomeInfoWithPage:(NSInteger)page CompletionHandler:(JFCompletionHandler)handler {
     @weakify(self);
