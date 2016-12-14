@@ -36,43 +36,23 @@ QBDefineLazyPropertyInitialization(JFBaseModel, baseModel)
     
     NSMutableArray *availablePaymentTypes = [NSMutableArray array];
     
-//    DLog("%@",[QBPaymentConfig sharedConfig]);
     
-    QBPayType wechatPaymentType = [[QBPaymentManager sharedManager] wechatPaymentType];
-    if (wechatPaymentType != QBPayTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(wechatPaymentType),@"subType" : @(QBPaySubTypeWeChat)}];
+    if ([[QBPaymentManager sharedManager] isOrderPayTypeAvailable:QBOrderPayTypeWeChatPay]) {
+        [availablePaymentTypes addObject:@{@"type" : @(QBOrderPayTypeWeChatPay)}];
     }
-    
-    QBPayType alipayPaymentType = [[QBPaymentManager sharedManager] alipayPaymentType];
-    if (alipayPaymentType != QBPayTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(alipayPaymentType),@"subType" : @(QBPaySubTypeAlipay)}];
+    if ([[QBPaymentManager sharedManager] isOrderPayTypeAvailable:QBOrderPayTypeAlipay]) {
+        [availablePaymentTypes addObject:@{@"type" : @(QBOrderPayTypeAlipay)}];
     }
-    
-    QBPayType qqPaymentType = [[QBPaymentManager sharedManager] qqPaymentType];
-    if (qqPaymentType != QBPayTypeNone) {
-        [availablePaymentTypes addObject:@{@"type" : @(qqPaymentType),@"subType" : @(QBPaySubTypeQQ)}];
-        
+    if ([[QBPaymentManager sharedManager] isOrderPayTypeAvailable:QBOrderPayTypeQQPay]) {
+        [availablePaymentTypes addObject:@{@"type" : @(QBOrderPayTypeQQPay)}];
     }
-
-//    JFPaymentType cardPaymentType = [[JFPaymentManager sharedManager] cardPayPaymentType];
-//    if (cardPaymentType != JFPaymentTypeNone) {
-//        [availablePaymentTypes addObject:@{@"type" : @(JFPaymentTypeIAppPay),@"subType" : @(JFSubPayTypeNone)}];
-//    }
-    
     
     _popView = [[JFPaymentPopView alloc] initWithAvailablePaymentTypes:availablePaymentTypes];
     @weakify(self);
-    _popView.paymentAction = ^(QBPayType payType,QBPaySubType subType, JFPayPriceLevel priceLevel) {
+    _popView.paymentAction = ^(QBOrderPayType payType, JFPayPriceLevel priceLevel) {
         @strongify(self);
+        [self payForPaymentType:payType withPriceLevel:priceLevel];
         
-        [self payForPaymentType:payType subPaymentType:subType priceLevel:priceLevel];
-//        if (subPayType == JFPaymentTypeWeChatPay) {
-//            [self payForPaymentType:wechatPaymentType subPaymentType:subPayType];
-//        } else if (subPayType == JFPaymentTypeAlipay) {
-//            [self payForPaymentType:alipayPaymentType subPaymentType:subPayType];
-//        }else {
-//            [self payForPaymentType:cardPaymentType subPaymentType:JFPaymentTypeNone];
-//        }
         
         [self hidePayment];
     };
@@ -85,37 +65,32 @@ QBDefineLazyPropertyInitialization(JFBaseModel, baseModel)
     return _popView;
 }
 
-- (void)payForPaymentType:(QBPayType)paymentType subPaymentType:(QBPaySubType)subPaymentType priceLevel:(JFPayPriceLevel)priceLevel {
-
-    
-    ///
-    
-    QBPaymentInfo *paymentInfo = [self createPaymentInfoWithPaymentType:paymentType subPaymentType:subPaymentType price:priceLevel];
-
-    [[QBPaymentManager sharedManager] startPaymentWithPaymentInfo:paymentInfo completionHandler:^(QBPayResult payResult, QBPaymentInfo *paymentInfo) {
+- (void)payForPaymentType:(QBOrderPayType)payType withPriceLevel:(JFPayPriceLevel)priceLevel {
+    [[QBPaymentManager sharedManager] startPaymentWithOrderInfo:[self createOrderInfoWithPaymentType:payType vipLevel:priceLevel] contentInfo:[self createContentInfo] beginAction:^(QBPaymentInfo *paymentInfo) {
+        if (paymentInfo) {
+                    [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:JFStatsPayActionGoToPay andTabIndex:[JFUtil currentTabPageIndex] subTabIndex:[JFUtil currentSubTabPageIndex]];
+                }
         
+    } completionHandler:^(QBPayResult payResult, QBPaymentInfo *paymentInfo) {
         [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-        
     }];
-    
-//    QBPaymentInfo *paymentInfo = [[QBPaymentManager sharedManager] startPaymentWithType:paymentType
-//                                                                                subType:subPaymentType
-//                                                                                  price:price
-//                                                                              baseModel:self.baseModel
-//                                                                      completionHandler:^(PAYRESULT payResult, JFPaymentInfo *paymentInfo)
-//                                  {
-//                                      [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-//                                      
-//                                  }];
-//    
-//    DLog("%@",paymentInfo);
-    if (paymentInfo) {
-        [[JFStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo forPayAction:JFStatsPayActionGoToPay andTabIndex:[JFUtil currentTabPageIndex] subTabIndex:[JFUtil currentSubTabPageIndex]];
-    }
     
 }
 
-- (QBPaymentInfo *)createPaymentInfoWithPaymentType:(QBPayType)payType subPaymentType:(QBPaySubType)subPayType price:(JFPayPriceLevel)priceLevel {
+
+- (QBOrderInfo *)createOrderInfoWithPaymentType:(QBOrderPayType)payType vipLevel:(JFPayPriceLevel)priceLevel {
+    QBOrderInfo *orderInfo = [[QBOrderInfo alloc] init];
+    
+    NSString *channelNo = JF_CHANNEL_NO;
+    if (channelNo.length > 14) {
+        channelNo = [channelNo substringFromIndex:channelNo.length-14];
+    }
+    
+    channelNo = [channelNo stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
+    
+    NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
+    NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
+    orderInfo.orderId = orderNo;
     NSUInteger price = 0;
     if (priceLevel == JFPayPriceLevelA) {
         price = [JFSystemConfigModel sharedModel].payAmount;
@@ -125,32 +100,28 @@ QBDefineLazyPropertyInitialization(JFBaseModel, baseModel)
         price = [JFSystemConfigModel sharedModel].payAmountPlus;
     }
 //    price = 200;
-    NSString *channelNo = JF_CHANNEL_NO;
-    channelNo = [channelNo substringFromIndex:channelNo.length-14];
-    NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
-    NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
+    orderInfo.orderPrice = price;
+    NSString *orderDescription = @"VIP";
     
-    QBPaymentInfo *paymentInfo = [[QBPaymentInfo alloc] init];
-    paymentInfo.orderId = orderNo;
-    paymentInfo.orderPrice = price;
-    paymentInfo.contentId = self.baseModel.programId;
-    paymentInfo.contentType = self.baseModel.programType;
-    paymentInfo.contentLocation = @(self.baseModel.programLocation + 1);
-    paymentInfo.columnId = self.baseModel.realColumnId;
-    paymentInfo.columnType = self.baseModel.channelType;
-    paymentInfo.payPointType = priceLevel;
-    paymentInfo.paymentTime = [JFUtil currentTimeString];
-    paymentInfo.paymentType = payType;
-    paymentInfo.paymentSubType = subPayType;
-    paymentInfo.paymentResult = QBPayResultUnknown;
-    paymentInfo.paymentStatus = QBPayStatusPaying;
-    paymentInfo.reservedData = [JFUtil paymentReservedData];
-    paymentInfo.orderDescription = @"VIP";
-    paymentInfo.userId = [JFUtil userId];
+    orderInfo.orderDescription = orderDescription;
+    orderInfo.payType = payType;
+    orderInfo.reservedData = [JFUtil paymentReservedData];
+    orderInfo.createTime = [JFUtil currentTimeString];
+    orderInfo.payPointType = priceLevel;
+    orderInfo.userId = [JFUtil userId];
     
-    return paymentInfo;
+    return orderInfo;
 }
 
+- (QBContentInfo *)createContentInfo {
+    QBContentInfo *contenInfo = [[QBContentInfo alloc] init];
+    contenInfo.contentId = self.baseModel.programId;
+    contenInfo.contentType = self.baseModel.programType;
+    contenInfo.contentLocation = [NSNumber numberWithInteger:self.baseModel.programLocation];
+    contenInfo.columnId = self.baseModel.realColumnId;
+    contenInfo.columnType = self.baseModel.channelType;
+    return contenInfo;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

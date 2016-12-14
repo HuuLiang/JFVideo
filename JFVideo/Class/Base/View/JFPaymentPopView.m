@@ -133,9 +133,9 @@
             };
             
             
-            _payTypeView.payAction = ^(QBPayType type,QBPaySubType subType) {
+            _payTypeView.payAction = ^(QBOrderPayType type) {
                 @strongify(self);
-                self.paymentAction(type,subType,self.priceLevel);
+                self.paymentAction(type,self.priceLevel);
             };
             
             [closeButton bk_addEventHandler:^(id sender) {

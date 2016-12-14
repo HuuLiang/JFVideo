@@ -18,12 +18,12 @@
 
 @implementation JFPaymentTypeCell
 
-- (instancetype)initWithPaymentType:(QBPayType)paymentType subType:(QBPaySubType)subType
+- (instancetype)initWithPaymentType:(QBOrderPayType)payType
 {
     self = [super init];
     if (self) {
-        self.payType = paymentType;
-        self.subType = subType;
+        self.payType = payType;
+//        self.subType = subType;
         
         self.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -36,28 +36,28 @@
         [self addSubview:_chooseBtn];
         
         [_chooseBtn bk_addEventHandler:^(id sender) {
-            _selectionAction(paymentType);
+            _selectionAction(payType);
         } forControlEvents:UIControlEventTouchUpInside];
         
         NSString *imageName = @"";
         NSString *text = @"";
         NSString *subTitle = nil;
-        if ((paymentType == QBPayTypeVIAPay || paymentType == QBPayTypeIAppPay) && subType == QBPaySubTypeAlipay) {
+        if (payType == QBOrderPayTypeAlipay) {
             imageName = @"alipay_icon";
             text = @"支付宝支付";
         }
-        if((paymentType == QBPayTypeVIAPay || paymentType == QBPayTypeIAppPay || paymentType == QBPayTypeMingPay ||paymentType == QBPayTypeHTPay) && subType == QBPaySubTypeWeChat){
+        if(payType == QBOrderPayTypeWeChatPay){
             imageName = @"wechat_icon";
             text = @"微信支付";
         }
 
         
-        if (paymentType == QBPayTypeIAppPay && subType == QBPaySubTypeNone){
-            imageName = @"card_pay_icon";
-            text = @"购卡支付";
-            subTitle = @"支持支付宝和微信";
-        }
-        if (paymentType == QBPayTypeVIAPay && subType == QBPaySubTypeQQ){
+//        if (paymentType == QBPayTypeIAppPay && subType == QBPaySubTypeNone){
+//            imageName = @"card_pay_icon";
+//            text = @"购卡支付";
+//            subTitle = @"支持支付宝和微信";
+//        }
+        if (payType == QBOrderPayTypeQQPay){
             imageName = @"qq_icon";
             text = @"QQ钱包";
         }

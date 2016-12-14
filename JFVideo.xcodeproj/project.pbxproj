@@ -790,7 +790,7 @@
 					ECAEA7E11D17BFE900926044 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 7VHT3KAS56;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1060,7 +1060,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7VHT3KAS56;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1084,10 +1084,10 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/HTPaySDK",
 					"$(PROJECT_DIR)/JFVideo/Class/Utils/DunXingTianXia",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.djrebo.new;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "2001ee4a-b0da-442d-a7b3-59dcb782bd87";
+				PROVISIONING_PROFILE_SPECIFIER = DJRBNewDevProvisioningProfile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
@@ -1100,8 +1100,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 7VHT3KAS56;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1125,10 +1125,10 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/HTPaySDK",
 					"$(PROJECT_DIR)/JFVideo/Class/Utils/DunXingTianXia",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jfyingyuan.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.djrebo.new;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8e519808-347f-4bab-a5c8-5c0a3368256c";
+				PROVISIONING_PROFILE_SPECIFIER = DJRBNewInHouseProvisioningProfile;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Release;

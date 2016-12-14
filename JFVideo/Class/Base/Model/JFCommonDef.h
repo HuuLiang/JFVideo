@@ -139,6 +139,7 @@ typedef void (^JFAction)(id obj);
 typedef void (^JFSelectionAction)(QBPayType paymentType);
 typedef void (^JFProgressHandler)(double progress);
 typedef void (^JFCompletionHandler)(BOOL success, id obj);
+typedef void(^JFSelectionPayAction)(QBOrderPayType type);
 
 
 //@class JFPaymentInfo;

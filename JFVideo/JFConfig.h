@@ -9,16 +9,17 @@
 #ifndef JFConfig_h
 #define JFConfig_h
 
-#define JF_CHANNEL_NO               @"IOS_DONGJING_99" //@"QB_MFW_IOS_TEST_0000001" //
+#define JF_CHANNEL_NO               @"IOS_DONGJING_99"//@"IOS_DONGJING_99" //@"QB_MFW_IOS_TEST_0000001" //
 #define JF_REST_APPID               @"QUBA_2023"
 #define JF_REST_PV                  @"102"
-#define JF_PAYMENT_PV               @"202"//@"109"
+#define JF_PAYMENT_PV               @"200"//@"109"
 #define JF_PACKAGE_CERTIFICATE      @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
 
 #define JF_REST_APP_VERSION     ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]))
 #define JF_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO]
 
-#define JF_BASE_URL                    @"http://spiv.jlswz.com"//@"http://iv.zcqcmj.com"//@"http://120.24.252.114:8093"//////@"http://192.168.1.123:8094/"
+#define JF_BASE_URL                    @"http://spiv.jlswz.com"//@"http://120.24.252.114:8093"//
+
 #define JF_STANDBY_BASE_URL     @"http://sfs.dswtg.com"
 
 #define JF_ACTIVATION_URL              @"/iosvideo/activat.htm"

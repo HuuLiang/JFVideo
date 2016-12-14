@@ -14,8 +14,8 @@
     UIView *_aliView;
     
 }
-@property (nonatomic)QBPayType payType;
-@property (nonatomic)QBPaySubType subType;
+@property (nonatomic)QBOrderPayType payType;
+//@property (nonatomic)QBPaySubType subType;
 @end
 
 @implementation JFPayTypeView
@@ -29,14 +29,14 @@
         
         for (NSDictionary *dic in payTypes) {
             _payType = [dic[@"type"] integerValue];
-            _subType = [dic[@"subType"] integerValue];
+//            _subType = [dic[@"subType"] integerValue];
             
-            if (_subType == QBPaySubTypeAlipay) {
+            if (_payType == QBOrderPayTypeAlipay) {
                 _aliView = [[UIView alloc] init];
-                [self initWithPayTypeView:_aliView PayType:_payType subPayType:_subType];
-            } else if (_subType == QBPaySubTypeWeChat) {
+                [self initWithPayTypeView:_aliView PayType:_payType];
+            } else if (_payType == QBOrderPayTypeWeChatPay) {
                 _wxView = [[UIView alloc] init];
-                [self initWithPayTypeView:_wxView PayType:_payType subPayType:_subType];
+                [self initWithPayTypeView:_wxView PayType:_payType];
             }
         }
         
@@ -70,18 +70,18 @@
     return self;
 }
 
-- (void)initWithPayTypeView:(UIView *)view PayType:(QBPayType)type subPayType:(QBPaySubType)subType {
+- (void)initWithPayTypeView:(UIView *)view PayType:(QBOrderPayType)type {
     view.userInteractionEnabled = YES;
     view.layer.cornerRadius = kWidth(10);
     view.layer.masksToBounds = YES;
-    view.backgroundColor = [UIColor colorWithHexString:subType == QBPaySubTypeAlipay ? @"#0090ff" : @"#08c20c"];
+    view.backgroundColor = [UIColor colorWithHexString:type == QBOrderPayTypeAlipay ? @"#0090ff" : @"#08c20c"];
     
-    UIImage *image = [UIImage imageNamed:subType == QBPaySubTypeAlipay ? @"pay_ali" : @"pay_weixin"];
+    UIImage *image = [UIImage imageNamed:type == QBOrderPayTypeAlipay ? @"pay_ali" : @"pay_weixin"];
     UIImageView * imgV = [[UIImageView alloc] initWithImage:image];
     [view addSubview:imgV];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = subType == QBPaySubTypeAlipay ? @"支付宝" : @"微信支付";
+    label.text = type == QBOrderPayTypeAlipay ? @"支付宝" : @"微信支付";
     label.textColor = [UIColor colorWithHexString:@"#ffffff"];
     label.font = [UIFont systemFontOfSize:kWidth(30)];
     [view addSubview:label];
@@ -105,7 +105,7 @@
     @weakify(self);
     [view bk_whenTapped:^{
         @strongify(self);
-        self.payAction(type,subType);
+        self.payAction(type);
     }];
     
     [self addSubview:view];

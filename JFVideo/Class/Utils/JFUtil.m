@@ -283,5 +283,4 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
     return standbyUrl;
 }
 
-
 @end
