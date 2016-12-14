@@ -18,7 +18,7 @@
 #import <BlocksKit+UIKit.h>
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
-
+#import <QBOrderInfo.h>
 #import "JFCommonDef.h"
 #import "JFConfig.h"
 #import "JFExtensions.h"

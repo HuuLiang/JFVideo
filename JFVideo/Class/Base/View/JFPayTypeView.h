@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^JFPaymentPopViewActions)(QBPayType paymentType,QBPaySubType subType);
+typedef void (^JFPaymentPopViewActions)(QBOrderPayType type);
 
 @interface JFPayTypeView : UIView
 

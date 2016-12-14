@@ -41,7 +41,6 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSArray<QBPaymentInfo *> *)allUnsuccessfulPaymentInfos;
 
 + (NSDate *)dateFromString:(NSString *)dateString;
-
 + (NSString *)currentTimeString;
 
 + (NSString *)paymentReservedData;
@@ -52,4 +51,5 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSUInteger)currentSubTabPageIndex;
 //+ (void)setDefaultPrice;
 + (NSString *)getStandByUrlPathWithOriginalUrl:(NSString *)url params:(id)params;
+
 @end

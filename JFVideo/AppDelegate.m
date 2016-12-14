@@ -254,6 +254,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     NSString *imageToken = [JFUtil imageToken];
     if (imageToken) {
         [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
+              [[JFVideoTokenManager sharedManager] setValue:imageToken forVideoHttpHeader:@"Referer"];
         self.window.rootViewController = self.rootViewController;
         [self.window makeKeyAndVisible];
     } else {
@@ -294,6 +295,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
             [JFUtil setImageToken:fetchedToken];
             if (fetchedToken) {
                 [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
+                  [[JFVideoTokenManager sharedManager] setValue:fetchedToken forVideoHttpHeader:@"Referer"];
             }
             
         }
@@ -318,14 +320,14 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     iAppPayConfig.waresid = @(1);
     configDetails.iAppPayConfig = iAppPayConfig;
     
-    //    //海豚默认配置
-//    QBHTPayConfig *htpayConfig = [[QBHTPayConfig alloc] init];
-//    htpayConfig.mchId = @"10014";
-//    htpayConfig.key = @"55f4f728b7a01c2e57a9f767fd34cb8e";
-//    htpayConfig.appid = @"wx2d28c8f27baeef4a";
-//    htpayConfig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyHtPay.json";
-//    htpayConfig.payType = @"z";
-//    configDetails.htpayConfig = htpayConfig;
+    //海豚默认配置
+    QBHTPayConfig *htpayConfig = [[QBHTPayConfig alloc] init];
+    htpayConfig.mchId = @"10014";
+    htpayConfig.key = @"55f4f728b7a01c2e57a9f767fd34cb8e";
+    htpayConfig.appid = @"wx875f657cb7c841de";
+    htpayConfig.notifyUrl = @"http://phas.zcqcmj.com/pd-has/notifyHtPay.json";
+    htpayConfig.payType = @"y";
+    configDetails.htpayConfig = htpayConfig;
     
     //WJPAY
 //        QBWJPayConfig *wjPayCofig = [[QBWJPayConfig alloc] init];
@@ -345,7 +347,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     //支付方式
     QBPaymentConfigSummary *payConfig = [[QBPaymentConfigSummary alloc] init];
     payConfig.alipay = @"IAPPPAY";
-    payConfig.wechat = @"SYSK";//@"HAITUN";
+    payConfig.wechat = @"HAITUN";//@"SYSK";//
     
     config.configDetails = configDetails;
     config.payConfig = payConfig;
