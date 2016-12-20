@@ -111,7 +111,7 @@ static NSString *const kImageTokenCryptPassword = @"wafei@#$%^%$^$wfsssfsf";
 }
 
 + (BOOL)isVip {
-    return YES;
+//    return YES;
     return [[[NSUserDefaults standardUserDefaults] objectForKey:kVipUserKeyName] isEqualToString:IS_VIP];
 }
 
