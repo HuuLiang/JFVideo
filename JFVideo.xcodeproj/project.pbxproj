@@ -17,12 +17,13 @@
 		B35045FD1D41D088005D1C03 /* JFTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35045F91D41D088005D1C03 /* JFTabStatsModel.m */; };
 		B35046031D41E25A005D1C03 /* JFStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35046021D41E25A005D1C03 /* JFStatsManager.m */; };
 		B39E362B1D40D11500763C24 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B39E36281D40D11500763C24 /* libMobClickLibrary.a */; };
+		B3CDC0A51E091E1800F5E255 /* JFVersionUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CDC0A41E091E1800F5E255 /* JFVersionUpdateViewController.m */; };
+		B3CDC0A81E091E4A00F5E255 /* JFVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CDC0A71E091E4A00F5E255 /* JFVersionUpdateModel.m */; };
 		B3D3A0181DC053690056DA24 /* JFManualActivationgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D3A0171DC053690056DA24 /* JFManualActivationgManager.m */; };
 		EC0849701D1E568A00623AEF /* JFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08496F1D1E568A00623AEF /* JFCommentCell.m */; };
 		EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */; };
 		EC0849761D1E718D00623AEF /* JFVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0849751D1E718D00623AEF /* JFVideoPlayer.m */; };
 		EC1698EA1D2F3CB800E7BC68 /* JFPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */; };
-		EC1976631D98FA5D00B91C4F /* JFVideoTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */; };
 		EC19F8021D38EA4C0048AA5C /* JFHotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */; };
 		EC19F8051D38FC250048AA5C /* JFTitleLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC19F8041D38FC250048AA5C /* JFTitleLabelCell.m */; };
 		EC2808CF1D34D00500E7E76E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2808CE1D34D00500E7E76E /* CoreMotion.framework */; };
@@ -113,6 +114,10 @@
 		B39E36281D40D11500763C24 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		B39E36291D40D11500763C24 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		B39E362A1D40D11500763C24 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		B3CDC0A31E091E1800F5E255 /* JFVersionUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVersionUpdateViewController.h; sourceTree = "<group>"; };
+		B3CDC0A41E091E1800F5E255 /* JFVersionUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVersionUpdateViewController.m; sourceTree = "<group>"; };
+		B3CDC0A61E091E4A00F5E255 /* JFVersionUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVersionUpdateModel.h; sourceTree = "<group>"; };
+		B3CDC0A71E091E4A00F5E255 /* JFVersionUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVersionUpdateModel.m; sourceTree = "<group>"; };
 		B3D3A0161DC053690056DA24 /* JFManualActivationgManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFManualActivationgManager.h; sourceTree = "<group>"; };
 		B3D3A0171DC053690056DA24 /* JFManualActivationgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFManualActivationgManager.m; sourceTree = "<group>"; };
 		CFC38F232A8E5C9CB66EEDCC /* libPods-JFVideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JFVideo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,8 +129,6 @@
 		EC0849751D1E718D00623AEF /* JFVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoPlayer.m; sourceTree = "<group>"; };
 		EC1698E81D2F3CB800E7BC68 /* JFPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoCell.h; sourceTree = "<group>"; };
 		EC1698E91D2F3CB800E7BC68 /* JFPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoCell.m; sourceTree = "<group>"; };
-		EC1976611D98FA5D00B91C4F /* JFVideoTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVideoTokenManager.h; sourceTree = "<group>"; };
-		EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVideoTokenManager.m; sourceTree = "<group>"; };
 		EC19F8001D38EA4C0048AA5C /* JFHotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFHotViewController.h; sourceTree = "<group>"; };
 		EC19F8011D38EA4C0048AA5C /* JFHotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFHotViewController.m; sourceTree = "<group>"; };
 		EC19F8031D38FC250048AA5C /* JFTitleLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTitleLabelCell.h; sourceTree = "<group>"; };
@@ -478,6 +481,8 @@
 				EC0849721D1E715F00623AEF /* JFVideoPlayerController.m */,
 				EC62505C1D30AB7B00054005 /* JFPaymentViewController.h */,
 				EC62505D1D30AB7B00054005 /* JFPaymentViewController.m */,
+				B3CDC0A31E091E1800F5E255 /* JFVersionUpdateViewController.h */,
+				B3CDC0A41E091E1800F5E255 /* JFVersionUpdateViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -496,6 +501,8 @@
 				ECAEA9721D17D12E00926044 /* JFUserAccessModel.m */,
 				EC62506E1D30F28700054005 /* JFBaseModel.h */,
 				EC62506F1D30F28700054005 /* JFBaseModel.m */,
+				B3CDC0A61E091E4A00F5E255 /* JFVersionUpdateModel.h */,
+				B3CDC0A71E091E4A00F5E255 /* JFVersionUpdateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -664,8 +671,6 @@
 				ECAEA8651D17C18600926044 /* JQKApplicationManager.m */,
 				B35046011D41E25A005D1C03 /* JFStatsManager.h */,
 				B35046021D41E25A005D1C03 /* JFStatsManager.m */,
-				EC1976611D98FA5D00B91C4F /* JFVideoTokenManager.h */,
-				EC1976621D98FA5D00B91C4F /* JFVideoTokenManager.m */,
 				B3D3A0161DC053690056DA24 /* JFManualActivationgManager.h */,
 				B3D3A0171DC053690056DA24 /* JFManualActivationgManager.m */,
 			);
@@ -790,7 +795,7 @@
 					ECAEA7E11D17BFE900926044 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 7VHT3KAS56;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -888,6 +893,7 @@
 				ECAEA92A1D17C18600926044 /* UIScrollView+Refresh.m in Sources */,
 				ECAEA9361D17C18600926044 /* RACEXTRuntimeExtensions.m in Sources */,
 				ECAEA9271D17C18600926044 /* UIBarButtonItem+Badge.m in Sources */,
+				B3CDC0A51E091E1800F5E255 /* JFVersionUpdateViewController.m in Sources */,
 				ECAEA9831D17ECB400926044 /* JFBaseViewController.m in Sources */,
 				EC2E72791D1BB1C5009950CB /* JFDetailViewController.m in Sources */,
 				EC2E72841D1BEC70009950CB /* JFHomeModel.m in Sources */,
@@ -916,7 +922,6 @@
 				EC62505E1D30AB7B00054005 /* JFPaymentViewController.m in Sources */,
 				ECF99B9A1D2D1F36003CBCA8 /* JFChannelProgramModel.m in Sources */,
 				ECF99B9D1D2D26A6003CBCA8 /* JFChannelProgramCell.m in Sources */,
-				EC1976631D98FA5D00B91C4F /* JFVideoTokenManager.m in Sources */,
 				ECAEA9701D17D06100926044 /* JFActivateModel.m in Sources */,
 				ECAEA9221D17C18600926044 /* NSMutableDictionary+Safety.m in Sources */,
 				EC62506A1D30DAB400054005 /* JFPaymentPopView.m in Sources */,
@@ -931,6 +936,7 @@
 				ECAEA9501D17C56E00926044 /* JFUtil.m in Sources */,
 				ECBF02541D40D762000F93E8 /* UIImageView+YPBAnimation.m in Sources */,
 				EC2E727F1D1BB535009950CB /* JFBannerCell.m in Sources */,
+				B3CDC0A81E091E4A00F5E255 /* JFVersionUpdateModel.m in Sources */,
 				EC3AFBA31D782D430055FA84 /* JFPaymentPointView.m in Sources */,
 				ECF99B971D2D1F23003CBCA8 /* JFChannelColumnModel.m in Sources */,
 				EC0849731D1E715F00623AEF /* JFVideoPlayerController.m in Sources */,
@@ -1060,7 +1066,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7VHT3KAS56;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1084,10 +1090,10 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/HTPaySDK",
 					"$(PROJECT_DIR)/JFVideo/Class/Utils/DunXingTianXia",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.djrebo.new;
+				PRODUCT_BUNDLE_IDENTIFIER = com.djrebo.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2001ee4a-b0da-442d-a7b3-59dcb782bd87";
-				PROVISIONING_PROFILE_SPECIFIER = DJRBNewDevProvisioningProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
@@ -1100,8 +1106,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7VHT3KAS56;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1125,10 +1131,10 @@
 					"$(PROJECT_DIR)/JFVideo/Class/Vendor/HTPaySDK",
 					"$(PROJECT_DIR)/JFVideo/Class/Utils/DunXingTianXia",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.djrebo.new;
+				PRODUCT_BUNDLE_IDENTIFIER = com.djrebo.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e519808-347f-4bab-a5c8-5c0a3368256c";
-				PROVISIONING_PROFILE_SPECIFIER = DJRBNewInHouseProvisioningProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Release;

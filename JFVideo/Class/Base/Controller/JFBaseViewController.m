@@ -55,26 +55,30 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
         videoVC.baseModel = model;
         [self presentViewController:videoVC animated:YES completion:nil];
     } else {
-        @weakify(self);
-        [[JFVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
-            @strongify(self);
-            if (!self) {
-                return ;
-            }
-            [self.view endProgressing];
-            
-            if (success) {
-                //            [self loadVideo:[NSURL URLWithString:[[JFVideoTokenManager sharedManager]videoLinkWithOriginalLink:_videoUrl]]];
-                UIViewController *videoPlayVC = [self playerVCWithVideo:[[JFVideoTokenManager sharedManager] videoLinkWithOriginalLink:videoUrlStr]];
-                videoPlayVC.hidesBottomBarWhenPushed = YES;
-                [self presentViewController:videoPlayVC animated:YES completion:nil];
-            } else {
-                [UIAlertView bk_showAlertViewWithTitle:@"无法获取视频信息" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                    
-                }];
-            }
-        }];
+//        @weakify(self);
+//        [[JFVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+//            @strongify(self);
+//            if (!self) {
+//                return ;
+//            }
+//            [self.view endProgressing];
+//            
+//            if (success) {
+//                //            [self loadVideo:[NSURL URLWithString:[[JFVideoTokenManager sharedManager]videoLinkWithOriginalLink:_videoUrl]]];
+//                UIViewController *videoPlayVC = [self playerVCWithVideo:[[JFVideoTokenManager sharedManager] videoLinkWithOriginalLink:videoUrlStr]];
+//                videoPlayVC.hidesBottomBarWhenPushed = YES;
+//                [self presentViewController:videoPlayVC animated:YES completion:nil];
+//            } else {
+//                [UIAlertView bk_showAlertViewWithTitle:@"无法获取视频信息" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//                    
+//                }];
+//            }
+//        }];
         
+        
+        UIViewController *videoPlayVC = [self playerVCWithVideo:[JFUtil encodeVideoUrlWithVideoUrlStr:videoUrlStr]];
+        videoPlayVC.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:videoPlayVC animated:YES completion:nil];
 
     }
 }

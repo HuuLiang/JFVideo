@@ -12,7 +12,7 @@
 #import "JFUserAccessModel.h"
 
 #import "JFSystemConfigModel.h"
-#import "JFVideoTokenManager.h"
+//#import "JFVideoTokenManager.h"
 
 #import "JFHomeViewController.h"
 #import "JFChannelListViewController.h"
@@ -23,6 +23,7 @@
 #import <QBPayment/QBPaymentManager.h>
 #import <QBNetworking/QBNetworkingConfiguration.h>
 #import <QBPaymentConfig.h>
+
 //#import <DXTXPay/PayuPlugin.h>
 
 static NSString *const kHTPaySchemeUrl = @"wxd3c9c179bb827f2c";
@@ -224,12 +225,12 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
                 if (success) {
                     [JFUtil setRegisteredWithUserId:userId];
                     [[JFUserAccessModel sharedModel] requestUserAccess];
-                    [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
+//                    [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
                 }
             }];
         } else {
             [[JFUserAccessModel sharedModel] requestUserAccess];
-             [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
+//             [[JFVideoTokenManager sharedManager]requestTokenWithCompletionHandler:nil];
         }
         if ([QBNetworkInfo sharedInfo].networkStatus <= QBNetworkStatusNotReachable && (![JFUtil isRegistered] || ![JFSystemConfigModel sharedModel].loaded)) {
             
@@ -254,7 +255,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
     NSString *imageToken = [JFUtil imageToken];
     if (imageToken) {
         [[SDWebImageManager sharedManager].imageDownloader setValue:imageToken forHTTPHeaderField:@"Referer"];
-              [[JFVideoTokenManager sharedManager] setValue:imageToken forVideoHttpHeader:@"Referer"];
+//              [[JFVideoTokenManager sharedManager] setValue:imageToken forVideoHttpHeader:@"Referer"];
         self.window.rootViewController = self.rootViewController;
         [self.window makeKeyAndVisible];
     } else {
@@ -284,7 +285,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
             [[JFStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         }];
     }
-    
+   
     return YES;
 }
 
@@ -295,7 +296,7 @@ static NSString *const kIappPaySchemeUrl = @"comdongjingrebo2016ppiapppayurlsche
             [JFUtil setImageToken:fetchedToken];
             if (fetchedToken) {
                 [[SDWebImageManager sharedManager].imageDownloader setValue:fetchedToken forHTTPHeaderField:@"Referer"];
-                  [[JFVideoTokenManager sharedManager] setValue:fetchedToken forVideoHttpHeader:@"Referer"];
+//                  [[JFVideoTokenManager sharedManager] setValue:fetchedToken forVideoHttpHeader:@"Referer"];
             }
             
         }
