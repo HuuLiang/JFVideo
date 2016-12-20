@@ -27,6 +27,8 @@ typedef void (^JFFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSUInteger statsTimeInterval;
 @property (nonatomic,readonly) BOOL loaded;
 @property (nonatomic) NSInteger timeOutInterval;
+@property (nonatomic) NSString *videoSignKey;
+@property (nonatomic) NSTimeInterval expireTime;
 
 + (instancetype)sharedModel;
 

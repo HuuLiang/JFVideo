@@ -19,6 +19,8 @@
 #import "JFHomeHotCell.h"
 
 #import "JFDetailViewController.h"
+#import "JFVersionUpdateModel.h"
+#import "JFVersionUpdateViewController.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 static NSString *const kHomeHotCellReusableIdentifier = @"HomeHotCellReusableIdentifier";
@@ -55,7 +57,7 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self examineUpdate];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#303030"];
     
     _bannerView = [[SDCycleScrollView alloc] init];
@@ -132,16 +134,18 @@ DefineLazyPropertyInitialization(NSMutableArray, imageUrlGroup)
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-//    [_timer setFireDate:[NSDate distantFuture]];
-}
+- (void)examineUpdate {
+    [[JFVersionUpdateModel sharedModel] fetchLatestVersionWithCompletionHandler:^(BOOL success, id obj) {
+        if (success) {
+            JFVersionUpdateInfo *info = obj;
+            if (info.up.boolValue) {
+                JFVersionUpdateViewController *updateVC = [[JFVersionUpdateViewController alloc] init];
+                updateVC.linkUrl = info.linkUrl;
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:updateVC animated:YES completion:nil];
+            }
+        }
+    }];
 
-- (void)viewDidAppear:(BOOL)animated {
-//    if (_bannerView) {
-//        [_timer setFireDate:[NSDate distantPast]];
-//    } else {
-//        [_timer setFireDate:[NSDate distantFuture]];
-//    }
 }
 
 - (void)loadMoreDataWithRefresh:(BOOL)isRefresh {

@@ -65,6 +65,10 @@
                                     [JFSystemConfigModel sharedModel].statsTimeInterval = config.value.integerValue;
                                 }else if ([config.name isEqualToString:JF_SYSTEM_TIME_OUT]){
                                     self.timeOutInterval = config.value.integerValue;
+                                }else if ([config.name isEqualToString:JF_SYSTEM_VIDEO_SIGN_KEY]){
+                                    self.videoSignKey = config.value;
+                                }else if ([config.name isEqualToString:JF_SYSTEM_VIDEO_EXPIRE_TIME]){
+                                    self.expireTime = config.value.doubleValue;
                                 }
                             }];
                             _loaded = YES;

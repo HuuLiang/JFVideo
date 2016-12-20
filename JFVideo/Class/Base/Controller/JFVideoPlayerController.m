@@ -64,24 +64,26 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     } forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
-    ;
-    [[JFVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
-        @strongify(self);
-        if (!self) {
-            return ;
-        }
-        [self.view endProgressing];
-        
-        if (success) {
-            [self loadVideo:[NSURL URLWithString:[[JFVideoTokenManager sharedManager]videoLinkWithOriginalLink:_videoUrl]]];
-        } else {
-            [UIAlertView bk_showAlertViewWithTitle:@"无法获取视频信息" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                @strongify(self);
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
-        }
-    }];
+//    [self.view beginProgressingWithTitle:@"加载中..." subtitle:nil];
+//    ;
+//    [[JFVideoTokenManager sharedManager] requestTokenWithCompletionHandler:^(BOOL success, NSString *token, NSString *userId) {
+//        @strongify(self);
+//        if (!self) {
+//            return ;
+//        }
+//        [self.view endProgressing];
+//        
+//        if (success) {
+//            [self loadVideo:[NSURL URLWithString:[[JFVideoTokenManager sharedManager]videoLinkWithOriginalLink:_videoUrl]]];
+//        } else {
+//            [UIAlertView bk_showAlertViewWithTitle:@"无法获取视频信息" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//                @strongify(self);
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }];
+//        }
+//    }];
+    
+    [self loadVideo:[NSURL URLWithString:[JFUtil encodeVideoUrlWithVideoUrlStr:self.videoUrl]]];
     
 }
 

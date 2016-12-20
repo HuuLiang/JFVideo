@@ -19,6 +19,7 @@
 #define JF_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JF_REST_APPID, JF_CHANNEL_NO]
 
 #define JF_BASE_URL                    @"http://spiv.jlswz.com"//@"http://120.24.252.114:8093"//
+#define JF_VERSION_UPDATE_URL          @"/iosvideo/versionCheck.htm"//更新
 
 #define JF_STANDBY_BASE_URL     @"http://sfs.dswtg.com"
 
@@ -44,6 +45,8 @@
 #define JF_SYSTEM_IMAGE_TOKEN                     @"IMG_REFERER"
 #define JF_SYSTEM_STATS_TIME_INTERVAL             @"STATS_TIME_INTERVAL"
 #define JF_SYSTEM_TIME_OUT                        @"TIME_OUT"
+#define JF_SYSTEM_VIDEO_SIGN_KEY               @"VIDEO_SIGN_KEY"
+#define JF_SYSTEM_VIDEO_EXPIRE_TIME            @"EXPIRE_TIME"
 
 #define JF_PAYMENT_CONFIG_URL           @"http://pay.zcqcmj.com/paycenter/appPayConfig.json"//@"http://120.24.252.114:8084/paycenter/appPayConfig.json"
 #define JF_PAYMENT_COMMIT_URL           @"http://pay.zcqcmj.com/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"//
