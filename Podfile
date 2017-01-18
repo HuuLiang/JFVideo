@@ -22,5 +22,5 @@ target 'JFVideo' do
     pod 'FMDB', '~> 2.6.2'
     pod 'libqrencode', '~> 3.4.2'
     # pod 'iCarousel', '~> 1.8.2'
-    pod 'QBPayment', '~>49' ,:subspecs => ['VIAPay','IappPay','HTPay']
+    pod 'QBPayment',:subspecs => ['VIAPay','IappPay','HTPay','WJPay','MLYPay','DXTXPay']
 end

@@ -8,165 +8,121 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>ActionSheetPicker-3.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 		<key>Aspects.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>BlocksKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>DACircularProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>HexColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
 		</dict>
 		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
 		<key>MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 		<key>Pods-JFVideo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>QBExtensions.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
 		</dict>
 		<key>QBNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>15</integer>
 		</dict>
 		<key>QBPayment.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>16</integer>
 		</dict>
 		<key>SDCycleScrollView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>17</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>18</integer>
 		</dict>
 		<key>SFHFKeychainUtils.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>19</integer>
 		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>20</integer>
 		</dict>
 		<key>TSMessages.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>21</integer>
+		</dict>
+		<key>XMLReader-Arc.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>libqrencode.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0AC55E754182E1FCF070AC7F74379523</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0B142B44E3F35E5F316896B6B94132F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -186,22 +142,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>27074D47C923C5911E67DB8AB9C0AD2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>496643A0C6647A237EA495B023CFA1A7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6C3D1D5DEE0F48732364CC69EC3DA36E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7283C0C9C2C3F5E25BEDF74471BDACCB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>735245E1D2B3139874FC22043377519B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -211,7 +157,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9785FEF7E033B42624670BDF8DFD6DE3</key>
+		<key>88D45D9231A45AA6F7AC89B7BC050697</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8EF3788F7898612B8DA369BBD13FB3F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -231,12 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EBCC8F1F0058C437E4F0003C73CBEA7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C2333C3FCA3B527A4600CD8B687FEDC2</key>
+		<key>C6A191E6E83C9ED403C89EF5BED13133</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -251,7 +197,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CFCE2515003BE924F9823BE7D5EA6407</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D31F2E1140FD881D5FEB76F35D954576</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D71B341E508E7AA7B6DC748216E5D227</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -261,12 +217,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E20357EA8F69583B8A01CC743A5A4179</key>
+		<key>DF88AB6CFF2088C74D5A20633FD47974</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E91B195579F5B44EF461B9F6AB5BA033</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>EC7BAA2B0109B633CE06A36E872A9505</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4B0A2AFB52057647E9F0E4169892BC0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
