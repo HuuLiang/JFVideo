@@ -46,7 +46,7 @@ PODS:
     - SDWebImage (!= 3.7.2, ~> 3.7)
   - OpenSSL (1.0.208)
   - QBExtensions (0.0.7)
-  - QBNetworking (0.0.10):
+  - QBNetworking (0.0.16):
     - AFNetworking (~> 3.1.0)
     - QBExtensions (~> 0.0.3)
   - QBPayment/Core (49):
@@ -108,7 +108,7 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   OpenSSL: b187269d386b07452f56af273764ea0636dd5da8
   QBExtensions: a32e8ae6e371c208e2efe2b2eec7251c36187b90
-  QBNetworking: c0ce3331d1ead787a7668ebc444aedc6196b4cc9
+  QBNetworking: cae5f59850c1fbbb779d220c9762d5c1704b1fbb
   QBPayment: 48975be00529d3fe6f8c109257cf402c3570ca4e
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
@@ -118,4 +118,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1cfcd1774f48ffdd4fa5b184381819b17808ac7a
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0.beta.1
